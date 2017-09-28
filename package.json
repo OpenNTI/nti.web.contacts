@@ -4,14 +4,14 @@
   "description": "Components for dealing with people",
   "main": "index.js",
   "scripts": {
-    "test": "nti-app-scripts test",
-    "start": "nti-app-scripts start",
-    "prepack": "nti-app-scripts build",
-    "build": "nti-app-scripts build",
-    "clean": "nti-app-scripts clean",
-    "check": "nti-app-scripts check",
-    "release": "nti-app-scripts release",
-    "install-snapshots": "nti-app-scripts install-snapshots"
+    "test": "nti-cmp-scripts test",
+    "start": "nti-cmp-scripts start",
+    "prepack": "nti-cmp-scripts build",
+    "build": "nti-cmp-scripts build",
+    "clean": "nti-cmp-scripts clean",
+    "check": "nti-cmp-scripts check",
+    "release": "nti-cmp-scripts release",
+    "install-snapshots": "nti-cmp-scripts install-snapshots"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,6 @@
   "homepage": "https://github.com/NextThought/nti.web.component.contacts#readme",
   "devDependencies": {
     "enzyme": "^2.9.1",
-    "nti-app-scripts": "^1.0.67",
     "nti-cmp-scripts": "^1.0.49",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0"
