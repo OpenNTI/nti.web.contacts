@@ -5,7 +5,7 @@ import ContactCard from '../../src';
 
 import {User} from 'nti-web-client';
 
-import TestContactCard from './contactcard';
+import TestContactCard from './ContactCard';
 
 import 'nti-style-common/all.scss';
 import 'nti-web-commons/lib/index.css';
@@ -29,11 +29,9 @@ class TestKitchenSink extends React.Component {
 		this.state = {
 			selectedOption: RESOLVE
 		};
-
-		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(event) {
+	handleChange = (event) => {
 		this.setState({selectedOption: event.target.value});
 	}
 
