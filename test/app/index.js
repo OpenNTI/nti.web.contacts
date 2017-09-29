@@ -5,95 +5,77 @@ import ContactCard from '../../src';
 
 import {User} from 'nti-web-client';
 
+import TestContactCard from './contactcard';
+
 import 'nti-style-common/all.scss';
 import 'nti-web-commons/lib/index.css';
 
 window.$AppConfig = window.$AppConfig || {server: '/dataserver2/'};
 
-class TestContactCard extends React.Component {
+const RESOLVE = 'RESOLVE';
+const SEARCH = 'SEARCH';
+
+class TestKitchenSink extends React.Component {
 
 	state = {}
+
+	renderMap = {
+		RESOLVE: 'renderResolve',
+		SEARCH: 'renderSearch'
+	};
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: '',
-			error: null
+			selectedOption: RESOLVE
 		};
 
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleChange(event) {
-		this.setState({username: event.target.value});
+		this.setState({selectedOption: event.target.value});
 	}
 
-	handleSubmit(event) {
-		event.preventDefault();
-		this.fetchUser();
+	renderResolve() {
+		return (
+			<TestContactCard/>
+		);
 	}
 
-	fetchUser () {
-		const set = state => {
-			this.setState(state);
-		};
-
-		this.setState({
-			entity: null,
-			error: null
-		});
-
-		User.resolve({entity: this.state.username})
-			.catch(() => set({
-				error: 'Not Found'
-			}))
-			.then(x => set({
-				entity: x
-			}));
+	renderSearch() {
+		return (
+			"Search happens here"
+		);
 	}
 
 	render () {
+		const selected = this.state.selectedOption;
 		const form = (
-			<form onSubmit={this.handleSubmit}>
+			<form>
 				<label>
-					Username:
-					<input type="text" value={this.state.username} onChange={this.handleChange} />
+					<input type="radio" value={RESOLVE} onChange={this.handleChange} checked={selected === RESOLVE} />
+					Resolve User
 				</label>
-				<input type="submit" value="Fetch" />
+				<label>
+					<input type="radio" value={SEARCH} onChange={this.handleChange} checked={selected === SEARCH}/>
+					Search
+				</label>
 			</form>
 		);
 
-		const error = this.state.error;
-		const entity = this.state.entity;
+		const bodyRenderer = this[this.renderMap[selected]];
 
-		let body = null;
-		if(error){
-			body = 'error';
-		}
-		else if(entity){
-			body = <ContactCard entity={entity}/>;
-		}
-
-		if( body ){
-			return (
-				<div>
-					{form}
-					{body}
-				</div>
-			);
-		}
-		else {
-			return (
-				<div>
-					{form}
-				</div>
-			);
-		}
+		return (
+			<div>
+				{form}
+				{bodyRenderer()}
+			</div>
+		);
 	}
 }
 
 ReactDOM.render(
-	React.createElement(TestContactCard, {}),
+	React.createElement(TestKitchenSink, {}),
 	document.getElementById('content')
 );
