@@ -1,3 +1,2 @@
-import ContactCard from './ContactCard';
-
-export default ContactCard;
+export ContactList from './ContactList';
+export ContactCard from './ContactCard';
