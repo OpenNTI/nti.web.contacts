@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ContactCard from '../../src';
-
-import {User} from 'nti-web-client';
-
-import TestContactCard from './ContactCard';
+import { ContactCard, ContactList } from '../../src';
 
 import 'nti-style-common/all.scss';
 import 'nti-web-commons/lib/index.css';
@@ -24,7 +20,7 @@ class TestKitchenSink extends React.Component {
 		SEARCH: 'renderSearch'
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			selectedOption: RESOLVE
@@ -35,15 +31,19 @@ class TestKitchenSink extends React.Component {
 		this.setState({selectedOption: event.target.value});
 	}
 
-	renderResolve() {
+	renderResolve () {
+		const provider = () => {
+			return 'subtitle placeholder';
+		};
+
 		return (
-			<TestContactCard/>
+			<ContactCard entity={{Username: 'Test user', displayName: 'Test user', initials: 'TU'}} subtitleProvider={provider}/>
 		);
 	}
 
-	renderSearch() {
+	renderSearch () {
 		return (
-			"Search happens here"
+			<ContactList/>
 		);
 	}
 

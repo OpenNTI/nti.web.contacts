@@ -1,41 +1,40 @@
-@import "~nti-style-common";
+@import "~nti-style-common/all.scss";
 
 .contact-card {
-	width: 200px;
-	height: 227px;
+	border: solid 1px #eaeaea;
+	color: #444;
+	width: 212px;
+	height: 236px;
+	box-shadow: 1px 1px 2px #eaeaea;
+	margin: 10px;
+	cursor: pointer;
+	position: relative;
+	border-radius: 5px;
 
-	padding-top: 20px;
+	.contact-avatar {
+		height: 110px;
+		border-radius: 100px;
+		margin: 16px 16px 16px 50px;
+		box-shadow: 0 1px 6px 1px #888;
 
-	border-radius: 4px;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.19), 0 0 3px 0 rgba(0,0,0,0.3);
-
-	.avatar {
-		height: 100px;
-		width: 100px;
-		border-radius: 50%;
-		margin: auto;
-		display: block;
-
-		margin-bottom: 14px;
-
-		box-shadow: 0 1px 2px 1px rgba(0,0,0,0.32);
+		&:hover {
+			transform: scale(1.05, 1.05);
+			transition: all 0.5s;
+			opacity: 0.7;
+		}
 	}
 
-	.username {
-		font-weight: bold;
-		font-size: 20px;
+	.contact-info {
 		text-align: center;
-		line-height: 22px;
-		color: $primary-grey;
-		font-family: $header-font-family;
-	}
 
-	.sub-title {
-		font-weight: bold;
-		font-size: 10px;
-		line-height: 14px;
-		color: $tertiary-grey;
-		text-align: center;
-		padding-top: 10px
+		.contact-name {
+			margin-bottom: 10px;
+		}
+
+		.contact-meta {
+			color: #999;
+			font-size: 12px;
+			padding: 0 15px;
+		}
 	}
 }
