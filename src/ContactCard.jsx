@@ -13,15 +13,18 @@ export default class ContactCard extends React.Component {
 			PropTypes.object,
 			PropTypes.string
 		]).isRequired,
+
+		subtitleProvider: PropTypes.func,
 	}
 
 	render () {
 		const entity = this.props.entity;
+		const subtitle = this.props.subtitleProvider && this.props.subtitleProvider(entity);
 		return (
 			<div className="contact-card">
 				<Avatar entity={entity}/>
 				<DisplayName entity={entity}/>
-				<div className='sub-title'>3 Days Ago</div>
+				<div className='sub-title'>{subtitle}</div>
 			</div>
 		);
 	}
