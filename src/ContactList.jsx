@@ -13,7 +13,7 @@ const PAGE_NUMBER_BUFFER = 4;
 class PageNumber extends React.Component {
 	static propTypes = {
 		pageNum: PropTypes.number,
-		current: PropTypes.boolean,
+		current: PropTypes.bool,
 		goToPage: PropTypes.func
 	}
 
