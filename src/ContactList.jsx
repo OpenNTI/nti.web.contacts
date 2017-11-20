@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { getService, User } from 'nti-web-client';
 import { Loading } from 'nti-web-commons';
 
@@ -8,10 +9,41 @@ import ContactCard from './ContactCard';
 const PAGE_SIZE = 20;
 const PAGE_NUMBER_BUFFER = 4;
 
+
+class PageNumber extends React.Component {
+	static propTypes = {
+		pageNum: PropTypes.number,
+		current: PropTypes.boolean,
+		goToPage: PropTypes.func
+	}
+
+	goToPage = () => {
+		const {pageNum, goToPage} = this.props;
+		goToPage(pageNum);
+	}
+
+	rendner () {
+		const {pageNum, current} = this.props;
+
+		if(pageNum < 0) {
+			return (<div className="page-padding">...</div>);
+		}
+
+		const className = cx('page', {current});
+
+
+		return (
+			<div key={pageNum} onClick={this.goToPage} className={className}>{pageNum}</div>
+		);
+	}
+}
+
+
 export default class ContactList extends React.Component {
 	static propTypes = {
 		onUserClick: PropTypes.func
 	}
+
 
 	constructor (props) {
 		super(props);
@@ -28,6 +60,7 @@ export default class ContactList extends React.Component {
 			});
 		});
 	}
+
 
 	updateUserList () {
 		const membersLink = this.state.siteCommunityUser.getLink('members');
@@ -52,6 +85,7 @@ export default class ContactList extends React.Component {
 		});
 	}
 
+
 	prev = () => {
 		if(this.state.pageNum === 1) {
 			return;
@@ -61,6 +95,7 @@ export default class ContactList extends React.Component {
 			this.updateUserList();
 		});
 	}
+
 
 	next = () => {
 		if(this.state.pageNum === this.state.totalPages) {
@@ -72,6 +107,7 @@ export default class ContactList extends React.Component {
 		});
 	}
 
+
 	goToPage = (newPage) => {
 		if(newPage === this.state.pageNum) {
 			return;
@@ -82,9 +118,11 @@ export default class ContactList extends React.Component {
 		});
 	}
 
+
 	renderUser = (user, index) => {
 		return (<ContactCard key={index} entity={user} onClick={this.props.onUserClick}/>);
 	}
+
 
 	renderUserList () {
 		if(!this.state.users || this.state.users.length === 0) {
@@ -94,21 +132,6 @@ export default class ContactList extends React.Component {
 		return (<div className="contact-list">{this.state.users.map(this.renderUser)}</div>);
 	}
 
-	renderPageNumber = (pageNum) => {
-		const currPage = this.state.pageNum;
-
-		if(pageNum < 0) {
-			return (<div className="page-padding">...</div>);
-		}
-
-		const className = 'page' + (pageNum === currPage ? ' current' : '');
-
-		const goToPage = () => {
-			this.goToPage(pageNum);
-		};
-
-		return (<div key={pageNum} onClick={goToPage} className={className}>{pageNum}</div>);
-	}
 
 	renderPageNumbers () {
 		const { pageNum, totalPages } = this.state;
@@ -133,10 +156,13 @@ export default class ContactList extends React.Component {
 
 		return (
 			<div className="page-numbers">
-				{pageNumbersToRender.map(this.renderPageNumber)}
+				{pageNumbersToRender.map(x => (
+					<PageNumber goToPage={this.goToPage} pageNum={x} key={x} current={x === this.state.pageNum}/>
+				))}
 			</div>
 		);
 	}
+
 
 	renderControls () {
 		return (
@@ -146,6 +172,7 @@ export default class ContactList extends React.Component {
 			</div>
 		);
 	}
+
 
 	renderPager () {
 		const prevClass = 'prev' + (this.state.pageNum === 1 ? ' disabled' : '');
@@ -158,9 +185,11 @@ export default class ContactList extends React.Component {
 		</div>);
 	}
 
+
 	updateSearchTerm = (e) => {
 		this.setState({searchTerm: e.target.value});
 	}
+
 
 	renderSearch () {
 		return (
@@ -168,6 +197,7 @@ export default class ContactList extends React.Component {
 				<input onChange={this.updateSearchTerm} value={this.state.searchTerm} type="text" placeholder="Search"/>
 			</div>);
 	}
+
 
 	renderContent () {
 		if(this.state.loading) {
@@ -179,6 +209,7 @@ export default class ContactList extends React.Component {
 			{this.renderUserList()}
 		</div>);
 	}
+
 
 	render () {
 		return (<div className="admin-users">
