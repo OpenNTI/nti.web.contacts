@@ -2,7 +2,8 @@
   "name": "nti-web-contacts",
   "version": "0.1.0-alpha",
   "description": "Components for dealing with people",
-  "main": "index.js",
+  "main": "./lib/index-cjs.js",
+  "module": "./lib/index.js",
   "scripts": {
     "test": "nti-cmp-scripts test",
     "start": "nti-cmp-scripts start",
