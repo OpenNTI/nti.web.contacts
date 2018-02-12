@@ -27,7 +27,8 @@
     "enzyme": "^2.9.1",
     "nti-cmp-scripts": "^1.0.49",
     "react": "^15.6.1",
-    "react-addons-test-utils": "^15.6.0"
+    "react-addons-test-utils": "^15.6.0",
+    "react-dom": "^15.6.1"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -35,7 +36,6 @@
     "nti-style-common": "^1.2.6",
     "nti-web-client": "^1.2.0",
     "nti-web-commons": "0.x.x",
-    "prop-types": "^15.5.10",
-    "react-dom": "^15.6.1"
+    "prop-types": "^15.5.10"
   }
 }
