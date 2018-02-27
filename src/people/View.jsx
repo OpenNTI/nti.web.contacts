@@ -4,7 +4,7 @@ export default class Group extends React.Component {
 
 	render () {
 		return (
-			<div>contact here</div>
+			<div>people here</div>
 		);
 	}
 }
