@@ -1,0 +1,152 @@
+@import "~nti-style-common";
+
+.contact-group {
+	.feature-top {
+		.btn-join {
+			background-color: #fff;
+			color: #757474;
+			height: 40px;
+			max-width: 192px;
+			border-radius: 3px;
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 40px;
+			display: block;
+			text-align: center;
+			position: relative;
+			width: 50%;
+			float: right;
+			border: 1px solid #e2e2e2;
+			margin-right: 15px;
+		}
+	}
+
+	.block-group {
+		.item {
+			overflow: hidden;
+			height: 200px;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.item-top {
+			padding: 15px 14px;
+		}
+
+		.group-item-left {
+			max-width: 188px;
+			min-width: 188px;
+			height: 200px;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.group-item-right {
+			width: 100%;
+		}
+	}
+}
+
+.modal-common-sharing-group {
+	.create-group {
+		.create-group-title, .create-group-content {
+			display: block;
+		}
+
+		.modal-button-feature {
+			a {
+				&.btn-join {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.modal-content-group {
+		display: none;
+
+		.title-desc {
+			color: #757474;
+			font-size: 14px;
+			line-height: 20px;
+		}
+	}
+
+	.invite-people {
+		.create-group-content {
+			display: none;
+		}
+
+		.invite-people-title, .invite-people-content {
+			display: block;
+		}
+
+		.group-code {
+			border: 1px solid #e2e2e2;
+			background-color: #fff;
+			box-shadow: inset 4px 0 0 0 #3fb3f6;
+			width: 100%;
+			position: relative;
+			margin-top: 10px;
+			padding: 9px 15px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.code-txt {
+				color: #494949;
+				font-size: 14px;
+				line-height: 19px;
+			}
+
+			.copy-code {
+				color: #3fb3f6;
+				font-size: 10px;
+				font-weight: bold;
+				line-height: 14px;
+				text-align: right;
+			}
+		}
+	}
+
+	.join-group {
+		.join-group-title, .join-group-content {
+			display: block;
+		}
+
+		.modal-button-feature {
+			a {
+				&.btn-create {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.error-sms {
+		color: #f35252;
+		font-size: 14px;
+		line-height: 19px;
+		margin-top: 10px;
+	}
+
+	.success-sms {
+		color: #3fb34f;
+		font-size: 14px;
+		line-height: 19px;
+		margin-top: 10px;
+	}
+
+	.blank-txt {
+		input {
+			border-color: #f35252 !important;
+		}
+
+		.error-sms {
+			display: block;
+		}
+	}
+}

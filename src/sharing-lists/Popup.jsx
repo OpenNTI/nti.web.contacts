@@ -16,7 +16,8 @@ export default class SharingPopup extends React.Component {
 	}
 
 	static propTypes = {
-		onDismiss: PropTypes.func
+		onDismiss: PropTypes.func,
+		data: PropTypes.object
 	}
 
 
@@ -53,23 +54,38 @@ export default class SharingPopup extends React.Component {
 		}
 	}
 
+	done = () =>{
+		this.cancel();
+	}
+
 	render () {
 		const {userName, members} = this.state;
+		const {data} = this.props;
 		const people = ['user 1', 'user 2', 'user 3', 'user 4', 'user 5'];
+
 		return (
 			<div className="modal-common-sharing-group">
 				<div className="dialog create-sharing">
 					<div className="dialog-header">
-						<h2 className="title-header create-sharing-title">Create a Sharing List</h2>
-						<h2 className="title-header friend-list-title">Friends <span>(8)</span></h2>
-						{/*<a href="#close" title="Close"className="close" onClick={this.cancel}></a>*/}
+						{data.isCreate && (
+							<h2 className="title-header create-sharing-title">Create a Sharing List</h2>
+						)}
+						{!data.isCreate && (
+							<h2 className="title-header create-sharing-title">Friends <span>({data.totalFriends})</span></h2>
+						)}
 					</div>
 					<div className="modal-content-create-sharing">
 						<form>
-							<label htmlFor="fname">List Name</label>
-							<input type="text" id="fname" name="firstname" placeholder="Name"/>
+							{data.isCreate && (
+								<div>
+									<label htmlFor="fname">List Name</label>
+									<input type="text" id="fname" name="firstname" placeholder="Name"/>
+								</div>
+							)}
 							<label htmlFor="lname">Add People</label>
-							<span className="notify"><i className="icon-view icon"/>Lists are private to you. We do not notify people you add to your lists.</span>
+							{data.isCreate && (
+								<span className="notify"><i className="icon-hide icon"/>Lists are private to you. We do not notify people you add to your lists.</span>
+							)}
 							<div className="search-add-people">
 								<input type="text" id="enterName" name="Enter a name" placeholder="Enter a Name" value={this.state.userName} onChange={this.changeName}/>
 								{userName.length > 0 && (
@@ -87,7 +103,7 @@ export default class SharingPopup extends React.Component {
 									</div>
 								)}
 							</div>
-							{userName.length === 0 && (
+							{userName.length === 0 && data.isCreate && (
 								<p className="suggest">Suggested <a>Harold Newman,</a> <a>Miguel
 									Wolfe,</a> <a>Lela
 									Chapman, Andy Rogers,</a>
@@ -118,36 +134,18 @@ export default class SharingPopup extends React.Component {
 							)}
 						</form>
 					</div>
-					{/*<div className="modal-content-friend-list">*/}
-					{/*<form>*/}
-					{/*<label htmlFor="lname">Add People</label>*/}
-					{/*<div className="search-add-people">*/}
-					{/*<input type="text" id="enterName" name="Enter a name" placeholder="Enter a Name"/>*/}
-					{/*</div>*/}
-					{/*</form>*/}
-					{/*<div className="member-friend-list"><p className="title">Members</p>*/}
-					{/*<div className="result-search">*/}
-					{/*<ul>*/}
-					{/*<li className="search-item">*/}
-					{/*<div className="item-left">*/}
-					{/*<img src="https://www.dsw3schools.com/howto/img_fjords.jpg"/>*/}
-					{/*<p className="search-name">Samuel Parker</p></div>*/}
-					{/*<a className="btn-remove">Remove</a>*/}
-					{/*</li>*/}
-					{/*<li className="search-item">*/}
-					{/*<div className="item-left">*/}
-					{/*<img src="https://www.dsw3schools.com/howto/img_fjords.jpg"/>*/}
-					{/*<p className="search-name">Sally Daniels</p>*/}
-					{/*</div>*/}
-					{/*<a className="btn-remove">Remove</a></li>*/}
-					{/*</ul>*/}
-					{/*</div>*/}
-					{/*</div>*/}
-					{/*</div>*/}
 					<ul className="modal-button-feature">
-						<li><a className="btn-create">Create</a></li>
-						<li><a className="btn-cancel" onClick={this.cancel}>Cancel</a></li>
-						<li><a className="btn-done" onClick={this.cancel}>Done</a></li>
+						{data.isCreate && (
+							<div>
+								<li><a className="btn-create">Create</a></li>
+								<li><a className="btn-cancel" onClick={this.cancel}>Cancel</a></li>
+							</div>
+						)}
+						{!data.isCreate && (
+							<div>
+								<li><a className="btn-done" onClick={this.done}>Done</a></li>
+							</div>
+						)}
 					</ul>
 				</div>
 			</div>
