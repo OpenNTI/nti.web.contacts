@@ -5,7 +5,13 @@ import Popup from './Popup';
 export default class SharingList extends React.Component {
 
 	create = (e) => {
-		Popup.show();
+		const data = {isCreate: true};
+		Popup.show(data);
+	}
+
+	managePeople = (pos) =>() =>{
+		const data = {isCreate: false, totalFriends: 7};
+		Popup.show(data);
 	}
 
 	constructor (props) {
@@ -47,7 +53,7 @@ export default class SharingList extends React.Component {
 							comments with just a few people? Sharing lists make this even faster. Create a list, add
 							people to it, and
 							start sharing.</p><a className="btn-learn-more">Learn More</a></div>
-						<a className="btn-create" onClick={this.create}>Create a Sharing List</a></div>
+						<a className="btn-create" onClick={this.create}> <i className="icon-createlarge icon"/>Create a Sharing List</a></div>
 					<div className="block-sharing-list">
 						<ul>
 							{list.map((item, index) =>{
@@ -67,7 +73,7 @@ export default class SharingList extends React.Component {
 													<a className="dropbtn"><i className="icon-chevron-down"/></a>
 													<div className="dropdown-content">
 														<a onClick={this.changeName(index)}>Change Name</a>
-														<a href="#">ManagePeople</a>
+														<a onClick={this.managePeople(index)}>ManagePeople</a>
 														<a className="link-delete" href="#">Delete List</a>
 													</div>
 												</div>
