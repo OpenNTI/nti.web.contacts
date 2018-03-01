@@ -137,7 +137,7 @@ export default class SharingPopup extends React.Component {
 
 		store.createList(listName, members)
 			.then((result) => {
-				console.log(result);
+				this.cancel();
 			});
 	}
 
