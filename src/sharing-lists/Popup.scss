@@ -1,6 +1,10 @@
 @import "~nti-style-common";
 
 .modal-common-sharing-group {
+	ul, li {
+		list-style: none;
+	}
+
 	.dialog {
 		width: 550px;
 		min-height: 500px;
@@ -105,9 +109,9 @@
 						cursor: pointer;
 
 						.img-avatar {
-							object-fit: cover;
 							height: 40px;
 							width: 40px;
+							overflow: hidden;
 						}
 
 						&:hover {
@@ -154,9 +158,9 @@
 					justify-content: space-between;
 
 					.img-avatar {
-						object-fit: cover;
 						height: 40px;
 						width: 40px;
+						overflow: hidden;
 					}
 
 					&:hover {

@@ -1,35 +1,5 @@
 @import "~nti-style-common";
 
-ul, li {
-	list-style: none;
-}
-
-.hidden {
-	display: none;
-}
-
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-	color: $tertiary-grey;
-	opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-	color: $tertiary-grey;
-}
-
-:-ms-input-placeholder { /* Microsoft Edge */
-	color: $tertiary-grey;
-}
-
-body {
-	font-family: "Open Sans";
-	position: relative !important;
-}
-
-a {
-	cursor: pointer;
-}
-
 .contact-sharing-list, .contact-group {
 	width: 1024px;
 	margin: 0 auto;
@@ -37,6 +7,14 @@ a {
 	padding: 30px;
 	margin-top: 20px;
 	background-color: #fff;
+
+	ul, li {
+		list-style: none;
+	}
+
+	a {
+		cursor: pointer;
+	}
 
 	.feature-top {
 		overflow: hidden;
@@ -301,7 +279,7 @@ a {
 					}
 				}
 
-				img, .number {
+				.avatar, .number {
 					width: 100%;
 					border: 1px solid #fff;
 					border-radius: 50%;
