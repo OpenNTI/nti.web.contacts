@@ -76,10 +76,7 @@ export default class SharingList extends React.Component {
 					<div className="block-sharing-list">
 						<ul>
 							{items.map((item, index) =>{
-								if (!item || !item.friends) {
-									return null;
-								}
-								const friends = item.friends;
+								const friends = item.friends || [];
 								const overFriends = friends.length > 8 ? (friends.length - 8) : 0;
 								return (
 									<li className="item" key={index}>
