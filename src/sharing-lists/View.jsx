@@ -77,7 +77,7 @@ export default class SharingList extends React.Component {
 						<ul>
 							{items.map((item, index) =>{
 								const friends = item.friends;
-								const overFriends = friends.length > 8 ? friends.length - 8 : 0;
+								const overFriends = friends.length > 8 ? (friends.length - 8) : 0;
 								return (
 									<li className="item" key={index}>
 										<div className="item-top">
@@ -102,7 +102,7 @@ export default class SharingList extends React.Component {
 										</div>
 										<div className="item-member"><p>MEMBERS</p>
 											{overFriends > 0 && (
-												<div className="active-account-img first-child"><p className="number">+(overFriends)</p></div>
+												<div className="active-account-img first-child"><p className="number">+{overFriends}</p></div>
 											)}
 
 											{friends.map((user) =>{

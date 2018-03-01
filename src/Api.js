@@ -1,5 +1,4 @@
-import {getService, getAppUser} from 'nti-web-client';
-import {decodeFromURI} from 'nti-lib-ntiids';
+import {getService} from 'nti-web-client';
 
 import {USERS, GROUPS, LISTS} from './Constants';
 
@@ -12,15 +11,4 @@ const storeGetters = {
 
 export function getStore (type) {
 	return storeGetters[type]();
-}
-
-export function getSuggestedContacts () {
-	return getAppUser()
-		.then(user => user.fetchLinkParsed('SuggestedContacts'));
-}
-
-export function getDistributionList (id) {
-	const listId = decodeFromURI(id);
-	return getStore(LISTS).then(store =>
-		store.getLists().find(list => decodeFromURI(list.getID()) === listId) || null);
 }
