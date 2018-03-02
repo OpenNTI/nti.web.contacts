@@ -17,11 +17,11 @@
 
 				.page {
 					margin: 0 4px;
-					color: #3fb3f6;
+					color: $primary-blue;
 					cursor: pointer;
 
 					&.current {
-						color: black;
+						color: #000;
 						cursor: auto;
 					}
 				}
@@ -29,14 +29,14 @@
 
 			.prev, .next {
 				color: white;
-				background-color: #3fb3f6;
+				background-color: $primary-blue;
 				padding: 3px;
 				border-radius: 2px;
 				cursor: pointer;
 
 				&.disabled {
 					cursor: auto;
-					background-color: #ccc;
+					background-color: $border-grey;
 				}
 			}
 		}

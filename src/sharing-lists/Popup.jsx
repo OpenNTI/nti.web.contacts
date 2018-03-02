@@ -104,7 +104,7 @@ export default class SharingPopup extends React.Component {
 								)}
 							</div>
 							{userName.length === 0 && data.isCreate && (
-								<p className="suggest">Suggested <a>Harold Newman,</a> <a>Miguel
+								<p className="suggest hidden">Suggested <a>Harold Newman,</a> <a>Miguel
 									Wolfe,</a> <a>Lela
 									Chapman, Andy Rogers,</a>
 								</p>

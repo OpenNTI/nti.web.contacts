@@ -4,7 +4,7 @@
 	.feature-top {
 		.btn-join {
 			background-color: #fff;
-			color: #757474;
+			color: $secondary-grey;
 			height: 40px;
 			max-width: 192px;
 			border-radius: 3px;
@@ -16,7 +16,7 @@
 			position: relative;
 			width: 50%;
 			float: right;
-			border: 1px solid #e2e2e2;
+			border: 1px solid $border-grey-light;
 			margin-right: 15px;
 		}
 	}
@@ -69,7 +69,7 @@
 		display: none;
 
 		.title-desc {
-			color: #757474;
+			color: $secondary-grey;
 			font-size: 14px;
 			line-height: 20px;
 		}
@@ -85,9 +85,9 @@
 		}
 
 		.group-code {
-			border: 1px solid #e2e2e2;
+			border: 1px solid $border-grey-light;
 			background-color: #fff;
-			box-shadow: inset 4px 0 0 0 #3fb3f6;
+			box-shadow: inset 4px 0 0 0 $primary-blue;
 			width: 100%;
 			position: relative;
 			margin-top: 10px;
@@ -97,13 +97,13 @@
 			align-items: center;
 
 			.code-txt {
-				color: #494949;
+				color: $primary-grey;
 				font-size: 14px;
 				line-height: 19px;
 			}
 
 			.copy-code {
-				color: #3fb3f6;
+				color: $primary-blue;
 				font-size: 10px;
 				font-weight: bold;
 				line-height: 14px;
@@ -127,14 +127,14 @@
 	}
 
 	.error-sms {
-		color: #f35252;
+		color: $incorrect;
 		font-size: 14px;
 		line-height: 19px;
 		margin-top: 10px;
 	}
 
 	.success-sms {
-		color: #3fb34f;
+		color: $primary-green;
 		font-size: 14px;
 		line-height: 19px;
 		margin-top: 10px;
@@ -142,7 +142,7 @@
 
 	.blank-txt {
 		input {
-			border-color: #f35252 !important;
+			border-color: $incorrect !important;
 		}
 
 		.error-sms {
