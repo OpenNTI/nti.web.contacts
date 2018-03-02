@@ -73,7 +73,7 @@ export default class SharingList extends React.Component {
 													<a className="dropbtn"><i className="icon-chevron-down"/></a>
 													<div className="dropdown-content">
 														<a onClick={this.changeName(index)}>Change Name</a>
-														<a onClick={this.managePeople(index)}>ManagePeople</a>
+														<a onClick={this.managePeople(index)}>Manage People</a>
 														<a className="link-delete" href="#">Delete List</a>
 													</div>
 												</div>

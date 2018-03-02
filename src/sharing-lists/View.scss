@@ -9,16 +9,16 @@ ul, li {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-	color: #b8b8b8;
+	color: $tertiary-grey;
 	opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-	color: #b8b8b8;
+	color: $tertiary-grey;
 }
 
 :-ms-input-placeholder { /* Microsoft Edge */
-	color: #b8b8b8;
+	color: $tertiary-grey;
 }
 
 body {
@@ -45,7 +45,7 @@ a {
 			height: 40px;
 			max-width: 192px;
 			border-radius: 3px;
-			background-color: #3fb3f6;
+			background-color: $primary-blue;
 			font-size: 14px;
 			font-weight: 600;
 			line-height: 40px;
@@ -70,7 +70,7 @@ a {
 		float: left;
 
 		.main-title {
-			color: #494949;
+			color: $primary-grey;
 			font-size: 32px;
 			font-weight: 300;
 			line-height: 43px;
@@ -82,11 +82,11 @@ a {
 			max-width: 435px;
 			font-size: 16px;
 			line-height: 22px;
-			color: #757474;
+			color: $secondary-grey;
 		}
 
 		.btn-learn-more {
-			color: #3fb3f6;
+			color: $primary-blue;
 			font-size: 16px;
 			line-height: 22px;
 			margin-top: 10px;
@@ -102,7 +102,7 @@ a {
 		}
 
 		.item {
-			border: 1px solid #e2e2e2;
+			border: 1px solid $border-grey-light;
 			background-color: #fff;
 			box-shadow: 0 2px 3px -2px rgba(0, 0, 0, 0.15);
 			min-width: 470px;
@@ -117,7 +117,7 @@ a {
 			}
 
 			.item-title {
-				color: #494949;
+				color: $primary-grey;
 				font-size: 18px;
 				line-height: 24px;
 				font-weight: normal;
@@ -135,10 +135,10 @@ a {
 				width: 14px;
 				height: 10px;
 				cursor: pointer;
-				margin-top: 8px;
+				// margin-top: 8px;
 
 				i {
-					color: #b8b8b8;
+					color: $tertiary-grey;
 				}
 			}
 
@@ -160,13 +160,14 @@ a {
 				background-color: #fff;
 				box-shadow: 0 2px 3px -2px rgba(0, 0, 0, 0.15);
 				min-width: 250px;
-				border: 1px solid #e2e2e2;
+				border: 1px solid $border-grey-light;
 				z-index: 99;
 				padding: 15px;
 				right: 0;
+				top: 18px;
 
 				a {
-					color: #757474;
+					color: $secondary-grey;
 					font-size: 14px;
 					line-height: 19px;
 					display: block;
@@ -178,7 +179,7 @@ a {
 					}
 
 					&.link-delete {
-						color: #f35252;
+						color: $incorrect;
 					}
 				}
 			}
@@ -186,8 +187,14 @@ a {
 			input {
 				float: left;
 				width: 175px;
-				border: 1px solid #e2e2e2;
+				border: 1px solid $border-grey-light;
 				background-color: #fff;
+				height: 39px;
+				padding: 10px;
+				color: $primary-grey;
+				font-size: 18px;
+				line-height: 24px;
+
 			}
 
 			.button {
@@ -195,12 +202,16 @@ a {
 				background-color: #fff;
 				font-weight: 600;
 				padding: 2px 7px;
+				font-weight: normal;
+				margin-top: 5px;
+				font-size: 18px;
 			}
 
 			.btn-save {
-				background-color: $primary-blue;
-				color: #fff;
+				// background-color: $primary-blue;
+				// color: #fff;
 				margin-left: 10px;
+				color: $primary-blue;
 			}
 		}
 
@@ -305,7 +316,7 @@ a {
 
 		.item-member {
 			p {
-				color: #b8b8b8;
+				color: $tertiary-grey;
 				font-size: 10px;
 				font-weight: bold;
 				line-height: 14px;
