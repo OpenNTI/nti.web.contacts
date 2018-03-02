@@ -1,6 +1,6 @@
 @import "~nti-style-common";
 
-.contact-sharing-list, .contact-group {
+.contact-sharing-list {
 	width: 1024px;
 	margin: 0 auto;
 	font-family: "Open Sans";
@@ -73,7 +73,7 @@
 		}
 	}
 
-	.block-sharing-list, .block-group {
+	.block-sharing-list {
 		ul {
 			padding-left: 0;
 			overflow: hidden;
@@ -176,13 +176,11 @@
 				color: $primary-grey;
 				font-size: 18px;
 				line-height: 24px;
-
 			}
 
 			.button {
 				float: right;
 				background-color: #fff;
-				font-weight: 600;
 				padding: 2px 7px;
 				font-weight: normal;
 				margin-top: 5px;
