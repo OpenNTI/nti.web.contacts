@@ -23,6 +23,7 @@ export default class SharingList extends React.Component {
 				let items = [];
 				for(let item of store) {
 					if(!store.entityMatchesQuery || store.entityMatchesQuery(item)) {
+						item.name = item.displayName;
 						items.push(item);
 					}
 				}
@@ -84,7 +85,7 @@ export default class SharingList extends React.Component {
 											{!item.changeName && (<DisplayName entity={item}/>)}
 											{item.changeName && (
 												<div>
-													<input type="text" value={item.alias} onChange={this.newName(index)}/>
+													<input type="text" value={item.name} onChange={this.newName(index)}/>
 													<a className="btn-save button" onClick={this.saveChangeName(index, true)}>Save</a>
 													<a className="btn-cancel button" onClick={this.saveChangeName(index, false)}>Cancel</a>
 												</div>
