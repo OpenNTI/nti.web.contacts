@@ -5,6 +5,8 @@ import {Prompt, Avatar} from 'nti-web-commons';
 import {getStore} from '../Api';
 import {USERS} from '../Constants';
 
+import PeopleList from './PeopleList';
+
 export default class SharingPopup extends React.Component {
 	static show (data) {
 		return new Promise(fulfill => {
@@ -200,32 +202,7 @@ export default class SharingPopup extends React.Component {
 									Chapman, Andy Rogers,</a>
 								</p>
 							)}
-							{members.length > 0 && (
-								<div className=""><p className="title">Members</p>
-									<div className="result-search">
-										<ul>
-											{members.map((item, index) =>{
-												return(
-													<li className="search-item" key={index}>
-														<div className="item-left">
-															<div className="img-avatar">
-																<Avatar className="img-user" entityId={item.Username}/>
-															</div>
-															<p className="search-name">{item.realname}</p>
-														</div>
-														{!item.remove && (
-															<a className="btn-remove" onClick={this.remove(index)}>Remove</a>
-														)}
-														{item.remove && (
-															<a className="btn-undo" onClick={this.remove(index)}>Undo</a>
-														)}
-													</li>
-												);
-											})}
-										</ul>
-									</div>
-								</div>
-							)}
+							<PeopleList members={members} remove={this.remove}/>
 						</form>
 					</div>
 					<ul className="modal-button-feature">
