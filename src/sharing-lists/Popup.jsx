@@ -144,7 +144,14 @@ export default class SharingPopup extends React.Component {
 			return;
 		}
 
-		store.createList(listName, members)
+		let selections = [];
+		for (let item of members) {
+			if (!item.remove) {
+				selections.push(item);
+			}
+		}
+
+		store.createList(listName, selections)
 			.then(() => {
 				refreshList(true);
 				this.cancel();
