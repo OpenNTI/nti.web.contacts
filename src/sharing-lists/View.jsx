@@ -36,13 +36,23 @@ export default class SharingList extends React.Component {
 
 	create = (e) => {
 		const data = {isCreate: true};
-		Popup.show(data, this.addList);
+		Popup.show(data, this.refreshList);
 	}
 
-	addList = (item) => () => {
-		let {items} = this.state;
-		items.push(item);
-		this.setState({items: items});
+	refreshList = (newItem) =>{
+		if (newItem) {
+			getStore(LISTS)
+				.then((store) => {
+					let items = [];
+					for (let item of store) {
+						if (!store.entityMatchesQuery || store.entityMatchesQuery(item)) {
+							item.name = item.displayName;
+							items.push(item);
+						}
+					}
+					this.setState({store: store, items: items});
+				});
+		}
 	}
 
 	managePeople = (item) =>() =>{

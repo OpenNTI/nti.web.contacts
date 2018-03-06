@@ -8,13 +8,13 @@ import {USERS} from '../Constants';
 import PeopleList from './PeopleList';
 
 export default class SharingPopup extends React.Component {
-	static show (data, addList) {
+	static show (data, refreshList) {
 		return new Promise(fulfill => {
 			Prompt.modal(
 				(<SharingPopup
 					onDismiss={fulfill}
 					data={data}
-					addList={addList}
+					refreshList={refreshList}
 				/>),
 				'viewer-container'
 			);
@@ -24,7 +24,7 @@ export default class SharingPopup extends React.Component {
 	static propTypes = {
 		onDismiss: PropTypes.func,
 		data: PropTypes.object,
-		addList: PropTypes.func
+		refreshList: PropTypes.func
 	}
 
 	constructor (props) {
@@ -134,14 +134,14 @@ export default class SharingPopup extends React.Component {
 
 	create = () => {
 		const {store, listName, members} = this.state;
-
+		const {refreshList} = this.props;
 		if (!store) {
 			return;
 		}
 
 		store.createList(listName, members)
-			.then((result) => {
-				this.props.addList(result);
+			.then(() => {
+				refreshList(true);
 				this.cancel();
 			});
 	}
