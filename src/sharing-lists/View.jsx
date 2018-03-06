@@ -99,12 +99,27 @@ export default class SharingList extends React.Component {
 
 	}
 
+	toggleMenu = (pos) => (e) =>{
+		let {items} = this.state;
+		items[pos].toggle = true;
+		this.setState({items: items});
+		e.stopPropagation();
+	}
+
+	clearToggle = () => {
+		let {items} = this.state;
+		for (let i = 0; i < items.length; i++) {
+			items[i].toggle = false;
+		}
+		this.setState({items: items});
+	}
+
 	render () {
 		const {items} = this.state;
 
 		return (
 			<div>
-				<section className="contact-sharing-list">
+				<section className="contact-sharing-list" onClick={this.clearToggle}>
 					<div className="feature-top">
 						<div className="description-block"><h3 className="main-title">Sharing Lists</h3><p
 							className="detail-txt">
@@ -131,12 +146,14 @@ export default class SharingList extends React.Component {
 											)}
 											{!item.changeName && (
 												<div className="dropdown">
-													<a className="dropbtn"><i className="icon-chevron-down"/></a>
-													<div className="dropdown-content">
-														<a onClick={this.changeName(index)}>Change Name</a>
-														<a onClick={this.managePeople(item)}>Manage People</a>
-														<a className="link-delete" onClick={this.delete(index)}>Delete List</a>
-													</div>
+													<a className="dropbtn"><i className="icon-chevron-down" onClick={this.toggleMenu(index)}/></a>
+													{item.toggle && (
+														<div className="dropdown-content">
+															<a onClick={this.changeName(index)}>Change Name</a>
+															<a onClick={this.managePeople(item)}>Manage People</a>
+															<a className="link-delete" onClick={this.delete(index)}>Delete List</a>
+														</div>
+													)}
 												</div>
 											)}
 										</div>
