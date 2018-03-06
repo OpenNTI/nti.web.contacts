@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Prompt, Avatar} from 'nti-web-commons';
+import {Prompt, Avatar, Loading} from 'nti-web-commons';
 
 import {getStore} from '../Api';
 import {USERS} from '../Constants';
@@ -36,7 +36,9 @@ export default class SharingPopup extends React.Component {
 			search: '',
 			members: [],
 			searchResults: [],
-			listName: ''
+			listName: '',
+			searchLoading: false,
+			searchError: ''
 		};
 	}
 
@@ -73,7 +75,8 @@ export default class SharingPopup extends React.Component {
 
 		this.setState({
 			search: query,
-			searchResults: []
+			searchResults: [],
+			searchLoading: true
 		});
 
 		if (store && store.search) {
@@ -95,7 +98,8 @@ export default class SharingPopup extends React.Component {
 				.catch(reason=> {
 					if (typeof reason !== 'object' || reason.statusCode !== -1) {
 						this.setState({
-							searchError: reason
+							searchError: reason,
+							searchLoading: false
 						});
 					}
 				});
@@ -176,7 +180,7 @@ export default class SharingPopup extends React.Component {
 	}
 
 	render () {
-		const {search, members, searchResults, listName} = this.state;
+		const {search, members, searchResults, listName, searchLoading} = this.state;
 
 		const {data} = this.props;
 
@@ -220,6 +224,16 @@ export default class SharingPopup extends React.Component {
 													</li>
 												);
 											})}
+											{searchLoading && (
+												<li className="search-item no-item">
+													<Loading.Ellipse/>
+												</li>
+											)}
+											{!searchLoading && searchResults.length === 0 && (
+												<li className="search-item no-item">
+													<p>No results</p>
+												</li>
+											)}
 										</ul>
 									</div>
 								)}
