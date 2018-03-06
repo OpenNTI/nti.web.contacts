@@ -36,7 +36,13 @@ export default class SharingList extends React.Component {
 
 	create = (e) => {
 		const data = {isCreate: true};
-		Popup.show(data);
+		Popup.show(data, this.addList);
+	}
+
+	addList = (item) => () => {
+		let {items} = this.state;
+		items.push(item);
+		this.setState({items: items});
 	}
 
 	managePeople = (item) =>() =>{
