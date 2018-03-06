@@ -1,14 +1,11 @@
 import React from 'react';
 import {Avatar, Prompt} from 'nti-web-commons';
-import {scoped} from 'nti-lib-locale';
 
 import {getStore} from '../Api';
 import {LISTS} from '../Constants';
 
 
 import Popup from './Popup';
-
-let t = scoped('CONTACTS');
 
 export default class SharingList extends React.Component {
 
@@ -89,7 +86,7 @@ export default class SharingList extends React.Component {
 
 	delete = (pos) =>() =>{
 		let {items} = this.state;
-		Prompt.areYouSure(t('deleteListPrompt')).then(() => {
+		Prompt.areYouSure('Delete this list?').then(() => {
 			items[pos].delete()
 				.then(() => {
 					items.splice(pos, 1);
