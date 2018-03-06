@@ -1,11 +1,14 @@
 import React from 'react';
-import {DisplayName, Avatar} from 'nti-web-commons';
+import {Avatar, Prompt} from 'nti-web-commons';
+import {scoped} from 'nti-lib-locale';
 
 import {getStore} from '../Api';
 import {LISTS} from '../Constants';
 
 
 import Popup from './Popup';
+
+let t = scoped('CONTACTS');
 
 export default class SharingList extends React.Component {
 
@@ -53,10 +56,32 @@ export default class SharingList extends React.Component {
 		this.setState({items: items});
 	}
 
-	saveChangeName = (pos, save) =>() =>{
+	saveChangeName = (pos) =>() =>{
 		let {items} = this.state;
 		items[pos].changeName = false;
 		this.setState({items: items});
+		let alias = items[pos].name;
+		items[pos].save({alias});
+
+	}
+
+	cancelChangeName = (pos) =>() =>{
+		let {items} = this.state;
+		items[pos].changeName = false;
+		items[pos].name = items[pos].displayName;
+		this.setState({items: items});
+
+	}
+
+	delete = (pos) =>() =>{
+		let {items} = this.state;
+		Prompt.areYouSure(t('deleteListPrompt')).then(() => {
+			items[pos].delete()
+				.then(() => {
+					items.splice(pos, 1);
+					this.setState({items: items});
+				});
+		});
 
 	}
 
@@ -82,12 +107,12 @@ export default class SharingList extends React.Component {
 								return (
 									<li className="item" key={index}>
 										<div className="item-top">
-											{!item.changeName && (<DisplayName entity={item}/>)}
+											{!item.changeName && (<h4 className="item-title">{item.name}</h4>)}
 											{item.changeName && (
 												<div>
 													<input type="text" value={item.name} onChange={this.newName(index)}/>
-													<a className="btn-save button" onClick={this.saveChangeName(index, true)}>Save</a>
-													<a className="btn-cancel button" onClick={this.saveChangeName(index, false)}>Cancel</a>
+													<a className="btn-save button" onClick={this.saveChangeName(index)}>Save</a>
+													<a className="btn-cancel button" onClick={this.cancelChangeName(index)}>Cancel</a>
 												</div>
 											)}
 											{!item.changeName && (
@@ -95,8 +120,8 @@ export default class SharingList extends React.Component {
 													<a className="dropbtn"><i className="icon-chevron-down"/></a>
 													<div className="dropdown-content">
 														<a onClick={this.changeName(index)}>Change Name</a>
-														<a onClick={this.managePeople(item)}>ManagePeople</a>
-														<a className="link-delete" href="#">Delete List</a>
+														<a onClick={this.managePeople(item)}>Manage People</a>
+														<a className="link-delete" onClick={this.delete(index)}>Delete List</a>
 													</div>
 												</div>
 											)}
