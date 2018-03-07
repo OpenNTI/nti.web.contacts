@@ -1,5 +1,5 @@
 import React from 'react';
-import {DisplayName} from 'nti-web-commons';
+import {DisplayName, Avatar, Prompt} from 'nti-web-commons';
 
 import {getStore} from '../Api';
 import {GROUPS} from '../Constants';
@@ -24,24 +24,53 @@ export default class Group extends React.Component {
 						items.push(item);
 					}
 				}
-
 				this.setState({store: store, items: items });
 			});
 	}
 
+	refreshList = () =>{
+		getStore(GROUPS)
+			.then((store) => {
+				let items = [];
+				for(let item of store) {
+					if(!store.entityMatchesQuery || store.entityMatchesQuery(item)) {
+						items.push(item);
+					}
+				}
+				this.setState({store: store, items: items });
+			});
+	}
+
+
+	toggleMenu = (pos) => (e) =>{
+		let {items} = this.state;
+		items[pos].toggle = true;
+		this.setState({items: items});
+		e.stopPropagation();
+	}
+
+	clearToggle = () => {
+		let {items} = this.state;
+		for (let i = 0; i < items.length; i++) {
+			items[i].toggle = false;
+		}
+		this.setState({items: items});
+	}
+
 	create = (e) => {
 		const data = {isCreate: true};
-		Popup.show(data);
+		Popup.show(data, this.refreshList);
 	}
 
 	viewGroupCode = (group) =>() =>{
 		const data = {isView: true, item: group};
-		Popup.show(data);
+		Popup.show(data, this.refreshList);
 	}
 
 	changeName = (pos) =>() =>{
 		let {items} = this.state;
 		items[pos].changeName = true;
+		items[pos].revertName = items[pos].alias;
 		this.setState({items: items});
 	}
 
@@ -51,16 +80,28 @@ export default class Group extends React.Component {
 		this.setState({items: items});
 	}
 
-	saveChangeName = (pos, save) =>() =>{
+	saveChangeName = (pos, status) =>() =>{
 		let {items} = this.state;
 		items[pos].changeName = false;
+		if(!status) {
+			items[pos].alias = items[pos].revertName;
+		}
+		else {
+			items[pos].save({alias: items[pos].alias});
+		}
 		this.setState({items: items});
 	}
 
-	delete = (index) =>() =>{
+	delete = (pos) =>() =>{
 		let {items} = this.state;
-
 		this.setState({items: items});
+		Prompt.areYouSure('Delete this list?').then(() => {
+			items[pos].delete()
+				.then(() => {
+					items.splice(pos, 1);
+					this.setState({items: items});
+				});
+		});
 	}
 
 	join = (e) => {
@@ -72,7 +113,7 @@ export default class Group extends React.Component {
 		const {items} = this.state;
 
 		return (
-			<section className="contact-group">
+			<section className="contact-group" onClick={this.clearToggle}>
 				<div className="feature-top">
 					<div className="description-block">
 						<h3 className="main-title">Groups</h3></div>
@@ -84,6 +125,8 @@ export default class Group extends React.Component {
 				<div className="block-group">
 					<ul>
 						{items.map((item, index) =>{
+							const friends = item.friends || [];
+							const overFriends = friends.length > 8 ? (friends.length - 8) : 0;
 							return (
 								<li className="item" key={index}>
 									<div className="group-item-left"><img src={item.avatarURL}/></div>
@@ -99,25 +142,27 @@ export default class Group extends React.Component {
 											)}
 											{!item.changeName && (
 												<div className="dropdown">
-													<a className="dropbtn"><i className="icon-chevron-down"/></a>
-													<div className="dropdown-content">
-														<a onClick={this.viewGroupCode(item)}>View Group Code</a>
-														<a onClick={this.changeName(index)}>Change Name</a>
-														<a className="link-delete" onClick={this.delete(index)}>Delete Group</a>
-													</div>
+													<a className="dropbtn"><i className="icon-chevron-down" onClick={this.toggleMenu(index)}/></a>
+													{item.toggle && (
+														<div className="dropdown-content">
+															<a onClick={this.viewGroupCode(item)}>View Group Code</a>
+															<a onClick={this.changeName(index)}>Change Name</a>
+															<a className="link-delete" onClick={this.delete(index)}>Delete Group</a>
+														</div>
+													)}
 												</div>
 											)}
 										</div>
 										<div className="item-member">
 											<p>MEMBERS</p>
-											<div className="active-account-img first-child"><img src="../images/icon.png" />
-												<p className="number">+23</p>
-											</div>
-											<div className="active-account-img"><img src="../images/icon1.png" /></div>
-											<div className="active-account-img"><img src="../images/icon2.jpg" /></div>
-											<div className="active-account-img"><img src="../images/icon3.jpg" /></div>
-											<div className="active-account-img"><img src="../images/icon4.png" /></div>
-											<div className="active-account-img"><img src="../images/icon5.jpeg" /></div>
+											{overFriends > 0 && (
+												<div className="active-account-img first-child"><p className="number">+{overFriends}</p></div>
+											)}
+											{friends.map((friend, key) =>{
+												return (
+													<Avatar className="active-account-img first-child" entityId={friend.Username} key={key}/>
+												);
+											})}
 										</div>
 									</div>
 								</li>

@@ -6,11 +6,12 @@ import {getStore} from '../Api';
 import {GROUPS} from '../Constants';
 
 export default class SharingPopup extends React.Component {
-	static show (data) {
+	static show (data, refreshList) {
 		return new Promise(fulfill => {
 			Prompt.modal(
 				(<SharingPopup
 					onDismiss={fulfill}
+					refreshList={refreshList}
 					data={data}
 				/>),
 				'viewer-container'
@@ -20,6 +21,7 @@ export default class SharingPopup extends React.Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func,
+		refreshList: PropTypes.func,
 		data: PropTypes.object
 	}
 
@@ -57,6 +59,7 @@ export default class SharingPopup extends React.Component {
 
 	create = () => {
 		const {store, groupName} = this.state;
+		const {refreshList} = this.props;
 
 		if (!store) {
 			return;
@@ -70,6 +73,7 @@ export default class SharingPopup extends React.Component {
 
 		store.createGroup(groupName)
 			.then((result) => {
+				refreshList(true);
 				this.cancel();
 			});
 	}
@@ -93,8 +97,8 @@ export default class SharingPopup extends React.Component {
 							</form>
 						</div>
 						<ul className="modal-button-feature">
-							<li><a href="" className="btn-create" onClick={this.create}>Create</a></li>
-							<li><a href="" className="btn-cancel" onClick={this.cancel}>Cancel</a></li>
+							<li><a className="btn-create" onClick={this.create}>Create</a></li>
+							<li><a className="btn-cancel" onClick={this.cancel}>Cancel</a></li>
 						</ul>
 					</div>
 				)}
@@ -102,20 +106,20 @@ export default class SharingPopup extends React.Component {
 				{data.isJoin && (
 					<div className="dialog join-group">
 						<div className="dialog-header">
-							<h2 className="title-header join-group-title">Join a Group</h2><a href="#close" title="Close" className="close"><img src="../images/close.png"/></a></div>
+							<h2 className="title-header join-group-title">Join a Group</h2><a title="Close" className="close"><img src="../images/close.png"/></a></div>
 						<div className="modal-content-group join-group-content blank-txt">
 							<form><label htmlFor="fname">Enter a group code to join a group.</label> <input type="text" id="gcode" name="groupcode" placeholder="Group Code"/></form>
 							<p className="error-sms hidden">Not a valid code</p>
 						</div>
 						<ul className="modal-button-feature">
-							<li><a href="" className="btn-join">Join</a></li>
-							<li><a href="" className="btn-cancel">Cancel</a></li>
+							<li><a className="btn-join">Join</a></li>
+							<li><a className="btn-cancel" onClick={this.cancel}>Cancel</a></li>
 						</ul>
 					</div>
 				)}
 
 				{data.isView && (
-					<div className="dialog join-group">
+					<div className="dialog invite-people">
 						<div className="dialog-header">
 							<h2 className="title-header invite-people-title">Invite People</h2></div>
 						<div className="modal-content-group invite-people-content">
@@ -125,8 +129,7 @@ export default class SharingPopup extends React.Component {
 							<p className="success-sms">Copy to clipboard!</p>
 						</div>
 						<ul className="modal-button-feature">
-							<li><a href="" className="btn-join">Join</a></li>
-							<li><a href="" className="btn-cancel">Cancel</a></li>
+							<li><a className="btn-done" onClick={this.cancel}>Done</a></li>
 						</ul>
 					</div>
 				)}
