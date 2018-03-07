@@ -59,7 +59,6 @@ export default class Group extends React.Component {
 
 	delete = (index) =>() =>{
 		let {items} = this.state;
-		let itemRemoved = items.splice(index, 1);
 
 		this.setState({items: items});
 	}
