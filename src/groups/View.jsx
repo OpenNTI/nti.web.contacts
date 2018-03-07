@@ -18,17 +18,13 @@ export default class Group extends React.Component {
 	componentWillMount () {
 		getStore(GROUPS)
 			.then((store) => {
-				console.log('done getStore======: ', store);
 				let items = [];
 				for(let item of store) {
-					console.log('store.entityMatchesQuery: ', store.entityMatchesQuery);
 					if(!store.entityMatchesQuery || store.entityMatchesQuery(item)) {
 						items.push(item);
 					}
 				}
 
-				console.log('store: ', store);
-				console.log('items: ', items);
 				this.setState({store: store, items: items });
 			});
 	}
@@ -63,10 +59,8 @@ export default class Group extends React.Component {
 
 	delete = (index) =>() =>{
 		let {items} = this.state;
-		console.log('index');
 		let itemRemoved = items.splice(index, 1);
 
-		console.log('itemRemoved: ', itemRemoved);
 		this.setState({items: items});
 	}
 
@@ -76,7 +70,6 @@ export default class Group extends React.Component {
 	}
 
 	render () {
-		console.log('vo render======');
 		const {items} = this.state;
 
 		return (
