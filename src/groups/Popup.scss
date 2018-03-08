@@ -1,6 +1,14 @@
 @import "~nti-style-common";
 
 .modal-common-group {
+	ul, li {
+		list-style: none;
+	}
+
+	a {
+		cursor: pointer;
+	}
+
 	.create-group {
 		.create-group-title, .create-group-content {
 			display: block;
