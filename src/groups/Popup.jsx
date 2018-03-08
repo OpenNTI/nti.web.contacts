@@ -106,7 +106,7 @@ export default class SharingPopup extends React.Component {
 				{data.isJoin && (
 					<div className="dialog join-group">
 						<div className="dialog-header">
-							<h2 className="title-header join-group-title">Join a Group</h2><a title="Close" className="close"><img src="../images/close.png"/></a></div>
+							<h2 className="title-header join-group-title">Join a Group</h2></div>
 						<div className="modal-content-group join-group-content blank-txt">
 							<form><label htmlFor="fname">Enter a group code to join a group.</label> <input type="text" id="gcode" name="groupcode" placeholder="Group Code"/></form>
 							<p className="error-sms hidden">Not a valid code</p>

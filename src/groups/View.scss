@@ -13,6 +13,8 @@
 	margin: 0 auto;
 	font-family: "Open Sans";
 	padding: 0 30px;
+	margin-top: 20px;
+	background-color: #fff;
 
 	.feature-top {
 		overflow: hidden;
@@ -132,7 +134,11 @@
 				width: 14px;
 				height: 10px;
 				cursor: pointer;
-				margin-top: 8px;
+				// margin-top: 8px;
+
+				.icon-chevron-down {
+					color: $tertiary-grey;
+				}
 			}
 
 			.dropdown {
@@ -171,11 +177,11 @@
 
 			input {
 				float: left;
-				width: 175px;
+				width: 100%;
 				border: 1px solid $border-grey-light;
 				background-color: #fff;
 				height: 39px;
-				padding: 10px;
+				padding: 5px 10px;
 				color: $primary-grey;
 				font-size: 18px;
 				line-height: 24px;
