@@ -47,7 +47,7 @@ export default class SharingPopup extends React.Component {
 	}
 
 	groupNameChange = (e) => {
-		this.setState({groupName: e.target.value.trim()});
+		this.setState({groupName: e.target.value});
 	}
 
 	cancel = () =>{
@@ -125,7 +125,7 @@ export default class SharingPopup extends React.Component {
 						<div className="modal-content-group invite-people-content">
 							<p className="title-desc">Share this group code to others you want to join your group. Once they click “Join a Group” they will paste in this code to join.</p><label htmlFor="fname">Group Name</label>
 							<div className="group-code">
-								<p className="code-txt">dCVTrckcB35</p><a className="copy-code">COPY CODE</a></div>
+								<p className="code-txt">{data.code}</p><a className="copy-code">COPY CODE</a></div>
 							<p className="success-sms">Copy to clipboard!</p>
 						</div>
 						<ul className="modal-button-feature">

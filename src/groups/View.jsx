@@ -1,5 +1,6 @@
 import React from 'react';
 import {DisplayName, Avatar, Prompt} from 'nti-web-commons';
+import {getService} from 'nti-web-client';
 
 import {getStore} from '../Api';
 import {GROUPS} from '../Constants';
@@ -63,8 +64,15 @@ export default class Group extends React.Component {
 	}
 
 	viewGroupCode = (group) =>() =>{
-		const data = {isView: true, item: group};
-		Popup.show(data, this.refreshList);
+		const link = group && group.getLink('default-trivial-invitation-code');
+		if (link) {
+			getService()
+				.then(service => service.get(link))
+				.then(result => {
+					const data = {isView: true, item: group, code: result.invitation_code};
+					Popup.show(data, this.refreshList);
+				});
+		}
 	}
 
 	changeName = (pos) =>() =>{
