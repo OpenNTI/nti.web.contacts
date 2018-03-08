@@ -84,7 +84,7 @@ export default class SharingPopup extends React.Component {
 		const {data} = this.props;
 
 		return (
-			<div id="openModal" className="modalbg modal-common-sharing-group modal-group">
+			<div id="openModal" className="modalbg modal-common-group modal-group">
 				{data.isCreate && (
 					<div className="dialog create-group">
 						<div className="dialog-header">
