@@ -46,6 +46,9 @@ export default class SharingPopup extends React.Component {
 		this.setUpStore();
 		const {data} = this.props;
 		const members = data.list && data.list.friends ? data.list.friends : [];
+		for (let item of members) {
+			item.remove = false;
+		}
 		this.setState({members: members});
 	}
 
@@ -165,18 +168,12 @@ export default class SharingPopup extends React.Component {
 	done = () => {
 		const {members} = this.state;
 		const {data, refreshList} = this.props;
-		let selections = [];
 		for (let item of members) {
-			if (!item.remove) {
-				selections.push(item);
-			}
+			item.remove ? data.list.remove(item) : data.list.add(item);
 		}
-
-		data.list.add(...selections)
-			.then(() => {
-				refreshList();
-			});
+		refreshList();
 		this.cancel();
+
 	}
 
 	render () {
@@ -192,7 +189,10 @@ export default class SharingPopup extends React.Component {
 							<h2 className="title-header create-sharing-title">Create a Sharing List</h2>
 						)}
 						{!data.isCreate && (
-							<h2 className="title-header create-sharing-title">Friends <span>({data.list.friends.length})</span></h2>
+							<h2 className="title-header create-sharing-title">Friends
+								{data.list.friends && (<span> ({data.list.friends.length})</span>)}
+								{!data.list.friends && (<span> (0)</span>)}
+							</h2>
 						)}
 					</div>
 					<div className="modal-content-create-sharing">
