@@ -137,7 +137,9 @@ export default class Group extends React.Component {
 							const overFriends = friends.length > 8 ? (friends.length - 8) : 0;
 							return (
 								<li className="item" key={index}>
-									<div className="group-item-left"><img src={item.avatarURL}/></div>
+									<div className="group-item-left">
+										<Avatar className="avatar" entityId={item}/>
+									</div>
 									<div className="group-item-right">
 										<div className="item-top">
 											{!item.changeName && (<DisplayName entity={item}/>)}
