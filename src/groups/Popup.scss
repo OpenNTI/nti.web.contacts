@@ -9,273 +9,62 @@
 		cursor: pointer;
 	}
 
-	.create-group {
-		.create-group-title, .create-group-content {
-			display: block;
-		}
-
-		.modal-button-feature {
-			a {
-				text-align: center;
-				display: block;
-				height: 40px;
-				width: 125px;
-				line-height: 40px;
-				font-size: 14px;
-
-				&.btn-create, &.btn-done, &.btn-join {
-					background-color: $primary-blue;
-					box-shadow: inset 0 1px 0 0 $border-grey-light;
-					color: #fff;
-					font-weight: 600;
-					text-decoration: none;
-				}
-
-				&.btn-cancel {
-					color: $secondary-grey;
-				}
-			}
-		}
-	}
-
-	.modal-content-group {
-		clear: both;
-		padding: 0 25px;
-
-		label {
-			display: block;
-			margin-bottom: 10px;
-			margin-top: 20px;
-		}
-
-		input {
-			border: 1px solid #e2e2e2;
-			background-color: #fff;
-			width: 100%;
-			height: 40px;
-			color: #b8b8b8;
-			font-size: 14px;
-			line-height: 19px;
-			padding: 12px 15px;
-		}
-
-		.notify {
-			color: #757474;
-			font-size: 14px;
-			line-height: 20px;
-			display: block;
-			position: relative;
-			padding-left: 20px;
-			margin-bottom: 15px;
-
-			&::before {
-				position: absolute;
-				content: '';
-				width: 16px;
-				height: 15px;
-				top: 2px;
-				left: 0;
-			}
-
-			.title-desc {
-				color: #757474;
-				font-size: 14px;
-				line-height: 20px;
-			}
-		}
-
-		.suggest {
-			color: #b8b8b8;
-			font-size: 14.1px;
-			line-height: 19px;
-			margin-top: 8px;
-
-			a {
-				color: #749cb3;
-
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-		}
-
-		.search-add-people {
-			width: 100%;
-			position: relative;
-
-			.result-search {
-				max-height: 417px;
-				border: 1px solid #e2e2e2;
-				background-color: #fff;
-				box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07);
-				max-width: 480px;
-				width: 100%;
-				margin: 0 auto;
-				border-top: 0;
-				position: absolute;
-				top: 40px;
-				left: 0;
-				right: 0;
-				z-index: 1;
-				overflow-y: auto;
-
-				.search-item {
-					margin: 10px;
-					margin-bottom: 0;
-					display: flex;
-					align-items: center;
-					cursor: pointer;
-
-					&:hover {
-						background-color: #fbfbfb;
-					}
-
-					&:last-child {
-						margin-bottom: 13px;
-					}
-				}
-
-				.search-name {
-					margin-left: 13px;
-					color: #b8b8b8;
-					font-size: 14px;
-					line-height: 19px;
-				}
-			}
-		}
-	}
-
-	.invite-people {
-		.create-group-content {
-			display: none;
-		}
-
-		.invite-people-title, .invite-people-content {
-			display: block;
-		}
-
-		.group-code {
-			border: 1px solid $border-grey-light;
-			background-color: #fff;
-			box-shadow: inset 4px 0 0 0 $primary-blue;
-			width: 100%;
-			position: relative;
-			margin-top: 10px;
-			padding: 9px 15px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-
-			.code-txt {
-				color: $primary-grey;
-				font-size: 14px;
-				line-height: 19px;
-			}
-
-			.copy-code {
-				color: $primary-blue;
-				font-size: 10px;
-				font-weight: bold;
-				line-height: 14px;
-				text-align: right;
-			}
-		}
-	}
-
-	.join-group {
-		.join-group-title, .join-group-content {
-			display: block;
-		}
-
-		.modal-button-feature {
-			a {
-				&.btn-create {
-					display: none;
-				}
-			}
-		}
-	}
-
-	.error-sms {
-		color: $incorrect;
-		font-size: 14px;
-		line-height: 19px;
-		margin-top: 10px;
-	}
-
-	.success-sms {
-		color: $primary-green;
-		font-size: 14px;
-		line-height: 19px;
-		margin-top: 10px;
-	}
-
-	.blank-txt {
-		input {
-			border-color: $incorrect !important;
-		}
-
-		.error-sms {
-			display: block;
-		}
-	}
-
 	.dialog {
 		width: 550px;
 		min-height: 500px;
 		background-color: #fff;
 		margin: 0 auto;
 		position: relative;
-		top: 50%;
+		top: 200px;
 		transform: translateY(-50%);
-
-		&.create-sharing {
-			.modal-content-friend-list {
-				display: none;
-			}
-		}
-
-		.title-header {
-			display: none;
-
-			&.create-sharing-title {
-				display: block;
-			}
-		}
 
 		.modal-content-create-sharing, .modal-content-group {
 			clear: both;
 			padding: 0 25px;
+			height: 350px;
+			overflow: auto;
 
 			label {
 				display: block;
 				margin-bottom: 10px;
 				margin-top: 20px;
+				color: $primary-grey;
+				font-size: 16px;
 			}
 
 			input {
-				border: 1px solid #e2e2e2;
+				border: 1px solid $border-grey-light;
 				background-color: #fff;
 				width: 100%;
 				height: 40px;
-				color: #b8b8b8;
 				font-size: 14px;
 				line-height: 19px;
-				padding: 12px 15px;
+				padding: 10px 15px;
+				color: $primary-grey;
+			}
+
+			.title-desc {
+				color: $primary-grey;
+				font-size: 14px;	
+				line-height: 20px;
 			}
 
 			.notify {
-				color: #757474;
+				color: $secondary-grey;
 				font-size: 14px;
 				line-height: 20px;
 				display: block;
 				position: relative;
-				padding-left: 20px;
 				margin-bottom: 15px;
+
+				.icon {
+					padding-right: 10px;
+				}
 
 				&::before {
 					position: absolute;
 					content: '';
+					//background: url(../images/eye.png) no-repeat;
 					width: 16px;
 					height: 15px;
 					top: 2px;
@@ -284,7 +73,7 @@
 			}
 
 			.suggest {
-				color: #b8b8b8;
+				color: $tertiary-grey;
 				font-size: 14.1px;
 				line-height: 19px;
 				margin-top: 8px;
@@ -298,13 +87,17 @@
 				}
 			}
 
+			.hidden {
+				display: none;
+			}
+
 			.search-add-people {
 				width: 100%;
 				position: relative;
 
 				.result-search {
 					max-height: 417px;
-					border: 1px solid #e2e2e2;
+					border: 1px solid $border-grey-light;
 					background-color: #fff;
 					box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07);
 					max-width: 480px;
@@ -317,16 +110,28 @@
 					right: 0;
 					z-index: 1;
 					overflow-y: auto;
+					margin-top: 0;
+
+					ul {
+						padding: 0;
+					}
 
 					.search-item {
 						margin: 10px;
 						margin-bottom: 0;
+						margin-left: 0;
 						display: flex;
 						align-items: center;
 						cursor: pointer;
 
+						.img-avatar {
+							height: 40px;
+							width: 40px;
+							overflow: hidden;
+						}
+
 						&:hover {
-							background-color: #fbfbfb;
+							background-color: $panel-background;
 						}
 
 						&:last-child {
@@ -334,33 +139,98 @@
 						}
 					}
 
+					.no-item {
+						width: 55%;
+						float: right;
+					}
+
 					.search-name {
 						margin-left: 13px;
-						color: #b8b8b8;
+						color: $tertiary-grey;
 						font-size: 14px;
 						line-height: 19px;
 					}
 				}
 			}
-		}
 
-		.modal-button-feature {
-			a {
-				&.btn-done {
-					display: none;
+			.member-friend-list {
+				margin-top: 30px;
+
+				.title {
+					margin-bottom: 5px;
 				}
 			}
+
+			.result-search {
+				max-height: 240px;
+				width: 100%;
+				overflow-y: auto;
+				margin-top: -25px;
+
+				ul {
+					padding: 0;
+				}
+
+				.search-item {
+					margin-top: 10px;
+					display: flex;
+					align-items: center;
+					cursor: pointer;
+					justify-content: space-between;
+
+					.img-avatar {
+						height: 40px;
+						width: 40px;
+						overflow: hidden;
+					}
+
+					&:hover {
+						background-color: $panel-background;
+					}
+
+					&:last-child {
+						margin-bottom: 13px;
+					}
+
+					.item-left {
+						display: flex;
+						align-items: center;
+					}
+				}
+
+				.search-name {
+					margin-left: 13px;
+					color: $secondary-grey;
+					font-size: 14px;
+					line-height: 19px;
+				}
+
+				.btn-remove {
+					color: $incorrect;
+					font-size: 14px;
+					line-height: 19px;
+					text-align: right;
+				}
+
+				.btn-undo {
+					color: $primary-green;
+					font-size: 14px;
+					line-height: 19px;
+					text-align: right;
+				}
+			}
+
 		}
 
 		.dialog-header {
-			background-color: #fbfbfb;
-			box-shadow: 0 1px 0 0 #e2e2e2;
+			background-color: $panel-background;
+			box-shadow: 0 1px 0 0 $border-grey-light;
 			padding: 7px 14px 10px 25px;
 			overflow: hidden;
 			margin-bottom: 15px;
 
 			h2 {
-				color: #757474;
+				color: $secondary-grey;
 				font-size: 24px;
 				font-weight: 300;
 				line-height: 33px;
@@ -375,13 +245,15 @@
 		.modal-button-feature {
 			position: absolute;
 			background-color: #fff;
-			box-shadow: inset 0 1px 0 0 #e2e2e2;
+			box-shadow: inset 0 1px 0 0 $border-grey-light;
 			bottom: 0;
 			width: 100%;
 			height: 40px;
+			margin: 0;
 
 			li {
 				float: right;
+				margin: 0;
 
 				a {
 					text-align: center;
@@ -392,113 +264,77 @@
 					font-size: 14px;
 
 					&.btn-create, &.btn-done, &.btn-join {
-						background-color: #3fb3f6;
-						box-shadow: inset 0 1px 0 0 #e2e2e2;
+						background-color: $primary-blue;
+						box-shadow: inset 0 1px 0 0 $border-grey-light;
 						color: #fff;
 						font-weight: 600;
 					}
 
 					&.btn-cancel {
-						color: #757474;
+						color: $secondary-grey;
 					}
 				}
 			}
 		}
+		&.invite-people {
+				
+	        .create-group-content {
+	            display: none;
+	        }
 
-		&.friend {
-			.friend-list-title {
-				display: block;
-			}
+	        .invite-people-title, .invite-people-content {
+	            display: block;
+	        }
 
-			.modal-content-create-sharing, .create-sharing-title {
-				display: none;
-			}
+	        .group-code {
+	            border: 1px solid $border-grey-light;
+	            background-color: #fff;
+	            box-shadow: inset 4px 0 0 0 $primary-blue;
+	            width: 100%;
+	            position: relative;
+	            margin-top: 10px;
+	            padding: 9px 15px;
+	            display: flex;
+	            justify-content: space-between;
+	            align-items: center;
 
-			.modal-content-friend-list {
-				clear: both;
-				padding: 0 25px;
-				display: block;
+	            .code-txt {
+	                color: $primary-grey;
+	                font-size: 14px;
+	                line-height: 19px;
+	            }
 
-				label {
-					display: block;
-					margin-bottom: 10px;
-					margin-top: 20px;
-				}
-
-				input {
-					border: 1px solid #e2e2e2;
-					background-color: #fff;
-					width: 100%;
-					height: 40px;
-					color: #b8b8b8;
-					font-size: 14px;
-					line-height: 19px;
-					padding: 12px 15px;
-				}
-
-				.member-friend-list {
-					margin-top: 30px;
-
-					.title {
-						margin-bottom: 5px;
-					}
-				}
-
-				.result-search {
-					max-height: 240px;
-					width: 100%;
-					overflow-y: auto;
-
-					.search-item {
-						margin-top: 10px;
-						display: flex;
-						align-items: center;
-						cursor: pointer;
-						justify-content: space-between;
-
-						&:hover {
-							background-color: #fbfbfb;
-						}
-
-						&:last-child {
-							margin-bottom: 13px;
-						}
-
-						.item-left {
-							display: flex;
-							align-items: center;
-						}
-					}
-
-					.search-name {
-						margin-left: 13px;
-						color: #757474;
-						font-size: 14px;
-						line-height: 19px;
-					}
-
-					.btn-remove {
-						color: #f35252;
-						font-size: 14px;
-						line-height: 19px;
-						text-align: right;
-					}
-				}
-			}
-		}
-
-		&.friend, &.invite-people {
-			.modal-button-feature {
-				a {
-					&.btn-create, &.btn-cancel, &.btn-join {
-						display: none;
-					}
-
-					&.btn-done {
-						display: block;
-					}
-				}
-			}
-		}
+	            .copy-code {
+	                color: $primary-blue;
+	                font-size: 10px;
+	                font-weight: bold;
+	                line-height: 14px;
+	                text-align: right;
+	            }
+	        }
+	    }
 	}
+	.error-sms {
+        color: $incorrect;
+        font-size: 14px;
+        line-height: 19px;
+        margin-top: 10px;
+    }
+
+    .success-sms {
+        color: $primary-green;
+        font-size: 14px;
+        line-height: 19px;
+        margin-top: 10px;
+    }
+
+    .blank-txt {
+        input {
+            border-color: $incorrect !important;
+        }
+
+        .error-sms {
+            display: block;
+        }
+    }
 }
