@@ -114,7 +114,7 @@ export default class Group extends React.Component {
 
 	join = (e) => {
 		const data = {isJoin: true};
-		Popup.show(data);
+		Popup.show(data, this.refreshList);
 	}
 
 	render () {
