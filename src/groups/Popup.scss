@@ -45,7 +45,7 @@
 
 			.title-desc {
 				color: $primary-grey;
-				font-size: 14px;	
+				font-size: 14px;
 				line-height: 20px;
 			}
 
@@ -302,6 +302,10 @@
 	                color: $primary-grey;
 	                font-size: 14px;
 	                line-height: 19px;
+									border: none;
+									cursor: not-allowed;
+									padding: 0px;
+									width: unset;
 	            }
 
 	            .copy-code {
@@ -329,9 +333,9 @@
     }
 
     .blank-txt {
-        input {
-            border-color: $incorrect !important;
-        }
+				.error-box {
+					border-color: $incorrect !important;
+				}
 
         .error-sms {
             display: block;
