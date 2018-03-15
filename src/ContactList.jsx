@@ -178,11 +178,13 @@ export default class ContactList extends React.Component {
 		const prevClass = 'prev' + (this.state.pageNum === 1 ? ' disabled' : '');
 		const nextClass = 'next' + (this.state.pageNum === this.state.totalPages ? ' disabled' : '');
 
-		return (<div className="pager">
-			<div className={prevClass} onClick={this.prev}><i className="icon-chevron-left"/></div>
-			{this.renderPageNumbers()}
-			<div className={nextClass} onClick={this.next}><i className="icon-chevron-right"/></div>
-		</div>);
+		return (
+			<div className="pager">
+				<div className={prevClass} onClick={this.prev}><i className="icon-chevron-left"/></div>
+				{this.renderPageNumbers()}
+				<div className={nextClass} onClick={this.next}><i className="icon-chevron-right"/></div>
+			</div>
+		);
 	}
 
 
@@ -204,16 +206,20 @@ export default class ContactList extends React.Component {
 			return (<Loading.Mask/>);
 		}
 
-		return (<div>
-			{this.renderControls()}
-			{this.renderUserList()}
-		</div>);
+		return (
+			<div>
+				{this.renderControls()}
+				{this.renderUserList()}
+			</div>
+		);
 	}
 
 
 	render () {
-		return (<div className="admin-users">
-			{this.renderContent()}
-		</div>);
+		return (
+			<div className="admin-users">
+				{this.renderContent()}
+			</div>
+		);
 	}
 }
