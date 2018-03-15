@@ -181,7 +181,7 @@ export default class GroupPopup extends React.Component {
 						<div className="dialog-header">
 							<h2 className="title-header invite-people-title">Invite People</h2></div>
 						<div className="modal-content-group invite-people-content">
-							<p className="title-desc">Share this group code to others you want to join your group. Once they click “Join a Group” they will paste in this code to join.</p><label htmlFor="fname">Group Name</label>
+							<p className="title-desc">Share this group code to others you want to join your group. Once they click “Join a Group” they will paste in this code to join.</p><label htmlFor="fname">Group Code</label>
 							<div className="group-code">
 								<input className="code-txt" readOnly="true" value={data.code}/><a className="copy-code" onClick={this.copy}>COPY CODE</a></div>
 							{!isCopied && (
