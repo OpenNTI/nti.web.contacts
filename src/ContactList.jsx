@@ -22,7 +22,7 @@ class PageNumber extends React.Component {
 		goToPage(pageNum);
 	}
 
-	rendner () {
+	render () {
 		const {pageNum, current} = this.props;
 
 		if(pageNum < 0) {
