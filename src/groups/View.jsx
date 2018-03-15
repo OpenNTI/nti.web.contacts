@@ -180,7 +180,9 @@ export default class Group extends React.Component {
 											)}
 											{friends.map((friend, key) =>{
 												return (
-													<Avatar className="active-account-img first-child" entityId={friend.Username} key={key}/>
+													<div key={key} className="active-account-img">
+														<Avatar entityId={friend.Username}/>
+													</div>
 												);
 											})}
 										</div>
