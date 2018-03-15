@@ -103,12 +103,14 @@ export default class Group extends React.Component {
 	delete = (pos) =>() =>{
 		let {items} = this.state;
 		this.setState({items: items});
-		Prompt.areYouSure('Delete this list?').then(() => {
-			items[pos].delete()
-				.then(() => {
-					items.splice(pos, 1);
-					this.setState({items: items});
-				});
+		Prompt.areYouSure('Delete this group?').then(() => {
+			items[pos].delete().then(() => { this.refreshList(); });
+		});
+	}
+
+	leave = (item) =>() =>{
+		Prompt.areYouSure('Leave this group?').then(() => {
+			item.leave().then((result) => { this.refreshList(); });
 		});
 	}
 
@@ -135,6 +137,7 @@ export default class Group extends React.Component {
 						{items.map((item, index) =>{
 							const friends = item.friends || [];
 							const overFriends = friends.length > 8 ? (friends.length - 8) : 0;
+							const editLink = item && item.getLink('edit');
 							return (
 								<li className="item" key={index}>
 									<div className="group-item-left">
@@ -155,9 +158,16 @@ export default class Group extends React.Component {
 													<a className="dropbtn"><i className="icon-chevron-down" onClick={this.toggleMenu(index)}/></a>
 													{item.toggle && (
 														<div className="dropdown-content">
-															<a onClick={this.viewGroupCode(item)}>View Group Code</a>
-															<a onClick={this.changeName(index)}>Change Name</a>
-															<a className="link-delete" onClick={this.delete(index)}>Delete Group</a>
+															{editLink && (
+																<div>
+																	<a onClick={this.viewGroupCode(item)}>View Group Code</a>
+																	<a onClick={this.changeName(index)}>Change Name</a>
+																	<a className="link-delete" onClick={this.delete(index)}>Delete Group</a>
+																</div>
+															)}
+															{!editLink && (
+																<a className="link-delete" onClick={this.leave(item)}>Leave Group</a>
+															)}
 														</div>
 													)}
 												</div>
