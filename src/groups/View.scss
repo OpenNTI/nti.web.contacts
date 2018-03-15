@@ -128,6 +128,16 @@
 
 		.item-top {
 			padding: 15px 14px;
+			display: flex;
+			width: 100%;
+			justify-content: space-between;
+
+			.username {
+				text-overflow: ellipsis;
+				display: block;
+				overflow: hidden;
+
+			}
 
 			.dropbtn {
 				display: block;
