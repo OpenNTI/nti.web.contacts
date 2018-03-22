@@ -35,6 +35,7 @@
     "react-test-renderer": "^16.0.0"
   },
   "dependencies": {
+    "@nti/lib-locale": "^1.0.9",
     "@nti/lib-store-connector": "0.x.x",
     "@nti/style-common": "^1.2.6",
     "@nti/web-client": "^1.2.0",
