@@ -1,2 +1,3 @@
 // export default from './View';
-export GroupCard from './Group';
+export GroupCard from './GroupCard';
+// export GroupsView from './GroupsView';
