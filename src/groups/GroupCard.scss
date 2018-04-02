@@ -1,0 +1,33 @@
+@import "~nti-style-common";
+
+.group-card {
+	height: 200px;
+	width: 472px;
+	margin: 10px;
+}
+
+.group-avatar {
+	float:left;
+	height: inherit;
+}
+
+.group-action-flyout-option {
+	color: #757474;
+	font-size: 14px;
+	line-height: 19px;
+}
+
+.group-action-flyout-option-delete {
+	color: #F35252;
+	font-size: 14px;
+	line-height: 19px;
+}
+
+.groups-list-frame {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.groups-panel-header {
+	margin: 10px;
+}
