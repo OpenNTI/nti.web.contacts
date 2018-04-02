@@ -5,6 +5,7 @@ import { ContactCard, ContactList } from '../../src';
 import { CardDetail, Member, Members } from '../../src/commons';
 import { SharingListCard } from '../../src/sharing-lists';
 import { GroupCard } from '../../src/groups';
+import GroupsView from '../../src/groups/View';
 
 import '@nti/style-common/all.scss';
 import '@nti/web-commons/lib/index.css';
@@ -18,6 +19,7 @@ const MEMBER = 'MEMBER';
 const MEMBERS = 'MEMBERS';
 const SHARINGLIST = 'SHARINGLIST';
 const GROUPCARD = 'GROUPCARD';
+const GROUPVIEW = 'GROUPVIEW';
 
 class TestKitchenSink extends React.Component {
 
@@ -30,7 +32,8 @@ class TestKitchenSink extends React.Component {
 		MEMBER: 'renderMember',
 		MEMBERS: 'renderMembers',
 		SHARINGLIST: 'renderSharingList',
-		GROUPCARD: 'renderGroupCard'
+		GROUPCARD: 'renderGroupCard',
+		GROUPVIEW: 'renderGroupView'
 	};
 
 	constructor (props) {
@@ -115,6 +118,12 @@ class TestKitchenSink extends React.Component {
 		);
 	}
 
+	renderGroupView () {
+		return (
+			<GroupsView/>
+		);
+	}
+
 	render () {
 		const selected = this.state.selectedOption;
 		const form = (
@@ -146,6 +155,10 @@ class TestKitchenSink extends React.Component {
 				<label>
 					<input type="radio" value={GROUPCARD} onChange={this.handleChange} checked={selected === GROUPCARD}/>
 					Group card
+				</label>
+				<label>
+					<input type="radio" value={GROUPVIEW} onChange={this.handleChange} checked={selected === GROUPVIEW}/>
+					Groups View
 				</label>
 			</form>
 		);
