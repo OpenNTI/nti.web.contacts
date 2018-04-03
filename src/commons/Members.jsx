@@ -7,10 +7,14 @@ import Member from './Member';
 const t = scoped('nti-web-contacts.commons.Members', {membersLabel: 'MEMBERS'});
 
 Members.propTypes = {
-	members: PropTypes.array.isRequired,
+	members: PropTypes.array,
 };
 
 export default function Members ({members}) {
+
+	// TODO: Need to figure out a better empty state. This keeps it from
+	// crashing for now though.
+	members = members || [];
 
 	function renderMemberList () {
 		return (
