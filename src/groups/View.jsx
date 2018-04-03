@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Loading } from 'nti-web-commons';
 
-import { Prompt } from 'nti-web-commons';
-const { Dialog } = Prompt;
-
-import Store from '../Store';
+import GroupListStore from './Store';
+import GroupActionModal from './GroupActionModal';
 
 import GroupCard from './GroupCard';
 
 const propMap = {
-	groups: 'groups'
+	items: 'items'
 };
 
 export default
-@Store.connect(propMap)
+@GroupListStore.connect(propMap)
 class GroupsView extends React.Component {
 
 	state = {
@@ -22,12 +21,12 @@ class GroupsView extends React.Component {
 
 	static propTypes = {
 		store: PropTypes.object,
-		groups: PropTypes.array
+		items: PropTypes.array
 	};
 
 	constructor (props) {
 		super();
-		this.groups = props.groups;
+		this.groups = props.items;
 	}
 
 	triggerRenameGroupModal = (props) => {
@@ -46,35 +45,37 @@ class GroupsView extends React.Component {
 		console.log (props.entity.displayName);
 	};
 
-	componentDidMount () {
-		console.log('component did mount');
-		this.props.store.loadGroups();
-	}
+	// componentDidMount () {
+	// 	console.log('component did mount');
+	// 	this.props.store.loadGroups();
+	// }
 
 	render () {
 
-		const {groups} = this.props;
+		const {items, store} = this.props;
 
 		console.log('in render method');
+
+		if (!store || store.loading) {
+			return <Loading.Mask />;
+		}
 
 		return (
 			<div className="groups-panel">
 				<h2 className="groups-panel-header">Groups</h2>
 				<div className="groups-list-frame">
-					{groups && groups.map(
+					{items && items.map(
 						(i) => (
-							<GroupCard entity={i['entity']}
-								members={i['members']}
-								key={i.entity.Username}
+							<GroupCard entity={i}
+								members={i.friends}
+								key={i.Username}
 								deleteGroup={this.deleteGroup}
 								renameGroup={this.triggerRenameGroupModal}
 								viewGroupCode={this.viewGroupCode}/>
 						)
 					)}
 					{this.state.showRenameDialog && (
-						<Dialog>
-							<div>Hello world</div>
-						</Dialog>
+						<GroupActionModal/>
 					)}
 				</div>
 			</div>
