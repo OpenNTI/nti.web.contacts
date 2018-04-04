@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { ContactCard, ContactList } from '../../src';
 import { CardDetail, Member, Members } from '../../src/commons';
 import { SharingListCard } from '../../src/sharing-lists';
+import SharingListsView from '../../src/sharing-lists/View';
 import { GroupCard } from '../../src/groups';
 import GroupsView from '../../src/groups/View';
 
@@ -18,6 +19,7 @@ const CARD = 'CARD';
 const MEMBER = 'MEMBER';
 const MEMBERS = 'MEMBERS';
 const SHARINGLIST = 'SHARINGLIST';
+const SHARINGLISTVIEW = 'SHARINGLISTVIEW';
 const GROUPCARD = 'GROUPCARD';
 const GROUPVIEW = 'GROUPVIEW';
 
@@ -32,6 +34,7 @@ class TestKitchenSink extends React.Component {
 		MEMBER: 'renderMember',
 		MEMBERS: 'renderMembers',
 		SHARINGLIST: 'renderSharingList',
+		SHARINGLISTVIEW: 'renderSharingListView',
 		GROUPCARD: 'renderGroupCard',
 		GROUPVIEW: 'renderGroupView'
 	};
@@ -105,6 +108,12 @@ class TestKitchenSink extends React.Component {
 		);
 	}
 
+	renderSharingListView () {
+		return (
+			<SharingListsView/>
+		);
+	}
+
 	renderGroupCard () {
 
 		let members = [
@@ -150,7 +159,11 @@ class TestKitchenSink extends React.Component {
 				</label>
 				<label>
 					<input type="radio" value={SHARINGLIST} onChange={this.handleChange} checked={selected === SHARINGLIST}/>
-					Sharing list
+					Sharing list Card
+				</label>
+				<label>
+					<input type="radio" value={SHARINGLISTVIEW} onChange={this.handleChange} checked={selected === SHARINGLISTVIEW}/>
+					Sharing list view
 				</label>
 				<label>
 					<input type="radio" value={GROUPCARD} onChange={this.handleChange} checked={selected === GROUPCARD}/>
