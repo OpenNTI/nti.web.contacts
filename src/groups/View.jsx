@@ -4,7 +4,6 @@ import { Loading } from 'nti-web-commons';
 
 import GroupListStore from './Store';
 import GroupActionModal from './GroupActionModal';
-
 import GroupCard from './GroupCard';
 
 const propMap = {
@@ -26,7 +25,7 @@ class GroupsView extends React.Component {
 
 	constructor (props) {
 		super();
-		this.groups = props.items;
+
 	}
 
 	triggerRenameGroupModal = (props) => {
@@ -53,8 +52,6 @@ class GroupsView extends React.Component {
 	render () {
 
 		const {items, store} = this.props;
-
-		console.log('in render method');
 
 		if (!store || store.loading) {
 			return <Loading.Mask />;
