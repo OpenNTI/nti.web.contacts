@@ -1,0 +1,28 @@
+@import "~nti-style-common";
+
+.sharing-list-card {
+	height: 160px;
+	width: 472px;
+	margin: 10px;
+}
+
+.sharing-list-action-flyout-option {
+	color: #757474;
+	font-size: 14px;
+	line-height: 19px;
+}
+
+.sharing-list-action-flyout-option-delete {
+	color: #F35252;
+	font-size: 14px;
+	line-height: 19px;
+}
+
+.sharing-lists-list-frame {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.sharing-lists-panel-header {
+	margin: 10px;
+}

@@ -33,19 +33,20 @@ class SharingListsView extends React.Component {
 	// };
 
 	deleteSharingList = (props) => {
-		console.log ('deleting group');
+		const {store} = this.props;
+
+		console.log ('deleting sharing list');
 		console.log (props.entity.displayName);
 	};
 
 	renameSharingList = (props) => {
-		console.log ('view group code');
+		console.log ('rename sharing list');
 		console.log (props.entity.displayName);
 	};
 
-	// componentDidMount () {
-	// 	console.log('component did mount');
-	// 	this.props.store.loadGroups();
-	// }
+	managePeople = (props) => {
+		console.log ('managing people');
+	}
 
 	render () {
 
@@ -65,7 +66,8 @@ class SharingListsView extends React.Component {
 								members={i.friends}
 								key={i.Username}
 								deleteSharingList={this.deleteSharingList}
-								renameSharingList={this.renameSharingList}/>
+								renameSharingList={this.renameSharingList}
+								managePeople={this.managePeople}/>
 						)
 					)}
 					{/* {this.state.showRenameDialog && (
