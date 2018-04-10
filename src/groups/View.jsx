@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Loading } from 'nti-web-commons';
 
 import GroupListStore from './Store';
-import GroupActionModal from './GroupActionModal';
+import GroupRenameModal from './GroupRenameModal';
+import GroupInviteCodeModal from './GroupInviteCodeModal';
+import GroupDeleteModal from './GroupDeleteModal';
 import GroupCard from './GroupCard';
 
 const propMap = {
@@ -15,7 +17,9 @@ export default
 class GroupsView extends React.Component {
 
 	state = {
-		showRenameDialog: false
+		showRenameDialog: false,
+		showInviteCodeDialog: false,
+		showDeleteDialog: false
 	}
 
 	static propTypes = {
@@ -28,23 +32,19 @@ class GroupsView extends React.Component {
 	}
 
 	triggerRenameGroupModal = (props) => {
-		console.log('Open rename group modal');
-		console.log(props.entity.displayName);
 		this.setState({ showRenameDialog: true });
 	};
 
 	deleteGroup = (props) => {
-		console.log ('deleting group');
-		console.log (props.entity.displayName);
+		this.setState({ showDeleteDialog: true });
 	};
 
 	viewGroupCode = (props) => {
-		console.log ('view group code');
-		console.log (props.entity.displayName);
+		this.setState({ showInviteCodeDialog: true });
 	};
 
-	onDismissModal = () => {
-		this.setState({showRenameDialog: false});
+	onDismissModal = (modal) => {
+		this.setState({[modal]: false});
 	}
 
 	render () {
@@ -70,7 +70,13 @@ class GroupsView extends React.Component {
 						)
 					)}
 					{this.state.showRenameDialog && (
-						<GroupActionModal onDismiss={this.onDismissModal}/>
+						<GroupRenameModal onDismiss={this.onDismissModal}/>
+					)}
+					{this.state.showInviteCodeDialog && (
+						<GroupInviteCodeModal onDismiss={this.onDismissModal}/>
+					)}
+					{this.state.showDeleteDialog && (
+						<GroupDeleteModal onDismiss={this.onDismissModal}/>
 					)}
 				</div>
 			</div>
