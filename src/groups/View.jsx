@@ -25,7 +25,6 @@ class GroupsView extends React.Component {
 
 	constructor (props) {
 		super();
-
 	}
 
 	triggerRenameGroupModal = (props) => {
@@ -44,10 +43,9 @@ class GroupsView extends React.Component {
 		console.log (props.entity.displayName);
 	};
 
-	// componentDidMount () {
-	// 	console.log('component did mount');
-	// 	this.props.store.loadGroups();
-	// }
+	onDismissModal = () => {
+		this.setState({showRenameDialog: false});
+	}
 
 	render () {
 
@@ -72,7 +70,7 @@ class GroupsView extends React.Component {
 						)
 					)}
 					{this.state.showRenameDialog && (
-						<GroupActionModal/>
+						<GroupActionModal onDismiss={this.onDismissModal}/>
 					)}
 				</div>
 			</div>
