@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loading } from 'nti-web-commons';
+import { Button, Loading } from 'nti-web-commons';
 
 import SharingListStore from './Store';
 import SharingListCard from './SharingListCard';
+import SharingListCreateModal from './SharingListCreateModal';
 
 const propMap = {
 	items: 'items'
@@ -14,7 +15,9 @@ export default
 class SharingListsView extends React.Component {
 
 	state = {
-		showRenameDialog: false
+		showCreateDialog: false,
+		showRenameDialog: false,
+		activeSharingList: null
 	}
 
 	static propTypes = {
@@ -48,6 +51,41 @@ class SharingListsView extends React.Component {
 		console.log ('managing people');
 	}
 
+	createSharingListModal = () => {
+		this.setState({showCreateDialog: true});
+	}
+
+	onCreateSharingList = (name, members) => {
+		console.log ('creating list with name ' + name + 'and members ' + members);
+	}
+
+	onDismissModal = (modal) => {
+		this.setState({[modal]: false});
+		this.setState({activeSharingList: null});
+	}
+
+	renderHeader () {
+		return (
+			<div className="sharing-lists-panel-header">
+				<h2>Sharing Lists</h2>
+				<Button className="create-sharing-list-button" onClick={this.createSharingListModal}>
+					Create a Sharing List
+				</Button>
+			</div>
+		);
+	}
+
+	renderModals () {
+		const {activeSharingList} = this.state;
+		return (
+			<div>
+				{this.state.showCreateDialog && (
+					<SharingListCreateModal onDismiss={this.onDismissModal} activeGroup={activeSharingList} onCreateSharingList={this.onCreateSharingList}/>
+				)}
+			</div>
+		);
+	}
+
 	render () {
 
 		const {items, store} = this.props;
@@ -58,7 +96,8 @@ class SharingListsView extends React.Component {
 
 		return (
 			<div className="sharing-lists-panel">
-				<h2 className="sharing-lists-panel-header">Sharing Lists</h2>
+				{this.renderHeader()}
+				{/* <h2 className="sharing-lists-panel-header">Sharing Lists</h2> */}
 				<div className="sharing-lists-list-frame">
 					{items && items.map(
 						(i) => (
@@ -70,9 +109,7 @@ class SharingListsView extends React.Component {
 								managePeople={this.managePeople}/>
 						)
 					)}
-					{/* {this.state.showRenameDialog && (
-						<GroupActionModal/>
-					)} */}
+					{this.renderModals()}
 				</div>
 			</div>
 		);
