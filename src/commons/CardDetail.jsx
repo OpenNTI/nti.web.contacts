@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Flyout, DisplayName } from 'nti-web-commons';
+import { Flyout, DisplayName } from '@nti/web-commons';
 
 import Members from './Members';
 

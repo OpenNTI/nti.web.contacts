@@ -1,6 +1,6 @@
-import {Stores} from 'nti-lib-store';
-import {getService} from 'nti-web-client';
-import Logger from 'nti-util-logger';
+import {Stores} from '@nti/lib-store';
+import {getService} from '@nti/web-client';
+import Logger from '@nti/util-logger';
 
 const logger = Logger.get('contacts:components:Groups');
 

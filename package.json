@@ -36,14 +36,13 @@
   },
   "dependencies": {
     "@nti/lib-locale": "^1.0.9",
-    "@nti/lib-store-connector": "0.x.x",
+    "@nti/lib-store": "^1.0.1",
     "@nti/style-common": "^1.2.6",
+    "@nti/util-logger": "^1.0.0",
     "@nti/web-client": "^1.2.0",
     "@nti/web-commons": "0.x.x",
+    "@nti/web-routing": "0.x.x",
     "classnames": "^2.2.5",
-    "prop-types": "^15.5.10",
-    "nti-lib-store": "^1.0.1",
-    "nti-util-logger": "^1.0.0",
-    "nti-web-routing": "0.x.x"
+    "prop-types": "^15.5.10"
   }
 }
