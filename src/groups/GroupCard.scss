@@ -15,12 +15,14 @@
 	color: #757474;
 	font-size: 14px;
 	line-height: 19px;
+	margin: 8px;
 }
 
 .group-action-flyout-option-delete {
 	color: #F35252;
 	font-size: 14px;
 	line-height: 19px;
+	margin: 8px;
 }
 
 .groups-list-frame {
@@ -30,4 +32,20 @@
 
 .groups-panel-header {
 	margin: 10px;
+	display: flex;
+}
+
+.groups-panel {
+	width: 1024px;
+}
+
+.create-group-button {
+	height: 40px;
+	width: 155px;
+	border-radius: 3px;
+	background-color: white;
+	margin-left: auto;
+	margin-right: 25px;
+	margin-top: auto;
+	margin-bottom: auto;
 }
