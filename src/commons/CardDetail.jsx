@@ -50,10 +50,13 @@ export default class CardDetail extends React.Component {
 	}
 
 	render () {
+		const {members, entity} = this.props;
+		const {location} = entity;
 		return (
 			<div className="card-detail">
 				<div className="card-info">
 					<DisplayName className="card-title" entity={this.props.entity}/>
+					{location && <div className="entity-location">{location}</div>}
 					<Flyout.Triggered
 						className="card-action-flyout"
 						trigger={this.renderFlyoutTrigger()}
@@ -65,8 +68,9 @@ export default class CardDetail extends React.Component {
 					{this.renderMeta()}
 
 				</div>
+				{/* Only render members if the list is non-empty */}
+				{members && <Members members={members}/>}
 
-				<Members members={this.props.members}/>
 			</div>
 		);
 	}
