@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Prompt, DialogButtons, Panels, Input } from 'nti-web-commons';
 
-export default class GroupRenameModal extends React.Component {
+export default class GroupCreateModal extends React.Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func,
-		onRenameGroup: PropTypes.func,
-		activeGroup: PropTypes.object
+		onCreateGroup: PropTypes.func
 	};
 
 	state = {
@@ -19,13 +18,12 @@ export default class GroupRenameModal extends React.Component {
 	}
 
 	onDismiss = () => {
-		this.props.onDismiss('showRenameDialog');
+		this.props.onDismiss('showCreateDialog');
 	}
 
-	onRenameGroup = () => {
-		const newGroupName = this.state.groupName;
-		const {activeGroup} = this.props;
-		this.props.onRenameGroup(activeGroup, newGroupName);
+	onCreateGroup = () => {
+		const {groupName} = this.state;
+		this.props.onCreateGroup(groupName);
 		this.onDismiss();
 	}
 
@@ -33,7 +31,7 @@ export default class GroupRenameModal extends React.Component {
 
 		const buttons = [
 			{label: 'Cancel', onClick: this.onDismiss},
-			{label: 'Rename', onClick: this.onRenameGroup}
+			{label: 'Create', onClick: this.onCreateGroup}
 		];
 
 		return (
@@ -44,22 +42,17 @@ export default class GroupRenameModal extends React.Component {
 	}
 
 	render () {
-
-		const {activeGroup} = this.props;
-		// debugger;
-		const originalGroupName = activeGroup.group.entity.displayName;
-
 		return(
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="group-action-modal">
-					<Panels.Header className="group-action-modal-header">
-						Rename Group
+					<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
+						Create a Group
 					</Panels.Header>
-
 					<div className="group-action-modal-content">
-						Enter a new name for your group.
+						Groups are great places to collaborate on projects or to share and discuss common interests. Share photos, videos, files and websites with your peers.
+						<div className="group-action-modal-content sub-header">Group Name</div>
 						<div>
-							<Input.Text placeholder={originalGroupName} value={this.state.groupName} onChange={this.updateGroupName} maxLength="140"/>
+							<Input.Text placeholder="Name" value={this.state.groupName} onChange={this.updateGroupName} maxLength="140"/>
 						</div>
 					</div>
 					{this.renderControls()}

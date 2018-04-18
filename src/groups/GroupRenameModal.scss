@@ -5,3 +5,41 @@
 	width: 550px;
 	background: white;
 }
+
+.group-action-modal-header {
+	height: 50px;
+	font-family: "Open Sans";
+	font-size: 24px;
+	line-height: 33px;
+	font-weight: 300;
+	color: #757474;
+
+	&.panel-header-component {
+		padding-left: 25px;
+		padding-top: 7px;
+	}
+}
+
+.group-action-modal-content {
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 30px;
+	color: #757474;
+	font-size: 14px;
+	line-height: 20px;
+
+	&.sub-header {
+		color: #494949;
+		padding-left: 0px;
+		padding-right: 0px;
+		height: 22px;
+		font-size: 16px;
+	}
+}
+
+.group-action-modal-controls {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+}

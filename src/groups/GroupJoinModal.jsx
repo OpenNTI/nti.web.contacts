@@ -1,30 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Prompt, DialogButtons, Panels } from 'nti-web-commons';
+import { Prompt, DialogButtons, Panels, Input } from 'nti-web-commons';
 
-export default class GroupDeleteModal extends React.Component {
+export default class GroupJoinModal extends React.Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func,
-		onDeleteGroup: PropTypes.func,
-		activeGroup: PropTypes.object
+		onJoinGroup: PropTypes.func
 	};
 
-	onDeleteGroup = () => {
-		const {activeGroup} = this.props;
-		this.props.onDeleteGroup(activeGroup);
-		this.onDismiss();
+	state = {
+		groupCode: ''
+	}
+
+	updateGroupCode = (value) => {
+		this.setState({groupCode : value});
 	}
 
 	onDismiss = () => {
-		this.props.onDismiss('showDeleteDialog');
+		this.props.onDismiss('showJoinGroupDialog');
+	}
+
+	onJoinGroup = () => {
+		const {groupCode} = this.state;
+		this.props.onJoinGroup(groupCode);
+		this.onDismiss();
 	}
 
 	renderControls = () => {
 
 		const buttons = [
 			{label: 'Cancel', onClick: this.onDismiss},
-			{label: 'Delete', onClick: this.onDeleteGroup}
+			{label: 'Join', onClick: this.onJoinGroup}
 		];
 
 		return (
@@ -39,11 +46,15 @@ export default class GroupDeleteModal extends React.Component {
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="group-action-modal">
 					<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
-						Delete Group
+						Join a Group
 					</Panels.Header>
 					<div className="group-action-modal-content">
-						Are you sure you want to delete this group?
+						Enter a group code to join a group.
+						<div>
+							<Input.Text placeholder="Name" value={this.state.groupCode} onChange={this.updateGroupCode} maxLength="140"/>
+						</div>
 					</div>
+
 					{this.renderControls()}
 				</div>
 			</Prompt.Dialog>
