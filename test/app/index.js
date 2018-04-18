@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { ContactCard, ContactList } from '../../src';
+import { ContactCard, ContactList, RouterView } from '../../src';
 import { CardDetail, Member, Members } from '../../src/commons';
 import { SharingListCard } from '../../src/sharing-lists';
 import SharingListsView from '../../src/sharing-lists/View';
 import { GroupCard } from '../../src/groups';
 import GroupsView from '../../src/groups/View';
+import ContactListView from '../../src/contacts/View';
+// import { RouterView } from '../../src';
 
 import '@nti/style-common/all.scss';
 import '@nti/web-commons/lib/index.css';
@@ -22,6 +24,8 @@ const SHARINGLIST = 'SHARINGLIST';
 const SHARINGLISTVIEW = 'SHARINGLISTVIEW';
 const GROUPCARD = 'GROUPCARD';
 const GROUPVIEW = 'GROUPVIEW';
+const CONTACTLISTVIEW = 'CONTACTLISTVIEW';
+const ROUTERVIEW = 'ROUTERVIEW';
 
 class TestKitchenSink extends React.Component {
 
@@ -36,7 +40,9 @@ class TestKitchenSink extends React.Component {
 		SHARINGLIST: 'renderSharingList',
 		SHARINGLISTVIEW: 'renderSharingListView',
 		GROUPCARD: 'renderGroupCard',
-		GROUPVIEW: 'renderGroupView'
+		GROUPVIEW: 'renderGroupView',
+		CONTACTLISTVIEW: 'renderContactListView',
+		ROUTERVIEW: 'renderRouterView'
 	};
 
 	constructor (props) {
@@ -133,6 +139,16 @@ class TestKitchenSink extends React.Component {
 		);
 	}
 
+	renderContactListView () {
+		return (
+			<ContactListView/>
+		);
+	}
+
+	renderRouterView () {
+		return ( <RouterView/> );
+	}
+
 	render () {
 		const selected = this.state.selectedOption;
 		const form = (
@@ -172,6 +188,14 @@ class TestKitchenSink extends React.Component {
 				<label>
 					<input type="radio" value={GROUPVIEW} onChange={this.handleChange} checked={selected === GROUPVIEW}/>
 					Groups View
+				</label>
+				<label>
+					<input type="radio" value={CONTACTLISTVIEW} onChange={this.handleChange} checked={selected === CONTACTLISTVIEW}/>
+					Contact list view
+				</label>
+				<label>
+					<input type="radio" value={ROUTERVIEW} onChange={this.handleChange} checked={selected === ROUTERVIEW}/>
+					Router view
 				</label>
 			</form>
 		);
