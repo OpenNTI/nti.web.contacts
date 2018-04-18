@@ -43,6 +43,7 @@
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10",
     "nti-lib-store": "^1.0.1",
+    "nti-util-logger": "^1.0.0",
     "nti-web-routing": "0.x.x"
   }
 }
