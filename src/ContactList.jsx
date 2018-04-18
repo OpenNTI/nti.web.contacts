@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { getService, User } from 'nti-web-client';
-import { Loading } from 'nti-web-commons';
+import { getService, User } from '@nti/web-client';
+import { Loading } from '@nti/web-commons';
 
 import ContactCard from './ContactCard';
 
