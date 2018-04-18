@@ -1,0 +1,35 @@
+@import "~nti-style-common";
+
+.contact-list-card {
+	height: 200px;
+	width: 472px;
+	margin: 10px;
+}
+
+.contact-list-avatar {
+	float:left;
+	height: inherit;
+}
+
+.contact-list-action-flyout-option {
+	color: #757474;
+	font-size: 14px;
+	line-height: 19px;
+	margin: 8px;
+}
+
+.contact-list-action-flyout-option-delete {
+	color: #F35252;
+	font-size: 14px;
+	line-height: 19px;
+	margin: 8px;
+}
+
+.contact-list-frame {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.contact-list-panel-header {
+	margin: 10px;
+}
