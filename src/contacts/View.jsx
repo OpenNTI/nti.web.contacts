@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Loading } from 'nti-web-commons';
+import { Button, Loading } from '@nti/web-commons';
 
 import ContactListStore from './Store';
 import ContactListCard from './ContactListCard';

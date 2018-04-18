@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Prompt, DialogButtons, Panels, Input } from 'nti-web-commons';
+import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
 
 export default class GroupJoinModal extends React.Component {
 
