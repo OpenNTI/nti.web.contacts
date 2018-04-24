@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {scoped} from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
+
+const t = scoped('nti-web-contacts.groups.GroupCreateModal', {
+	cancelButton: 'Cancel',
+	createButton: 'Create',
+	createGroupHeader: 'Create a Group',
+	createGroupDescription: 'Groups are great places to collaborate on projects or to share and discuss common interests. Share photos, videos, files and websites with your peers.'
+});
 
 export default class GroupCreateModal extends React.Component {
 
@@ -30,8 +38,8 @@ export default class GroupCreateModal extends React.Component {
 	renderControls = () => {
 
 		const buttons = [
-			{label: 'Cancel', onClick: this.onDismiss},
-			{label: 'Create', onClick: this.onCreateGroup}
+			{label: t('cancelButton'), onClick: this.onDismiss},
+			{label: t('createButton'), onClick: this.onCreateGroup}
 		];
 
 		return (
@@ -46,10 +54,10 @@ export default class GroupCreateModal extends React.Component {
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="group-action-modal">
 					<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
-						Create a Group
+						{t('createGroupHeader')}
 					</Panels.Header>
 					<div className="group-action-modal-content">
-						Groups are great places to collaborate on projects or to share and discuss common interests. Share photos, videos, files and websites with your peers.
+						{t('createGroupDescription')}
 						<div className="group-action-modal-content sub-header">Group Name</div>
 						<div>
 							<Input.Text placeholder="Name" value={this.state.groupName} onChange={this.updateGroupName} maxLength="140"/>
