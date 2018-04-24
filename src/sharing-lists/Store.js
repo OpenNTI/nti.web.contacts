@@ -36,4 +36,13 @@ export default class SharingListStore extends Stores.SimpleStore {
 	onDataSourceChanged = () => {
 		this.emitChange('items');
 	}
+
+	static async contactSuggestionProvider (value) {
+		const service = await getService();
+		const contacts = await service.getContacts();
+		const results = await contacts.search(value, false, true);
+		return results.filter(entity => entity.isUser );
+	}
+
+
 }
