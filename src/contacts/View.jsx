@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Loading } from '@nti/web-commons';
+import { scoped } from '@nti/lib-locale';
+import { Loading } from '@nti/web-commons';
 
 import ContactListStore from './Store';
 import ContactListCard from './ContactListCard';
@@ -8,6 +9,11 @@ import ContactListCard from './ContactListCard';
 const propMap = {
 	items: 'items'
 };
+
+const t = scoped('nti-web-contacts.contacts.ContactListView', {
+	contactsHeader: 'Contacts',
+
+});
 
 export default
 @ContactListStore.connect(propMap)
@@ -37,13 +43,7 @@ class ContactListView extends React.Component {
 	renderHeader () {
 		return (
 			<div className="contacts-panel-header">
-				<h2>Contacts</h2>
-				<Button className="create-contact-button" onClick={this.createGroupModal}>
-					Create a Group
-				</Button>
-				<Button className="create-group-button" onClick={this.joinGroupModal}>
-					Join Group
-				</Button>
+				<h2>{t('contactsHeader')}</h2>
 			</div>
 		);
 	}
@@ -59,6 +59,7 @@ class ContactListView extends React.Component {
 
 		return (
 			<div className="contact-list-panel">
+				{this.renderHeader()}
 				<div className="contact-list-frame">
 					{items && items.map(
 						(i) => (
