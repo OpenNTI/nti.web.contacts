@@ -10,7 +10,7 @@ ContactListCard.propTypes = {
 		PropTypes.object,
 		PropTypes.string
 	]).isRequired,
-	unfollowContact: PropTypes.func,
+	removeContact: PropTypes.func,
 	viewContactProfile: PropTypes.func,
 	addContactToSharingList: PropTypes.func,
 	chatWithContact: PropTypes.func
@@ -23,13 +23,13 @@ const t = scoped('nti-web-contacts.contacts.ContactListCard', {
 	deleteText: 'Unfollow'
 });
 
-export default function ContactListCard ({entity, unfollowContact, viewContactProfile, addContactToSharingList, chatWithContact}) {
+export default function ContactListCard ({entity, removeContact, viewContactProfile, addContactToSharingList, chatWithContact}) {
 
 	const contactFlyoutOptions = [
 		{className: 'contact-list-action-flyout-option', displayText: t('viewProfile'), onClick: viewContactProfile},
 		{className: 'contact-list-action-flyout-option', displayText: t('chat'), onClick: chatWithContact},
 		{className: 'contact-list-action-flyout-option', displayText: t('addToSharingList'), onClick: addContactToSharingList},
-		{className: 'contact-list-action-flyout-option-delete', displayText: t('deleteText'), onClick: unfollowContact}
+		{className: 'contact-list-action-flyout-option-delete', displayText: t('deleteText'), onClick: removeContact}
 	];
 
 	return (
