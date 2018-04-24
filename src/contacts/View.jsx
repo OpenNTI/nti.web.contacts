@@ -22,6 +22,18 @@ class ContactListView extends React.Component {
 		super();
 	}
 
+	removeContact = (contactCard) => {
+		const {store} = this.props;
+		store.removeContact(contactCard.entity);
+	}
+
+	viewContactProfile = (contactCard) => {
+		const {entity} = contactCard;
+		// TODO: Get the user profile link from the entity
+		// and then navigate to it.
+		console.log("Should navigate to profile for contact " + entity.Username);
+	}
+
 	renderHeader () {
 		return (
 			<div className="contacts-panel-header">
@@ -53,9 +65,10 @@ class ContactListView extends React.Component {
 							<ContactListCard entity={i}
 								members={i.friends}
 								key={i.Username}
-								deleteGroup={this.deleteGroup}
-								renameGroup={this.triggerRenameGroupModal}
-								viewGroupCode={this.viewGroupCode}/>
+								removeContact={this.removeContact}
+								chatWithContact={this.chatWithContact}
+								addContactToSharingList={this.viewGroupCode}
+								viewContactProfile={this.viewContactProfile}/>
 						)
 					)}
 					{/* {this.state.showRenameDialog && (
