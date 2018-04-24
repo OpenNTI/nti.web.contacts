@@ -37,7 +37,7 @@ export default class ContactListStore extends Stores.SimpleStore {
 		this.emitChange('items');
 	}
 
-	removeContact (entity) {
+	removeContact = (entity) => {
 		console.log ("Remove contact");
 		console.log (entity);
 		this.ds.removeContact(entity);
