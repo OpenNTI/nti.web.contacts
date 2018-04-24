@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {scoped} from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
+
+const t = scoped('nti-web-contacts.groups.GroupJoinModal', {
+	cancelButton: 'Cancel',
+	joinButton: 'Join',
+	joinGroupHeader: 'Join a Group',
+	joinGroupDescription: 'Enter a group code to join a group.'
+});
+
 
 export default class GroupJoinModal extends React.Component {
 
@@ -30,8 +39,8 @@ export default class GroupJoinModal extends React.Component {
 	renderControls = () => {
 
 		const buttons = [
-			{label: 'Cancel', onClick: this.onDismiss},
-			{label: 'Join', onClick: this.onJoinGroup}
+			{label: t('cancelButton'), onClick: this.onDismiss},
+			{label: t('joinButton'), onClick: this.onJoinGroup}
 		];
 
 		return (
@@ -46,10 +55,10 @@ export default class GroupJoinModal extends React.Component {
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="group-action-modal">
 					<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
-						Join a Group
+						{t('joinGroupHeader')}
 					</Panels.Header>
 					<div className="group-action-modal-content">
-						Enter a group code to join a group.
+						{t('joinGroupDescription')}
 						<div>
 							<Input.Text placeholder="Name" value={this.state.groupCode} onChange={this.updateGroupCode} maxLength="140"/>
 						</div>

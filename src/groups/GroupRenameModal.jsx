@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { scoped } from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
+
+const t = scoped('nti-web-contacts.groups.GroupRenameModal', {
+	cancelButton: 'Cancel',
+	renameButton: 'Rename',
+	renameHeader: 'Rename Group',
+	renameDescription: 'Enter a new name for your group.'
+});
 
 export default class GroupRenameModal extends React.Component {
 
@@ -32,8 +40,8 @@ export default class GroupRenameModal extends React.Component {
 	renderControls = () => {
 
 		const buttons = [
-			{label: 'Cancel', onClick: this.onDismiss},
-			{label: 'Rename', onClick: this.onRenameGroup}
+			{label: t('cancelButton'), onClick: this.onDismiss},
+			{label: t('renameButton'), onClick: this.onRenameGroup}
 		];
 
 		return (
@@ -53,11 +61,11 @@ export default class GroupRenameModal extends React.Component {
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="group-action-modal">
 					<Panels.Header className="group-action-modal-header">
-						Rename Group
+						{t('renameHeader')}
 					</Panels.Header>
 
 					<div className="group-action-modal-content">
-						Enter a new name for your group.
+						{t('renameDescription')}
 						<div>
 							<Input.Text placeholder={originalGroupName} value={this.state.groupName} onChange={this.updateGroupName} maxLength="140"/>
 						</div>

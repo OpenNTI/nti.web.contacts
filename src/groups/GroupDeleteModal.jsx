@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {scoped} from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels } from '@nti/web-commons';
+
+const t = scoped('nti-web-contacts.groups.GroupDeleteModal', {
+	cancelButton: 'Cancel',
+	deleteButton: 'Create',
+	deleteGroupHeader: 'Delete Group',
+	deleteGroupDescription: 'Are you sure you want to delete this group?'
+});
 
 export default class GroupDeleteModal extends React.Component {
 
@@ -23,8 +31,8 @@ export default class GroupDeleteModal extends React.Component {
 	renderControls = () => {
 
 		const buttons = [
-			{label: 'Cancel', onClick: this.onDismiss},
-			{label: 'Delete', onClick: this.onDeleteGroup}
+			{label: t('cancelButton'), onClick: this.onDismiss},
+			{label: t('deleteButton'), onClick: this.onDeleteGroup}
 		];
 
 		return (

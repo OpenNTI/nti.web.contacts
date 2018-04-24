@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { scoped } from '@nti/lib-locale';
 import { Avatar } from '@nti/web-commons';
 
 import { CardDetail } from '../commons';
+
+const t = scoped('nti-web-contacts.groups.GroupCard', {
+	leaveGroupText: 'Leave Group',
+	deleteGroupText: 'Delete Group',
+	groupCodeText: 'View Group Code',
+	renameText: 'Rename Group'
+});
 
 GroupCard.propTypes = {
 	entity: PropTypes.oneOfType([
@@ -18,10 +26,10 @@ GroupCard.propTypes = {
 
 export default function GroupCard ({entity, members, deleteGroup, leaveGroup, renameGroup, viewGroupCode}) {
 
-	const leaveGroupOption = {className: 'group-action-flyout-option-delete', displayText: 'Leave Group', onClick: leaveGroup};
-	const deleteGroupOption = {className: 'group-action-flyout-option-delete', displayText: 'Delete Group', onClick: deleteGroup};
-	const groupCodeOption = {className: 'group-action-flyout-option', displayText: 'View Group Code', onClick: viewGroupCode};
-	const changeNameOption = {className: 'group-action-flyout-option', displayText: 'Change Name', onClick: renameGroup};
+	const leaveGroupOption = {className: 'group-action-flyout-option-delete', displayText: t('leaveGroupText'), onClick: leaveGroup};
+	const deleteGroupOption = {className: 'group-action-flyout-option-delete', displayText: t('deleteGroupText'), onClick: deleteGroup};
+	const groupCodeOption = {className: 'group-action-flyout-option', displayText: t('groupCodeText'), onClick: viewGroupCode};
+	const changeNameOption = {className: 'group-action-flyout-option', displayText: t('renameText'), onClick: renameGroup};
 
 	// Make sure we only show the appropriate flyout options
 	// for whatever links we're getting back on the group.
