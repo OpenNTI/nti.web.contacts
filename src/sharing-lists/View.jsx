@@ -56,12 +56,17 @@ class SharingListsView extends React.Component {
 	}
 
 	onCreateSharingList = (name, members) => {
-		console.log ('creating list with name ' + name + 'and members ' + members);
+		console.log ('creating list with name ' + name + ' and members ' + members);
 	}
 
 	onDismissModal = (modal) => {
 		this.setState({[modal]: false});
 		this.setState({activeSharingList: null});
+	}
+
+	suggestionProvider = (value) => {
+		const {store} = this.props;
+		return store.contactSuggestionProvider(value);
 	}
 
 	renderHeader () {
@@ -80,7 +85,9 @@ class SharingListsView extends React.Component {
 		return (
 			<div>
 				{this.state.showCreateDialog && (
-					<SharingListCreateModal onDismiss={this.onDismissModal} activeGroup={activeSharingList} onCreateSharingList={this.onCreateSharingList}/>
+					<SharingListCreateModal onDismiss={this.onDismissModal}
+						activeGroup={activeSharingList}
+						onCreateSharingList={this.onCreateSharingList}/>
 				)}
 			</div>
 		);
