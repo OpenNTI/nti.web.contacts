@@ -35,11 +35,10 @@ class SharingListsView extends React.Component {
 	// 	this.setState({ showRenameDialog: true });
 	// };
 
-	deleteSharingList = (props) => {
-		const {store} = this.props;
-
+	onDeleteSharingList = (sharingListCard) => {
 		console.log ('deleting sharing list');
-		console.log (props.entity.displayName);
+		const {store} = this.props;
+		store.onDeleteSharingList(sharingListCard.entity);
 	};
 
 	renameSharingList = (props) => {
@@ -104,14 +103,13 @@ class SharingListsView extends React.Component {
 		return (
 			<div className="sharing-lists-panel">
 				{this.renderHeader()}
-				{/* <h2 className="sharing-lists-panel-header">Sharing Lists</h2> */}
 				<div className="sharing-lists-list-frame">
 					{items && items.map(
 						(i) => (
 							<SharingListCard entity={i}
 								members={i.friends}
 								key={i.Username}
-								deleteSharingList={this.deleteSharingList}
+								deleteSharingList={this.onDeleteSharingList}
 								renameSharingList={this.renameSharingList}
 								managePeople={this.managePeople}/>
 						)

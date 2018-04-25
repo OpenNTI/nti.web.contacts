@@ -44,5 +44,22 @@ export default class SharingListStore extends Stores.SimpleStore {
 		return results.filter(entity => entity.isUser );
 	}
 
+	onCreateSharingList = (name, members) => {
+		this.ds.createList(name, members);
+		console.log('Created list "' + name + '" and members ' + members);
+	}
+
+	onDeleteSharingList = (listToDelete) => {
+		console.log('Deleting group ' + listToDelete);
+		return listToDelete.delete()
+			.catch(reason => {
+				logger.error('There was an error while trying to delete a sharing list: error: %o, group: %o', reason, listToDelete);
+
+				//Continue the error.
+				return Promise.reject(reason);
+			});
+
+	}
+
 
 }
