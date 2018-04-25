@@ -46,7 +46,11 @@ export default class SharingListStore extends Stores.SimpleStore {
 
 	onCreateSharingList = (name, members) => {
 		this.ds.createList(name, members);
-		console.log('Created list "' + name + '" and members ' + members);
+	}
+
+	onFinishedManagingPeople = (newContactList, activeSharingList) => {
+		console.log('In store, finishing managing people');
+		console.log(newContactList, activeSharingList.Name);
 	}
 
 	onDeleteSharingList = (listToDelete) => {

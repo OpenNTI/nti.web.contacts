@@ -5,6 +5,7 @@ import { Button, Loading } from '@nti/web-commons';
 import SharingListStore from './Store';
 import SharingListCard from './SharingListCard';
 import SharingListCreateModal from './SharingListCreateModal';
+import SharingListManagePeopleModal from './SharingListManagePeopleModal';
 
 const propMap = {
 	items: 'items'
@@ -17,6 +18,7 @@ class SharingListsView extends React.Component {
 	state = {
 		showCreateDialog: false,
 		showRenameDialog: false,
+		showManageDialog: false,
 		activeSharingList: null
 	}
 
@@ -36,7 +38,6 @@ class SharingListsView extends React.Component {
 	// };
 
 	onDeleteSharingList = (sharingListCard) => {
-		console.log ('deleting sharing list');
 		const {store} = this.props;
 		store.onDeleteSharingList(sharingListCard.entity);
 	};
@@ -46,8 +47,15 @@ class SharingListsView extends React.Component {
 		console.log (props.entity.displayName);
 	};
 
-	managePeople = (props) => {
-		console.log ('managing people');
+	managePeople = (sharingListCard) => {
+		const {entity} = sharingListCard;
+		this.setState({showManageDialog: true});
+		this.setState({activeSharingList: entity});
+	}
+
+	onFinishedManagingPeople = (newContacts, activeSharingList) => {
+		const {store} = this.props;
+		store.onFinishedManagingPeople(newContacts, activeSharingList);
 	}
 
 	createSharingListModal = () => {
@@ -56,7 +64,6 @@ class SharingListsView extends React.Component {
 
 	onCreateSharingList = (name, members) => {
 		const {store} = this.props;
-		console.log ('creating list with name ' + name + ' and members ' + members);
 		store.onCreateSharingList(name, members);
 	}
 
@@ -90,6 +97,12 @@ class SharingListsView extends React.Component {
 						activeGroup={activeSharingList}
 						onCreateSharingList={this.onCreateSharingList}/>
 				)}
+				{this.state.showManageDialog && (
+					<SharingListManagePeopleModal onDismiss={this.onDismissModal}
+						activeSharingList={activeSharingList}
+						onFinishedManagingPeople={this.onFinishedManagingPeople}/>
+				)}
+
 			</div>
 		);
 	}
