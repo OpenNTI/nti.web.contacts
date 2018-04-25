@@ -55,7 +55,9 @@ class SharingListsView extends React.Component {
 	}
 
 	onCreateSharingList = (name, members) => {
+		const {store} = this.props;
 		console.log ('creating list with name ' + name + ' and members ' + members);
+		store.onCreateSharingList(name, members);
 	}
 
 	onDismissModal = (modal) => {

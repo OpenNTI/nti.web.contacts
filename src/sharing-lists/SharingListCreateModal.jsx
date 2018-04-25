@@ -17,19 +17,12 @@ export default class SharingListCreateModal extends React.Component {
 		contacts: []
 	}
 
-	addContactToList = (newContact) => {
-		const {contacts: existingContacts} = this.state;
-		if (existingContacts.find((i) => {return (i.Username !== newContact.Username);})) {
-			// If we found a user with this same username, don't need to add
-			// them again. However, make a log of this.
-			console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
-		}
-		// Otherwise, add them to our list.
-		this.setState({contacts: [...existingContacts, newContact]});
-	}
-
 	updateSharingListName = (value) => {
 		this.setState({sharingListName : value});
+	}
+
+	onContactsChange = (updatedContacts) => {
+		this.setState({contacts: updatedContacts});
 	}
 
 	onDismiss = () => {
@@ -69,7 +62,7 @@ export default class SharingListCreateModal extends React.Component {
 				<div className="sharing-list-action-modal-content sub-header">Add People</div>
 				Lists are private to you. We do not notify people you add to your lists.
 				<SharingListContactsManager
-					addContactToList={this.addContactToList}
+					onContactsChange={this.onContactsChange}
 					contacts={contacts}/>
 			</div>
 		);

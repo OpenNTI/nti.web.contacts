@@ -9,26 +9,35 @@ const DELIMITER_KEYS = ['Enter', 'Tab'];
 export default class SharingListContactsManager extends React.Component {
 
 	state = {
-		values: []
+		values: [],
+		contacts: []
 	}
 
 	static propTypes = {
 		contacts: PropTypes.array,
-		addContactToList: PropTypes.func
+		onContactsChange: PropTypes.func
 	};
 
 	addContactToList = (newContact) => {
 		this.setState({values : []});
 		newContact = newContact[0];
-		this.props.addContactToList(newContact.value);
-		// const {contacts: existingContacts} = this.state;
-		// if (existingContacts.find((i) => {return (i.Username != newContact.Username);})) {
-		// 	// If we found a user with this same username, don't need to add
-		// 	// them again. However, make a log of this.
-		// 	console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
-		// }
-		// // Otherwise, add them to our list.
-		// this.setState({contacts: [...this.state.contacts, newContact.value]});
+
+		const {contacts: existingContacts} = this.state;
+		if (existingContacts.find((i) => {return (i.Username !== newContact.Username);})) {
+			// If we found a user with this same username, don't need to add
+			// them again. However, make a log of this.
+			console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
+		}
+		// Otherwise, add them to our list.
+		this.setState({contacts: [...existingContacts, newContact.value]});
+		this.props.onContactsChange([...existingContacts, newContact.value]);
+	}
+
+	removeContactFromList = (contactToRemove) => {
+		const {contacts} = this.state;
+		const newContacts = contacts.filter(e => e.Username !== contactToRemove.Username);
+		this.setState({contacts: [newContacts]});
+		this.props.onContactsChange(newContacts);
 	}
 
 	async contactSuggestionProvider (value) {
