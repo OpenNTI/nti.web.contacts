@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
+import { Prompt, DialogButtons, Panels } from '@nti/web-commons';
 
 import SharingListContactsManager from './SharingListContactsManager';
 
@@ -39,10 +39,9 @@ export default class SharingListManagePeopleModal extends React.Component {
 	}
 
 	onFinishedEditing = () => {
-
 		const {onFinishedManagingPeople, activeSharingList} = this.props;
-		const {contacts} = this.state;
-		onFinishedManagingPeople(activeSharingList, contacts);
+		const {contacts:updatedContacts} = this.state;
+		onFinishedManagingPeople(updatedContacts, activeSharingList);
 		this.onDismiss();
 	}
 

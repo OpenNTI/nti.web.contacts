@@ -1,16 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Avatar, TokenEditor } from '@nti/web-commons';
+import { TokenEditor } from '@nti/web-commons';
 
+import ContactRow from './SharingListContactRow';
 import Store from './Store';
 
 const DELIMITER_KEYS = ['Enter', 'Tab'];
 
 export default class SharingListContactsManager extends React.Component {
 
-	state = {
-		values: [],
-		contacts: []
+	constructor (props) {
+		super(props);
+
+		// Load the state with any contacts we are given from props
+		// when we first construct this component.
+		const contacts = props.contacts || [];
+		this.state = {
+			contacts: contacts,
+			values: []
+		};
 	}
 
 	static propTypes = {
@@ -41,22 +49,25 @@ export default class SharingListContactsManager extends React.Component {
 	}
 
 	async contactSuggestionProvider (value) {
-		// debugger;
 		const suggestionProvider = Store.contactSuggestionProvider;
 		const users = await suggestionProvider(value);
+		// users = users.filter(x => x.Username !== this.store.ds.context.Username);
 		return users.map(x => {
 			return {
 				key: x.Username,
 				display: x.alias,
 				value: x,
-				view: (<Suggestion user={x} showUsername={users.filter(y => y.alias === x.alias).length > 1}/>)
+				view: (<ContactRow user={x} showUsername={users.filter(y => y.alias === x.alias).length > 1}/>)
 			};
 		});
 	}
 
 	renderContactList (contacts) {
 		return contacts && contacts.map((x) => (
-			<Suggestion user={x} key={x.Username} showUsername={contacts.filter(y => y.alias === x.alias).length > 1}/>
+			<ContactRow user={x}
+				key={x.Username}
+				showUsername={contacts.filter(y => y.alias === x.alias).length > 1}
+				onRemove={this.removeContactFromList}/>
 		));
 	}
 
@@ -77,23 +88,4 @@ export default class SharingListContactsManager extends React.Component {
 			</div>
 		);
 	}
-}
-
-// Borrowed from the AddFacilitators logic for now.
-Suggestion.propTypes = {
-	user: PropTypes.object.isRequired,
-	showUsername: PropTypes.bool
-};
-
-function Suggestion ({user, showUsername}) {
-	return (
-		<div className="contact-suggestion">
-			<Avatar className="suggestion-image" entity={user}/>
-			<div className="user-info">
-				<div className="alias">
-					<span>{user.alias}</span>
-				</div>
-			</div>
-		</div>
-	);
 }

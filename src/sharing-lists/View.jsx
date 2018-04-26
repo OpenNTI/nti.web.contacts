@@ -53,9 +53,9 @@ class SharingListsView extends React.Component {
 		this.setState({activeSharingList: entity});
 	}
 
-	onFinishedManagingPeople = (newContacts, activeSharingList) => {
+	onFinishedManagingPeople = (updatedMembersList, activeSharingList) => {
 		const {store} = this.props;
-		store.onFinishedManagingPeople(newContacts, activeSharingList);
+		store.onFinishedManagingPeople(updatedMembersList, activeSharingList);
 	}
 
 	createSharingListModal = () => {
