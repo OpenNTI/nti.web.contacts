@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { scoped } from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
 
 import SharingListContactsManager from './SharingListContactsManager';
+
+const t = scoped('nti-web-contacts.sharing-lists.SharingListCreateModal', {
+	modalTitleText: 'Create a Sharing List',
+	listNameLabel: 'List Name',
+	contactSearchLabel: 'Add People',
+	listDescription: 'Lists are private to you. We do not notify people you add to your lists.'
+});
 
 export default class SharingListCreateModal extends React.Component {
 
@@ -50,17 +58,16 @@ export default class SharingListCreateModal extends React.Component {
 	}
 
 	renderContent = () => {
-
 		const {contacts} = this.state;
 
 		return (
 			<div className="sharing-list-action-modal-content">
-				<div className="sharing-list-action-modal-content sub-header">List Name</div>
+				<div className="sharing-list-action-modal-content sub-header">{t('listNameLabel')}</div>
 				<div className="sharing-list-action-modal-input">
 					<Input.Text placeholder="Name" value={this.state.sharingListName} onChange={this.updateSharingListName} maxLength="140"/>
 				</div>
-				<div className="sharing-list-action-modal-content sub-header">Add People</div>
-				Lists are private to you. We do not notify people you add to your lists.
+				<div className="sharing-list-action-modal-content sub-header">{t('contactSearchLabel')}</div>
+				{t('listDescription')}
 				<SharingListContactsManager
 					onContactsChange={this.onContactsChange}
 					contacts={contacts}/>
@@ -73,7 +80,7 @@ export default class SharingListCreateModal extends React.Component {
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="sharing-list-action-modal">
 					<Panels.Header className="sharing-list-action-modal-header" onClose={this.onDismiss}>
-						Create a Sharing List
+						{t('modalTitleText')}
 					</Panels.Header>
 					{this.renderContent()}
 					{this.renderControls()}
