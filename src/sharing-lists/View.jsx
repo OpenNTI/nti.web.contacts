@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { scoped } from '@nti/lib-locale';
 import { Button, Loading } from '@nti/web-commons';
 
 import SharingListStore from './Store';
@@ -10,6 +11,11 @@ import SharingListManagePeopleModal from './SharingListManagePeopleModal';
 const propMap = {
 	items: 'items'
 };
+
+const t = scoped ('nti-web-contacts.sharing-lists.View', {
+	createButton: 'Create a Sharing List',
+	headerText: 'Sharing Lists'
+});
 
 export default
 @SharingListStore.connect(propMap)
@@ -30,12 +36,6 @@ class SharingListsView extends React.Component {
 	constructor (props) {
 		super();
 	}
-
-	// triggerRenameGroupModal = (props) => {
-	// 	console.log('Open rename group modal');
-	// 	console.log(props.entity.displayName);
-	// 	this.setState({ showRenameDialog: true });
-	// };
 
 	onDeleteSharingList = (sharingListCard) => {
 		const {store} = this.props;
@@ -80,9 +80,9 @@ class SharingListsView extends React.Component {
 	renderHeader () {
 		return (
 			<div className="sharing-lists-panel-header">
-				<h2>Sharing Lists</h2>
+				<h2>{t('headerText')}</h2>
 				<Button className="create-sharing-list-button" onClick={this.createSharingListModal}>
-					Create a Sharing List
+					{t('createButton')}
 				</Button>
 			</div>
 		);
