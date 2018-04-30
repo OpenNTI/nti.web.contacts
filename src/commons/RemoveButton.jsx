@@ -10,12 +10,16 @@ const t = scoped ('nti-web-contacts.commons.RemoveButton', {
 export default class RemoveButton extends React.Component {
 
 	static propTypes = {
-		onRemove: PropTypes.func
+		onRemove: PropTypes.func,
+		className: PropTypes.string
 	}
 
 	render () {
+
+		const {className, onRemove} = this.props;
+
 		return (
-			<Button className="remove-contact-button" onClick={this.props.onRemove}>
+			<Button className={className} onClick={onRemove}>
 				{t('removeButton')}
 			</Button>
 		);

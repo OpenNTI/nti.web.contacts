@@ -19,14 +19,14 @@ export default class ContactRow extends React.Component {
 	render () {
 		const {user, onRemove} = this.props;
 		return (
-			<div className="contact-suggestion">
-				<Avatar className="suggestion-image" entity={user}/>
+			<div className="contact-row">
+				<Avatar className="contact-row-image" entity={user}/>
 				<div className="user-info">
 					<div className="alias">
 						<span>{user.alias}</span>
 					</div>
 				</div>
-				{onRemove && <RemoveButton onRemove={this.onRemove}/>}
+				{onRemove && <RemoveButton className="remove-contact-button" onRemove={this.onRemove}/>}
 			</div>
 		);
 	}
