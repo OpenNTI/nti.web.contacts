@@ -82,6 +82,7 @@ export default class SharingListContactsManager extends React.Component {
 					onChange={this.addContactToList}
 					tokenDelimiterKeys={DELIMITER_KEYS}
 					onlyAllowSuggestions/>
+				<div className="sharing-list-action-modal-content sub-header">Members</div>
 				<div className="sharing-list-contacts">
 					{this.renderContactList(contacts)}
 				</div>
