@@ -48,9 +48,12 @@ export default class SharingListContactsManager extends React.Component {
 		this.props.onContactsChange(newContacts);
 	}
 
-	async contactSuggestionProvider (value) {
+	contactSuggestionProvider = async (value) => {
+		// TODO: Still need to exclude the logged-in user.
+		let {contacts: existingContacts} = this.state;
+		existingContacts = existingContacts.map(x => x.getID());
 		const suggestionProvider = Store.contactSuggestionProvider;
-		const users = await suggestionProvider(value);
+		const users = await suggestionProvider(value, existingContacts);
 		// users = users.filter(x => x.Username !== this.store.ds.context.Username);
 		return users.map(x => {
 			return {
