@@ -9,49 +9,27 @@ const DELIMITER_KEYS = ['Enter', 'Tab'];
 
 export default class SharingListContactsContainer extends React.Component {
 
-	constructor (props) {
-		super(props);
-
-		// Load the state with any contacts we are given from props
-		// when we first construct this component.
-		const contacts = props.contacts || [];
-		this.state = {
-			contacts: contacts,
-			values: []
-		};
+	state = {
+		values: []
 	}
 
 	static propTypes = {
 		contacts: PropTypes.array,
-		onContactsChange: PropTypes.func
+		addContactToList: PropTypes.func,
+		removeContactFromList: PropTypes.func
 	};
 
 	addContactToList = (newContact) => {
 		this.setState({values : []});
 		newContact = newContact[0];
-
-		const {contacts: existingContacts} = this.state;
-		if (existingContacts.find((i) => i.getID() !== newContact.getID())) {
-			// If we found a user with this same username, don't need to add
-			// them again. However, make a log of this.
-			console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
-		}
-		// Otherwise, add them to our list.
-		this.setState({contacts: [...existingContacts, newContact.value]});
-		this.props.onContactsChange([...existingContacts, newContact.value]);
+		this.props.addContactToList(newContact.value);
 	}
 
-	removeContactFromList = (contactToRemove) => {
-		const {contacts} = this.state;
-		const newContacts = contacts.filter(e => e.getID() !== contactToRemove.getID());
-		this.setState({contacts: [newContacts]});
-		this.props.onContactsChange(newContacts);
-	}
 
 	contactSuggestionProvider = async (value) => {
 		// TODO: Still need to exclude the logged-in user.
-		const {contacts} = this.state;
-		const existingContacts = contacts.map(x => x.getID());
+		const {contacts} = this.props;
+		const existingContacts = contacts.map(x => x.Username);
 		const contactSuggestionProvider = Store.contactSuggestionProvider;
 		const users = await contactSuggestionProvider(value, existingContacts);
 		return users.map(x => {
@@ -65,11 +43,12 @@ export default class SharingListContactsContainer extends React.Component {
 	}
 
 	renderContactList (contacts) {
+		const {removeContactFromList} = this.props;
 		return contacts && contacts.map((x) => (
 			<ContactRow user={x}
-				key={x.getID()}
+				key={x.Username}
 				showUsername={contacts.filter(y => y.alias === x.alias).length > 1}
-				onRemove={this.removeContactFromList}/>
+				onRemove={removeContactFromList}/>
 		));
 	}
 

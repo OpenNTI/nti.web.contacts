@@ -34,6 +34,24 @@ export default class SharingListManagePeopleModal extends React.Component {
 		this.setState({contacts: updatedContacts});
 	}
 
+	addContactToList = (newContact) => {
+
+		const {contacts: existingContacts} = this.state;
+		if (existingContacts.find((i) => i.getID() !== newContact.getID())) {
+			// If we found a user with this same username, don't need to add
+			// them again. However, make a log of this.
+			console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
+		}
+		// Otherwise, add them to our list.
+		this.setState({contacts: [...existingContacts, newContact]});
+	}
+
+	removeContactFromList = (contactToRemove) => {
+		const {contacts} = this.state;
+		const newContacts = contacts.filter(e => e.getID() !== contactToRemove.getID());
+		this.setState({contacts: newContacts});
+	}
+
 	onFinishedEditing = () => {
 		const {onFinishedManagingPeople, activeSharingList} = this.props;
 		const {contacts:updatedContacts} = this.state;
@@ -75,7 +93,8 @@ export default class SharingListManagePeopleModal extends React.Component {
 			<div className="sharing-list-action-modal-content">
 				<div className="sharing-list-action-modal-content sub-header">Add People</div>
 				<SharingListContactsContainer
-					onContactsChange={this.onContactsChange}
+					addContactToList={this.addContactToList}
+					removeContactFromList={this.removeContactFromList}
 					contacts={contacts}/>
 			</div>
 		);
