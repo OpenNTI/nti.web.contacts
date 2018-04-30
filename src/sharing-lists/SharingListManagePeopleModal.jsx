@@ -46,7 +46,8 @@ export default class SharingListManagePeopleModal extends React.Component {
 	}
 
 	renderHeader = () => {
-		const headerTitle = t('modalTitleText') + ' (%s)' % this.state.contacts.length;
+		const numberOfContacts = this.state.contacts.length;
+		const headerTitle = t('modalTitleText') + ' (' + numberOfContacts + ')';
 		return (
 			<Panels.Header className="sharing-list-action-modal-header" onClose={this.onDismiss}>
 				{headerTitle}
