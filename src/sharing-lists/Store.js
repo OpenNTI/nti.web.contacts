@@ -43,11 +43,14 @@ export default class SharingListStore extends Stores.SimpleStore {
 	// TODO: Should we make this non-static so that it
 	// can filter out the logged-in user, or is that something
 	// we should filter out within the views that call it?
-	static async contactSuggestionProvider (value) {
+	static async contactSuggestionProvider (value, idsToExclude = []) {
 		const service = await getService();
 		const contacts = await service.getContacts();
 		const results = await contacts.search(value, false, true);
-		return results.filter(entity => entity.isUser);
+		// Filter out results that aren't users, and any IDs
+		// we explicitly want to exclude.
+		return results.filter(entity => entity.isUser
+			&& !idsToExclude.includes(entity.getID()));
 	}
 
 	onCreateSharingList = (name, members) => {
