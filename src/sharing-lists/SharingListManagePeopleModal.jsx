@@ -19,10 +19,6 @@ export default class SharingListManagePeopleModal extends React.Component {
 		activeSharingList: PropTypes.object
 	};
 
-	state = {
-		contacts: []
-	}
-
 	constructor (props) {
 		super(props);
 
