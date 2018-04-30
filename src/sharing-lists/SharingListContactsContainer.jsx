@@ -7,7 +7,7 @@ import Store from './Store';
 
 const DELIMITER_KEYS = ['Enter', 'Tab'];
 
-export default class SharingListContactsManager extends React.Component {
+export default class SharingListContactsContainer extends React.Component {
 
 	constructor (props) {
 		super(props);
@@ -31,7 +31,7 @@ export default class SharingListContactsManager extends React.Component {
 		newContact = newContact[0];
 
 		const {contacts: existingContacts} = this.state;
-		if (existingContacts.find((i) => {return (i.Username !== newContact.Username);})) {
+		if (existingContacts.find((i) => i.getID() !== newContact.getID())) {
 			// If we found a user with this same username, don't need to add
 			// them again. However, make a log of this.
 			console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
@@ -43,18 +43,17 @@ export default class SharingListContactsManager extends React.Component {
 
 	removeContactFromList = (contactToRemove) => {
 		const {contacts} = this.state;
-		const newContacts = contacts.filter(e => e.Username !== contactToRemove.Username);
+		const newContacts = contacts.filter(e => e.getID() !== contactToRemove.getID());
 		this.setState({contacts: [newContacts]});
 		this.props.onContactsChange(newContacts);
 	}
 
 	contactSuggestionProvider = async (value) => {
 		// TODO: Still need to exclude the logged-in user.
-		let {contacts: existingContacts} = this.state;
-		existingContacts = existingContacts.map(x => x.getID());
-		const suggestionProvider = Store.contactSuggestionProvider;
-		const users = await suggestionProvider(value, existingContacts);
-		// users = users.filter(x => x.Username !== this.store.ds.context.Username);
+		const {contacts} = this.state;
+		const existingContacts = contacts.map(x => x.getID());
+		const contactSuggestionProvider = Store.contactSuggestionProvider;
+		const users = await contactSuggestionProvider(value, existingContacts);
 		return users.map(x => {
 			return {
 				key: x.Username,
@@ -68,7 +67,7 @@ export default class SharingListContactsManager extends React.Component {
 	renderContactList (contacts) {
 		return contacts && contacts.map((x) => (
 			<ContactRow user={x}
-				key={x.Username}
+				key={x.getID()}
 				showUsername={contacts.filter(y => y.alias === x.alias).length > 1}
 				onRemove={this.removeContactFromList}/>
 		));

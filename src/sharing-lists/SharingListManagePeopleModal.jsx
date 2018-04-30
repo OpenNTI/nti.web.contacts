@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels } from '@nti/web-commons';
 
-import SharingListContactsManager from './SharingListContactsManager';
+import SharingListContactsContainer from './SharingListContactsContainer';
 
 const t = scoped ('nti-web-contacts.sharing-lists.SharingListManagePeopleModal', {
 	modalTitleText: 'Friends'
@@ -74,7 +74,7 @@ export default class SharingListManagePeopleModal extends React.Component {
 		return (
 			<div className="sharing-list-action-modal-content">
 				<div className="sharing-list-action-modal-content sub-header">Add People</div>
-				<SharingListContactsManager
+				<SharingListContactsContainer
 					onContactsChange={this.onContactsChange}
 					contacts={contacts}/>
 			</div>
