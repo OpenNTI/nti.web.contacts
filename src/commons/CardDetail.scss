@@ -1,12 +1,11 @@
 @import "~@nti/style-common";
 
 .card-detail {
-	border: 1px solid #e2e2e2;
-	background-color: #fff;
+	border: 1px solid $border-grey-light;
+	background-color: white;
 	box-shadow: 0 2px 3px -2px rgba(0, 0, 0, 0.15);
 	height: inherit;
 	max-width: 472px;
-	// min-height: 160px;
 	position: relative;
 	margin-bottom: 22px;
 	overflow: hidden;
@@ -15,7 +14,7 @@
 }
 
 .card-title {
-	color: #494949;
+	color: $primary-grey;
 	font-size: 18px;
 	line-height: 24px;
 	font-weight: normal;
@@ -27,4 +26,8 @@
 .members {
 	position: absolute;
 	bottom: 15px;
+}
+
+.card-action-flyout {
+	width: 250px;
 }

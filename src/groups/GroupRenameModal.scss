@@ -12,7 +12,7 @@
 	font-size: 24px;
 	line-height: 33px;
 	font-weight: 300;
-	color: #757474;
+	color: $primary-grey;
 
 	&.panel-header-component {
 		padding-left: 25px;
@@ -24,12 +24,12 @@
 	padding-left: 25px;
 	padding-right: 25px;
 	padding-top: 30px;
-	color: #757474;
+	color: $secondary-grey;
 	font-size: 14px;
 	line-height: 20px;
 
 	&.sub-header {
-		color: #494949;
+		color: $primary-grey;
 		padding-left: 0px;
 		padding-right: 0px;
 		height: 22px;
