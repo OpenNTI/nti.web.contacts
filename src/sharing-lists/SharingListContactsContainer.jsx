@@ -55,7 +55,7 @@ export default class SharingListContactsContainer extends React.Component {
 	render () {
 		const {contacts} = this.props;
 		return (
-			<div className="sharing-list-contact-manager">
+			<div className="sharing-list-contact-container">
 				<TokenEditor
 					value={this.state.values}
 					placeholder="Enter a name"
