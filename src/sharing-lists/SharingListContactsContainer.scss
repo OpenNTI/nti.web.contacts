@@ -1,12 +1,11 @@
 @import "~@nti/style-common";
 
-.contact-suggestion {
-	height: 40px;
-	display: flex;
-	margin: 5px;
-}
+.sharing-list-contact-container {
+  height: auto;
 
-.suggestion-image {
-	height: inherit;
-	// padding: 10px;
+	.sharing-list-contacts {
+		height: auto;
+		margin-bottom: 60px;
+	}
+
 }
