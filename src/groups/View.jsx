@@ -34,7 +34,8 @@ class GroupsView extends React.Component {
 		showDeleteDialog: false,
 		showJoinGroupDialog: false,
 		showCreateDialog: false,
-		activeGroup: null
+		activeGroup: null,
+		activeInviteCode: null
 	}
 
 	static propTypes = {
@@ -45,11 +46,6 @@ class GroupsView extends React.Component {
 	constructor (props) {
 		super();
 	}
-
-	triggerRenameGroupModal = (group) => {
-		this.setState({activeGroup: {group}});
-		this.setState({ showRenameDialog: true });
-	};
 
 	onRenameGroup = (group, newName) => {
 		console.log('Renaming group to ' + newName);
@@ -82,12 +78,10 @@ class GroupsView extends React.Component {
 		store.createGroup(groupName);
 	}
 
-	viewGroupCode = (props) => {
+	viewGroupCode = async (props) => {
 		this.setState({ showInviteCodeDialog: true });
-		this.setState({activeGroup: props.entity});
-		const link = props.entity.fetchLink('default-trivial-invitation-code');
-		const result = props.entity.requestLink(link);
-
+		const link = await props.entity.fetchLink('default-trivial-invitation-code');
+		this.setState({activeInviteCode: link.invitation_code});
 	};
 
 	joinGroupModal = (props) => {
@@ -102,6 +96,7 @@ class GroupsView extends React.Component {
 	onDismissModal = (modal) => {
 		this.setState({[modal]: false});
 		this.setState({activeGroup: null});
+		this.setState({activeInviteCode: null});
 	}
 
 	renderHeader () {
@@ -120,7 +115,7 @@ class GroupsView extends React.Component {
 
 	renderModals () {
 
-		const {activeGroup} = this.state;
+		const {activeGroup, activeInviteCode} = this.state;
 
 		return (
 			<div>
@@ -128,7 +123,7 @@ class GroupsView extends React.Component {
 					<GroupRenameModal onDismiss={this.onDismissModal} activeGroup={activeGroup} onRenameGroup={this.onRenameGroup}/>
 				)}
 				{this.state.showInviteCodeDialog && (
-					<GroupInviteCodeModal onDismiss={this.onDismissModal} activeGroup={activeGroup}/>
+					<GroupInviteCodeModal onDismiss={this.onDismissModal} inviteCode={activeInviteCode}/>
 				)}
 				{this.state.showDeleteDialog && (
 					<GroupDeleteModal onDismiss={this.onDismissModal} onDeleteGroup={this.onDeleteGroup} activeGroup={activeGroup}/>
