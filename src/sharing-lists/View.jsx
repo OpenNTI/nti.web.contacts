@@ -42,9 +42,10 @@ class SharingListsView extends React.Component {
 		store.onDeleteSharingList(sharingListCard.entity);
 	};
 
-	renameSharingList = (props) => {
-		console.log ('rename sharing list');
-		console.log (props.entity.displayName);
+	renameSharingList = (sharingList, newName) => {
+		console.log ('rename sharing list to ' + newName);
+		// TODO: call a method in the store to handle the actual
+		// renaming, now that we have the data we need.
 	};
 
 	managePeople = (sharingListCard) => {

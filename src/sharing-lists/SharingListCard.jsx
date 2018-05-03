@@ -10,27 +10,56 @@ const t = scoped('nti-web-contacts.sharing-lists.SharingListCard', {
 	deleteText: 'Delete List'
 });
 
-SharingListCard.propTypes = {
-	entity: PropTypes.oneOfType([
-		PropTypes.object,
-		PropTypes.string
-	]).isRequired,
-	members: PropTypes.array,
-	renameSharingList: PropTypes.func,
-	managePeople: PropTypes.func,
-	deleteSharingList: PropTypes.func
-};
+export default class SharingListCard extends React.Component {
 
-export default function SharingListCard ({entity, members, renameSharingList, managePeople, deleteSharingList}) {
+	static propTypes = {
+		entity: PropTypes.oneOfType([
+			PropTypes.object,
+			PropTypes.string
+		]).isRequired,
+		members: PropTypes.array,
+		renameSharingList: PropTypes.func,
+		managePeople: PropTypes.func,
+		deleteSharingList: PropTypes.func
+	};
 
-	const flyoutOptions = [
-		{className: 'sharing-list-action-flyout-option', displayText: t('renameText'), onClick: renameSharingList},
-		{className: 'sharing-list-action-flyout-option', displayText: t('managePeopleText'), onClick: managePeople},
-		{className: 'sharing-list-action-flyout-option-delete', displayText: t('deleteText'), onClick: deleteSharingList}
-	];
+	constructor (props) {
+		super(props);
+		const {managePeople, deleteSharingList} = this.props;
+		const flyoutOptions = [
+			{className: 'sharing-list-action-flyout-option', displayText: t('renameText'), onClick: this.beginRenamingSharingList},
+			{className: 'sharing-list-action-flyout-option', displayText: t('managePeopleText'), onClick: managePeople},
+			{className: 'sharing-list-action-flyout-option-delete', displayText: t('deleteText'), onClick: deleteSharingList}
+		];
+		this.flyoutOptions = flyoutOptions;
+	}
 
-	return (
-		<div className="sharing-list-card">
-			<CardDetail entity={entity} members={members} flyoutOptions={flyoutOptions}/>
-		</div>);
+	state = {
+		renameMode: false
+	}
+
+	beginRenamingSharingList = () => {
+		this.setState({renameMode: true});
+	}
+
+	finishRenamingSharingList = (entity, newText) => {
+		this.setState({renameMode: false});
+		const {renameSharingList} = this.props;
+		renameSharingList(entity, newText);
+	}
+
+	render () {
+
+		const {entity, members} = this.props;
+		const {renameMode} = this.state;
+
+		return (
+			<div className="sharing-list-card">
+				<CardDetail entity={entity}
+					members={members}
+					flyoutOptions={this.flyoutOptions}
+					onRenameFinish={this.finishRenamingSharingList}
+					renameMode={renameMode}/>
+			</div>);
+	}
 }
