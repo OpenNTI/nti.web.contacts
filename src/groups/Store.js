@@ -61,12 +61,6 @@ export default class GroupListStore extends Stores.SimpleStore {
 		// but since I can't find it right now, doing it the
 		// quick and dirty way.
 		return this.invitations.Links.find(function (obj) {return obj.rel === 'accept-invitation';});
-		// return this.invitations.getLink('accept-invitation');
-		// debugger;
-		// let invitations = this.invitations;
-		// let links = invitations && invitations.Links || [];
-		// debugger;
-		// return links['accept-invitation'];
 	};
 
 	joinGroup = (groupCode) => {
