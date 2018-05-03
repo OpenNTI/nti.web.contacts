@@ -5,7 +5,7 @@ import { Prompt, DialogButtons, Panels } from '@nti/web-commons';
 
 const t = scoped('nti-web-contacts.groups.GroupDeleteModal', {
 	cancelButton: 'Cancel',
-	deleteButton: 'Create',
+	deleteButton: 'Delete',
 	deleteGroupHeader: 'Delete Group',
 	deleteGroupDescription: 'Are you sure you want to delete this group?'
 });
