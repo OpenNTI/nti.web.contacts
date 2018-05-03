@@ -4,7 +4,7 @@ import { scoped } from '@nti/lib-locale';
 import { Loading } from '@nti/web-commons';
 
 import ContactListStore from './Store';
-import ContactListCard from './ContactListCard';
+import ContactCardsContainer from './ContactCardsContainer';
 
 const propMap = {
 	items: 'items'
@@ -36,7 +36,7 @@ class ContactListView extends React.Component {
 	viewContactProfile = (contactCard) => {
 		const {entity} = contactCard;
 		// TODO: Get the user profile link from the entity
-		// and then navigate to it.
+		// and then navigate to it. Need to use routes here.
 		console.log("Should navigate to profile for contact " + entity.Username);
 	}
 
@@ -48,9 +48,20 @@ class ContactListView extends React.Component {
 		);
 	}
 
+	renderContactListCards () {
+		const {items} = this.props;
+		return (
+			<ContactCardsContainer items={items}
+				removeContact={this.removeContact}
+				chatWithContact={this.chatWithContact}
+				addContactToSharingList={this.addContactToSharingList}
+				viewContactProfile={this.viewContactProfile}/>
+		);
+	}
+
 	render () {
 
-		const {items, store} = this.props;
+		const {store} = this.props;
 
 		if (!store || store.loading) {
 			// If we're still loading, exit early
@@ -60,28 +71,7 @@ class ContactListView extends React.Component {
 		return (
 			<div className="contact-list-panel">
 				{this.renderHeader()}
-				<div className="contact-list-frame">
-					{items && items.map(
-						(i) => (
-							<ContactListCard entity={i}
-								members={i.friends}
-								key={i.Username}
-								removeContact={this.removeContact}
-								chatWithContact={this.chatWithContact}
-								addContactToSharingList={this.viewGroupCode}
-								viewContactProfile={this.viewContactProfile}/>
-						)
-					)}
-					{/* {this.state.showRenameDialog && (
-						<GroupRenameModal onDismiss={this.onDismissModal}/>
-					)}
-					{this.state.showInviteCodeDialog && (
-						<GroupInviteCodeModal onDismiss={this.onDismissModal}/>
-					)}
-					{this.state.showDeleteDialog && (
-						<GroupDeleteModal onDismiss={this.onDismissModal}/>
-					)} */}
-				</div>
+				{this.renderContactListCards()}
 			</div>
 		);
 	}
