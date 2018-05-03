@@ -62,32 +62,25 @@ export default class CardDetail extends React.Component {
 		}
 	}
 
-	renderMeta () {
-
-		const {subtitleProvider} = this.props.entity;
-		const subtitle = subtitleProvider && subtitleProvider(this.props.entity);
-
-		return (
-			<div className="contact-meta">{subtitle}</div>
-		);
-	}
-
 	render () {
-		const {members, entity, renameMode} = this.props;
+		const {members, entity, renameMode, flyoutOptions} = this.props;
 		const {location} = entity;
 		return (
 			<div className="card-detail">
 				<div className="card-info">
-					{this.renderCardName(renameMode)}
-					{location && <div className="entity-location">{location}</div>}
-					<Flyout.Triggered
-						className="card-action-flyout"
-						trigger={this.renderFlyoutTrigger()}
-						horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
-					>
-						{this.renderFlyoutOptions(this.props.flyoutOptions)}
-					</Flyout.Triggered>
-					{this.renderMeta()}
+					<div className="card-meta">
+						<div className="card-title">
+							{this.renderCardName(renameMode)}
+							{location && <div className="entity-location">{location}</div>}
+						</div>
+						<Flyout.Triggered
+							className="card-action-flyout"
+							trigger={this.renderFlyoutTrigger()}
+							horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
+						>
+							{this.renderFlyoutOptions(flyoutOptions)}
+						</Flyout.Triggered>
+					</div>
 					<FollowButton entity={entity}/>
 				</div>
 				{/* Only render members if the list is non-empty */}
