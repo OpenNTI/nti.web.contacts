@@ -52,7 +52,7 @@ class GroupsView extends React.Component {
 	};
 
 	onRenameGroup = (group, newName) => {
-		console.log("Renaming group to " + newName);
+		console.log('Renaming group to ' + newName);
 	}
 
 	deleteGroupModal = (group) => {
@@ -84,9 +84,10 @@ class GroupsView extends React.Component {
 
 	viewGroupCode = (props) => {
 		this.setState({ showInviteCodeDialog: true });
+		this.setState({activeGroup: props.entity});
 		const link = props.entity.fetchLink('default-trivial-invitation-code');
 		const result = props.entity.requestLink(link);
-		debugger;
+
 	};
 
 	joinGroupModal = (props) => {
@@ -127,7 +128,7 @@ class GroupsView extends React.Component {
 					<GroupRenameModal onDismiss={this.onDismissModal} activeGroup={activeGroup} onRenameGroup={this.onRenameGroup}/>
 				)}
 				{this.state.showInviteCodeDialog && (
-					<GroupInviteCodeModal onDismiss={this.onDismissModal}/>
+					<GroupInviteCodeModal onDismiss={this.onDismissModal} activeGroup={activeGroup}/>
 				)}
 				{this.state.showDeleteDialog && (
 					<GroupDeleteModal onDismiss={this.onDismissModal} onDeleteGroup={this.onDeleteGroup} activeGroup={activeGroup}/>
@@ -162,7 +163,7 @@ class GroupsView extends React.Component {
 								key={i.Username}
 								deleteGroup={this.deleteGroupModal}
 								leaveGroup={this.onLeaveGroup}
-								renameGroup={this.triggerRenameGroupModal}
+								renameGroup={this.onRenameGroup}
 								viewGroupCode={this.viewGroupCode}/>
 						)
 					)}
