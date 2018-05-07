@@ -1,27 +1,11 @@
-import {Stores} from '@nti/lib-store';
 import {getService} from '@nti/web-client';
 import Logger from '@nti/util-logger';
 
+import BaseContactsStore from '../BaseContactsStore';
+
 const logger = Logger.get('store:Contacts:SharingLists');
 
-export default class SharingListStore extends Stores.SimpleStore {
-
-	constructor () {
-		super();
-		this.setupDataSource();
-	}
-
-	get (key) {
-		if (key === 'loading' || key === 'error') {
-			return this.ds[key] || super.get(key);
-		}
-
-		if (key === 'items') {
-			return Array.from(this.ds);
-		}
-
-		return super.get(key);
-	}
+export default class SharingListStore extends BaseContactsStore {
 
 	async setupDataSource () {
 		try {
@@ -34,10 +18,6 @@ export default class SharingListStore extends Stores.SimpleStore {
 			this.set('error', e);
 			this.emitChange('error', 'loading');
 		}
-	}
-
-	onDataSourceChanged = () => {
-		this.emitChange('items');
 	}
 
 	// TODO: Should we make this non-static so that it
