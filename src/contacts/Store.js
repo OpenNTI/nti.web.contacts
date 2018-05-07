@@ -42,4 +42,13 @@ export default class ContactListStore extends Stores.SimpleStore {
 		console.log (entity);
 		this.ds.removeContact(entity);
 	}
+
+	getSharingLists = () => {
+		return this.ds.getLists();
+	}
+
+	addContactToSharingList = (newContact, sharingList) => {
+		sharingList.add(newContact);
+	}
+
 }

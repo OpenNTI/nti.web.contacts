@@ -5,6 +5,7 @@ import { Loading } from '@nti/web-commons';
 
 import ContactListStore from './Store';
 import ContactCardsContainer from './ContactCardsContainer';
+import AddContactToSharingListModal from './AddContactToSharingListModal';
 
 const propMap = {
 	items: 'items'
@@ -24,13 +25,38 @@ class ContactListView extends React.Component {
 		items: PropTypes.array
 	};
 
+	state = {
+		showAddContactToSharingListModal: false,
+		activeContact: null
+	}
+
 	constructor (props) {
 		super();
+	}
+
+	onDismissModal = (modal) => {
+		this.setState({[modal]: false});
+		this.setState({activeContact: null});
 	}
 
 	removeContact = (contactCard) => {
 		const {store} = this.props;
 		store.removeContact(contactCard.entity);
+	}
+
+	openAddToSharingListModal = (contactCard) => {
+		this.setState({showAddContactToSharingListModal: true});
+		this.setState({activeContact: contactCard.entity});
+	}
+
+	onAddContactToList = (contact, list) => {
+		const {store} = this.props;
+		store.addContactToSharingList(contact, list);
+	}
+
+	getSharingLists = () => {
+		const {store} = this.props;
+		return store.getSharingLists();
 	}
 
 	viewContactProfile = (contactCard) => {
@@ -48,13 +74,30 @@ class ContactListView extends React.Component {
 		);
 	}
 
-	renderContactListCards () {
+	renderModals () {
+
+		const {showAddContactToSharingListModal, activeContact} = this.state;
+
+		return (
+			<div className="contact-view-modal">
+				{showAddContactToSharingListModal && (
+					<AddContactToSharingListModal
+						onDismiss={this.onDismissModal}
+						sharingLists={this.getSharingLists()}
+						entity={activeContact}
+						onAddContactToList={this.onAddContactToList}/>
+				)}
+			</div>
+		);
+	}
+
+	renderContactListCards = () => {
 		const {items} = this.props;
 		return (
 			<ContactCardsContainer items={items}
 				removeContact={this.removeContact}
 				chatWithContact={this.chatWithContact}
-				addContactToSharingList={this.addContactToSharingList}
+				addToSharingList={this.openAddToSharingListModal}
 				viewContactProfile={this.viewContactProfile}/>
 		);
 	}
@@ -72,6 +115,7 @@ class ContactListView extends React.Component {
 			<div className="contact-list-panel">
 				{this.renderHeader()}
 				{this.renderContactListCards()}
+				{this.renderModals()}
 			</div>
 		);
 	}
