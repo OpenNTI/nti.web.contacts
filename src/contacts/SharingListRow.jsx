@@ -20,7 +20,9 @@ export default function SharingListRow ({sharingList, onClick}) {
 
 	return (
 		<div className="sharing-list-row" onClick={onClickRow}>
-			<DisplayName entity={sharingList}/>
+			<div className="list-title">
+				<DisplayName entity={sharingList}/>
+			</div>
 			<Members members={friends} displayLabel={false}/>
 		</div>
 	);
