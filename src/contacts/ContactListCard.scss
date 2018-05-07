@@ -4,6 +4,24 @@
 	height: 100px;
 	width: 472px;
 	margin: 10px;
+
+	.card-title {
+		color: $primary-grey;
+		font-size: 18px;
+		height: 24px;
+		line-height: 24px;
+		font-family: $header-font-family;
+		font-weight: bold;
+		float: left;
+		width: 100%;
+
+		.entity-location {
+			color: $secondary-grey;
+			font-size: 14px;
+			font-family: $body-font-family;
+			font-weight: normal;
+		}
+	}
 }
 
 .contact-list-avatar {
