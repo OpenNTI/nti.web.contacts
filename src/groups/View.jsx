@@ -15,7 +15,8 @@ import GroupCard from './GroupCard';
 const logger = Logger.get('contacts:components:Groups');
 
 const propMap = {
-	items: 'items'
+	items: 'items',
+	loading: 'loading'
 };
 
 const t = scoped('nti-web-contacts.groups.View', {
@@ -40,7 +41,8 @@ class GroupsView extends React.Component {
 
 	static propTypes = {
 		store: PropTypes.object,
-		items: PropTypes.array
+		items: PropTypes.array,
+		loading: PropTypes.bool
 	};
 
 	constructor (props) {
@@ -140,9 +142,9 @@ class GroupsView extends React.Component {
 
 	render () {
 
-		const {items, store} = this.props;
+		const {items, store, loading} = this.props;
 
-		if (!store || store.loading) {
+		if (!store || loading) {
 			return <Loading.Mask />;
 		}
 
