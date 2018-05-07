@@ -1,0 +1,23 @@
+@import "~@nti/style-common";
+
+.sharing-list-row {
+	height: 50px;
+	font-family: "Open Sans";
+	font-size: 14px;
+	line-height: 19px;
+	display: flex;
+	margin-top: auto;
+	margin-bottom: auto;
+
+	.list-title {
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+
+	.members {
+		margin-top: auto;
+		margin-bottom: auto;
+		position: static;
+		margin-left: auto;
+	}
+}
