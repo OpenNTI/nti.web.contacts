@@ -1,27 +1,15 @@
-import {Stores} from '@nti/lib-store';
 import {getService} from '@nti/web-client';
 import Logger from '@nti/util-logger';
 
+import BaseContactsStore from '../BaseContactsStore';
+
 const logger = Logger.get('contacts:components:Groups');
 
-export default class GroupListStore extends Stores.SimpleStore {
+export default class GroupListStore extends BaseContactsStore {
 
 	constructor () {
 		super();
-		this.setupDataSource();
 		this.getInvitationLinks();
-	}
-
-	get (key) {
-		if (key === 'loading' || key === 'error') {
-			return this.ds[key] || super.get(key);
-		}
-
-		if (key === 'items') {
-			return Array.from(this.ds);
-		}
-
-		return super.get(key);
 	}
 
 	async setupDataSource () {
@@ -45,10 +33,6 @@ export default class GroupListStore extends Stores.SimpleStore {
 			// this.set('error', e);
 			// this.emitChange('error', 'loading');
 		}
-	}
-
-	onDataSourceChanged = () => {
-		this.emitChange('items');
 	}
 
 	createGroup = (groupName) => {
@@ -78,7 +62,6 @@ export default class GroupListStore extends Stores.SimpleStore {
 
 	deleteGroup = (activeGroup) => {
 		console.log('Deleting group ' + activeGroup.group.groupName);
-		// HELP! Why is this such a complicated call??
 		return activeGroup.group.entity.delete()
 			.catch(reason => {
 				logger.error('There was an error while trying to delete a group: error: %o, group: %o', reason, activeGroup);

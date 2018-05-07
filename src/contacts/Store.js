@@ -1,23 +1,11 @@
-import {Stores} from '@nti/lib-store';
 import {getService} from '@nti/web-client';
 
-export default class ContactListStore extends Stores.SimpleStore {
+import BaseContactsStore from '../BaseContactsStore';
+
+export default class ContactListStore extends BaseContactsStore {
 
 	constructor () {
 		super();
-		this.setupDataSource();
-	}
-
-	get (key) {
-		if (key === 'loading' || key === 'error') {
-			return this.ds[key] || super.get(key);
-		}
-
-		if (key === 'items') {
-			return Array.from(this.ds);
-		}
-
-		return super.get(key);
 	}
 
 	async setupDataSource () {
@@ -31,10 +19,6 @@ export default class ContactListStore extends Stores.SimpleStore {
 			this.set('error', e);
 			this.emitChange('error', 'loading');
 		}
-	}
-
-	onDataSourceChanged = () => {
-		this.emitChange('items');
 	}
 
 	removeContact = (entity) => {
