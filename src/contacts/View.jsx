@@ -8,7 +8,8 @@ import ContactCardsContainer from './ContactCardsContainer';
 import AddContactToSharingListModal from './AddContactToSharingListModal';
 
 const propMap = {
-	items: 'items'
+	items: 'items',
+	loading: 'loading'
 };
 
 const t = scoped('nti-web-contacts.contacts.ContactListView', {
@@ -22,7 +23,8 @@ class ContactListView extends React.Component {
 
 	static propTypes = {
 		store: PropTypes.object,
-		items: PropTypes.array
+		items: PropTypes.array,
+		loading: PropTypes.bool
 	};
 
 	state = {
@@ -104,9 +106,9 @@ class ContactListView extends React.Component {
 
 	render () {
 
-		const {store} = this.props;
+		const {store, loading} = this.props;
 
-		if (!store || store.loading) {
+		if (!store || loading) {
 			// If we're still loading, exit early
 			return <Loading.Mask />;
 		}

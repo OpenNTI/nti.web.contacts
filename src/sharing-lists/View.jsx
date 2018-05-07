@@ -9,7 +9,8 @@ import SharingListCreateModal from './SharingListCreateModal';
 import SharingListManagePeopleModal from './SharingListManagePeopleModal';
 
 const propMap = {
-	items: 'items'
+	items: 'items',
+	loading: 'loading'
 };
 
 const t = scoped ('nti-web-contacts.sharing-lists.View', {
@@ -30,7 +31,8 @@ class SharingListsView extends React.Component {
 
 	static propTypes = {
 		store: PropTypes.object,
-		items: PropTypes.array
+		items: PropTypes.array,
+		loading: PropTypes.bool
 	};
 
 	constructor (props) {
@@ -110,9 +112,9 @@ class SharingListsView extends React.Component {
 
 	render () {
 
-		const {items, store} = this.props;
+		const {items, store, loading} = this.props;
 
-		if (!store || store.loading) {
+		if (!store || loading) {
 			return <Loading.Mask />;
 		}
 
