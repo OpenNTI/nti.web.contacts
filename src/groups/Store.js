@@ -18,6 +18,7 @@ export default class GroupListStore extends BaseContactsStore {
 			const ds = this.ds = service.getGroups();
 
 			ds.addListener('change', this.onDataSourceChanged);
+			this.emitChange('loading');
 
 		} catch (e) {
 			this.set('error', e);
@@ -47,34 +48,38 @@ export default class GroupListStore extends BaseContactsStore {
 		return this.invitations.Links.find(function (obj) {return obj.rel === 'accept-invitation';});
 	};
 
-	joinGroup = (groupCode) => {
+	joinGroup = async (groupCode) => {
 
 		let data = {'invitation_codes': [groupCode]},
-			url = this.getAcceptInviteLink(),
-			me = this;
+			url = this.getAcceptInviteLink();
 
-		debugger;
+		try {
+			const service = await getService();
+			service.post(url.href, data);
+		} catch (e) {
+			console.log("invalid code, show proper error message");
+		}
+
 	}
 
 	renameGroup = (group, newName) => {
 		debugger;
 	}
 
-	deleteGroup = (activeGroup) => {
-		console.log('Deleting group ' + activeGroup.group.groupName);
-		return activeGroup.group.entity.delete()
+	deleteGroup = (group) => {
+		return group.delete()
 			.catch(reason => {
-				logger.error('There was an error while trying to delete a group: error: %o, group: %o', reason, activeGroup);
+				logger.error('There was an error while trying to delete a group: error: %o, group: %o', reason, group);
 
 				//Continue the error.
 				return Promise.reject(reason);
 			});
 	};
 
-	leaveGroup = (activeGroup) => {
-		return activeGroup.entity.leave()
+	leaveGroup = (group) => {
+		return group.leave()
 			.catch(reason => {
-				logger.error('There was an error while trying to leave a group: error: %o, group: %o', reason, activeGroup);
+				logger.error('There was an error while trying to leave a group: error: %o, group: %o', reason, group);
 
 				//Continue the error.
 				return Promise.reject(reason);
