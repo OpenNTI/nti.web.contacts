@@ -25,12 +25,26 @@ export default class SharingListCard extends React.Component {
 
 	constructor (props) {
 		super(props);
-		const {managePeople, deleteSharingList} = this.props;
+		const {managePeople, deleteSharingList, entity} = this.props;
+
 		const flyoutOptions = [
-			{className: 'sharing-list-action-flyout-option', displayText: t('renameText'), onClick: this.beginRenamingSharingList},
-			{className: 'sharing-list-action-flyout-option', displayText: t('managePeopleText'), onClick: managePeople},
-			{className: 'sharing-list-action-flyout-option-delete', displayText: t('deleteText'), onClick: deleteSharingList}
+			<div className="sharing-list-action-flyout-option"
+				onClick={this.beginRenamingSharingList}
+				key="rename">
+				{t('renameText')}
+			</div>,
+			<div className="sharing-list-action-flyout-option"
+				onClick={() => managePeople(entity)}
+				key="managePeople">
+				{t('managePeopleText')}
+			</div>,
+			<div className="sharing-list-action-flyout-option-delete"
+				onClick={() => deleteSharingList(entity)}
+				key="deleteList">
+				{t('deleteText')}
+			</div>
 		];
+
 		this.flyoutOptions = flyoutOptions;
 	}
 
