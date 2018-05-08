@@ -96,9 +96,7 @@ class SharingListsView extends React.Component {
 		return (
 			<div>
 				{this.state.showCreateDialog && (
-					<SharingListCreateModal onDismiss={this.onDismissModal}
-						activeGroup={activeSharingList}
-						onCreateSharingList={this.onCreateSharingList}/>
+					<SharingListCreateModal onDismiss={this.onDismissModal}/>
 				)}
 				{this.state.showManageDialog && (
 					<SharingListManagePeopleModal onDismiss={this.onDismissModal}
