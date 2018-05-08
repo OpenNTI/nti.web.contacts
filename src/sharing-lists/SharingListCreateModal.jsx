@@ -4,6 +4,7 @@ import { scoped } from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
 
 import SharingListContactsContainer from './SharingListContactsContainer';
+import SharingListStore from './Store';
 
 const t = scoped('nti-web-contacts.sharing-lists.SharingListCreateModal', {
 	modalTitleText: 'Create a Sharing List',
@@ -12,12 +13,19 @@ const t = scoped('nti-web-contacts.sharing-lists.SharingListCreateModal', {
 	listDescription: 'Lists are private to you. We do not notify people you add to your lists.'
 });
 
-export default class SharingListCreateModal extends React.Component {
+const propMap = {
+	loading: 'loading'
+};
+
+export default
+@SharingListStore.connect(propMap)
+class SharingListCreateModal extends React.Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func,
 		onCreateSharingList: PropTypes.func,
-		contacts: PropTypes.array
+		contacts: PropTypes.array,
+		store: PropTypes.object
 	};
 
 	state = {
@@ -57,7 +65,8 @@ export default class SharingListCreateModal extends React.Component {
 
 	onCreateSharingList = () => {
 		const {sharingListName, contacts} = this.state;
-		this.props.onCreateSharingList(sharingListName, contacts);
+		const {store} = this.props;
+		store.onCreateSharingList(sharingListName, contacts);
 		this.onDismiss();
 	}
 

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {scoped} from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
 
+import GroupListStore from './Store';
+
 const t = scoped('nti-web-contacts.groups.GroupCreateModal', {
 	cancelButton: 'Cancel',
 	createButton: 'Create',
@@ -10,11 +12,17 @@ const t = scoped('nti-web-contacts.groups.GroupCreateModal', {
 	createGroupDescription: 'Groups are great places to collaborate on projects or to share and discuss common interests. Share photos, videos, files and websites with your peers.'
 });
 
-export default class GroupCreateModal extends React.Component {
+const propMap = {
+	loading: 'loading'
+};
+
+export default
+@GroupListStore.connect(propMap)
+class GroupCreateModal extends React.Component {
 
 	static propTypes = {
+		store: PropTypes.object,
 		onDismiss: PropTypes.func,
-		onCreateGroup: PropTypes.func
 	};
 
 	state = {
@@ -30,8 +38,9 @@ export default class GroupCreateModal extends React.Component {
 	}
 
 	onCreateGroup = () => {
+		const {store} = this.props;
 		const {groupName} = this.state;
-		this.props.onCreateGroup(groupName);
+		store.createGroup(groupName);
 		this.onDismiss();
 	}
 

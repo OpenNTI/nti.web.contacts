@@ -134,7 +134,7 @@ class GroupsView extends React.Component {
 					<GroupJoinModal onDismiss={this.onDismissModal} onJoinGroup={this.onJoinGroup}/>
 				)}
 				{this.state.showCreateDialog && (
-					<GroupCreateModal onDismiss={this.onDismissModal} onCreateGroup={this.onCreateGroup}/>
+					<GroupCreateModal onDismiss={this.onDismissModal}/>
 				)}
 			</div>
 		);
