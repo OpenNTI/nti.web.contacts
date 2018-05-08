@@ -58,12 +58,6 @@ class GroupsView extends React.Component {
 		this.setState({ showDeleteDialog: true });
 	};
 
-	onDeleteGroup = (group) => {
-		const {store} = this.props;
-		logger.debug('Deleting group ' + group);
-		store.deleteGroup(group);
-	}
-
 	onLeaveGroup = (group) => {
 		const {store} = this.props;
 		logger.debug('Leaving group ' + group);
@@ -80,9 +74,9 @@ class GroupsView extends React.Component {
 		store.createGroup(groupName);
 	}
 
-	viewGroupCode = async (props) => {
+	viewGroupCode = async (entity) => {
 		this.setState({ showInviteCodeDialog: true });
-		const link = await props.entity.fetchLink('default-trivial-invitation-code');
+		const link = await entity.fetchLink('default-trivial-invitation-code');
 		this.setState({activeInviteCode: link.invitation_code});
 	};
 
@@ -128,7 +122,7 @@ class GroupsView extends React.Component {
 					<GroupInviteCodeModal onDismiss={this.onDismissModal} inviteCode={activeInviteCode}/>
 				)}
 				{this.state.showDeleteDialog && (
-					<GroupDeleteModal onDismiss={this.onDismissModal} onDeleteGroup={this.onDeleteGroup} activeGroup={activeGroup}/>
+					<GroupDeleteModal onDismiss={this.onDismissModal} item={activeGroup}/>
 				)}
 				{this.state.showJoinGroupDialog && (
 					<GroupJoinModal onDismiss={this.onDismissModal} onJoinGroup={this.onJoinGroup}/>

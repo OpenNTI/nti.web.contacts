@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {scoped} from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels } from '@nti/web-commons';
 
+import GroupListStore from './Store';
+
 const t = scoped('nti-web-contacts.groups.GroupDeleteModal', {
 	cancelButton: 'Cancel',
 	deleteButton: 'Delete',
@@ -10,17 +12,24 @@ const t = scoped('nti-web-contacts.groups.GroupDeleteModal', {
 	deleteGroupDescription: 'Are you sure you want to delete this group?'
 });
 
-export default class GroupDeleteModal extends React.Component {
+const propMap = {
+	loading: 'loading'
+};
+
+export default
+@GroupListStore.connect(propMap)
+class GroupDeleteModal extends React.Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func,
 		onDeleteGroup: PropTypes.func,
-		activeGroup: PropTypes.object
+		item: PropTypes.object,
+		store: PropTypes.object
 	};
 
 	onDeleteGroup = () => {
-		const {activeGroup} = this.props;
-		this.props.onDeleteGroup(activeGroup);
+		const {item, store} = this.props;
+		store.deleteGroup(item.group);
 		this.onDismiss();
 	}
 
@@ -47,10 +56,10 @@ export default class GroupDeleteModal extends React.Component {
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="group-action-modal">
 					<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
-						Delete Group
+						{t('deleteGroupHeader')}
 					</Panels.Header>
 					<div className="group-action-modal-content">
-						Are you sure you want to delete this group?
+						{t('deleteGroupDescription')}
 					</div>
 					{this.renderControls()}
 				</div>
