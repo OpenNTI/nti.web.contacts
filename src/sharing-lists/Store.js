@@ -21,9 +21,6 @@ export default class SharingListStore extends BaseContactsStore {
 		}
 	}
 
-	// TODO: Should we make this non-static so that it
-	// can filter out the logged-in user, or is that something
-	// we should filter out within the views that call it?
 	static async contactSuggestionProvider (value, idsToExclude = []) {
 		const service = await getService();
 		const contacts = await service.getContacts();
