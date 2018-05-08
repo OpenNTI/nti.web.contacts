@@ -1,5 +1,13 @@
 @import "~@nti/style-common";
 
 .contact-list-panel {
-	width: 1024px;
+	max-width: 1024px;
+}
+
+.contacts-sidebar-router {
+	width: 40px;
+}
+
+.contacts-body {
+	display: flex;
 }
