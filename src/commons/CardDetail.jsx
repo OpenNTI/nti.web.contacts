@@ -31,22 +31,6 @@ export default class CardDetail extends React.Component {
 		);
 	}
 
-	renderFlyoutOptions (flyoutOptions) {
-		return (
-			<div>
-				{flyoutOptions && flyoutOptions.map(
-					(i) => (
-						<div className={i.className}
-							key={i.displayText}
-							onClick={()=>i.onClick(this.props)}>
-							{i.displayText}
-						</div>
-					)
-				)}
-			</div>
-		);
-	}
-
 	renderCardName (enableEditing) {
 		const {entity} = this.props;
 		const {isModifiable} = entity;
@@ -78,7 +62,7 @@ export default class CardDetail extends React.Component {
 							trigger={this.renderFlyoutTrigger()}
 							horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
 						>
-							{this.renderFlyoutOptions(flyoutOptions)}
+							{flyoutOptions}
 						</Flyout.Triggered>
 					</div>
 					<FollowButton entity={entity}/>
