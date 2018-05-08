@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getAppUser } from '@nti/web-client';
 import { TokenEditor } from '@nti/web-commons';
 
 import ContactRow from './SharingListContactRow';
@@ -27,9 +28,10 @@ export default class SharingListContactsContainer extends React.Component {
 
 
 	contactSuggestionProvider = async (value) => {
-		// TODO: Still need to exclude the logged-in user.
 		const {contacts} = this.props;
-		const existingContacts = contacts.map(x => x.Username);
+		const existingContacts = contacts.map(x => x.getID());
+		const currentUser = await getAppUser();
+		existingContacts.push(currentUser.getID());
 		const contactSuggestionProvider = Store.contactSuggestionProvider;
 		const users = await contactSuggestionProvider(value, existingContacts);
 		return users.map(x => {
