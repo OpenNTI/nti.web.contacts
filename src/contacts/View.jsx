@@ -41,14 +41,14 @@ class ContactListView extends React.Component {
 		this.setState({activeContact: null});
 	}
 
-	removeContact = (contactCard) => {
+	removeContact = (entity) => {
 		const {store} = this.props;
-		store.removeContact(contactCard.entity);
+		store.removeContact(entity);
 	}
 
-	openAddToSharingListModal = (contactCard) => {
+	openAddToSharingListModal = (entity) => {
 		this.setState({showAddContactToSharingListModal: true});
-		this.setState({activeContact: contactCard.entity});
+		this.setState({activeContact: entity});
 	}
 
 	onAddContactToList = (contact, list) => {
@@ -65,7 +65,7 @@ class ContactListView extends React.Component {
 		const {entity} = contactCard;
 		// TODO: Get the user profile link from the entity
 		// and then navigate to it. Need to use routes here.
-		console.log("Should navigate to profile for contact " + entity.Username);
+		console.log('Should navigate to profile for contact ' + entity.Username);
 	}
 
 	renderHeader () {
@@ -96,11 +96,19 @@ class ContactListView extends React.Component {
 	renderContactListCards = () => {
 		const {items} = this.props;
 		return (
-			<ContactCardsContainer items={items}
-				removeContact={this.removeContact}
-				chatWithContact={this.chatWithContact}
-				addToSharingList={this.openAddToSharingListModal}
-				viewContactProfile={this.viewContactProfile}/>
+			<div className="contact-list-cards-frame">
+				<ContactCardsContainer items={items}
+					removeContact={this.removeContact}
+					chatWithContact={this.chatWithContact}
+					addToSharingList={this.openAddToSharingListModal}
+					viewContactProfile={this.viewContactProfile}/>
+			</div>
+		);
+	}
+
+	renderSidebar = () => {
+		return(
+			<div className="contacts-sidebar-router"/>
 		);
 	}
 
@@ -109,14 +117,16 @@ class ContactListView extends React.Component {
 		const {store, loading} = this.props;
 
 		if (!store || loading) {
-			// If we're still loading, exit early
 			return <Loading.Mask />;
 		}
 
 		return (
 			<div className="contact-list-panel">
 				{this.renderHeader()}
-				{this.renderContactListCards()}
+				<div className="contacts-body">
+					{this.renderSidebar()}
+					{this.renderContactListCards()}
+				</div>
 				{this.renderModals()}
 			</div>
 		);

@@ -13,18 +13,16 @@ ContactCardsContainer.propTypes = {
 
 export default function ContactCardsContainer ({items, removeContact, chatWithContact, addToSharingList, viewContactProfile}) {
 	return (
-		<div className="contact-list-cards-frame">
-			{items && items.map(
-				(i) => (
-					<ContactListCard entity={i}
-						members={i.friends}
-						key={i.Username}
-						removeContact={removeContact}
-						chatWithContact={chatWithContact}
-						addContactToSharingList={addToSharingList}
-						viewContactProfile={viewContactProfile}/>
-				)
-			)}
-		</div>
+		items && items.map(
+			(i) => (
+				<ContactListCard entity={i}
+					members={i.friends}
+					key={i.Username}
+					removeContact={removeContact}
+					chatWithContact={chatWithContact}
+					addContactToSharingList={addToSharingList}
+					viewContactProfile={viewContactProfile}/>
+			)
+		)
 	);
 }
