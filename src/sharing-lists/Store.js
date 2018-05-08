@@ -13,6 +13,7 @@ export default class SharingListStore extends BaseContactsStore {
 			const ds = this.ds = service.getLists();
 
 			ds.addListener('change', this.onDataSourceChanged);
+			this.emitChange('loading');
 
 		} catch (e) {
 			this.set('error', e);
