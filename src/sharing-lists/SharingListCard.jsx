@@ -60,6 +60,7 @@ export default class SharingListCard extends React.Component {
 					flyoutOptions={this.flyoutOptions}
 					onRenameFinish={this.finishRenamingSharingList}
 					renameMode={renameMode}/>
-			</div>);
+			</div>
+		);
 	}
 }
