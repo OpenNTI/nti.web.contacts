@@ -99,8 +99,7 @@ class SharingListsView extends React.Component {
 				)}
 				{this.state.showManageDialog && (
 					<SharingListManagePeopleModal onDismiss={this.onDismissModal}
-						activeSharingList={activeSharingList}
-						onFinishedManagingPeople={this.onFinishedManagingPeople}/>
+						item={activeSharingList}/>
 				)}
 
 			</div>

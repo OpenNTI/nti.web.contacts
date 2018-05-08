@@ -4,19 +4,20 @@ import { scoped } from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels } from '@nti/web-commons';
 
 import SharingListContactsContainer from './SharingListContactsContainer';
+import SharingListStore from './Store';
 
 const t = scoped ('nti-web-contacts.sharing-lists.SharingListManagePeopleModal', {
 	modalTitleText: 'Friends'
 });
 
-export default class SharingListManagePeopleModal extends React.Component {
+export default
+@SharingListStore.connect()
+class SharingListManagePeopleModal extends React.Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func,
-		onFinishedManagingPeople: PropTypes.func,
-		onContactsChange: PropTypes.func,
-		contacts: PropTypes.array,
-		activeSharingList: PropTypes.object
+		item: PropTypes.object,
+		store: PropTypes.object
 	};
 
 	constructor (props) {
@@ -24,7 +25,7 @@ export default class SharingListManagePeopleModal extends React.Component {
 
 		// Load the state with any contacts we are given from props
 		// when we first construct this component.
-		const friends = this.props.activeSharingList.friends || [];
+		const friends = this.props.item.friends || [];
 		this.state = {
 			contacts: friends
 		};
@@ -53,9 +54,9 @@ export default class SharingListManagePeopleModal extends React.Component {
 	}
 
 	onFinishedEditing = () => {
-		const {onFinishedManagingPeople, activeSharingList} = this.props;
+		const {store, item} = this.props;
 		const {contacts:updatedContacts} = this.state;
-		onFinishedManagingPeople(updatedContacts, activeSharingList);
+		store.onFinishedManagingPeople(updatedContacts, item);
 		this.onDismiss();
 	}
 
