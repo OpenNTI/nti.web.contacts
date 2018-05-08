@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { Avatar } from '@nti/web-commons';
+import { LinkTo } from '@nti/web-routing';
 
 import { CardDetail } from '../commons';
 
@@ -25,17 +26,34 @@ const t = scoped('nti-web-contacts.contacts.ContactListCard', {
 
 export default function ContactListCard ({entity, removeContact, viewContactProfile, addContactToSharingList, chatWithContact}) {
 
-	const contactFlyoutOptions = [
-		{className: 'contact-list-action-flyout-option', displayText: t('viewProfile'), onClick: viewContactProfile},
-		{className: 'contact-list-action-flyout-option', displayText: t('chat'), onClick: chatWithContact},
-		{className: 'contact-list-action-flyout-option', displayText: t('addToSharingList'), onClick: addContactToSharingList},
-		{className: 'contact-list-action-flyout-option-delete', displayText: t('deleteText'), onClick: removeContact}
+	const flyoutOptions = [
+		<div className="contact-list-action-flyout-option"
+			key="viewProfile">
+			<LinkTo.Object object={entity}>
+				{t('viewProfile')}
+			</LinkTo.Object>
+		</div>,
+		<div className="contact-list-action-flyout-option"
+			onClick={()=>chatWithContact(entity)}
+			key="chat">
+			{t('chat')}
+		</div>,
+		<div className="contact-list-action-flyout-option"
+			onClick={()=>addContactToSharingList(entity)}
+			key="addToSharingList">
+			{t('addToSharingList')}
+		</div>,
+		<div className="contact-list-action-flyout-option-delete"
+			onClick={()=>removeContact(entity)}
+			key="unfollow">
+			{t('deleteText')}
+		</div>
 	];
 
 	return (
 		<div className="contact-list-card">
 			<Avatar entity={entity} className="contact-list-avatar"/>
-			<CardDetail entity={entity} flyoutOptions={contactFlyoutOptions}/>
+			<CardDetail entity={entity} flyoutOptions={flyoutOptions}/>
 		</div>
 	);
 }
