@@ -4,16 +4,13 @@ import BaseContactsStore from '../BaseContactsStore';
 
 export default class ContactListStore extends BaseContactsStore {
 
-	constructor () {
-		super();
-	}
-
 	async setupDataSource () {
 		try {
 			const service = await getService();
 			const ds = this.ds = service.getContacts();
 
 			ds.addListener('change', this.onDataSourceChanged);
+			this.emitChange('loading');
 
 		} catch (e) {
 			this.set('error', e);
@@ -22,8 +19,6 @@ export default class ContactListStore extends BaseContactsStore {
 	}
 
 	removeContact = (entity) => {
-		console.log ("Remove contact");
-		console.log (entity);
 		this.ds.removeContact(entity);
 	}
 
