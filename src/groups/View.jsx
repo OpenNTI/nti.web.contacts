@@ -5,7 +5,6 @@ import { Loading, Button } from '@nti/web-commons';
 import Logger from '@nti/util-logger';
 
 import GroupListStore from './Store';
-import GroupRenameModal from './GroupRenameModal';
 import GroupInviteCodeModal from './GroupInviteCodeModal';
 import GroupCreateModal from './GroupCreateModal';
 import GroupDeleteModal from './GroupDeleteModal';
@@ -115,9 +114,6 @@ class GroupsView extends React.Component {
 
 		return (
 			<div>
-				{this.state.showRenameDialog && (
-					<GroupRenameModal onDismiss={this.onDismissModal} activeGroup={activeGroup} onRenameGroup={this.onRenameGroup}/>
-				)}
 				{this.state.showInviteCodeDialog && (
 					<GroupInviteCodeModal onDismiss={this.onDismissModal} inviteCode={activeInviteCode}/>
 				)}
