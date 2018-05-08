@@ -85,9 +85,7 @@ class ContactListView extends React.Component {
 				{showAddContactToSharingListModal && (
 					<AddContactToSharingListModal
 						onDismiss={this.onDismissModal}
-						sharingLists={this.getSharingLists()}
-						entity={activeContact}
-						onAddContactToList={this.onAddContactToList}/>
+						item={activeContact}/>
 				)}
 			</div>
 		);

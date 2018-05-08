@@ -1,30 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Prompt, DialogButtons, Panels } from '@nti/web-commons';
+import { Prompt, Panels } from '@nti/web-commons';
 
+import ContactListStore from './Store';
 import SharingListRow from './SharingListRow';
 
-export default class AddContactToSharingListModal extends React.Component {
+const t = scoped('nti-web-contacts.contacts.AddContactToSharingListModal', {
+	headerPt1: 'Add "',
+	headerPt2: '" to a sharing list'
+});
+
+export default
+@ContactListStore.connect()
+class AddContactToSharingListModal extends React.Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func,
-		entity: PropTypes.object,
-		sharingLists: PropTypes.array,
-		onAddContactToList: PropTypes.func
+		item: PropTypes.object,
+		store: PropTypes.object
 	};
+
+	getSharingLists = () => {
+		const {store} = this.props;
+		return store.getSharingLists();
+	}
+
+	onAddContactToList = (contact, list) => {
+		const {store} = this.props;
+		store.addContactToSharingList(contact, list);
+	}
 
 	onDismiss = () => {
 		this.props.onDismiss('showAddContactToSharingListModal');
 	}
 
 	onClick = (row) => {
-		const {entity, onAddContactToList} = this.props;
-		onAddContactToList(entity, row);
+		const {item} = this.props;
+		this.onAddContactToList(item, row);
+	}
+
+	generateHeaderString = () => {
+		const {item} = this.props;
+		const name = item.realname || item.alias || item.getID();
+		// TODO: use the locale library to do this properly,
+		// use a DisplayName to render title instead.
+		return t('headerPt1') + name + t('headerPt2');
 	}
 
 	renderSharingListRows () {
-		const {sharingLists} = this.props;
+		const sharingLists = this.getSharingLists();
 
 		return (
 			<div className="sharing-list-rows">
@@ -42,7 +67,7 @@ export default class AddContactToSharingListModal extends React.Component {
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="contact-action-modal">
 					<Panels.Header className="contact-modal-header" onClose={this.onDismiss}>
-						Add this person to a sharing list
+						{this.generateHeaderString()}
 					</Panels.Header>
 					<div className="contact-modal-content">
 						{this.renderSharingListRows()}
