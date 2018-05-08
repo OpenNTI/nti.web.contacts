@@ -39,9 +39,9 @@ class SharingListsView extends React.Component {
 		super();
 	}
 
-	onDeleteSharingList = (sharingListCard) => {
+	onDeleteSharingList = (entity) => {
 		const {store} = this.props;
-		store.onDeleteSharingList(sharingListCard.entity);
+		store.onDeleteSharingList(entity);
 	};
 
 	renameSharingList = (sharingList, newName) => {
@@ -50,8 +50,7 @@ class SharingListsView extends React.Component {
 		// renaming, now that we have the data we need.
 	};
 
-	managePeople = (sharingListCard) => {
-		const {entity} = sharingListCard;
+	managePeople = (entity) => {
 		this.setState({showManageDialog: true});
 		this.setState({activeSharingList: entity});
 	}
