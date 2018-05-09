@@ -5,9 +5,17 @@
 }
 
 .contacts-sidebar-router {
-	width: 40px;
+	width: 255px;
 }
 
 .contacts-body {
 	display: flex;
+}
+
+.contacts-panel-header {
+	color: $primary-grey;
+	font-size: 32px;
+	font-weight: 300;
+	line-height: 43px;
+	padding-bottom: 20px;
 }
