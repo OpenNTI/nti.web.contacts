@@ -49,17 +49,15 @@ export default class GroupListStore extends BaseContactsStore {
 	};
 
 	joinGroup = async (groupCode) => {
-
-		let data = {'invitation_codes': [groupCode]},
-			url = this.getAcceptInviteLink();
+		const service = await getService();
+		const user = await service.getAppUser();
 
 		try {
-			const service = await getService();
-			service.post(url.href, data);
+			await user.joinGroupWithCode(groupCode);
+			return true;
 		} catch (e) {
-			console.log("invalid code, show proper error message");
+			return false;
 		}
-
 	}
 
 	renameGroup = (group, newName) => {

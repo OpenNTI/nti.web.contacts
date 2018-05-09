@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {scoped} from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
 
+import GroupListStore from './Store';
+
 const t = scoped('nti-web-contacts.groups.GroupJoinModal', {
 	cancelButton: 'Cancel',
 	joinButton: 'Join',
@@ -11,15 +13,18 @@ const t = scoped('nti-web-contacts.groups.GroupJoinModal', {
 });
 
 
-export default class GroupJoinModal extends React.Component {
+export default
+@GroupListStore.connect()
+class GroupJoinModal extends React.Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func,
-		onJoinGroup: PropTypes.func
+		store: PropTypes.object
 	};
 
 	state = {
-		groupCode: ''
+		groupCode: '',
+		validCode: true
 	}
 
 	updateGroupCode = (value) => {
@@ -30,10 +35,16 @@ export default class GroupJoinModal extends React.Component {
 		this.props.onDismiss('showJoinGroupDialog');
 	}
 
-	onJoinGroup = () => {
+	onJoinGroup = async () => {
+		const {store} = this.props;
 		const {groupCode} = this.state;
-		this.props.onJoinGroup(groupCode);
-		this.onDismiss();
+		const validCode = await store.joinGroup(groupCode);
+		if (!validCode) {
+			this.setState({validCode: false});
+		} else {
+			this.setState({validCode: true});
+			this.onDismiss();
+		}
 	}
 
 	renderControls = () => {
@@ -62,6 +73,7 @@ export default class GroupJoinModal extends React.Component {
 						<div>
 							<Input.Text placeholder="Name" value={this.state.groupCode} onChange={this.updateGroupCode} maxLength="140"/>
 						</div>
+						{!this.state.validCode && <div>Not a valid code</div>}
 					</div>
 
 					{this.renderControls()}
