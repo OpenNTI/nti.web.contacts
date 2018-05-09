@@ -71,7 +71,7 @@ class ContactListView extends React.Component {
 	renderHeader () {
 		return (
 			<div className="contacts-panel-header">
-				<h2>{t('contactsHeader')}</h2>
+				{t('contactsHeader')}
 			</div>
 		);
 	}

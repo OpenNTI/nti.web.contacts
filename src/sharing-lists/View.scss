@@ -1,0 +1,28 @@
+@import "~@nti/style-common";
+
+.sharing-lists-header-description {
+	width: 400px;
+	word-wrap: normal;
+	color: $secondary-grey;
+}
+
+.sharing-lists-title-and-button {
+	display: flex;
+
+	.sharing-lists-header-title {
+		color: $primary-grey;
+		font-size: 32px;
+		font-weight: 300;
+		line-height: 43px;
+		padding-bottom: 20px;
+	}
+}
+
+.create-sharing-list-button {
+	margin-left: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 30px;
+	height: 40px;
+	border-radius: 3px;
+}

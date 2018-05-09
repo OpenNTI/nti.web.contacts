@@ -96,7 +96,7 @@ class GroupsView extends React.Component {
 	renderHeader () {
 		return (
 			<div className="groups-panel-header">
-				<h2>{t('groupsHeader')}</h2>
+				<div className="groups-header-title">{t('groupsHeader')}</div>
 				<Button className="create-group-button" onClick={this.createGroupModal}>
 					{t('createGroupButton')}
 				</Button>
