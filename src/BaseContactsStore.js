@@ -1,16 +1,47 @@
+import React from 'react';
 import {Stores} from '@nti/lib-store';
+import {Searchable} from '@nti/web-search';
+import {HOC} from '@nti/lib-commons';
 // import Logger from '@nti/util-logger';
 
 // const logger = Logger.get('contacts:components:Store');
 
 export default class BaseContactsStore extends Stores.SimpleStore {
 
+	static connect (propMap, storeProp = 'store') {
+		const store = this.getInstance();
+		const extraProps = {
+			[storeProp]: store
+		};
+
+		return function decorator (component) {
+			const cmp = React.forwardRef((props, ref) =>
+				React.createElement(component, {
+					...extraProps,
+					...this.props,
+					ref
+				}));
+
+			HOC.hoistStatics(cmp, component, 'SearchableBaseContactsStoreConnector');
+
+			return Searchable.connect(
+				store,
+				cmp,
+				propMap,
+				// onMount:
+				() => store.setupDataSource(),
+
+				// onUnmount:
+				// () => store.cleanup()
+			);
+		};
+	}
+
 	constructor () {
 		super();
 		this.ds = {
 			loading: true
 		};
-		this.setupDataSource();
 	}
 
 	get (key) {
@@ -32,5 +63,10 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 
 	onDataSourceChanged = () => {
 		this.emitChange('items');
+	}
+
+
+	updateSearchTerm () {
+		//Subclasses must implement this function.
 	}
 }
