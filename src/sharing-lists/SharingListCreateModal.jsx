@@ -47,7 +47,7 @@ class SharingListCreateModal extends React.Component {
 		if (existingContacts.find((i) => i.getID() !== newContact.getID())) {
 			// If we found a user with this same username, don't need to add
 			// them again. However, make a log of this.
-			console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
+			// console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
 		}
 		// Otherwise, add them to our list.
 		this.setState({contacts: [...existingContacts, newContact]});

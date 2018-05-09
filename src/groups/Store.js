@@ -61,7 +61,7 @@ export default class GroupListStore extends BaseContactsStore {
 	}
 
 	renameGroup = (group, newName) => {
-		debugger;
+		// debugger;
 	}
 
 	deleteGroup = (group) => {

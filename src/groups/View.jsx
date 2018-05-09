@@ -49,7 +49,7 @@ class GroupsView extends React.Component {
 	}
 
 	onRenameGroup = (group, newName) => {
-		console.log('Renaming group to ' + newName);
+		// console.log('Renaming group to ' + newName);
 	}
 
 	deleteGroupModal = (group) => {

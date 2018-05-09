@@ -1,7 +1,7 @@
 import {Stores} from '@nti/lib-store';
-import Logger from '@nti/util-logger';
+// import Logger from '@nti/util-logger';
 
-const logger = Logger.get('contacts:components:Store');
+// const logger = Logger.get('contacts:components:Store');
 
 export default class BaseContactsStore extends Stores.SimpleStore {
 
