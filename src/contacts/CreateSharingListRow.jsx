@@ -25,7 +25,7 @@ export default class CreateSharingListRow extends React.Component {
 
 	render () {
 		return (
-			<div className="sharing-list-row" onClick={this.onClickRow}>
+			<div className="add-sharing-list-row" onClick={this.onClickRow}>
 				<EditableTextField text="Create new list"
 					isEditable={this.state.inEditMode}
 					onFinishedEditing={this.onFinishedEditing}/>
