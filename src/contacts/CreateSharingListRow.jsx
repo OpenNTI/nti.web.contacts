@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { scoped } from '@nti/lib-locale';
 
 import EditableTextField from '../commons/EditableTextField';
+
+const t = scoped('nti-web-contacts.contacts.CreateSharingListRow', {
+	newListText: 'Create a New List'
+});
 
 export default class CreateSharingListRow extends React.Component {
 
@@ -26,7 +31,7 @@ export default class CreateSharingListRow extends React.Component {
 	render () {
 		return (
 			<div className="add-sharing-list-row" onClick={this.onClickRow}>
-				<EditableTextField text="Create new list"
+				<EditableTextField text={t('newListText')}
 					isEditable={this.state.inEditMode}
 					onFinishedEditing={this.onFinishedEditing}/>
 			</div>
