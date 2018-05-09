@@ -15,20 +15,23 @@ export default class GroupInviteCodeModal extends React.Component {
 		onDismiss: PropTypes.func
 	};
 
+	state = {
+		invitationCode: ''
+	}
+
 	onDismiss = () => {
 		this.props.onDismiss('showInviteCodeDialog');
 	}
 
 	getInviteCode = async () => {
 		const {item} = this.props;
-
 		const link = await item.fetchLink('default-trivial-invitation-code');
-		return link.invitation_code;
+		this.setState({invitationCode: link.invitation_code});
 	};
 
 	render () {
-		let inviteCode = this.getInviteCode();
-		// console.log(inviteCode);
+		this.getInviteCode();
+		const {invitationCode} = this.state;
 		return(
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="group-action-modal">
@@ -38,7 +41,7 @@ export default class GroupInviteCodeModal extends React.Component {
 					<div className="group-action-modal-content">
 						{t('bodyText')}
 						<div className="group-action-modal-content sub-header">Group Code</div>
-						{inviteCode && <Input.Text value={inviteCode}/>}
+						{invitationCode && <Input.Text value={invitationCode}/>}
 					</div>
 				</div>
 			</Prompt.Dialog>
