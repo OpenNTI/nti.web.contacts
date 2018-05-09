@@ -15,7 +15,8 @@ const propMap = {
 
 const t = scoped ('nti-web-contacts.sharing-lists.View', {
 	createButton: 'Create a Sharing List',
-	headerText: 'Sharing Lists'
+	headerText: 'Sharing Lists',
+	headerDescription: 'Frequently share comments with just a few people? Sharing lists make this even faster. Create a list, add people to it, and start sharing.'
 });
 
 export default
@@ -82,10 +83,15 @@ class SharingListsView extends React.Component {
 	renderHeader () {
 		return (
 			<div className="sharing-lists-panel-header">
-				<h2>{t('headerText')}</h2>
-				<Button className="create-sharing-list-button" onClick={this.createSharingListModal}>
-					{t('createButton')}
-				</Button>
+				<div className="sharing-lists-title-and-button">
+					<div className="sharing-lists-header-title">{t('headerText')}</div>
+					<Button className="create-sharing-list-button" onClick={this.createSharingListModal}>
+						{t('createButton')}
+					</Button>
+				</div>
+				<div className="sharing-lists-header-description">
+					{t('headerDescription')}
+				</div>
 			</div>
 		);
 	}
