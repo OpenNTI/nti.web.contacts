@@ -30,4 +30,8 @@ export default class ContactListStore extends BaseContactsStore {
 		sharingList.add(newContact);
 	}
 
+	onCreateSharingList = (name, members) => {
+		this.ds.createList(name, members);
+	}
+
 }
