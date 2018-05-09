@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Avatar, DisplayName } from '@nti/web-commons';
+import { Avatar } from '@nti/web-commons';
 
 import RemoveButton from '../commons/RemoveButton';
 

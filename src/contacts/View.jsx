@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { Loading } from '@nti/web-commons';
+// import { searchable } from '@nti/web-search';
 
 import ContactListStore from './Store';
 import ContactCardsContainer from './ContactCardsContainer';
 import AddContactToSharingListModal from './AddContactToSharingListModal';
+import ContactSidebar from './ContactSidebar';
 
 const propMap = {
 	items: 'items',
@@ -62,10 +64,10 @@ class ContactListView extends React.Component {
 	}
 
 	viewContactProfile = (contactCard) => {
-		const {entity} = contactCard;
+		// const {entity} = contactCard;
 		// TODO: Get the user profile link from the entity
 		// and then navigate to it. Need to use routes here.
-		console.log('Should navigate to profile for contact ' + entity.Username);
+		// console.log('Should navigate to profile for contact ' + entity.Username);
 	}
 
 	renderHeader () {
@@ -106,7 +108,8 @@ class ContactListView extends React.Component {
 
 	renderSidebar = () => {
 		return(
-			<div className="contacts-sidebar-router"/>
+			<ContactSidebar/>
+			//{/* <div className="contacts-sidebar-router"/> */}
 		);
 	}
 
