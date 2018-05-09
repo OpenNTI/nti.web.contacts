@@ -75,8 +75,7 @@ class GroupsView extends React.Component {
 
 	viewGroupCode = async (entity) => {
 		this.setState({ showInviteCodeDialog: true });
-		const link = await entity.fetchLink('default-trivial-invitation-code');
-		this.setState({activeInviteCode: link.invitation_code});
+		this.setState({ activeGroup: entity });
 	};
 
 	joinGroupModal = (props) => {
@@ -110,18 +109,18 @@ class GroupsView extends React.Component {
 
 	renderModals () {
 
-		const {activeGroup, activeInviteCode} = this.state;
+		const {activeGroup} = this.state;
 
 		return (
 			<div>
 				{this.state.showInviteCodeDialog && (
-					<GroupInviteCodeModal onDismiss={this.onDismissModal} inviteCode={activeInviteCode}/>
+					<GroupInviteCodeModal onDismiss={this.onDismissModal} item={activeGroup}/>
 				)}
 				{this.state.showDeleteDialog && (
 					<GroupDeleteModal onDismiss={this.onDismissModal} item={activeGroup}/>
 				)}
 				{this.state.showJoinGroupDialog && (
-					<GroupJoinModal onDismiss={this.onDismissModal} onJoinGroup={this.onJoinGroup}/>
+					<GroupJoinModal onDismiss={this.onDismissModal}/>
 				)}
 				{this.state.showCreateDialog && (
 					<GroupCreateModal onDismiss={this.onDismissModal}/>
