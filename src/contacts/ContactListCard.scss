@@ -2,7 +2,8 @@
 
 .contact-list-card {
 	height: 100px;
-	width: 344px;
+	flex-grow: 1;
+	max-width: 472px;
 	margin: 10px;
 
 	.card-title {
