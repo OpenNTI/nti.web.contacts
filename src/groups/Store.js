@@ -9,7 +9,6 @@ export default class GroupListStore extends BaseContactsStore {
 
 	constructor () {
 		super();
-		this.getInvitationLinks();
 	}
 
 	async setupDataSource () {
@@ -27,13 +26,8 @@ export default class GroupListStore extends BaseContactsStore {
 	}
 
 	async getInvitationLinks () {
-		try {
-			const service = await getService();
-			this.invitations = await service.getCollection('Invitations', 'Invitations');
-		} catch (e) {
-			// this.set('error', e);
-			// this.emitChange('error', 'loading');
-		}
+		const service = await getService();
+		return await service.getCollection('Invitations', 'Invitations');
 	}
 
 	createGroup = (groupName) => {
@@ -41,11 +35,12 @@ export default class GroupListStore extends BaseContactsStore {
 		this.emitChange('items');
 	}
 
-	getAcceptInviteLink = () => {
+	getAcceptInviteLink = async () => {
+		const links = await this.getInvitationLinks();
 		// TODO: There's probably a better way to do this,
 		// but since I can't find it right now, doing it the
 		// quick and dirty way.
-		return this.invitations.Links.find(function (obj) {return obj.rel === 'accept-invitation';});
+		return links.find(function (obj) {return obj.rel === 'accept-invitation';});
 	};
 
 	joinGroup = async (groupCode) => {
