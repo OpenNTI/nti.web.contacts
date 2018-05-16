@@ -17,6 +17,7 @@ const propMap = {
 
 const t = scoped('nti-web-contacts.contacts.ContactListView', {
 	contactsHeader: 'Contacts',
+	searchResultsHeader: 'Search Results for '
 
 });
 
@@ -80,6 +81,14 @@ class ContactListView extends React.Component {
 		);
 	}
 
+	renderSearchResultHeader (searchTerm) {
+		return (
+			<div className="contacts-panel-header">
+				{t('searchResultsHeader') + '"' + searchTerm + '"'}
+			</div>
+		);
+	}
+
 	renderModals () {
 
 		const {showAddContactToSharingListModal, activeContact} = this.state;
@@ -131,7 +140,7 @@ class ContactListView extends React.Component {
 
 	render () {
 
-		const {store, loading} = this.props;
+		const {store, loading, searchTerm} = this.props;
 
 		if (!store || loading) {
 			return <Loading.Mask />;
@@ -139,9 +148,10 @@ class ContactListView extends React.Component {
 
 		return (
 			<div className="contact-list-panel">
-				{this.renderHeader()}
+				{!searchTerm && this.renderHeader()}
+				{searchTerm && this.renderSearchResultHeader(searchTerm)}
 				<div className="contacts-body">
-					{this.renderSidebar()}
+					{!searchTerm && this.renderSidebar()}
 					{this.renderContactListCards()}
 				</div>
 				{this.renderModals()}
