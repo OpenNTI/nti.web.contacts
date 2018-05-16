@@ -35,7 +35,7 @@ export default class CardDetail extends React.Component {
 		const {entity} = this.props;
 		const {isModifiable} = entity;
 		if (!isModifiable) {
-			return (<DisplayName className="card-title" entity={entity}/>);
+			return (<DisplayName entity={entity}/>);
 		}
 		else {
 			return (
@@ -65,8 +65,8 @@ export default class CardDetail extends React.Component {
 							{flyoutOptions}
 						</Flyout.Triggered>
 					</div>
-					<FollowButton entity={entity}/>
 				</div>
+				<FollowButton entity={entity}/>
 				{/* Only render members if the list is non-empty */}
 				{members && <Members members={members}/>}
 			</div>

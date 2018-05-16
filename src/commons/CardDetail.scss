@@ -11,28 +11,33 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+
+	.follow-widget {
+		position: static;
+		height: 17px;
+		margin-left: 15px;
+		margin-top: auto;
+		margin-bottom: 15px;
+	}
 }
 
 .card-meta {
 	display: flex;
 	padding: 15px;
 
-	.trigger {
-		margin-left: auto;
-	}
-
 	.card-title {
 		color: $primary-grey;
 		font-size: 18px;
 		line-height: 24px;
 		font-weight: normal;
-		float: left;
-		width: 100%;
 
 		.entity-location {
 			color: $secondary-grey;
 			font-size: 14px;
 		}
+	}
+	.trigger {
+		margin-left: auto;
 	}
 }
 
