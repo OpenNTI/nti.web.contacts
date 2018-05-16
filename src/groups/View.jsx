@@ -97,12 +97,14 @@ class GroupsView extends React.Component {
 		return (
 			<div className="groups-panel-header">
 				<div className="groups-header-title">{t('groupsHeader')}</div>
-				<Button className="create-group-button" onClick={this.createGroupModal}>
-					{t('createGroupButton')}
-				</Button>
-				<Button className="create-group-button" onClick={this.joinGroupModal}>
-					{t('joinGroupButton')}
-				</Button>
+				<div className="groups-header-buttons">
+					<Button className="create-group-button" onClick={this.createGroupModal}>
+						{t('createGroupButton')}
+					</Button>
+					<Button className="create-group-button" onClick={this.joinGroupModal}>
+						{t('joinGroupButton')}
+					</Button>
+				</div>
 			</div>
 		);
 	}
