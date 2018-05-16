@@ -11,7 +11,8 @@ import ContactSidebar from './ContactSidebar';
 
 const propMap = {
 	items: 'items',
-	loading: 'loading'
+	loading: 'loading',
+	searchTerm: 'searchTerm'
 };
 
 const t = scoped('nti-web-contacts.contacts.ContactListView', {
@@ -26,7 +27,8 @@ class ContactListView extends React.Component {
 	static propTypes = {
 		store: PropTypes.object,
 		items: PropTypes.array,
-		loading: PropTypes.bool
+		loading: PropTypes.bool,
+		searchTerm: PropTypes.string
 	};
 
 	state = {
@@ -94,10 +96,12 @@ class ContactListView extends React.Component {
 	}
 
 	renderContactListCards = () => {
-		const {items} = this.props;
+		const {searchTerm, items} = this.props;
+		const filteredItems = this.getFilteredItemsBySearchTerm(searchTerm, items);
+
 		return (
 			<div className="contact-list-cards-frame">
-				<ContactCardsContainer items={items}
+				<ContactCardsContainer items={filteredItems}
 					removeContact={this.removeContact}
 					chatWithContact={this.chatWithContact}
 					addToSharingList={this.openAddToSharingListModal}
@@ -111,6 +115,18 @@ class ContactListView extends React.Component {
 			<ContactSidebar/>
 			//{/* <div className="contacts-sidebar-router"/> */}
 		);
+	}
+
+	getFilteredItemsBySearchTerm (searchTerm, items) {
+		// Only filters items if search term is a truthy value
+		if (searchTerm) {
+			const results = items.filter(
+				x => x.realname.toLowerCase().includes(searchTerm.toLowerCase()
+				)
+			);
+			return results;
+		}
+		return items;
 	}
 
 	render () {

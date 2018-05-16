@@ -51,7 +51,7 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 		}
 
 		if (key === 'items') {
-			return this.getFilteredItemsBySearchTerm(this.searchTerm);
+			return Array.from(this.ds);
 		}
 
 		return super.get(key);
@@ -70,10 +70,6 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 	updateSearchTerm (searchTerm) {
 		this.searchTerm = searchTerm;
 		this.emitChange('items');
-	}
-
-	getFilteredItemsBySearchTerm (searchTerm) {
-		//Subclasses must implement this function for search capability
-		return Array.from(this.ds);
+		this.emitChange('searchTerm');
 	}
 }
