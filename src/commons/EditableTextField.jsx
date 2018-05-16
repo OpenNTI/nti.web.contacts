@@ -38,10 +38,12 @@ export default class EditableTextField extends React.Component {
 		}
 		else {
 			return (
-				<Input.Text placeholder="Name"
-					value={this.state.textValue}
-					onChange={this.updateTextValue}
-					onKeyDown={this.onKeyDown}/>
+				<div className="editable-text-field">
+					<Input.Text placeholder="Name"
+						value={this.state.textValue}
+						onChange={this.updateTextValue}
+						onKeyDown={this.onKeyDown}/>
+				</div>
 			);
 		}
 	}
