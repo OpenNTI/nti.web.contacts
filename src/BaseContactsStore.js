@@ -18,7 +18,7 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 			const cmp = React.forwardRef((props, ref) =>
 				React.createElement(component, {
 					...extraProps,
-					...this.props,
+					...props,
 					ref
 				}));
 
