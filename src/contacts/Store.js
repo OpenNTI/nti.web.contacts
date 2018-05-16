@@ -34,4 +34,18 @@ export default class ContactListStore extends BaseContactsStore {
 		this.ds.createList(name, members);
 	}
 
+	getFilteredItemsBySearchTerm (searchTerm) {
+
+		const items = Array.from(this.ds);
+
+		if (searchTerm) {
+			const results = items.filter(
+				x => x.realname.toLowerCase().includes(searchTerm.toLowerCase()
+				)
+			);
+			return results;
+		}
+		return items;
+	}
+
 }
