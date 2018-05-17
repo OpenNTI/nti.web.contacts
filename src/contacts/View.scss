@@ -1,20 +1,25 @@
 @import "~@nti/style-common";
 
 .contact-list-panel {
-	background-color: white;
-}
 
-.contacts-sidebar-router {
-	width: 255px;
 }
 
 .contacts-body {
 	display: flex;
+	margin-top: 20px;
 
 	.contact-list-cards-frame {
-		background-color: white;
+		background: white;
+		padding-top: 26px;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-bottom: 30px;
 	}
 
+	.contact-sidebar {
+		width: 255px;
+		background: white;
+	}
 }
 
 .contacts-panel-header {
