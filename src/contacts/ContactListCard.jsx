@@ -34,17 +34,26 @@ export default function ContactListCard ({entity, removeContact, viewContactProf
 			</LinkTo.Object>
 		</div>,
 		<div className="contact-list-action-flyout-option"
-			onClick={()=>chatWithContact(entity)}
+			onClick={(e)=>{
+				e.stopPropagation();
+				chatWithContact(entity);
+			}}
 			key="chat">
 			{t('chat')}
 		</div>,
 		<div className="contact-list-action-flyout-option"
-			onClick={()=>addContactToSharingList(entity)}
+			onClick={(e)=>{
+				e.stopPropagation();
+				addContactToSharingList(entity);
+			}}
 			key="addToSharingList">
 			{t('addToSharingList')}
 		</div>,
 		<div className="contact-list-action-flyout-option-delete"
-			onClick={()=>removeContact(entity)}
+			onClick={(e)=>{
+				e.stopPropagation();
+				removeContact(entity);
+			}}
 			key="unfollow">
 			{t('deleteText')}
 		</div>
