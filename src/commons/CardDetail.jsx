@@ -19,8 +19,11 @@ export default class CardDetail extends React.Component {
 		renameMode: PropTypes.bool
 	};
 
+	attachFlyoutRef = x => this.flyout = x;
+
 	onFinishedEditing = (text) => {
 		this.props.onRenameFinish(this.props.entity, text);
+		this.flyout.dismiss();
 	}
 
 	renderFlyoutTrigger () {
@@ -46,6 +49,23 @@ export default class CardDetail extends React.Component {
 		}
 	}
 
+	onOptionClick = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+		this.flyout.dismiss();
+	}
+
+	// Wrap each flyout option so that we can
+	// dimisss the flyout automatically after
+	// calling the onClick method of the option.
+	renderFlyoutOption = (option) => {
+		return (
+			<div onClick={this.onOptionClick} key={option.key}>
+				{option}
+			</div>
+		);
+	}
+
 	render () {
 		const {members, entity, renameMode, flyoutOptions} = this.props;
 		const {location} = entity;
@@ -61,8 +81,9 @@ export default class CardDetail extends React.Component {
 							className="card-action-flyout"
 							trigger={this.renderFlyoutTrigger()}
 							horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
+							ref={this.attachFlyoutRef}
 						>
-							{flyoutOptions}
+							{flyoutOptions.map(this.renderFlyoutOption)}
 						</Flyout.Triggered>
 					</div>
 				</div>
