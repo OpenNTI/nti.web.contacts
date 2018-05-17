@@ -28,11 +28,16 @@ export default class EditableTextField extends React.Component {
 			e.stopPropagation();
 			e.preventDefault();
 			onFinishedEditing(this.state.textValue);
+			//TODO: Need to figure out if this is what we actually want
+			this.setState({textValue: this.props.text});
 		}
 	}
 
 	render () {
 		const {text, isEditable} = this.props;
+		// We might want a prop to specify whether we want to edit the
+		// existing text in this field, or whether we want to start
+		// from scratch with a blank box?
 		if (!isEditable) {
 			return (<div className="editable-text-field">{text}</div>);
 		}
