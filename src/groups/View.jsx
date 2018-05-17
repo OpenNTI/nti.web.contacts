@@ -15,7 +15,8 @@ const logger = Logger.get('contacts:components:Groups');
 
 const propMap = {
 	items: 'items',
-	loading: 'loading'
+	loading: 'loading',
+	searchTerm: 'searchTerm'
 };
 
 const t = scoped('nti-web-contacts.groups.View', {
@@ -41,7 +42,8 @@ class GroupsView extends React.Component {
 	static propTypes = {
 		store: PropTypes.object,
 		items: PropTypes.array,
-		loading: PropTypes.bool
+		loading: PropTypes.bool,
+		searchTerm: PropTypes.string
 	};
 
 	constructor (props) {
@@ -131,20 +133,35 @@ class GroupsView extends React.Component {
 		);
 	}
 
+	getFilteredItemsBySearchTerm (searchTerm, items) {
+		// Only filters items if search term is a truthy value
+		if (searchTerm) {
+			const results = items.filter(
+				x => x.realname.toLowerCase().includes(searchTerm.toLowerCase()
+				)
+			);
+			return results;
+		}
+		return items;
+	}
+
+
 	render () {
 
-		const {items, store, loading} = this.props;
+		const {items, store, loading, searchTerm} = this.props;
 
 		if (!store || loading) {
 			return <Loading.Mask />;
 		}
+
+		const filteredItems = this.getFilteredItemsBySearchTerm(searchTerm, items);
 
 		return (
 			<div className="groups-panel">
 
 				{this.renderHeader()}
 				<div className="groups-list-frame">
-					{items && items.map(
+					{filteredItems && filteredItems.map(
 						(i) => (
 							<GroupCard entity={i}
 								members={i.friends}
