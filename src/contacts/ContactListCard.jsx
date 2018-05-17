@@ -51,9 +51,9 @@ export default function ContactListCard ({entity, removeContact, viewContactProf
 	];
 
 	return (
-		<div className="contact-list-card">
+		<LinkTo.Object className="contact-list-card" object={entity}>
 			<Avatar entity={entity} className="contact-list-avatar"/>
 			<CardDetail entity={entity} flyoutOptions={flyoutOptions}/>
-		</div>
+		</LinkTo.Object>
 	);
 }
