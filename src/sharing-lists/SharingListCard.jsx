@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
+// import { LinkTo } from '@nti/web-routing';
 
 import { CardDetail } from '../commons';
 
@@ -29,17 +30,26 @@ export default class SharingListCard extends React.Component {
 
 		const flyoutOptions = [
 			<div className="sharing-list-action-flyout-option"
-				onClick={this.beginRenamingSharingList}
+				onClick={(e) => {
+					e.stopPropagation();
+					this.beginRenamingSharingList;
+				}}
 				key="rename">
 				{t('renameText')}
 			</div>,
 			<div className="sharing-list-action-flyout-option"
-				onClick={() => managePeople(entity)}
+				onClick={(e) => {
+					e.stopPropagation();
+					managePeople(entity);
+				}}
 				key="managePeople">
 				{t('managePeopleText')}
 			</div>,
 			<div className="sharing-list-action-flyout-option-delete"
-				onClick={() => deleteSharingList(entity)}
+				onClick={(e) => {
+					e.stopPropagation();
+					deleteSharingList(entity);
+				}}
 				key="deleteList">
 				{t('deleteText')}
 			</div>
@@ -67,6 +77,8 @@ export default class SharingListCard extends React.Component {
 		const {entity, members} = this.props;
 		const {renameMode} = this.state;
 
+		// TODO: Wrap this in a LinkTo component that links to
+		// a route that points to the sharing list manager modal
 		return (
 			<div className="sharing-list-card">
 				<CardDetail entity={entity}
