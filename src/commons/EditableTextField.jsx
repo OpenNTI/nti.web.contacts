@@ -28,8 +28,6 @@ export default class EditableTextField extends React.Component {
 			e.stopPropagation();
 			e.preventDefault();
 			onFinishedEditing(this.state.textValue);
-			//TODO: Need to figure out if this is what we actually want
-			this.setState({textValue: this.props.text});
 		}
 	}
 
