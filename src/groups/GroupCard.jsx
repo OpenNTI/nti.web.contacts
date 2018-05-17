@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { Avatar } from '@nti/web-commons';
+import { LinkTo } from '@nti/web-routing';
 
 import { CardDetail } from '../commons';
 
@@ -36,7 +37,10 @@ export default class GroupCard extends React.Component {
 		const leaveGroupOption = (
 			<div className="group-action-flyout-option-delete"
 				key="leaveGroup"
-				onClick={() => leaveGroup(entity)}>
+				onClick={(e) => {
+					e.stopPropagation();
+					leaveGroup(entity);
+				}}>
 				{t('leaveGroupText')}
 			</div>
 		);
@@ -44,7 +48,10 @@ export default class GroupCard extends React.Component {
 		const deleteGroupOption = (
 			<div className="group-action-flyout-option-delete"
 				key="deleteGroup"
-				onClick={() => deleteGroup(entity)}>
+				onClick={(e) => {
+					e.stopPropagation();
+					deleteGroup(entity);
+				}}>
 				{t('deleteGroupText')}
 			</div>
 		);
@@ -52,7 +59,10 @@ export default class GroupCard extends React.Component {
 		const groupCodeOption = (
 			<div className="group-action-flyout-option"
 				key="groupCode"
-				onClick={() => viewGroupCode(entity)}>
+				onClick={(e) => {
+					e.stopPropagation();
+					viewGroupCode(entity);
+				}}>
 				{t('groupCodeText')}
 			</div>
 		);
@@ -60,7 +70,10 @@ export default class GroupCard extends React.Component {
 		const changeNameOption = (
 			<div className="group-action-flyout-option"
 				key="renameGroup"
-				onClick={this.beginRenamingGroup}>
+				onClick={(e) => {
+					e.stopPropagation();
+					this.beginRenamingGroup;
+				}}>
 				{t('renameText')}
 			</div>
 		);
@@ -98,14 +111,14 @@ export default class GroupCard extends React.Component {
 		const {renameMode} = this.state;
 
 		return (
-			<div className="group-card">
+			<LinkTo.Object className="group-card" object={entity}>
 				<Avatar entity={entity} className="group-avatar"/>
 				<CardDetail entity={entity}
 					members={members}
 					flyoutOptions={this.groupFlyoutOptions}
 					onRenameFinish={this.finishRenamingGroup}
 					renameMode={renameMode}/>
-			</div>
+			</LinkTo.Object>
 		);
 	}
 }
