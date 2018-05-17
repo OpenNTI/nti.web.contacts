@@ -55,8 +55,9 @@ export default class GroupListStore extends BaseContactsStore {
 		}
 	}
 
-	renameGroup = (group, newName) => {
-		// debugger;
+	renameGroup = async (group, newName) => {
+		await group.save({'alias': newName});
+		this.emitChange('items');
 	}
 
 	deleteGroup = (group) => {
