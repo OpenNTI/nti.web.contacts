@@ -30,26 +30,17 @@ export default class SharingListCard extends React.Component {
 
 		const flyoutOptions = [
 			<div className="sharing-list-action-flyout-option"
-				onClick={(e) => {
-					e.stopPropagation();
-					this.beginRenamingSharingList;
-				}}
+				onClick={(e) => this.beginRenamingSharingList()}
 				key="rename">
 				{t('renameText')}
 			</div>,
 			<div className="sharing-list-action-flyout-option"
-				onClick={(e) => {
-					e.stopPropagation();
-					managePeople(entity);
-				}}
+				onClick={(e) => managePeople(entity)}
 				key="managePeople">
 				{t('managePeopleText')}
 			</div>,
 			<div className="sharing-list-action-flyout-option-delete"
-				onClick={(e) => {
-					e.stopPropagation();
-					deleteSharingList(entity);
-				}}
+				onClick={(e) => deleteSharingList(entity)}
 				key="deleteList">
 				{t('deleteText')}
 			</div>

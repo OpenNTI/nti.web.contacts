@@ -37,10 +37,7 @@ export default class GroupCard extends React.Component {
 		const leaveGroupOption = (
 			<div className="group-action-flyout-option-delete"
 				key="leaveGroup"
-				onClick={(e) => {
-					e.stopPropagation();
-					leaveGroup(entity);
-				}}>
+				onClick={(e) => leaveGroup(entity)}>
 				{t('leaveGroupText')}
 			</div>
 		);
@@ -48,10 +45,7 @@ export default class GroupCard extends React.Component {
 		const deleteGroupOption = (
 			<div className="group-action-flyout-option-delete"
 				key="deleteGroup"
-				onClick={(e) => {
-					e.stopPropagation();
-					deleteGroup(entity);
-				}}>
+				onClick={(e) => deleteGroup(entity)}>
 				{t('deleteGroupText')}
 			</div>
 		);
@@ -59,10 +53,7 @@ export default class GroupCard extends React.Component {
 		const groupCodeOption = (
 			<div className="group-action-flyout-option"
 				key="groupCode"
-				onClick={(e) => {
-					e.stopPropagation();
-					viewGroupCode(entity);
-				}}>
+				onClick={(e) => viewGroupCode(entity)}>
 				{t('groupCodeText')}
 			</div>
 		);
@@ -70,10 +61,7 @@ export default class GroupCard extends React.Component {
 		const changeNameOption = (
 			<div className="group-action-flyout-option"
 				key="renameGroup"
-				onClick={(e) => {
-					e.stopPropagation();
-					this.beginRenamingGroup;
-				}}>
+				onClick={(e) => this.beginRenamingGroup()}>
 				{t('renameText')}
 			</div>
 		);
@@ -111,14 +99,16 @@ export default class GroupCard extends React.Component {
 		const {renameMode} = this.state;
 
 		return (
-			<LinkTo.Object className="group-card" object={entity}>
-				<Avatar entity={entity} className="group-avatar"/>
+			<div className="group-card">
+				<LinkTo.Object className="group-avatar" object={entity}>
+					<Avatar className="group-avatar" entity={entity}/>
+				</LinkTo.Object>
 				<CardDetail entity={entity}
 					members={members}
 					flyoutOptions={this.groupFlyoutOptions}
 					onRenameFinish={this.finishRenamingGroup}
 					renameMode={renameMode}/>
-			</LinkTo.Object>
+			</div>
 		);
 	}
 }
