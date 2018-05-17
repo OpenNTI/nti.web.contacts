@@ -32,7 +32,7 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 				() => store.setupDataSource(),
 
 				// onUnmount:
-				// () => store.cleanup()
+				() => store.cleanup()
 			);
 		};
 	}
@@ -66,6 +66,9 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 		this.emitChange('items');
 	}
 
+	cleanup () {
+		this.ds.removeListener('change', this.onDataSourceChanged);
+	}
 
 	updateSearchTerm (searchTerm) {
 		this.searchTerm = searchTerm;
