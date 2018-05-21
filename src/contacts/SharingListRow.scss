@@ -13,6 +13,9 @@
 	.list-title {
 		margin-top: auto;
 		margin-bottom: auto;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
 	}
 
 	.members {
