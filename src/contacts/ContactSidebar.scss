@@ -1,0 +1,42 @@
+@import "~@nti/style-common";
+
+.contacts-tabs {
+	width: 255px;
+	background: white;
+	list-style: none;
+	padding: 0px;
+
+	li {
+		box-shadow: 0 -1px 0 0 $border-grey-light;
+
+		a {
+			display: block;
+			padding: 0.5rem 1rem;
+			text-decoration: none;
+			color: $secondary-grey;
+
+			&:not(.active):hover {
+				background: $panel-background;
+			}
+
+			&.active {
+				background: $primary-blue;
+				color: white;
+			}
+		}
+	}
+
+	.sidebar-header {
+		height: 50px;
+		box-shadow: 0 1px 0 0 #E2E2E2;
+		color: #A1A1A1;
+
+		.sidebar-title {
+			margin-top: auto;
+			margin-bottom: auto;
+			padding-left: 30px;
+		}
+	}
+
+
+}
