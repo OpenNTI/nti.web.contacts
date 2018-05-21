@@ -115,7 +115,7 @@ class ContactListView extends React.Component {
 		// Only filters items if search term is a truthy value
 		if (searchTerm) {
 			const results = items.filter(
-				x => x.realname.toLowerCase().includes(searchTerm.toLowerCase()
+				x => x.displayName.toLowerCase().includes(searchTerm.toLowerCase()
 				)
 			);
 			return results;
