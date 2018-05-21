@@ -90,7 +90,10 @@ export default class GroupCard extends React.Component {
 	finishRenamingGroup = (entity, newText) => {
 		this.setState({renameMode: false});
 		const {renameGroup} = this.props;
-		renameGroup(entity, newText);
+		// Only commit our changes if the new name is not blank
+		if (newText) {
+			renameGroup(entity, newText);
+		}
 	}
 
 	render () {

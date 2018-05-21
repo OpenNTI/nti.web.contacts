@@ -60,7 +60,12 @@ export default class SharingListCard extends React.Component {
 	finishRenamingSharingList = (entity, newText) => {
 		this.setState({renameMode: false});
 		const {renameSharingList} = this.props;
-		renameSharingList(entity, newText);
+		// Only commit our changes if the new name is not blank
+		// TODO: May want to do more checks, so maybe should check
+		// against a function like isValidEntityName()
+		if (newText) {
+			renameSharingList(entity, newText);
+		}
 	}
 
 	render () {
