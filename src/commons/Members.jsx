@@ -32,7 +32,7 @@ export default function Members ({members, displayLabel = true}) {
 
 	let listOfMembers = renderMemberList();
 	if (members.length > MAX_MEMBERS_TO_DISPLAY) {
-		listOfMembers.push(<MemberOverflowPlaceholder overflowCount={members.length - MAX_MEMBERS_TO_DISPLAY} key="overflowPlaceholder"/>);
+		listOfMembers.unshift(<MemberOverflowPlaceholder overflowCount={members.length - MAX_MEMBERS_TO_DISPLAY} key="overflowPlaceholder"/>);
 	}
 
 	return (
