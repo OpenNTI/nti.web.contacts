@@ -1,0 +1,18 @@
+@import "~@nti/style-common";
+
+.member-avatar-overflow-placeholder {
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	float:left;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+	background-color: #5F6365;
+	display: flex;
+
+	.count {
+		color: white;
+		font-size: 10px;
+		font-weight: bold;
+		margin: auto;
+	}
+}

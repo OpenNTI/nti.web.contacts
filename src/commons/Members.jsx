@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 
 import Member from './Member';
+import MemberOverflowPlaceholder from './MemberOverflowPlaceholder';
 
 const t = scoped('nti-web-contacts.commons.Members', {membersLabel: 'MEMBERS'});
 
@@ -10,6 +11,8 @@ Members.propTypes = {
 	members: PropTypes.array,
 	displayLabel: PropTypes.bool
 };
+
+const MAX_MEMBERS_TO_DISPLAY = 8;
 
 export default function Members ({members, displayLabel = true}) {
 
@@ -19,20 +22,25 @@ export default function Members ({members, displayLabel = true}) {
 
 	function renderMemberList () {
 		return (
-			<div className="member-list">
-				{members.map(
-					(i) => (
-						<Member entity={i} key={i.Username}/>
-					)
-				)}
-			</div>
+			members.slice(0, MAX_MEMBERS_TO_DISPLAY).map(
+				(i) => (
+					<Member entity={i} key={i.Username}/>
+				)
+			)
 		);
+	}
+
+	let listOfMembers = renderMemberList();
+	if (members.length > MAX_MEMBERS_TO_DISPLAY) {
+		listOfMembers.push(<MemberOverflowPlaceholder overflowCount={members.length - MAX_MEMBERS_TO_DISPLAY} key="overflowPlaceholder"/>);
 	}
 
 	return (
 		<div className="members">
 			{displayLabel && (<div className="members-label">{t('membersLabel')}</div>)}
-			{renderMemberList()}
+			<div className="member-list">
+				{listOfMembers}
+			</div>
 		</div>
 	);
 }
