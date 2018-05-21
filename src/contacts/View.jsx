@@ -66,21 +66,6 @@ class ContactListView extends React.Component {
 		return store.getSharingLists();
 	}
 
-	viewContactProfile = (contactCard) => {
-		// const {entity} = contactCard;
-		// TODO: Get the user profile link from the entity
-		// and then navigate to it. Need to use routes here.
-		// console.log('Should navigate to profile for contact ' + entity.Username);
-	}
-
-	renderHeader () {
-		return (
-			<div className="contacts-panel-header">
-				{t('contactsHeader')}
-			</div>
-		);
-	}
-
 	renderSearchResultHeader (searchTerm) {
 		return (
 			<div className="contacts-panel-header">
@@ -148,7 +133,6 @@ class ContactListView extends React.Component {
 
 		return (
 			<div className="contact-list-panel">
-				{!searchTerm && this.renderHeader()}
 				{searchTerm && this.renderSearchResultHeader(searchTerm)}
 				<div className="contacts-body">
 					{!searchTerm && this.renderSidebar()}
