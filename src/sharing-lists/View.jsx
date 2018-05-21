@@ -48,9 +48,8 @@ class SharingListsView extends React.Component {
 	};
 
 	renameSharingList = (sharingList, newName) => {
-		// console.log ('rename sharing list to ' + newName);
-		// TODO: call a method in the store to handle the actual
-		// renaming, now that we have the data we need.
+		const {store} = this.props;
+		store.renameSharingList(sharingList, newName);
 	};
 
 	managePeople = (entity) => {

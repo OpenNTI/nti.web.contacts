@@ -48,4 +48,9 @@ export default class SharingListStore extends BaseContactsStore {
 				return Promise.reject(reason);
 			});
 	}
+
+	renameSharingList = async (sharingList, newName) => {
+		await sharingList.save({'alias': newName});
+		this.emitChange('items');
+	}
 }
