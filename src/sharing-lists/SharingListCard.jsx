@@ -68,6 +68,10 @@ export default class SharingListCard extends React.Component {
 		}
 	}
 
+	cancelRenamingGroup = () => {
+		this.setState({renameMode: false});
+	}
+
 	render () {
 
 		const {entity, members} = this.props;
@@ -81,6 +85,7 @@ export default class SharingListCard extends React.Component {
 					members={members}
 					flyoutOptions={this.flyoutOptions}
 					onRenameFinish={this.finishRenamingSharingList}
+					onCancelEditing={this.cancelRenamingGroup}
 					renameMode={renameMode}/>
 			</div>
 		);
