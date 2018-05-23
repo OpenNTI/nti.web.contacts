@@ -16,6 +16,7 @@ export default class CardDetail extends React.Component {
 		members: PropTypes.array,
 		flyoutOptions: PropTypes.array,
 		onRenameFinish: PropTypes.func,
+		onCancelEditing: PropTypes.func,
 		renameMode: PropTypes.bool
 	};
 
@@ -23,6 +24,11 @@ export default class CardDetail extends React.Component {
 
 	onFinishedEditing = (text) => {
 		this.props.onRenameFinish(this.props.entity, text);
+		this.flyout.dismiss();
+	}
+
+	onCancelEditing = () => {
+		this.props.onCancelEditing();
 		this.flyout.dismiss();
 	}
 
@@ -44,6 +50,7 @@ export default class CardDetail extends React.Component {
 			return (
 				<EditableTextField text={entity.displayName}
 					isEditable={enableEditing}
+					onCancelEditing={this.onCancelEditing}
 					onFinishedEditing={this.onFinishedEditing}/>
 			);
 		}

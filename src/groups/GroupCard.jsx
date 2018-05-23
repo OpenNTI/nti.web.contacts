@@ -96,6 +96,10 @@ export default class GroupCard extends React.Component {
 		}
 	}
 
+	cancelRenamingGroup = () => {
+		this.setState({renameMode: false});
+	}
+
 	render () {
 
 		const {entity, members} = this.props;
@@ -110,6 +114,7 @@ export default class GroupCard extends React.Component {
 					members={members}
 					flyoutOptions={this.groupFlyoutOptions}
 					onRenameFinish={this.finishRenamingGroup}
+					onCancelEditing={this.cancelRenamingGroup}
 					renameMode={renameMode}/>
 			</div>
 		);

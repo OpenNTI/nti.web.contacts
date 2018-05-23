@@ -14,7 +14,8 @@ export default class EditableTextField extends React.Component {
 	static propTypes = {
 		text: PropTypes.string,
 		isEditable: PropTypes.bool,
-		onFinishedEditing: PropTypes.func
+		onFinishedEditing: PropTypes.func,
+		onCancelEditing: PropTypes.func
 	};
 
 	updateTextValue = (newValue) => {
@@ -22,12 +23,18 @@ export default class EditableTextField extends React.Component {
 	}
 
 	onKeyDown = (e) => {
-		const {onFinishedEditing} = this.props;
+		const {onFinishedEditing, onCancelEditing} = this.props;
 		const finishingKeys = ['Enter'];
+		const cancelingKeys = ['Escape'];
 		if (finishingKeys.indexOf(e.key) > -1) {
 			e.stopPropagation();
 			e.preventDefault();
 			onFinishedEditing(this.state.textValue);
+		}
+		if (cancelingKeys.indexOf(e.key) > -1) {
+			e.stopPropagation();
+			e.preventDefault();
+			onCancelEditing();
 		}
 	}
 
