@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Button, Loading } from '@nti/web-commons';
+import { Button, Loading, Prompt } from '@nti/web-commons';
 
 import SharingListStore from './Store';
 import SharingListCard from './SharingListCard';
@@ -42,9 +42,17 @@ class SharingListsView extends React.Component {
 		super();
 	}
 
-	onDeleteSharingList = (entity) => {
+	onDeleteSharingList = async (entity) => {
 		const {store} = this.props;
-		store.onDeleteSharingList(entity);
+
+		try {
+			await Prompt.areYouSure('Delete this sharing list?');
+			store.onDeleteSharingList(entity);
+		}
+		catch (e) {
+			// do nothing because the user hit cancel
+		}
+
 	};
 
 	renameSharingList = (sharingList, newName) => {

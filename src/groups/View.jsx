@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Loading, Button } from '@nti/web-commons';
+import { Loading, Button, Prompt } from '@nti/web-commons';
 import Logger from '@nti/util-logger';
 
 import GroupListStore from './Store';
@@ -55,9 +55,16 @@ class GroupsView extends React.Component {
 		store.renameGroup(group, newName);
 	}
 
-	deleteGroupModal = (group) => {
-		this.setState({activeGroup: {group}});
-		this.setState({ showDeleteDialog: true });
+	deleteGroupModal = async (group) => {
+		const {store} = this.props;
+
+		try {
+			await Prompt.areYouSure('Delete this group?');
+			store.deleteGroup(group);
+		}
+		catch (e) {
+			// do nothing because the user hit cancel
+		}
 	};
 
 	onLeaveGroup = (group) => {
