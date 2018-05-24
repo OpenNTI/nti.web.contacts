@@ -18,6 +18,9 @@
     "type": "git",
     "url": "https://github.com/NextThought/nti.web.component.contacts"
   },
+  "publishConfig": {
+    "registry": "https://npm.nextthought.com"
+  },
   "author": "nextthought",
   "license": "UNLICENSED",
   "bugs": {
