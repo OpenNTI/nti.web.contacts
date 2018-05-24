@@ -19,6 +19,10 @@ export default class GroupInviteCodeModal extends React.Component {
 		invitationCode: ''
 	}
 
+	componentDidMount () {
+		this.getInviteCode();
+	}
+
 	onDismiss = () => {
 		this.props.onDismiss('showInviteCodeDialog');
 	}
@@ -30,7 +34,6 @@ export default class GroupInviteCodeModal extends React.Component {
 	};
 
 	render () {
-		this.getInviteCode();
 		const {invitationCode} = this.state;
 		return(
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
