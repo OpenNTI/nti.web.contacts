@@ -7,7 +7,6 @@ import Logger from '@nti/util-logger';
 import GroupListStore from './Store';
 import GroupInviteCodeModal from './GroupInviteCodeModal';
 import GroupCreateModal from './GroupCreateModal';
-import GroupDeleteModal from './GroupDeleteModal';
 import GroupJoinModal from './GroupJoinModal';
 import GroupCard from './GroupCard';
 
@@ -127,9 +126,6 @@ class GroupsView extends React.Component {
 			<div>
 				{this.state.showInviteCodeDialog && (
 					<GroupInviteCodeModal onDismiss={this.onDismissModal} item={activeGroup}/>
-				)}
-				{this.state.showDeleteDialog && (
-					<GroupDeleteModal onDismiss={this.onDismissModal} item={activeGroup}/>
 				)}
 				{this.state.showJoinGroupDialog && (
 					<GroupJoinModal onDismiss={this.onDismissModal}/>
