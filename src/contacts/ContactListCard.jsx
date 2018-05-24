@@ -26,34 +26,35 @@ const t = scoped('nti-web-contacts.contacts.ContactListCard', {
 
 export default function ContactListCard ({entity, removeContact, viewContactProfile, addContactToSharingList, chatWithContact}) {
 
-	const flyoutOptions = [
-		<div className="contact-list-action-flyout-option"
-			key="viewProfile">
-			<LinkTo.Object object={entity}>
-				{t('viewProfile')}
-			</LinkTo.Object>
-		</div>,
-		<div className="contact-list-action-flyout-option"
-			onClick={(e) => chatWithContact(entity)}
-			key="chat">
-			{t('chat')}
-		</div>,
-		<div className="contact-list-action-flyout-option"
-			onClick={(e) => addContactToSharingList(entity)}
-			key="addToSharingList">
-			{t('addToSharingList')}
-		</div>,
-		<div className="contact-list-action-flyout-option-delete"
-			onClick={(e) => removeContact(entity)}
-			key="unfollow">
-			{t('deleteText')}
-		</div>
-	];
-
 	return (
 		<LinkTo.Object className="contact-list-card" object={entity}>
 			<Avatar entity={entity} className="contact-list-avatar"/>
-			<CardDetail entity={entity} flyoutOptions={flyoutOptions}/>
+			<CardDetail entity={entity}
+				flyoutOptions={(
+					<React.Fragment>
+						<div className="contact-list-action-flyout-option"
+							key="viewProfile">
+							<LinkTo.Object object={entity}>
+								{t('viewProfile')}
+							</LinkTo.Object>
+						</div>
+						<div className="contact-list-action-flyout-option"
+							onClick={(e) => chatWithContact(entity)}
+							key="chat">
+							{t('chat')}
+						</div>
+						<div className="contact-list-action-flyout-option"
+							onClick={(e) => addContactToSharingList(entity)}
+							key="addToSharingList">
+							{t('addToSharingList')}
+						</div>
+						<div className="contact-list-action-flyout-option-delete"
+							onClick={(e) => removeContact(entity)}
+							key="unfollow">
+							{t('deleteText')}
+						</div>
+					</React.Fragment>
+				)}/>
 		</LinkTo.Object>
 	);
 }

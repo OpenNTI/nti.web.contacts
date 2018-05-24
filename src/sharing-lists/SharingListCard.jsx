@@ -24,31 +24,6 @@ export default class SharingListCard extends React.Component {
 		deleteSharingList: PropTypes.func
 	};
 
-	constructor (props) {
-		super(props);
-		const {managePeople, deleteSharingList, entity} = this.props;
-
-		const flyoutOptions = [
-			<div className="sharing-list-action-flyout-option"
-				onClick={(e) => this.beginRenamingSharingList()}
-				key="rename">
-				{t('renameText')}
-			</div>,
-			<div className="sharing-list-action-flyout-option"
-				onClick={(e) => managePeople(entity)}
-				key="managePeople">
-				{t('managePeopleText')}
-			</div>,
-			<div className="sharing-list-action-flyout-option-delete"
-				onClick={(e) => deleteSharingList(entity)}
-				key="deleteList">
-				{t('deleteText')}
-			</div>
-		];
-
-		this.flyoutOptions = flyoutOptions;
-	}
-
 	state = {
 		renameMode: false
 	}
@@ -62,7 +37,7 @@ export default class SharingListCard extends React.Component {
 		const {renameSharingList} = this.props;
 		// Only commit our changes if the new name is not blank
 		// TODO: May want to do more checks, so maybe should check
-		// against a function like isValidEntityName()
+		// against a function like isValidEntityName()?
 		if (newText) {
 			renameSharingList(entity, newText);
 		}
@@ -74,7 +49,7 @@ export default class SharingListCard extends React.Component {
 
 	render () {
 
-		const {entity, members} = this.props;
+		const {entity, members, deleteSharingList, managePeople} = this.props;
 		const {renameMode} = this.state;
 
 		// TODO: Wrap this in a LinkTo component that links to
@@ -83,7 +58,22 @@ export default class SharingListCard extends React.Component {
 			<div className="sharing-list-card">
 				<CardDetail entity={entity}
 					members={members}
-					flyoutOptions={this.flyoutOptions}
+					flyoutOptions={(
+						<React.Fragment>
+							<div className="sharing-list-action-flyout-option"
+								onClick={(e) => this.beginRenamingSharingList()}>
+								{t('renameText')}
+							</div>
+							<div className="sharing-list-action-flyout-option"
+								onClick={(e) => managePeople(entity)}>
+								{t('managePeopleText')}
+							</div>
+							<div className="sharing-list-action-flyout-option-delete"
+								onClick={(e) => deleteSharingList(entity)}>
+								{t('deleteText')}
+							</div>
+						</React.Fragment>
+					)}
 					onRenameFinish={this.finishRenamingSharingList}
 					onCancelEditing={this.cancelRenamingGroup}
 					renameMode={renameMode}/>

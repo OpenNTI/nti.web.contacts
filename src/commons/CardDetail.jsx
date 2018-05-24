@@ -14,7 +14,7 @@ export default class CardDetail extends React.Component {
 			PropTypes.string
 		]).isRequired,
 		members: PropTypes.array,
-		flyoutOptions: PropTypes.array,
+		flyoutOptions: PropTypes.object,
 		onRenameFinish: PropTypes.func,
 		onCancelEditing: PropTypes.func,
 		renameMode: PropTypes.bool
@@ -63,17 +63,6 @@ export default class CardDetail extends React.Component {
 		this.flyout.dismiss();
 	}
 
-	// Wrap each flyout option so that we can
-	// dimisss the flyout automatically after
-	// calling the onClick method of the option.
-	renderFlyoutOption = (option) => {
-		return (
-			<div onClick={this.onOptionClick} key={option.key}>
-				{option}
-			</div>
-		);
-	}
-
 	render () {
 		const {members, entity, renameMode, flyoutOptions} = this.props;
 		const {location} = entity;
@@ -91,7 +80,9 @@ export default class CardDetail extends React.Component {
 							horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
 							ref={this.attachFlyoutRef}
 						>
-							{flyoutOptions.map(this.renderFlyoutOption)}
+							<div onClick={this.onOptionClick}>
+								{flyoutOptions}
+							</div>
 						</Flyout.Triggered>
 					</div>
 				</div>
