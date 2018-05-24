@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Loading, Button, Prompt } from '@nti/web-commons';
+import { Loading, Button, EmptyList, Prompt } from '@nti/web-commons';
 import Logger from '@nti/util-logger';
 
 import GroupListStore from './Store';
@@ -180,6 +180,7 @@ class GroupsView extends React.Component {
 								viewGroupCode={this.viewGroupCode}/>
 						)
 					)}
+					{!filteredItems.length && <EmptyList type="dynamicfriendslists"/>}
 					{this.renderModals()}
 				</div>
 			</div>

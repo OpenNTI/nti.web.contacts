@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Button, Loading, Prompt } from '@nti/web-commons';
+import { Button, EmptyList, Loading, Prompt } from '@nti/web-commons';
 
 import SharingListStore from './Store';
 import SharingListCard from './SharingListCard';
@@ -157,6 +157,7 @@ class SharingListsView extends React.Component {
 								managePeople={this.managePeople}/>
 						)
 					)}
+					{!filteredItems.length && <EmptyList type="friendslists"/>}
 					{this.renderModals()}
 				</div>
 			</div>
