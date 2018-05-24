@@ -49,6 +49,7 @@ export default class CardDetail extends React.Component {
 		else {
 			return (
 				<EditableTextField text={entity.displayName}
+					placeholderText="Name"
 					isEditable={enableEditing}
 					onCancelEditing={this.onCancelEditing}
 					onFinishedEditing={this.onFinishedEditing}/>

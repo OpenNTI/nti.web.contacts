@@ -33,6 +33,7 @@ export default class CreateSharingListRow extends React.Component {
 			<div className="add-sharing-list-row" onClick={this.onClickRow}>
 				<EditableTextField text={t('newListText')}
 					isEditable={this.state.inEditMode}
+					placeholderText="New list name"
 					onFinishedEditing={this.onFinishedEditing}/>
 			</div>
 		);
