@@ -11,7 +11,8 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 	static connect (propMap, storeProp = 'store') {
 		const store = this.getInstance();
 		const extraProps = {
-			[storeProp]: store
+			[storeProp]: store,
+			searchItems: this.searchItems
 		};
 
 		return function decorator (component) {
@@ -43,6 +44,7 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 			loading: true
 		};
 		this.searchTerm = '';
+		this.searchItems = [];
 	}
 
 	get (key) {
@@ -52,6 +54,10 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 
 		if (key === 'items') {
 			return Array.from(this.ds);
+		}
+
+		if (key === 'searchItems') {
+			return Array.from(this.searchItems);
 		}
 
 		return super.get(key);
@@ -70,7 +76,8 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 		this.ds.removeListener('change', this.onDataSourceChanged);
 	}
 
-	updateSearchTerm (searchTerm) {
+	async updateSearchTerm (searchTerm) {
+		//Default implementation
 		this.searchTerm = searchTerm;
 		this.emitChange('items');
 		this.emitChange('searchTerm');
