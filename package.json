@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NextThought/nti.web.component.contacts"
+    "url": "https://github.com/NextThought/nti.web.contacts"
   },
   "publishConfig": {
     "registry": "https://npm.nextthought.com"
@@ -27,9 +27,9 @@
   "author": "nextthought",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/NextThought/nti.web.component.contacts/issues"
+    "url": "https://github.com/NextThought/nti.web.contacts/issues"
   },
-  "homepage": "https://github.com/NextThought/nti.web.component.contacts#readme",
+  "homepage": "https://github.com/NextThought/nti.web.contacts#readme",
   "devDependencies": {
     "@nti/cmp-scripts": "^1.17.16",
     "@nti/style-common": "^1.3.0",
