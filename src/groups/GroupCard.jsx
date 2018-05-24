@@ -71,7 +71,10 @@ export default class GroupCard extends React.Component {
 			groupFlyoutOptions.push(groupCodeOption);
 		}
 		if (entity.hasLink('edit')) {
-			groupFlyoutOptions.push(changeNameOption, deleteGroupOption);
+			groupFlyoutOptions.push(changeNameOption);
+		}
+		if (!entity.friends) {
+			groupFlyoutOptions.push(deleteGroupOption);
 		}
 		if (entity.hasLink('my_membership')) {
 			groupFlyoutOptions.push(leaveGroupOption);
