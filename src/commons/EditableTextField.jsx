@@ -45,7 +45,7 @@ export default class EditableTextField extends React.Component {
 		const {text, isEditable, placeholderText} = this.props;
 		const {textValue: currentInputText} = this.state;
 
-		const displayText = currentInputText || !isEditable && text;
+		const displayText = (currentInputText || !isEditable && text) || '';
 		// We might want a prop to specify whether we want to edit the
 		// existing text in this field, or whether we want to start
 		// from scratch with an empty box? For now just starting every
