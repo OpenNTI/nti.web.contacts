@@ -69,8 +69,19 @@
 	padding-right: 0;
 
 	.create-group-button {
+		width: 155px;
 		margin-left: 25px;
 		margin-right: auto;
+		margin-top: auto;
+		margin-bottom: auto;
+		font-weight: 600;
+		line-height: 19px;
+		padding: 10px;
 		text-align: center;
+
+		.icon-createlarge {
+			font-size: 15pt;
+			margin-left: 1px;
+		}
 	}
 }

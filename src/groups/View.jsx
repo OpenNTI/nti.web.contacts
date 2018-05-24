@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Loading, Button, EmptyList, Prompt } from '@nti/web-commons';
 import Logger from '@nti/util-logger';
+import { Loading, Button, EmptyList, Prompt } from '@nti/web-commons';
+import { LinkTo } from '@nti/web-routing';
 
 import GroupListStore from './Store';
 import GroupInviteCodeModal from './GroupInviteCodeModal';
-import GroupCreateModal from './GroupCreateModal';
+// import GroupCreateModal from './GroupCreateModal';
 import GroupJoinModal from './GroupJoinModal';
 import GroupCard from './GroupCard';
 
@@ -107,12 +108,15 @@ class GroupsView extends React.Component {
 			<div className="groups-panel-header">
 				<div className="groups-header-title">{t('groupsHeader')}</div>
 				<div className="groups-header-buttons">
-					<Button className="create-group-button" onClick={this.createGroupModal}>
-						{t('createGroupButton')}
-					</Button>
-					<Button className="create-group-button" onClick={this.joinGroupModal}>
+					<Button className="create-group-button">
 						{t('joinGroupButton')}
 					</Button>
+					<LinkTo.Path to="groups/add">
+						<Button component="span" className="create-group-button">
+							<i className="icon-createlarge"/>
+							{t('createGroupButton')}
+						</Button>
+					</LinkTo.Path>
 				</div>
 			</div>
 		);
@@ -130,9 +134,9 @@ class GroupsView extends React.Component {
 				{this.state.showJoinGroupDialog && (
 					<GroupJoinModal onDismiss={this.onDismissModal}/>
 				)}
-				{this.state.showCreateDialog && (
+				{/* {this.state.showCreateDialog && (
 					<GroupCreateModal onDismiss={this.onDismissModal}/>
-				)}
+				)} */}
 			</div>
 		);
 	}
