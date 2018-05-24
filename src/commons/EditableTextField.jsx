@@ -7,7 +7,7 @@ export default class EditableTextField extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			textValue: props.text
+			textValue: ''
 		};
 	}
 
@@ -30,16 +30,21 @@ export default class EditableTextField extends React.Component {
 			e.stopPropagation();
 			e.preventDefault();
 			onFinishedEditing(this.state.textValue);
+			this.setState({textValue: ''});
 		}
 		if (cancelingKeys.indexOf(e.key) > -1) {
 			e.stopPropagation();
 			e.preventDefault();
 			onCancelEditing();
+			this.setState({textValue: ''});
 		}
 	}
 
 	render () {
 		const {text, isEditable} = this.props;
+		const {textValue: currentInputText} = this.state;
+
+		const displayText = currentInputText || !isEditable && text;
 		// We might want a prop to specify whether we want to edit the
 		// existing text in this field, or whether we want to start
 		// from scratch with a blank box?
@@ -50,7 +55,7 @@ export default class EditableTextField extends React.Component {
 			return (
 				<div className="editable-text-field">
 					<Input.Text placeholder="Name"
-						value={this.state.textValue}
+						value={displayText}
 						onChange={this.updateTextValue}
 						onKeyDown={this.onKeyDown}/>
 				</div>
