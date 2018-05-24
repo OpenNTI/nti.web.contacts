@@ -27,61 +27,6 @@ export default class GroupCard extends React.Component {
 		viewGroupCode: PropTypes.func
 	};
 
-	constructor (props) {
-		super(props);
-
-		const {entity, deleteGroup, leaveGroup, viewGroupCode} = this.props;
-
-		// Set up flyout options and their respective callbacks
-
-		const leaveGroupOption = (
-			<div className="group-action-flyout-option-delete"
-				key="leaveGroup"
-				onClick={(e) => leaveGroup(entity)}>
-				{t('leaveGroupText')}
-			</div>
-		);
-
-		const deleteGroupOption = (
-			<div className="group-action-flyout-option-delete"
-				key="deleteGroup"
-				onClick={(e) => deleteGroup(entity)}>
-				{t('deleteGroupText')}
-			</div>
-		);
-
-		const groupCodeOption = (
-			<div className="group-action-flyout-option"
-				key="groupCode"
-				onClick={(e) => viewGroupCode(entity)}>
-				{t('groupCodeText')}
-			</div>
-		);
-
-		const changeNameOption = (
-			<div className="group-action-flyout-option"
-				key="renameGroup"
-				onClick={(e) => this.beginRenamingGroup()}>
-				{t('renameText')}
-			</div>
-		);
-
-		let groupFlyoutOptions = [];
-		if (entity.hasLink('default-trivial-invitation-code')) {
-			groupFlyoutOptions.push(groupCodeOption);
-		}
-		if (entity.hasLink('edit')) {
-			groupFlyoutOptions.push(changeNameOption);
-		}
-		if (!entity.friends) {
-			groupFlyoutOptions.push(deleteGroupOption);
-		}
-		if (entity.hasLink('my_membership')) {
-			groupFlyoutOptions.push(leaveGroupOption);
-		}
-		this.groupFlyoutOptions = groupFlyoutOptions;
-	}
-
 	state = {
 		renameMode: false
 	}
@@ -103,6 +48,50 @@ export default class GroupCard extends React.Component {
 		this.setState({renameMode: false});
 	}
 
+	renderFlyoutOptions () {
+
+		const {entity, deleteGroup, leaveGroup, viewGroupCode} = this.props;
+
+		// Set up flyout options and their respective callbacks
+		return (
+			<React.Fragment>
+				{entity.hasLink('default-trivial-invitation-code') && (
+					<div className="group-action-flyout-option"
+						key="groupCode"
+						onClick={(e) => viewGroupCode(entity)}>
+						{t('groupCodeText')}
+					</div>
+				)}
+
+				{entity.hasLink('edit') && (
+					<div className="group-action-flyout-option"
+						key="renameGroup"
+						onClick={(e) => this.beginRenamingGroup()}>
+						{t('renameText')}
+					</div>
+				)}
+
+				{!entity.friends && (
+					<div className="group-action-flyout-option-delete"
+						key="deleteGroup"
+						onClick={(e) => deleteGroup(entity)}>
+						{t('deleteGroupText')}
+					</div>
+				)}
+
+				{entity.hasLink('my_membership') && (
+					<div className="group-action-flyout-option-delete"
+						key="leaveGroup"
+						onClick={(e) => leaveGroup(entity)}>
+						{t('leaveGroupText')}
+					</div>
+				)}
+
+			</React.Fragment>
+		);
+
+	}
+
 	render () {
 
 		const {entity, members} = this.props;
@@ -115,7 +104,7 @@ export default class GroupCard extends React.Component {
 				</LinkTo.Object>
 				<CardDetail entity={entity}
 					members={members}
-					flyoutOptions={this.groupFlyoutOptions}
+					flyoutOptions={this.renderFlyoutOptions()}
 					onRenameFinish={this.finishRenamingGroup}
 					onCancelEditing={this.cancelRenamingGroup}
 					renameMode={renameMode}/>
