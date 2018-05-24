@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getAppUser } from '@nti/web-client';
-import { TokenEditor } from '@nti/web-commons';
+import { TokenEditor, EmptyList } from '@nti/web-commons';
 
 import ContactRow from './SharingListContactRow';
 import Store from './Store';
@@ -46,12 +46,18 @@ export default class SharingListContactsContainer extends React.Component {
 
 	renderContactList (contacts) {
 		const {removeContactFromList} = this.props;
-		return contacts && contacts.map((x) => (
+
+		const contactList = contacts && contacts.map((x) => (
 			<ContactRow user={x}
 				key={x.Username}
 				showUsername={contacts.filter(y => y.alias === x.alias).length > 1}
 				onRemove={removeContactFromList}/>
 		));
+
+		if (contactList.length) {
+			return contactList;
+		}
+		return <EmptyList type="entity-search"/>;
 	}
 
 	render () {
