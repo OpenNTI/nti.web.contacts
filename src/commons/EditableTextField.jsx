@@ -15,7 +15,8 @@ export default class EditableTextField extends React.Component {
 		text: PropTypes.string,
 		isEditable: PropTypes.bool,
 		onFinishedEditing: PropTypes.func,
-		onCancelEditing: PropTypes.func
+		onCancelEditing: PropTypes.func,
+		placeholderText: PropTypes.string
 	};
 
 	updateTextValue = (newValue) => {
@@ -41,20 +42,21 @@ export default class EditableTextField extends React.Component {
 	}
 
 	render () {
-		const {text, isEditable} = this.props;
+		const {text, isEditable, placeholderText} = this.props;
 		const {textValue: currentInputText} = this.state;
 
 		const displayText = currentInputText || !isEditable && text;
 		// We might want a prop to specify whether we want to edit the
 		// existing text in this field, or whether we want to start
-		// from scratch with a blank box?
+		// from scratch with an empty box? For now just starting every
+		// time with an empty box.
 		if (!isEditable) {
 			return (<div className="editable-text-field">{text}</div>);
 		}
 		else {
 			return (
 				<div className="editable-text-field">
-					<Input.Text placeholder="Name"
+					<Input.Text placeholder={placeholderText}
 						value={displayText}
 						onChange={this.updateTextValue}
 						onKeyDown={this.onKeyDown}/>
