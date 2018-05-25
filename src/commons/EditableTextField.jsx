@@ -28,14 +28,18 @@ export default class EditableTextField extends React.Component {
 			e.stopPropagation();
 			e.preventDefault();
 			onFinishedEditing(this.state.textValue);
-			this.setState({textValue: ''});
+			// this.setState({textValue: ''});
 		}
 		if (cancelingKeys.indexOf(e.key) > -1) {
 			e.stopPropagation();
 			e.preventDefault();
 			onCancelEditing();
-			this.setState({textValue: ''});
+			// this.setState({textValue: ''});
 		}
+	}
+
+	onBlur = () => {
+		this.props.onCancelEditing();
 	}
 
 	render () {
@@ -56,6 +60,7 @@ export default class EditableTextField extends React.Component {
 					<Input.Text placeholder={placeholderText}
 						value={displayText}
 						onChange={this.updateTextValue}
+						onBlur={this.onBlur}
 						onKeyDown={this.onKeyDown}/>
 				</div>
 			);
