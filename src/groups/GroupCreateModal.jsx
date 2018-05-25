@@ -21,8 +21,7 @@ export default
 class GroupCreateModal extends React.Component {
 
 	static propTypes = {
-		store: PropTypes.object,
-		onDismiss: PropTypes.func,
+		store: PropTypes.object
 	};
 
 	state = {
@@ -34,7 +33,8 @@ class GroupCreateModal extends React.Component {
 	}
 
 	onDismiss = () => {
-		this.props.onDismiss('showCreateDialog');
+		//We may want to replace the current route with the previous, or just leave this as is.
+		global.history.back();
 	}
 
 	onCreateGroup = () => {
