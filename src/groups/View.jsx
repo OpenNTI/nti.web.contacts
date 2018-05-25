@@ -1,17 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import Logger from '@nti/util-logger';
-import { Loading, Button, EmptyList, Prompt } from '@nti/web-commons';
+import { Loading, Button, EmptyList } from '@nti/web-commons';
 import { LinkTo } from '@nti/web-routing';
 
 import GroupListStore from './Store';
-import GroupInviteCodeModal from './GroupInviteCodeModal';
-// import GroupCreateModal from './GroupCreateModal';
-import GroupJoinModal from './GroupJoinModal';
 import GroupCard from './GroupCard';
-
-const logger = Logger.get('contacts:components:Groups');
 
 const propMap = {
 	items: 'items',
@@ -46,98 +40,6 @@ class GroupsView extends React.Component {
 		searchTerm: PropTypes.string
 	};
 
-	constructor (props) {
-		super();
-	}
-
-	onRenameGroup = (group, newName) => {
-		const {store} = this.props;
-		store.renameGroup(group, newName);
-	}
-
-	deleteGroupModal = async (group) => {
-		const {store} = this.props;
-
-		try {
-			await Prompt.areYouSure('Delete this group?');
-			store.deleteGroup(group);
-		}
-		catch (e) {
-			// do nothing because the user hit cancel
-		}
-	};
-
-	onLeaveGroup = (group) => {
-		const {store} = this.props;
-		logger.debug('Leaving group ' + group);
-		store.leaveGroup(group);
-	}
-
-	createGroupModal = () => {
-		this.setState({ showCreateDialog: true});
-	}
-
-	onCreateGroup = (groupName) => {
-		const {store} = this.props;
-		logger.debug('Creating group with name ' + groupName);
-		store.createGroup(groupName);
-	}
-
-	viewGroupCode = async (entity) => {
-		this.setState({ showInviteCodeDialog: true });
-		this.setState({ activeGroup: entity });
-	};
-
-	joinGroupModal = (props) => {
-		this.setState({ showJoinGroupDialog: true });
-	}
-
-	onJoinGroup = (groupCode) => {
-		const {store} = this.props;
-		store.joinGroup(groupCode);
-	}
-
-	onDismissModal = (modal) => {
-		this.setState({[modal]: false});
-		this.setState({activeGroup: null});
-		this.setState({activeInviteCode: null});
-	}
-
-	renderHeader () {
-		return (
-			<div className="groups-panel-header">
-				<div className="groups-header-title">{t('groupsHeader')}</div>
-				<div className="groups-header-buttons">
-					<Button className="create-group-button">
-						{t('joinGroupButton')}
-					</Button>
-					<Button component={LinkTo.Path} to="groups/add" className="create-group-button">
-						<i className="icon-createlarge"/>
-						{t('createGroupButton')}
-					</Button>
-				</div>
-			</div>
-		);
-	}
-
-	renderModals () {
-
-		const {activeGroup} = this.state;
-
-		return (
-			<div>
-				{this.state.showInviteCodeDialog && (
-					<GroupInviteCodeModal onDismiss={this.onDismissModal} item={activeGroup}/>
-				)}
-				{this.state.showJoinGroupDialog && (
-					<GroupJoinModal onDismiss={this.onDismissModal}/>
-				)}
-				{/* {this.state.showCreateDialog && (
-					<GroupCreateModal onDismiss={this.onDismissModal}/>
-				)} */}
-			</div>
-		);
-	}
 
 	getFilteredItemsBySearchTerm (searchTerm, items) {
 		// Only filters items if search term is a truthy value
@@ -165,21 +67,26 @@ class GroupsView extends React.Component {
 		return (
 			<div className="groups-panel">
 
-				{this.renderHeader()}
+				<div className="groups-panel-header">
+					<div className="groups-header-title">{t('groupsHeader')}</div>
+					<div className="groups-header-buttons">
+						<Button component={LinkTo.Path} to="groups/join" className="create-group-button">
+							{t('joinGroupButton')}
+						</Button>
+						<Button component={LinkTo.Path} to="groups/add" className="create-group-button">
+							<i className="icon-createlarge"/>
+							{t('createGroupButton')}
+						</Button>
+					</div>
+				</div>
+
 				<div className="groups-list-frame">
-					{filteredItems && filteredItems.map(
-						(i) => (
-							<GroupCard entity={i}
-								members={i.friends}
-								key={i.Username}
-								deleteGroup={this.deleteGroupModal}
-								leaveGroup={this.onLeaveGroup}
-								renameGroup={this.onRenameGroup}
-								viewGroupCode={this.viewGroupCode}/>
-						)
-					)}
+
+					{filteredItems && filteredItems.map(i => (
+						<GroupCard key={i.getID()} entity={i} />
+					))}
+
 					{!filteredItems.length && <EmptyList type="dynamicfriendslists"/>}
-					{this.renderModals()}
 				</div>
 			</div>
 		);

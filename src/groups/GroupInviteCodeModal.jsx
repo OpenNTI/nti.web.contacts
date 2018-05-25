@@ -2,18 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { Prompt, Panels, Input } from '@nti/web-commons';
+import { decodeFromURI } from '@nti/lib-ntiids';
+
+import GroupListStore from './Store';
 
 const t = scoped('nti-web-contacts.groups.GroupInviteCodeModal', {
 	headerText: 'Invite People',
 	bodyText: 'Share this group code to others you want to join your group. Once they click "Join a Group" they will paste in this code to join.'
 });
 
-export default class GroupInviteCodeModal extends React.Component {
+export default
+@GroupListStore.connect()
+class GroupInviteCodeModal extends React.Component {
 
 	static propTypes = {
-		item: PropTypes.object,
-		onDismiss: PropTypes.func
+		store: PropTypes.object,
 	};
+
+	static getDerivedStateFromProps ({entityId, store}, state) {
+		const items = (store && store.get('items')) || [];
+		const item = items.find(x => x.getID() === decodeFromURI(entityId));
+
+		return state.item === item ? null : {
+			item
+		};
+	}
 
 	state = {
 		invitationCode: ''
@@ -23,12 +36,23 @@ export default class GroupInviteCodeModal extends React.Component {
 		this.getInviteCode();
 	}
 
+	componentDidUpdate (_, prevState) {
+		if (this.state.item !== prevState.item) {
+			this.getInviteCode();
+		}
+	}
+
 	onDismiss = () => {
-		this.props.onDismiss('showInviteCodeDialog');
+		//We may want to replace the current route with the previous, or just leave this as is.
+		global.history.back();
 	}
 
 	getInviteCode = async () => {
-		const {item} = this.props;
+		const {item} = this.state;
+		if (!item) {
+			return;
+		}
+
 		const link = await item.fetchLink('default-trivial-invitation-code');
 		this.setState({invitationCode: link.invitation_code});
 	};

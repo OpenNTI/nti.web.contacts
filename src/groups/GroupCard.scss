@@ -8,11 +8,12 @@
 }
 
 .group-avatar {
-	float:left;
+	float: left;
 	height: inherit;
 }
 
 .group-action-flyout-option {
+	text-decoration: none;
 	color: $secondary-grey;
 	font-size: 14px;
 	line-height: 19px;

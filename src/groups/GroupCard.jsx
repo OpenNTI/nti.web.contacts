@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Logger from '@nti/util-logger';
 import { scoped } from '@nti/lib-locale';
-import { Avatar } from '@nti/web-commons';
+import { encodeForURI } from '@nti/lib-ntiids';
+import { Avatar, Prompt } from '@nti/web-commons';
 import { LinkTo } from '@nti/web-routing';
 
 import { CardDetail } from '../commons';
+
+import GroupListStore from './Store';
+
+const logger = Logger.get('contacts:components:Groups');
 
 const t = scoped('nti-web-contacts.groups.GroupCard', {
 	leaveGroupText: 'Leave Group',
@@ -13,18 +19,16 @@ const t = scoped('nti-web-contacts.groups.GroupCard', {
 	renameText: 'Rename Group'
 });
 
-export default class GroupCard extends React.Component {
+export default
+@GroupListStore.connect()
+class GroupCard extends React.Component {
 
 	static propTypes = {
 		entity: PropTypes.oneOfType([
 			PropTypes.object,
 			PropTypes.string
 		]).isRequired,
-		members: PropTypes.array,
-		deleteGroup: PropTypes.func,
-		leaveGroup: PropTypes.func,
-		renameGroup: PropTypes.func,
-		viewGroupCode: PropTypes.func
+		store: PropTypes.object
 	};
 
 	state = {
@@ -35,67 +39,45 @@ export default class GroupCard extends React.Component {
 		this.setState({renameMode: true});
 	}
 
-	finishRenamingGroup = (entity, newText) => {
-		this.setState({renameMode: false});
-		const {renameGroup} = this.props;
+	finishRenamingGroup = async (_, newName) => {
+		const {entity, store} = this.props;
 		// Only commit our changes if the new name is not blank
-		if (newText) {
-			renameGroup(entity, newText);
+		if (newName) {
+			await store.renameGroup(entity, newName);
 		}
+
+		this.setState({renameMode: false});
 	}
 
 	cancelRenamingGroup = () => {
 		this.setState({renameMode: false});
 	}
 
-	renderFlyoutOptions () {
 
-		const {entity, deleteGroup, leaveGroup, viewGroupCode} = this.props;
+	onDeleteGroup = async () => {
+		const {entity, store} = this.props;
 
-		// Set up flyout options and their respective callbacks
-		return (
-			<React.Fragment>
-				{entity.hasLink('default-trivial-invitation-code') && (
-					<div className="group-action-flyout-option"
-						key="groupCode"
-						onClick={(e) => viewGroupCode(entity)}>
-						{t('groupCodeText')}
-					</div>
-				)}
+		try {
+			await Prompt.areYouSure('Delete this group?');
+			store.deleteGroup(entity);
+		}
+		catch (e) {
+			// do nothing because the user hit cancel
+		}
+	};
 
-				{entity.hasLink('edit') && (
-					<div className="group-action-flyout-option"
-						key="renameGroup"
-						onClick={(e) => this.beginRenamingGroup()}>
-						{t('renameText')}
-					</div>
-				)}
-
-				{!entity.friends && (
-					<div className="group-action-flyout-option-delete"
-						key="deleteGroup"
-						onClick={(e) => deleteGroup(entity)}>
-						{t('deleteGroupText')}
-					</div>
-				)}
-
-				{entity.hasLink('my_membership') && (
-					<div className="group-action-flyout-option-delete"
-						key="leaveGroup"
-						onClick={(e) => leaveGroup(entity)}>
-						{t('leaveGroupText')}
-					</div>
-				)}
-
-			</React.Fragment>
-		);
-
+	onLeaveGroup = () => {
+		const {entity, store} = this.props;
+		logger.debug('Leaving group ' + entity);
+		store.leaveGroup(entity);
 	}
+
 
 	render () {
 
-		const {entity, members} = this.props;
+		const {entity} = this.props;
 		const {renameMode} = this.state;
+
 
 		return (
 			<div className="group-card">
@@ -103,11 +85,39 @@ export default class GroupCard extends React.Component {
 					<Avatar className="group-avatar" entity={entity}/>
 				</LinkTo.Object>
 				<CardDetail entity={entity}
-					members={members}
-					flyoutOptions={this.renderFlyoutOptions()}
+					members={entity.friends}
 					onRenameFinish={this.finishRenamingGroup}
 					onCancelEditing={this.cancelRenamingGroup}
-					renameMode={renameMode}/>
+					renameMode={renameMode}
+					flyoutOptions={(
+						<React.Fragment>
+							{entity.hasLink('default-trivial-invitation-code') && (
+								<LinkTo.Path to={`groups/${encodeForURI(entity.getID())}`} className="group-action-flyout-option">
+									{t('groupCodeText')}
+								</LinkTo.Path>
+							)}
+
+							{entity.hasLink('edit') && (
+								<div className="group-action-flyout-option" onClick={this.beginRenamingGroup}>
+									{t('renameText')}
+								</div>
+							)}
+
+							{!entity.friends && (
+								<div className="group-action-flyout-option-delete" onClick={this.onDeleteGroup}>
+									{t('deleteGroupText')}
+								</div>
+							)}
+
+							{entity.hasLink('my_membership') && (
+								<div className="group-action-flyout-option-delete" onClick={this.onLeaveGroup}>
+									{t('leaveGroupText')}
+								</div>
+							)}
+
+						</React.Fragment>
+					)}
+				/>
 			</div>
 		);
 	}

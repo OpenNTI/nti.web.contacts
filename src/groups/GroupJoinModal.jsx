@@ -18,7 +18,6 @@ export default
 class GroupJoinModal extends React.Component {
 
 	static propTypes = {
-		onDismiss: PropTypes.func,
 		store: PropTypes.object
 	};
 
@@ -32,7 +31,8 @@ class GroupJoinModal extends React.Component {
 	}
 
 	onDismiss = () => {
-		this.props.onDismiss('showJoinGroupDialog');
+		//We may want to replace the current route with the previous, or just leave this as is.
+		global.history.back();
 	}
 
 	onJoinGroup = async () => {
