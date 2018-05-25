@@ -111,12 +111,10 @@ class GroupsView extends React.Component {
 					<Button className="create-group-button">
 						{t('joinGroupButton')}
 					</Button>
-					<LinkTo.Path to="groups/add">
-						<Button component="span" className="create-group-button">
-							<i className="icon-createlarge"/>
-							{t('createGroupButton')}
-						</Button>
-					</LinkTo.Path>
+					<Button component={LinkTo.Path} to="groups/add" className="create-group-button">
+						<i className="icon-createlarge"/>
+						{t('createGroupButton')}
+					</Button>
 				</div>
 			</div>
 		);
