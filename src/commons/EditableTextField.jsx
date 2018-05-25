@@ -4,11 +4,8 @@ import { Input } from '@nti/web-commons';
 
 export default class EditableTextField extends React.Component {
 
-	constructor (props) {
-		super(props);
-		this.state = {
-			textValue: ''
-		};
+	state = {
+		textValue: this.props.text
 	}
 
 	static propTypes = {
