@@ -6,8 +6,6 @@ import ReactDOM from 'react-dom';
 import {Router, Route, LinkTo} from '@nti/web-routing';
 import {Input} from '@nti/web-search';
 
-import '@nti/style-common/all.scss';
-import '@nti/web-commons/lib/index.css';
 
 import RouterView from '../../src';
 

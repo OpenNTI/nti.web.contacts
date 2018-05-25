@@ -1,6 +1,7 @@
 @import "~@nti/style-common";
 
 .contact-list-card {
+	text-decoration: none;
 	height: 100px;
 	width: 344px;
 	margin: 8px;
@@ -23,7 +24,7 @@
 }
 
 .contact-list-avatar {
-	float:left;
+	float: left;
 	height: inherit;
 }
 

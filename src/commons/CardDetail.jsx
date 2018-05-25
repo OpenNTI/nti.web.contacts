@@ -32,12 +32,10 @@ export default class CardDetail extends React.Component {
 		this.flyout.dismiss();
 	}
 
-	renderFlyoutTrigger () {
-		return (
-			<div className="trigger">
-				<div className="dropdown"><i className="icon-chevron-down"/></div>
-			</div>
-		);
+	onOptionClick = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+		this.flyout.dismiss();
 	}
 
 	renderCardName (enableEditing) {
@@ -57,11 +55,7 @@ export default class CardDetail extends React.Component {
 		}
 	}
 
-	onOptionClick = (e) => {
-		e.stopPropagation();
-		e.preventDefault();
-		this.flyout.dismiss();
-	}
+
 
 	render () {
 		const {members, entity, renameMode, flyoutOptions} = this.props;
@@ -76,8 +70,12 @@ export default class CardDetail extends React.Component {
 						</div>
 						<Flyout.Triggered
 							className="card-action-flyout"
-							trigger={this.renderFlyoutTrigger()}
 							horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
+							trigger={(
+								<div className="trigger">
+									<div className="dropdown"><i className="icon-chevron-down"/></div>
+								</div>
+							)}
 							ref={this.attachFlyoutRef}
 						>
 							<div onClick={this.onOptionClick}>
