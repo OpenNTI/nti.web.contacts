@@ -18,7 +18,8 @@ class FollowButton extends React.Component {
 
 	static propTypes = {
 		entity: PropTypes.any.isRequired,
-		children: PropTypes.node
+		children: PropTypes.node,
+		className: PropTypes.string
 	}
 
 	componentDidMount () { this.setup(); }
@@ -63,7 +64,7 @@ class FollowButton extends React.Component {
 	render () {
 		//Get the entity on the state, not the props. See @setup() above.
 		const {entity} = this.state || {};
-		const {children} = this.props;
+		const {children, className} = this.props;
 		const child = React.Children.count(children) > 0
 			? React.Children.only(children)
 			: null;
@@ -74,7 +75,7 @@ class FollowButton extends React.Component {
 
 		const {following} = entity;
 
-		const css = cx({
+		const css = cx('contact-follow-toggle', className, {
 			'follow-button': !following,
 			'unfollow-button': following
 		});
