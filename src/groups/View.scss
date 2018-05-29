@@ -49,8 +49,18 @@
 
 	.nti-text-input {
 		margin-top: 10px;
+		margin-bottom: 10px;
 		width: 100%;
 		height: 40px;
+
+		&.error-message {
+			color: $secondary-grey;
+			border: solid 1px $primary-red;
+		}
+	}
+
+	.error-message {
+		color: $primary-red;
 	}
 }
 

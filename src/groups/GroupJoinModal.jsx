@@ -9,7 +9,8 @@ const t = scoped('nti-web-contacts.groups.GroupJoinModal', {
 	cancelButton: 'Cancel',
 	joinButton: 'Join',
 	joinGroupHeader: 'Join a Group',
-	joinGroupDescription: 'Enter a group code to join a group.'
+	joinGroupDescription: 'Enter a group code to join a group.',
+	invalidCodeMessage: 'Not a valid code'
 });
 
 
@@ -62,6 +63,7 @@ class GroupJoinModal extends React.Component {
 	}
 
 	render () {
+		const {validCode} = this.state;
 		return(
 			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
 				<div className="group-action-modal">
@@ -71,9 +73,13 @@ class GroupJoinModal extends React.Component {
 					<div className="group-action-modal-content">
 						{t('joinGroupDescription')}
 						<div>
-							<Input.Text placeholder="Name" value={this.state.groupCode} onChange={this.updateGroupCode} maxLength="140"/>
+							<Input.Text placeholder="Name"
+								className={!validCode && 'error-message'}
+								value={this.state.groupCode}
+								onChange={this.updateGroupCode}
+								maxLength="140"/>
 						</div>
-						{!this.state.validCode && <div>Not a valid code</div>}
+						{!validCode && <div className="error-message">{t('invalidCodeMessage')}</div>}
 					</div>
 
 					{this.renderControls()}
