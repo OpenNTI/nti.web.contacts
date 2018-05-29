@@ -37,6 +37,7 @@ export default class ContactListStore extends BaseContactsStore {
 	async updateSearchTerm (searchTerm) {
 
 		this.searchTerm = searchTerm;
+		this.ds['loading'] = true;
 		this.emitChange('loading');
 
 		if (!searchTerm) {
@@ -63,6 +64,7 @@ export default class ContactListStore extends BaseContactsStore {
 				}
 			}
 		}
+		this.ds['loading'] = false;
 		this.emitChange('searchItems');
 		this.emitChange('loading');
 	}
