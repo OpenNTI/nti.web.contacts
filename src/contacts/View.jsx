@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Loading } from '@nti/web-commons';
+import { EmptyList, Loading } from '@nti/web-commons';
 // import { searchable } from '@nti/web-search';
 
 import ContactListStore from './Store';
@@ -92,20 +92,24 @@ class ContactListView extends React.Component {
 	}
 
 	renderContactListCards = () => {
-		const {items, searchItems} = this.props;
+		const {items, searchItems, searchTerm} = this.props;
 
 		let filteredItems = items;
-		if (searchItems.length) {
+		if (searchTerm) {
 			filteredItems = searchItems;
 		}
 
 		return (
 			<div className="contact-list-cards-frame">
-				<ContactCardsContainer items={filteredItems}
-					removeContact={this.removeContact}
-					chatWithContact={this.chatWithContact}
-					addToSharingList={this.openAddToSharingListModal}
-					viewContactProfile={this.viewContactProfile}/>
+				{(!filteredItems.length && searchTerm) && <EmptyList type="contactssearch"/>}
+				{(!filteredItems.length && !searchTerm) && <EmptyList type="contacts"/>}
+				{filteredItems.length > 0 && (
+					<ContactCardsContainer items={filteredItems}
+						removeContact={this.removeContact}
+						chatWithContact={this.chatWithContact}
+						addToSharingList={this.openAddToSharingListModal}
+						viewContactProfile={this.viewContactProfile}/>
+				)}
 			</div>
 		);
 	}
@@ -114,18 +118,6 @@ class ContactListView extends React.Component {
 		return(
 			<ContactSidebar/>
 		);
-	}
-
-	getFilteredItemsBySearchTerm (searchTerm, items) {
-		// Only filters items if search term is a truthy value
-		if (searchTerm) {
-			const results = items.filter(
-				x => x.displayName.toLowerCase().includes(searchTerm.toLowerCase()
-				)
-			);
-			return results;
-		}
-		return items;
 	}
 
 	render () {
