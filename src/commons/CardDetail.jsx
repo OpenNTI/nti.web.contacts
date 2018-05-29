@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Flyout, DisplayName, FollowButton } from '@nti/web-commons';
+import { Flyout, DisplayName } from '@nti/web-commons';
 
+import FollowButton from './FollowButton';
 import Members from './Members';
 import EditableTextField from './EditableTextField';
 
