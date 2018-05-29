@@ -70,10 +70,10 @@ class GroupsView extends React.Component {
 				<div className="groups-panel-header">
 					<div className="groups-header-title">{t('groupsHeader')}</div>
 					<div className="groups-header-buttons">
-						<Button component={LinkTo.Path} to="groups/join" className="create-group-button">
+						<Button component={LinkTo.Path} to="groups/join" className="header-button join">
 							{t('joinGroupButton')}
 						</Button>
-						<Button component={LinkTo.Path} to="groups/add" className="create-group-button">
+						<Button component={LinkTo.Path} to="groups/add" className="header-button add">
 							<i className="icon-createlarge"/>
 							{t('createGroupButton')}
 						</Button>

@@ -67,18 +67,26 @@
 	margin-left: auto;
 	padding-right: 0;
 
-	.create-group-button {
+	.header-button {
 		min-width: 155px;
 		border-radius: 3px;
 		margin: 0 25px 0 0;
 		line-height: 20px;
 		padding: 10px;
 		text-align: center;
+		font-weight: normal;
 
 		.icon-createlarge {
 			font-size: 18px;
 			vertical-align: text-bottom;
 			margin-right: 5px;
+		}
+
+		&.join {
+			background: white;
+			color: $secondary-grey;
+			border: 1px solid $border-grey-light;
+			border-radius: 3px;
 		}
 	}
 }
