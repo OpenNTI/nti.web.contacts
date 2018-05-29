@@ -12,11 +12,12 @@
 
 .member-list {
 	display: flex;
-	flex: 0;
-}
+	flex-direction: row-reverse;
+	width: min-content;
 
-.member {
-	margin-left: -10px;
+	.member-avatar {
+		margin-right: -10px;
+	}
 }
 
 .members {

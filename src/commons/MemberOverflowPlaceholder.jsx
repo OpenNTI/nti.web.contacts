@@ -10,7 +10,7 @@ MemberOverflowPlaceholder.propTypes = {
 
 export default function MemberOverflowPlaceholder ({overflowCount}) {
 	return (
-		<div className="member-avatar-overflow-placeholder">
+		<div className="member-avatar overflow-placeholder">
 			<div className="count">
 				{'+' + overflowCount}
 			</div>

@@ -39,7 +39,7 @@ export default function Members ({members, displayLabel = true}) {
 		<div className="members">
 			{displayLabel && (<div className="members-label">{t('membersLabel')}</div>)}
 			<div className="member-list">
-				{listOfMembers}
+				{listOfMembers.reverse()}
 			</div>
 		</div>
 	);
