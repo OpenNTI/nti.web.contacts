@@ -72,9 +72,12 @@ class SharingListCreateModal extends React.Component {
 
 	renderControls = () => {
 
+		const {sharingListName} = this.state;
+		const createButtonClass = sharingListName.trim() ? '' : 'disabled';
+
 		const buttons = [
 			{label: 'Cancel', onClick: this.onDismiss},
-			{label: 'Create', onClick: this.onCreateSharingList}
+			{label: 'Create', onClick: this.onCreateSharingList, className: createButtonClass}
 		];
 
 		return (
