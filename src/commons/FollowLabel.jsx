@@ -8,8 +8,6 @@ FollowLabel.propTypes = {
 
 export default function FollowLabel ({following}) {
 
-	debugger;
-
 	if (following) {
 		return (
 			<div className="follow-label following">
