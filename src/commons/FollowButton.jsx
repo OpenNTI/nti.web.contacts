@@ -12,9 +12,7 @@ const DEFAULT_TEXT = {
 let t = scoped('contacts.components.buttons.follow', DEFAULT_TEXT);
 
 
-export default
-@HOC.ItemChanges.compose
-class FollowButton extends React.Component {
+export default class FollowButton extends React.Component {
 
 	static propTypes = {
 		entity: PropTypes.any.isRequired,
@@ -22,7 +20,9 @@ class FollowButton extends React.Component {
 		className: PropTypes.string
 	}
 
+
 	componentDidMount () { this.setup(); }
+
 
 	componentDidUpdate (prevProps) {
 		if (this.props.entity !== prevProps.entity) {
@@ -30,16 +30,12 @@ class FollowButton extends React.Component {
 		}
 	}
 
-	getItem (_, state) {
-		return (state || {}).entity;
-	}
 
-
-	setup (props = this.props) {
-		const {entity} = props;
+	async setup (props = this.props) {
 		//so far, entity is always the full object, but allow it to be a string...
-		User.resolve({entity})
-			.then(e => this.setState({entity: e}));
+		const e = await User.resolve(props);
+
+		this.setState({entity: e});
 	}
 
 
@@ -59,6 +55,9 @@ class FollowButton extends React.Component {
 			//don't care
 		}
 	}
+
+
+	onItemChanged = () => this.forceUpdate();
 
 
 	render () {
@@ -85,9 +84,11 @@ class FollowButton extends React.Component {
 			: following ? 'Unfollow' : 'Follow';
 
 		return (
-			<PromiseButton className={css} onClick={this.toggleFollow}>
-				{text}
-			</PromiseButton>
+			<HOC.ItemChanges item={entity} onItemChanged={this.onItemChanged}>
+				<PromiseButton className={css} onClick={this.toggleFollow}>
+					{text}
+				</PromiseButton>
+			</HOC.ItemChanges>
 		);
 	}
 }
