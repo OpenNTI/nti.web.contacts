@@ -38,3 +38,57 @@
 		width: 100%;
 	}
 }
+.sharing-list-action-modal {
+	min-height: 500px;
+	height: auto;
+	width: 550px;
+	background: white;
+}
+
+.sharing-list-action-modal-header {
+	height: 50px;
+	font-family: "Open Sans";
+	font-size: 24px;
+	line-height: 33px;
+	font-weight: 300;
+	color: $secondary-grey;
+
+	&.panel-header-component {
+		padding-left: 25px;
+		padding-top: 7px;
+	}
+}
+
+.sharing-list-action-modal-content {
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 30px;
+	color: $secondary-grey;
+	font-size: 14px;
+	line-height: 20px;
+	display: flex;
+	flex-direction: column;
+
+	&.sub-header {
+		color: $primary-grey;
+		padding-left: 0px;
+		padding-right: 0px;
+		font-size: 16px;
+		margin-bottom: 5px;
+	}
+
+	.nti-text-input {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		width: 100%;
+		line-height: 40px;
+		height: auto;
+	}
+}
+
+.sharing-list-action-modal-controls {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+}
