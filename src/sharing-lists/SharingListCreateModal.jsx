@@ -60,24 +60,28 @@ class SharingListCreateModal extends React.Component {
 	}
 
 	onDismiss = () => {
-		this.props.onDismiss('showCreateDialog');
+		global.history.back();
 	}
 
 	onCreateSharingList = () => {
-		const {sharingListName, contacts} = this.state;
-		const {store} = this.props;
-		store.onCreateSharingList(sharingListName, contacts);
-		this.onDismiss();
+		if (!this.disableCreate) {
+			const {sharingListName, contacts} = this.state;
+			const {store} = this.props;
+			store.onCreateSharingList(sharingListName, contacts);
+			this.onDismiss();
+		}
+		// Do nothing if create is disabled.
 	}
 
 	renderControls = () => {
 
 		const {sharingListName} = this.state;
-		const createButtonClass = sharingListName.trim() ? '' : 'disabled';
+		const disableCreateClass = this.disableCreate = sharingListName.trim() ? '' : 'disabled';
+
 
 		const buttons = [
 			{label: 'Cancel', onClick: this.onDismiss},
-			{label: 'Create', onClick: this.onCreateSharingList, className: createButtonClass}
+			{label: 'Create', onClick: this.onCreateSharingList, className: disableCreateClass}
 		];
 
 		return (

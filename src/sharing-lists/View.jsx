@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { Button, EmptyList, Loading, Prompt } from '@nti/web-commons';
+import { LinkTo } from '@nti/web-routing';
 
 import SharingListStore from './Store';
 import SharingListCard from './SharingListCard';
-import SharingListCreateModal from './SharingListCreateModal';
 import SharingListManagePeopleModal from './SharingListManagePeopleModal';
 
 const propMap = {
@@ -25,8 +25,6 @@ export default
 class SharingListsView extends React.Component {
 
 	state = {
-		showCreateDialog: false,
-		showRenameDialog: false,
 		showManageDialog: false,
 		activeSharingList: null
 	}
@@ -94,7 +92,7 @@ class SharingListsView extends React.Component {
 			<div className="sharing-lists-panel-header">
 				<div className="sharing-lists-title-and-button">
 					<div className="sharing-lists-header-title">{t('headerText')}</div>
-					<Button className="create-sharing-list-button" onClick={this.createSharingListModal}>
+					<Button component={LinkTo.Path} to="sharing-lists/add" className="create-sharing-list-button">
 						{t('createButton')}
 					</Button>
 				</div>
@@ -109,9 +107,6 @@ class SharingListsView extends React.Component {
 		const {activeSharingList} = this.state;
 		return (
 			<div>
-				{this.state.showCreateDialog && (
-					<SharingListCreateModal onDismiss={this.onDismissModal}/>
-				)}
 				{this.state.showManageDialog && (
 					<SharingListManagePeopleModal onDismiss={this.onDismissModal}
 						item={activeSharingList}/>
