@@ -10,7 +10,8 @@ const t = scoped('nti-web-contacts.groups.GroupJoinModal', {
 	joinButton: 'Join',
 	joinGroupHeader: 'Join a Group',
 	joinGroupDescription: 'Enter a group code to join a group.',
-	invalidCodeMessage: 'Not a valid code'
+	invalidCodeMessage: 'Not a valid code',
+	inputPrompt: 'Group Code'
 });
 
 
@@ -73,7 +74,7 @@ class GroupJoinModal extends React.Component {
 					<div className="group-action-modal-content">
 						{t('joinGroupDescription')}
 						<div>
-							<Input.Text placeholder="Name"
+							<Input.Text placeholder={t('inputPrompt')}
 								className={!validCode && 'error-message'}
 								value={this.state.groupCode}
 								onChange={this.updateGroupCode}
