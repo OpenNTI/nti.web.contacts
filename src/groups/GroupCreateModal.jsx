@@ -38,20 +38,23 @@ class GroupCreateModal extends React.Component {
 	}
 
 	onCreateGroup = () => {
-		const {store} = this.props;
-		const {groupName} = this.state;
-		store.createGroup(groupName);
-		this.onDismiss();
+		if (!this.disableCreate) {
+			const {store} = this.props;
+			const {groupName} = this.state;
+			store.createGroup(groupName);
+			this.onDismiss();
+		}
+		// do nothing if create is disabled
 	}
 
 	renderControls = () => {
 
 		const {groupName} = this.state;
-		const createButtonClass = groupName.trim() ? '' : 'disabled';
+		const disableCreateClass = this.disableCreate = groupName.trim() ? '' : 'disabled';
 
 		const buttons = [
 			{label: t('cancelButton'), onClick: this.onDismiss},
-			{label: t('createButton'), onClick: this.onCreateGroup, className: createButtonClass}
+			{label: t('createButton'), onClick: this.onCreateGroup, className: disableCreateClass}
 		];
 
 		return (
