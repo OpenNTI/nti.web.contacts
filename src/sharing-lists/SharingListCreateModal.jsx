@@ -90,11 +90,11 @@ class SharingListCreateModal extends React.Component {
 		return (
 			<div className="sharing-list-action-modal-content">
 				<div className="sharing-list-action-modal-content sub-header">{t('listNameLabel')}</div>
-				<div className="sharing-list-action-modal-input">
-					<Input.Text placeholder="Name" value={this.state.sharingListName} onChange={this.updateSharingListName} maxLength="140"/>
-				</div>
+				<Input.Text placeholder="Name" value={this.state.sharingListName} onChange={this.updateSharingListName} maxLength="140"/>
 				<div className="sharing-list-action-modal-content sub-header">{t('contactSearchLabel')}</div>
-				{t('listDescription')}
+				<span>
+					<i className="icon-hide"/> {t('listDescription')}
+				</span>
 				<SharingListContactsContainer
 					addContactToList={this.addContactToList}
 					removeContactFromList={this.removeContactFromList}
