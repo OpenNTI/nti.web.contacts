@@ -48,12 +48,9 @@ export default class ContactListStore extends BaseContactsStore {
 			const token = this.searchToken = {};
 			try {
 				this.searchItems = await this.ds.search(searchTerm);
-				// eslint-disable-next-line
-				console.log(this.searchItems);
 			}
 			catch (e) {
 				if (this.searchToken !== token) {
-
 					// This call got aborted by another update, so
 					// do nothing.
 				}
