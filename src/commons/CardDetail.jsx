@@ -5,6 +5,7 @@ import { Flyout, DisplayName } from '@nti/web-commons';
 import FollowButton from './FollowButton';
 import Members from './Members';
 import EditableTextField from './EditableTextField';
+import FollowLabel from './FollowLabel';
 
 
 export default class CardDetail extends React.Component {
@@ -18,7 +19,8 @@ export default class CardDetail extends React.Component {
 		flyoutOptions: PropTypes.object,
 		onRenameFinish: PropTypes.func,
 		onCancelEditing: PropTypes.func,
-		renameMode: PropTypes.bool
+		renameMode: PropTypes.bool,
+		isFollowableEntity: PropTypes.bool
 	};
 
 	attachFlyoutRef = x => this.flyout = x;
@@ -59,7 +61,7 @@ export default class CardDetail extends React.Component {
 
 
 	render () {
-		const {members, entity, renameMode, flyoutOptions} = this.props;
+		const {members, entity, renameMode, flyoutOptions, isFollowableEntity} = this.props;
 		const {location} = entity;
 		return (
 			<div className="card-detail">
@@ -85,7 +87,11 @@ export default class CardDetail extends React.Component {
 						</Flyout.Triggered>
 					</div>
 				</div>
-				<FollowButton entity={entity}/>
+				{isFollowableEntity && (
+					<FollowButton entity={entity} className="contact-card-follow-toggle">
+						<FollowLabel/>
+					</FollowButton>
+				)}
 				{/* Only render members if the list is non-empty */}
 				{members && <Members members={members}/>}
 			</div>

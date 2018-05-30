@@ -11,6 +11,12 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+
+	.contact-card-follow-toggle {
+		color: inherit;
+		// border: none;
+		font-size: 14px;
+	}
 }
 
 .card-meta {
