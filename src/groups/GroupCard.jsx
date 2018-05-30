@@ -42,7 +42,7 @@ class GroupCard extends React.Component {
 	finishRenamingGroup = async (_, newName) => {
 		const {entity, store} = this.props;
 		// Only commit our changes if the new name is not blank
-		if (newName) {
+		if (newName && newName.trim().length > 0) {
 			await store.renameGroup(entity, newName);
 		}
 
