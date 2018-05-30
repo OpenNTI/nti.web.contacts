@@ -46,9 +46,12 @@ class GroupCreateModal extends React.Component {
 
 	renderControls = () => {
 
+		const {groupName} = this.state;
+		const createButtonClass = groupName.trim() ? '' : 'disabled';
+
 		const buttons = [
 			{label: t('cancelButton'), onClick: this.onDismiss},
-			{label: t('createButton'), onClick: this.onCreateGroup}
+			{label: t('createButton'), onClick: this.onCreateGroup, className: createButtonClass}
 		];
 
 		return (
