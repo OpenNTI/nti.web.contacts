@@ -19,8 +19,7 @@ export default class CardDetail extends React.Component {
 		flyoutOptions: PropTypes.object,
 		onRenameFinish: PropTypes.func,
 		onCancelEditing: PropTypes.func,
-		renameMode: PropTypes.bool,
-		isFollowableEntity: PropTypes.bool
+		renameMode: PropTypes.bool
 	};
 
 	attachFlyoutRef = x => this.flyout = x;
@@ -61,33 +60,32 @@ export default class CardDetail extends React.Component {
 
 
 	render () {
-		const {members, entity, renameMode, flyoutOptions, isFollowableEntity} = this.props;
+		const {members, entity, renameMode, flyoutOptions} = this.props;
 		const {location} = entity;
 		return (
 			<div className="card-detail">
-				<div className="card-info">
-					<div className="card-meta">
-						<div className="card-title">
-							{this.renderCardName(renameMode)}
-							{location && <div className="entity-location">{location}</div>}
-						</div>
-						<Flyout.Triggered
-							className="card-action-flyout"
-							horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
-							trigger={(
-								<div className="trigger">
-									<div className="dropdown"><i className="icon-chevron-down"/></div>
-								</div>
-							)}
-							ref={this.attachFlyoutRef}
-						>
-							<div onClick={this.onOptionClick}>
-								{flyoutOptions}
-							</div>
-						</Flyout.Triggered>
+				<div className="card-meta">
+					<div className="card-title">
+						{this.renderCardName(renameMode)}
+						{location && <div className="entity-location">{location}</div>}
 					</div>
+					<Flyout.Triggered
+						className="card-action-flyout"
+						horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
+						trigger={(
+							<div className="trigger">
+								<div className="dropdown"><i className="icon-chevron-down"/></div>
+							</div>
+						)}
+						ref={this.attachFlyoutRef}
+					>
+						<div onClick={this.onOptionClick}>
+							{flyoutOptions}
+						</div>
+					</Flyout.Triggered>
 				</div>
-				{isFollowableEntity && (
+
+				{entity && entity.follow && (
 					<FollowButton entity={entity} className="contact-card-follow-toggle">
 						<FollowLabel/>
 					</FollowButton>

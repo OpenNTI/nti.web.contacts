@@ -1,6 +1,8 @@
 @import "~@nti/style-common";
 
 .card-detail {
+	// @include clearfix();
+
 	border: 1px solid $border-grey-light;
 	background-color: white;
 	box-shadow: 0 2px 3px -2px rgba(0, 0, 0, 0.15);
@@ -13,15 +15,26 @@
 	flex-direction: column;
 
 	.contact-card-follow-toggle {
+		flex: 0 0 auto;
 		color: inherit;
-		// border: none;
+		border: none;
+		width: max-content;
 		font-size: 14px;
+		text-align: left;
+		padding: 0;
+		margin: 15px;
+
+		&.promise-button > ul > li:first-child > span {
+			left: 0;
+			transform: translate3d(0, -50%, 0);
+		}
 	}
 }
 
 .card-meta {
 	display: flex;
-	padding: 15px;
+	padding: 15px 15px 0 15px;
+	flex: 1 1 auto;
 
 	.card-title {
 		color: $primary-grey;

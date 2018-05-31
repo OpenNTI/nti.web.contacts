@@ -30,7 +30,6 @@ export default function ContactListCard ({entity, removeContact, viewContactProf
 		<LinkTo.Object className="contact-list-card" object={entity}>
 			<Avatar entity={entity} className="contact-list-avatar"/>
 			<CardDetail entity={entity}
-				isFollowableEntity
 				flyoutOptions={(
 					<React.Fragment>
 						<div className="contact-list-action-flyout-option"
