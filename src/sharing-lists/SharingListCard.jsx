@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-// import { LinkTo } from '@nti/web-routing';
+import { LinkTo } from '@nti/web-routing';
 
 import { CardDetail } from '../commons';
 
@@ -47,7 +47,7 @@ export default class SharingListCard extends React.Component {
 
 	render () {
 
-		const {entity, members, deleteSharingList, managePeople} = this.props;
+		const {entity, members, deleteSharingList} = this.props;
 		const {renameMode} = this.state;
 
 		// TODO: Wrap this in a LinkTo component that links to
@@ -62,9 +62,10 @@ export default class SharingListCard extends React.Component {
 								onClick={(e) => this.beginRenamingSharingList()}>
 								{t('renameText')}
 							</div>
-							<div className="sharing-list-action-flyout-option"
-								onClick={(e) => managePeople(entity)}>
-								{t('managePeopleText')}
+							<div className="sharing-list-action-flyout-option">
+								<LinkTo.Path to={`sharing-lists/${encodeURIComponent(entity.getID())}`}>
+									{t('managePeopleText')}
+								</LinkTo.Path>
 							</div>
 							<div className="sharing-list-action-flyout-option-delete"
 								onClick={(e) => deleteSharingList(entity)}>

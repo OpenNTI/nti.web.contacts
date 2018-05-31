@@ -15,20 +15,21 @@ export default
 class SharingListManagePeopleModal extends React.Component {
 
 	static propTypes = {
-		onDismiss: PropTypes.func,
-		item: PropTypes.object,
 		store: PropTypes.object
 	};
 
-	constructor (props) {
-		super(props);
-
-		// Load the state with any contacts we are given from props
-		// when we first construct this component.
-		const friends = this.props.item.friends || [];
-		this.state = {
-			contacts: friends
+	static getDerivedStateFromProps ({entityId, store}, state) {
+		const items = (store && store.get('items')) || [];
+		const item = items.find(x => x.getID() === decodeURIComponent(entityId));
+		return state.item === item ? null : {
+			item: item,
+			contacts: item.friends
 		};
+	}
+
+	state = {
+		item: null,
+		contacts: []
 	}
 
 	onContactsChange = (updatedContacts) => {
@@ -54,14 +55,14 @@ class SharingListManagePeopleModal extends React.Component {
 	}
 
 	onFinishedEditing = () => {
-		const {store, item} = this.props;
-		const {contacts:updatedContacts} = this.state;
+		const {store} = this.props;
+		const {contacts:updatedContacts, item} = this.state;
 		store.onFinishedManagingPeople(updatedContacts, item);
 		this.onDismiss();
 	}
 
 	onDismiss = () => {
-		this.props.onDismiss('showManageDialog');
+		global.history.back();
 	}
 
 	renderHeader = () => {
