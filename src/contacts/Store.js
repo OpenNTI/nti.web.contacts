@@ -48,6 +48,7 @@ export default class ContactListStore extends BaseContactsStore {
 			const token = this.searchToken = {};
 			try {
 				this.searchItems = await this.ds.search(searchTerm);
+				this.ds.loading = false;
 			}
 			catch (e) {
 				if (this.searchToken !== token) {
@@ -61,7 +62,6 @@ export default class ContactListStore extends BaseContactsStore {
 				}
 			}
 		}
-		this.ds.loading = false;
 		this.emitChange('searchItems');
 		this.emitChange('loading');
 	}
