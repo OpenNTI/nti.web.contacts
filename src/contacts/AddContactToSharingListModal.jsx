@@ -73,7 +73,7 @@ class AddContactToSharingListModal extends React.Component {
 
 	render () {
 		return(
-			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
+			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				<div className="contact-action-modal">
 					<Panels.Header className="contact-modal-header" onClose={this.onDismiss}>
 						{this.generateHeaderString()}

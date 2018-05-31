@@ -67,7 +67,7 @@ class GroupJoinModal extends React.Component {
 		const {validCode} = this.state;
 		const invalidCodeClass = validCode ? '' : 'error-message';
 		return(
-			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
+			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				<div className="group-action-modal">
 					<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
 						{t('joinGroupHeader')}

@@ -112,7 +112,7 @@ class SharingListCreateModal extends React.Component {
 
 	render () {
 		return(
-			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
+			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				<div className="sharing-list-action-modal">
 					<Panels.Header className="sharing-list-action-modal-header" onClose={this.onDismiss}>
 						{t('modalTitleText')}

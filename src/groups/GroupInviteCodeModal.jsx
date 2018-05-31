@@ -60,7 +60,7 @@ class GroupInviteCodeModal extends React.Component {
 	render () {
 		const {invitationCode} = this.state;
 		return(
-			<Prompt.Dialog closeOnMaskClick onBeforeDismiss={this.onDismiss} title="Test">
+			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				<div className="group-action-modal">
 					<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
 						{t('headerText')}
