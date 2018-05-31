@@ -69,20 +69,20 @@ export default class CardDetail extends React.Component {
 						{this.renderCardName(renameMode)}
 						{location && <div className="entity-location">{location}</div>}
 					</div>
-					<Flyout.Triggered
-						className="card-action-flyout"
-						horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
-						trigger={(
-							<div className="trigger">
+					<div className="card-flyout-trigger">
+						<Flyout.Triggered
+							className="card-action-flyout"
+							horizontalAlign={Flyout.ALIGNMENTS.RIGHT}
+							trigger={(
 								<div className="dropdown"><i className="icon-chevron-down"/></div>
+							)}
+							ref={this.attachFlyoutRef}
+						>
+							<div onClick={this.onOptionClick}>
+								{flyoutOptions}
 							</div>
-						)}
-						ref={this.attachFlyoutRef}
-					>
-						<div onClick={this.onOptionClick}>
-							{flyoutOptions}
-						</div>
-					</Flyout.Triggered>
+						</Flyout.Triggered>
+					</div>
 				</div>
 
 				{entity && entity.follow && (
