@@ -32,7 +32,19 @@
 	color: $secondary-grey;
 	font-size: 14px;
 	line-height: 19px;
-	margin: 8px;
+	padding: 8px;
+
+	&:not(.link) {
+		cursor: pointer;
+	}
+
+	&.link {
+		padding: 0;
+
+		.nti-link-to-path {
+			padding: 8px;
+		}
+	}
 }
 
 .contact-list-action-flyout-option-delete {

@@ -1,0 +1,15 @@
+@import "~@nti/style-common";
+
+.contact-chat-link {
+	cursor: pointer;
+
+	&:not(.online) {
+		pointer-events: none;
+		opacity: 0.8;
+	}
+
+	.offline {
+		margin-left: 0.5rem;
+		color: $tertiary-grey;
+	}
+}

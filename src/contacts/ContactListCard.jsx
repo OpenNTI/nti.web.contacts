@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Avatar } from '@nti/web-commons';
+import { Avatar, User } from '@nti/web-commons';
 import { LinkTo } from '@nti/web-routing';
 
 import { CardDetail } from '../commons';
+
+import ChatLink from './ChatLink';
 
 ContactListCard.propTypes = {
 	entity: PropTypes.oneOfType([
@@ -38,10 +40,12 @@ export default function ContactListCard ({entity, removeContact, viewContactProf
 								{t('viewProfile')}
 							</LinkTo.Object>
 						</div>
-						<div className="contact-list-action-flyout-option"
+						<div className="contact-list-action-flyout-option link"
 							onClick={(e) => chatWithContact(entity)}
 							key="chat">
-							{t('chat')}
+							<User.Presence user={entity}>
+								<ChatLink entity={entity} />
+							</User.Presence>
 						</div>
 						<div className="contact-list-action-flyout-option"
 							onClick={(e) => addContactToSharingList(entity)}
