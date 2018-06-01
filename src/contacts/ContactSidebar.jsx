@@ -20,7 +20,7 @@ export default function ContactSidebar ({classes}) {
 				</div>
 			</li>
 			<li>
-				<LinkTo.Path to="./contacts" activeClassName="active" exact>{t('myContacts')}</LinkTo.Path>
+				<LinkTo.Path to="./" activeClassName="active" exact>{t('myContacts')}</LinkTo.Path>
 			</li>
 		</ul>
 	);
