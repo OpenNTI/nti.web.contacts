@@ -27,6 +27,13 @@
 		&.promise-button > ul > li:first-child > span {
 			left: 0;
 			transform: translate3d(0, -50%, 0);
+			color: $secondary-green;
+			font-size: 14px;
+
+			.follow-label.following {
+				color: $tertiary-grey;
+			}
+
 		}
 	}
 }
