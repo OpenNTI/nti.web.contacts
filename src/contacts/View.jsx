@@ -93,12 +93,9 @@ class ContactListView extends React.Component {
 		const {items, searchItems, searchTerm} = this.props;
 
 		let filteredItems = items;
+
 		if (searchTerm) {
 			filteredItems = searchItems;
-		}
-
-		for (let i = 0; i < 5; i++) {
-			filteredItems = filteredItems.concat(filteredItems);
 		}
 
 		return (
