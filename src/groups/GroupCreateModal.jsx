@@ -75,7 +75,7 @@ class GroupCreateModal extends React.Component {
 						{t('createGroupDescription')}
 						<div className="group-action-modal-content sub-header">Group Name</div>
 						<div>
-							<Input.Text placeholder="Name" value={this.state.groupName} onChange={this.updateGroupName} maxLength="140"/>
+							<Input.Text placeholder="Name" value={this.state.groupName} onChange={this.updateGroupName} maxLength="80"/>
 						</div>
 					</div>
 					{this.renderControls()}
