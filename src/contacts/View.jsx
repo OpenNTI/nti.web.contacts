@@ -39,10 +39,6 @@ class ContactListView extends React.Component {
 		activeContact: null
 	}
 
-	constructor (props) {
-		super();
-	}
-
 	onDismissModal = (modal) => {
 		this.setState({[modal]: false});
 		this.setState({activeContact: null});
