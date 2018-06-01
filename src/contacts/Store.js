@@ -51,15 +51,15 @@ export default class ContactListStore extends BaseContactsStore {
 				this.ds.loading = false;
 			}
 			catch (e) {
-				if (this.searchToken !== token) {
-					// This call got aborted by another update, so
-					// do nothing.
-				}
 				if (this.searchToken === token) {
 					// If this call was not aborted and still failed,
 					// return the error.
-					return e;
+					throw e;
 				}
+
+				// This call got aborted by another update, so
+				// do nothing.
+
 			}
 		}
 		this.emitChange('searchItems');
