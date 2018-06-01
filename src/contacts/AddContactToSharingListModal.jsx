@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Prompt, Panels } from '@nti/web-commons';
+import { Prompt, Panels, DialogButtons } from '@nti/web-commons';
 
 import ContactListStore from './Store';
 import SharingListRow from './SharingListRow';
@@ -9,7 +9,8 @@ import CreateSharingListRow from './CreateSharingListRow';
 
 const t = scoped('nti-web-contacts.contacts.AddContactToSharingListModal', {
 	headerPt1: 'Add "',
-	headerPt2: '" to a sharing list'
+	headerPt2: '" to a sharing list',
+	done: 'Done'
 });
 
 export default
@@ -72,6 +73,10 @@ class AddContactToSharingListModal extends React.Component {
 	}
 
 	render () {
+		const buttons = [
+			{label: t('done'), onClick: this.onDismiss}
+		];
+
 		return(
 			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				<div className="contact-action-modal">
@@ -81,6 +86,7 @@ class AddContactToSharingListModal extends React.Component {
 					<div className="contact-modal-content">
 						{this.renderSharingListRows()}
 					</div>
+					<DialogButtons buttons={buttons} />
 				</div>
 			</Prompt.Dialog>
 		);

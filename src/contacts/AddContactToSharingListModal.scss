@@ -1,7 +1,6 @@
 @import "~@nti/style-common";
 
 .contact-action-modal {
-	min-height: 400px;
 	width: 550px;
 	background: white;
 }
@@ -35,6 +34,7 @@
 	color: $secondary-grey;
 	font-size: 14px;
 	line-height: 20px;
+	min-height: 360px;
 
 	&.sub-header {
 		color: $primary-grey;
