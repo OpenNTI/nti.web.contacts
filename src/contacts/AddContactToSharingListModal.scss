@@ -14,6 +14,14 @@
 	font-weight: 300;
 	color: $primary-grey;
 
+	.contact-header {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		display: inline-block;
+		width: calc(100% - 3rem);
+	}
+
 	&.panel-header-component {
 		padding-left: 25px;
 		padding-top: 7px;

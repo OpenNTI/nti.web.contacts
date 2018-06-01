@@ -76,7 +76,7 @@ class AddContactToSharingListModal extends React.Component {
 			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				<div className="contact-action-modal">
 					<Panels.Header className="contact-modal-header" onClose={this.onDismiss}>
-						{this.generateHeaderString()}
+						<span className="contact-header">{this.generateHeaderString()}</span>
 					</Panels.Header>
 					<div className="contact-modal-content">
 						{this.renderSharingListRows()}
