@@ -13,11 +13,18 @@ export default class EditableTextField extends React.Component {
 		isEditable: PropTypes.bool,
 		onFinishedEditing: PropTypes.func,
 		onCancelEditing: PropTypes.func,
-		placeholderText: PropTypes.string
+		placeholderText: PropTypes.string,
+		saveOnBlur: PropTypes.bool
 	};
 
 	updateTextValue = (newValue) => {
 		this.setState({textValue: newValue});
+	}
+
+	componentDidUpdate (oldProps) {
+		if(oldProps && oldProps.text !== this.props.text) {
+			this.setState({textValue: this.props.text});
+		}
 	}
 
 	onKeyDown = (e) => {
@@ -33,13 +40,22 @@ export default class EditableTextField extends React.Component {
 		if (cancelingKeys.indexOf(e.key) > -1) {
 			e.stopPropagation();
 			e.preventDefault();
+			this.setState({textValue: this.props.text});
 			onCancelEditing();
 			// this.setState({textValue: ''});
 		}
 	}
 
 	onBlur = () => {
-		this.props.onCancelEditing();
+		if(this.props.saveOnBlur) {
+			const {onFinishedEditing} = this.props;
+
+			onFinishedEditing(this.state.textValue);
+		}
+		else {
+			this.setState({textValue: this.props.text});
+			this.props.onCancelEditing();
+		}
 	}
 
 	render () {

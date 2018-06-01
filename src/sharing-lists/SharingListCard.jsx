@@ -75,7 +75,8 @@ export default class SharingListCard extends React.Component {
 					)}
 					onRenameFinish={this.finishRenamingSharingList}
 					onCancelEditing={this.cancelRenamingGroup}
-					renameMode={renameMode}/>
+					renameMode={renameMode}
+					saveOnBlur/>
 			</div>
 		);
 	}

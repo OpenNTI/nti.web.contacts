@@ -19,7 +19,8 @@ export default class CardDetail extends React.Component {
 		flyoutOptions: PropTypes.object,
 		onRenameFinish: PropTypes.func,
 		onCancelEditing: PropTypes.func,
-		renameMode: PropTypes.bool
+		renameMode: PropTypes.bool,
+		saveOnBlur: PropTypes.bool
 	};
 
 	attachFlyoutRef = x => this.flyout = x;
@@ -41,7 +42,7 @@ export default class CardDetail extends React.Component {
 	}
 
 	renderCardName (enableEditing) {
-		const {entity} = this.props;
+		const {entity, saveOnBlur} = this.props;
 		const {isModifiable} = entity;
 		if (!isModifiable) {
 			return (<DisplayName entity={entity}/>);
@@ -52,7 +53,8 @@ export default class CardDetail extends React.Component {
 					placeholderText="Name"
 					isEditable={enableEditing}
 					onCancelEditing={this.onCancelEditing}
-					onFinishedEditing={this.onFinishedEditing}/>
+					onFinishedEditing={this.onFinishedEditing}
+					saveOnBlur={saveOnBlur}/>
 			);
 		}
 	}
