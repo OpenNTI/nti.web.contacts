@@ -1,6 +1,6 @@
 @import "~@nti/style-common";
 
-.card-detail {
+.contact-card-detail {
 	// @include clearfix();
 
 	border: 1px solid $border-grey-light;
@@ -36,60 +36,62 @@
 
 		}
 	}
-}
 
-.card-meta {
-	display: flex;
-	padding: 12px 15px 0;
-	flex: 1 1 auto;
-	position: relative;
+	.card-meta {
+		display: flex;
+		padding: 12px 15px 0;
+		flex: 1 1 auto;
+		position: relative;
 
-	.card-title {
-		color: $primary-grey;
-		font-size: 18px;
-		line-height: 24px;
-		font-weight: normal;
+		.card-title {
+			color: $primary-grey;
+			font-size: 18px;
+			line-height: 24px;
+			font-weight: normal;
+			padding-right: 15px;
 
-		.entity-location {
+			.entity-location {
+				color: $secondary-grey;
+				font-size: 14px;
+			}
+
+			.display-name.user {
+				display: block;
+
+				.username {
+					display: inline-block;
+					vertical-align: middle;
+					white-space: nowrap;
+					overflow: hidden;
+					max-width: 175px;
+					text-overflow: ellipsis;
+				}
+
+				.nti-user-presence-dot {
+					display: inline-block;
+					vertical-align: middle;
+					margin-left: 5px;
+				}
+			}
+		}
+
+		.card-flyout-trigger {
 			color: $secondary-grey;
-			font-size: 14px;
-		}
-
-		.display-name.user {
-			display: block;
-
-			.username {
-				display: inline-block;
-				vertical-align: middle;
-				white-space: nowrap;
-				overflow: hidden;
-				max-width: 175px;
-				text-overflow: ellipsis;
-			}
-
-			.nti-user-presence-dot {
-				display: inline-block;
-				vertical-align: middle;
-				margin-left: 5px;
-			}
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			left: auto;
+			bottom: auto;
 		}
 	}
 
-	.card-flyout-trigger {
-		color: $secondary-grey;
+	.members {
 		position: absolute;
-		top: 15px;
-		right: 15px;
-		left: auto;
-		bottom: auto;
+		bottom: 15px;
+	}
+
+	.card-action-flyout {
+		width: 250px;
 	}
 }
 
-.members {
-	position: absolute;
-	bottom: 15px;
-}
-
-.card-action-flyout {
-	width: 250px;
-}

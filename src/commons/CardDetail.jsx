@@ -71,7 +71,7 @@ export default class CardDetail extends React.Component {
 		const {members, entity, renameMode, flyoutOptions} = this.props;
 		const {location} = entity;
 		return (
-			<div className="card-detail">
+			<div className={cx('contact-card-detail', {user: entity.isUser})}>
 				<div className="card-meta">
 					<div className="card-title">
 						{this.renderCardName(renameMode)}
