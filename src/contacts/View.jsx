@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { EmptyList, Loading } from '@nti/web-commons';
+import { EmptyList, Loading, Layouts } from '@nti/web-commons';
 // import { searchable } from '@nti/web-search';
 
 import ContactListStore from './Store';
 import ContactCardsContainer from './ContactCardsContainer';
 import AddContactToSharingListModal from './AddContactToSharingListModal';
 import ContactSidebar from './ContactSidebar';
+
+const {NavContent} = Layouts;
 
 const propMap = {
 	items: 'items',
@@ -95,6 +97,10 @@ class ContactListView extends React.Component {
 			filteredItems = searchItems;
 		}
 
+		for (let i = 0; i < 5; i++) {
+			filteredItems = filteredItems.concat(filteredItems);
+		}
+
 		return (
 			<div className="contact-list-cards-frame">
 				{(!filteredItems.length && searchTerm) && <EmptyList type="contactssearch"/>}
@@ -127,10 +133,14 @@ class ContactListView extends React.Component {
 		return (
 			<div className="contact-list-panel">
 				{searchTerm && this.renderSearchResultHeader(searchTerm)}
-				<div className="contacts-body">
-					{!searchTerm && this.renderSidebar()}
-					{this.renderContactListCards()}
-				</div>
+				<NavContent.Container className="contacts-body">
+					{!searchTerm && (
+						<NavContent.Nav sticky fill>
+							<ContactSidebar />
+						</NavContent.Nav>
+					)}
+					<NavContent.Content>{this.renderContactListCards()}</NavContent.Content>
+				</NavContent.Container>
 				{this.renderModals()}
 			</div>
 		);

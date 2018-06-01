@@ -1,14 +1,12 @@
 @import "~@nti/style-common";
 
-.nav-content-container {
-	background: white;
-}
-
 .contacts-tabs {
-	width: 255px;
+	height: 100%;
 	background: white;
 	list-style: none;
 	padding: 0px;
+	margin: 0px;
+	box-shadow: 0 1px 2px 1px rgba(0,0,0,0.15);
 
 	li {
 		box-shadow: 0 -1px 0 0 $border-grey-light;

@@ -1,6 +1,10 @@
 @import "!~@nti/style-common/all.scss";
 @import "~@nti/web-commons/lib/index.css";
 
+body {
+	background-color: #FBFBFB;
+}
+
 #content {
 	padding: 10px;
 }
