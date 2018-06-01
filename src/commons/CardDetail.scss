@@ -40,27 +40,48 @@
 
 .card-meta {
 	display: flex;
-	padding: 15px 15px 0 15px;
+	padding: 12px 15px 0;
 	flex: 1 1 auto;
+	position: relative;
 
 	.card-title {
 		color: $primary-grey;
 		font-size: 18px;
 		line-height: 24px;
 		font-weight: normal;
-		max-height: 72px;
-		overflow: hidden;
 
 		.entity-location {
 			color: $secondary-grey;
 			font-size: 14px;
 		}
+
+		.display-name.user {
+			display: block;
+
+			.username {
+				display: inline-block;
+				vertical-align: middle;
+				white-space: nowrap;
+				overflow: hidden;
+				max-width: 175px;
+				text-overflow: ellipsis;
+			}
+
+			.nti-user-presence-dot {
+				display: inline-block;
+				vertical-align: middle;
+				margin-left: 5px;
+			}
+		}
 	}
 
 	.card-flyout-trigger {
 		color: $secondary-grey;
-		margin-left: auto;
-		padding: 5px;
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		left: auto;
+		bottom: auto;
 	}
 }
 

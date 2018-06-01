@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Flyout, DisplayName } from '@nti/web-commons';
+import cx from 'classnames';
+import { Flyout, DisplayName, User } from '@nti/web-commons';
 
 import FollowButton from './FollowButton';
 import Members from './Members';
@@ -45,7 +46,12 @@ export default class CardDetail extends React.Component {
 		const {entity, saveOnBlur} = this.props;
 		const {isModifiable} = entity;
 		if (!isModifiable) {
-			return (<DisplayName entity={entity}/>);
+			return (
+				<div className={cx('display-name', {user: entity.isUser})}>
+					<DisplayName entity={entity}/>
+					{entity.isUser && (<User.Presence user={entity} />)}
+				</div>
+			);
 		}
 		else {
 			return (
