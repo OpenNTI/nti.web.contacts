@@ -42,6 +42,7 @@ export default class ContactListStore extends BaseContactsStore {
 
 		if (!searchTerm) {
 			this.searchItems = [];
+			this.ds.loading = false;
 		}
 		else {
 

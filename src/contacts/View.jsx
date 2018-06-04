@@ -90,7 +90,11 @@ class ContactListView extends React.Component {
 	}
 
 	renderContactListCards = () => {
-		const {items, searchItems, searchTerm} = this.props;
+		const {items, searchItems, searchTerm, loading} = this.props;
+
+		if(loading) {
+			return <Loading.Mask />;
+		}
 
 		let filteredItems = items;
 
@@ -121,10 +125,10 @@ class ContactListView extends React.Component {
 
 	render () {
 
-		const {store, loading, searchTerm} = this.props;
+		const {store, searchTerm} = this.props;
 
-		if (!store || loading) {
-			return <Loading.Mask />;
+		if (!store) {
+			return null;
 		}
 
 		return (
