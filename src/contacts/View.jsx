@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { EmptyList, Loading, Layouts } from '@nti/web-commons';
+import {contextual} from '@nti/web-search';
 // import { searchable } from '@nti/web-search';
 
 import ContactListStore from './Store';
@@ -20,11 +21,13 @@ const propMap = {
 
 const t = scoped('nti-web-contacts.contacts.ContactListView', {
 	contactsHeader: 'Contacts',
-	searchResultsHeader: 'Search Results for '
+	searchResultsHeader: 'Search Results for "%(term)s"',
+	searchContext: 'followers'
 
 });
 
 export default
+@contextual(t('searchContext'))
 @ContactListStore.connect(propMap)
 class ContactListView extends React.Component {
 
@@ -69,7 +72,7 @@ class ContactListView extends React.Component {
 	renderSearchResultHeader (searchTerm) {
 		return (
 			<div className="contacts-panel-header">
-				{t('searchResultsHeader') + '"' + searchTerm + '"'}
+				{t('searchResultsHeader', {term: searchTerm})}
 			</div>
 		);
 	}
