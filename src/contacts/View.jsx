@@ -120,12 +120,6 @@ class ContactListView extends React.Component {
 		);
 	}
 
-	renderSidebar = () => {
-		return(
-			<ContactSidebar/>
-		);
-	}
-
 	render () {
 
 		const {store, searchTerm} = this.props;
