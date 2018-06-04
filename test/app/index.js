@@ -3,12 +3,14 @@ window.$AppConfig = window.$AppConfig || {server: '/dataserver2/'};
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import {addFeatureCheckClasses} from '@nti/lib-dom';
 import {Router, Route, LinkTo} from '@nti/web-routing';
 import {Input} from '@nti/web-search';
 
 
 import RouterView from '../../src';
 
+addFeatureCheckClasses();
 
 class Root extends React.Component {
 

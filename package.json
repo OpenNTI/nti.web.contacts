@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/NextThought/nti.web.contacts#readme",
   "devDependencies": {
+    "@nti/lib-dom": "^1.11.0",
     "@nti/cmp-scripts": "^1.17.16",
     "@nti/style-common": "^1.3.0",
     "enzyme": "^3.0.0",
