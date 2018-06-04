@@ -15,8 +15,7 @@ export default function FollowLabel ({following}) {
 
 	return (
 		<span className={cx('follow-label', {following})}>
-			<i className={iconClass}/>
-			{text}
+			<i className={iconClass}/> {text}
 		</span>
 	);
 }

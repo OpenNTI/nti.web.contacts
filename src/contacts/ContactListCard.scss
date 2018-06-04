@@ -4,7 +4,7 @@
 	text-decoration: none;
 	height: 100px;
 	width: 344px;
-	margin: 8px;
+	margin: 0 8px 8px;
 
 	.card-title {
 		color: $primary-grey;
@@ -21,11 +21,12 @@
 			font-weight: normal;
 		}
 	}
-}
 
-.contact-list-avatar {
-	float: left;
-	height: inherit;
+	.contact-list-avatar {
+		float: left;
+		height: 100px;
+		width: 100px;
+	}
 }
 
 .contact-list-action-flyout-option {
@@ -52,13 +53,4 @@
 	font-size: 14px;
 	line-height: 19px;
 	margin: 8px;
-}
-
-.contact-list-frame {
-	display: flex;
-	flex-flow: row wrap;
-}
-
-.contact-list-panel-header {
-	margin: 10px;
 }
