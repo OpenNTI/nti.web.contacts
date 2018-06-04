@@ -29,7 +29,7 @@ export default class SharingListContactsContainer extends React.Component {
 
 	contactSuggestionProvider = async (value) => {
 		const {contacts} = this.props;
-		const existingContacts = contacts.map(x => x.getID());
+		const existingContacts = (contacts || []).map(x => x.getID());
 		const currentUser = await getAppUser();
 		existingContacts.push(currentUser.getID());
 		const contactSuggestionProvider = Store.contactSuggestionProvider;
@@ -54,7 +54,7 @@ export default class SharingListContactsContainer extends React.Component {
 				onRemove={removeContactFromList}/>
 		));
 
-		if (contactList.length) {
+		if (contactList && contactList.length) {
 			return contactList;
 		}
 		return <EmptyList type="entity-search"/>;

@@ -21,7 +21,7 @@ class SharingListManagePeopleModal extends React.Component {
 	static getDerivedStateFromProps ({entityId, store}, state) {
 		const items = (store && store.get('items')) || [];
 		const item = items.find(x => x.getID() === decodeURIComponent(entityId));
-		return state.item === item ? null : {
+		return state.item === item || !item ? null : {
 			item: item,
 			contacts: item.friends
 		};
@@ -39,17 +39,17 @@ class SharingListManagePeopleModal extends React.Component {
 	addContactToList = (newContact) => {
 
 		const {contacts: existingContacts} = this.state;
-		if (existingContacts.find((i) => i.getID() !== newContact.getID())) {
+		if ((existingContacts || []).find((i) => i.getID() !== newContact.getID())) {
 			// If we found a user with this same username, don't need to add
 			// them again. However, make a log of this.
 			// console.log ('Skipped adding ' + newContact.Username + ' to sharing list.');
 		}
 		// Otherwise, add them to our list.
-		this.setState({contacts: [...existingContacts, newContact]});
+		this.setState({contacts: [...(existingContacts || []), newContact]});
 	}
 
 	removeContactFromList = (contactToRemove) => {
-		const {contacts} = this.state;
+		const {contacts} = this.state || [];
 		const newContacts = contacts.filter(e => e.getID() !== contactToRemove.getID());
 		this.setState({contacts: newContacts});
 	}
@@ -57,7 +57,7 @@ class SharingListManagePeopleModal extends React.Component {
 	onFinishedEditing = () => {
 		const {store} = this.props;
 		const {contacts:updatedContacts, item} = this.state;
-		store.onFinishedManagingPeople(updatedContacts, item);
+		store.onFinishedManagingPeople(updatedContacts || [], item);
 		this.onDismiss();
 	}
 
@@ -66,7 +66,7 @@ class SharingListManagePeopleModal extends React.Component {
 	}
 
 	renderHeader = () => {
-		const numberOfContacts = this.state.contacts.length;
+		const numberOfContacts = (this.state.contacts && this.state.contacts.length) || 0;
 		const headerTitle = t('modalTitleText') + ' (' + numberOfContacts + ')';
 		return (
 			<Panels.Header className="sharing-list-action-modal-header" onClose={this.onDismiss}>
@@ -89,7 +89,7 @@ class SharingListManagePeopleModal extends React.Component {
 
 	renderContent = () => {
 
-		const {contacts} = this.state;
+		const {contacts} = this.state || [];
 
 		return (
 			<div className="sharing-list-action-modal-content">
