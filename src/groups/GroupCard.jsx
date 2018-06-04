@@ -86,6 +86,7 @@ class GroupCard extends React.Component {
 				</LinkTo.Object>
 				<CardDetail entity={entity}
 					members={entity.friends}
+					saveOnBlur
 					onRenameFinish={this.finishRenamingGroup}
 					onCancelEditing={this.cancelRenamingGroup}
 					renameMode={renameMode}
