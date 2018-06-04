@@ -66,7 +66,7 @@ class GroupCreateModal extends React.Component {
 
 	render () {
 		return(
-			<Prompt.Dialog tall onBeforeDismiss={this.onDismiss}>
+			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				<div className="group-action-modal">
 					<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
 						{t('createGroupHeader')}
