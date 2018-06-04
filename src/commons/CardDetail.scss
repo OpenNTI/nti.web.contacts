@@ -48,7 +48,7 @@
 			font-size: 18px;
 			line-height: 24px;
 			font-weight: normal;
-			padding-right: 15px;
+			padding-right: 20px;
 
 			.entity-location {
 				color: $secondary-grey;
@@ -63,7 +63,7 @@
 					vertical-align: middle;
 					white-space: nowrap;
 					overflow: hidden;
-					max-width: 175px;
+					max-width: 170px;
 					text-overflow: ellipsis;
 				}
 
@@ -78,10 +78,14 @@
 		.card-flyout-trigger {
 			color: $secondary-grey;
 			position: absolute;
-			top: 15px;
-			right: 15px;
+			top: 0;
+			right: 0;
 			left: auto;
 			bottom: auto;
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
 		}
 	}
 
