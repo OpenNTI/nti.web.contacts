@@ -23,6 +23,8 @@ class AddContactToSharingListModal extends React.Component {
 		store: PropTypes.object
 	};
 
+	state = {}
+
 	getSharingLists = () => {
 		const {store} = this.props;
 		return store.getSharingLists();
@@ -55,6 +57,14 @@ class AddContactToSharingListModal extends React.Component {
 		return t('headerPt1') + name + t('headerPt2');
 	}
 
+	onEnterEditMode = () => {
+		this.setState({inEditMode: true});
+	}
+
+	onExitEditMode = () => {
+		this.setState({inEditMode: false});
+	}
+
 	renderSharingListRows () {
 		const sharingLists = this.getSharingLists();
 
@@ -63,7 +73,11 @@ class AddContactToSharingListModal extends React.Component {
 				<SharingListRow key={i.ID} sharingList={i} onClick={this.onClick}/>
 			)
 		)) || [];
-		rows.push(<CreateSharingListRow onFinish={this.createNewSharingList} key={'Add new sharing list'}/>);
+		rows.push(<CreateSharingListRow
+			onFinish={this.createNewSharingList}
+			onEnterEditMode={this.onEnterEditMode}
+			onExitEditMode={this.onExitEditMode}
+			key={'Add new sharing list'}/>);
 
 		return (
 			<div className="sharing-list-rows">
@@ -73,12 +87,14 @@ class AddContactToSharingListModal extends React.Component {
 	}
 
 	render () {
+		const className = this.state.inEditMode ? 'disabled' : '';
+
 		const buttons = [
-			{label: t('done'), onClick: this.onDismiss}
+			{label: t('done'), className, onClick: this.onDismiss}
 		];
 
 		return(
-			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
+			<Prompt.Dialog onBeforeDismiss={this.onDismiss} closeOnEscape={false}>
 				<div className="contact-action-modal">
 					<Panels.Header className="contact-modal-header" onClose={this.onDismiss}>
 						<span className="contact-header">{this.generateHeaderString()}</span>

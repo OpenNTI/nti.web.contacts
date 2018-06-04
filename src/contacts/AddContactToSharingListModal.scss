@@ -3,6 +3,14 @@
 .contact-action-modal {
 	width: 550px;
 	background: white;
+
+	.dialog-buttons {
+		.button {
+			&.disabled {
+				pointer-events: none;
+			}
+		}
+	}
 }
 
 .contact-modal-header {

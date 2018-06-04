@@ -14,7 +14,8 @@ export default class EditableTextField extends React.Component {
 		onFinishedEditing: PropTypes.func,
 		onCancelEditing: PropTypes.func,
 		placeholderText: PropTypes.string,
-		saveOnBlur: PropTypes.bool
+		saveOnBlur: PropTypes.bool,
+		clearOnFinish: PropTypes.bool
 	};
 
 	updateTextValue = (newValue) => {
@@ -28,21 +29,27 @@ export default class EditableTextField extends React.Component {
 	}
 
 	onKeyDown = (e) => {
-		const {onFinishedEditing, onCancelEditing} = this.props;
+		const {onFinishedEditing, onCancelEditing, clearOnFinish} = this.props;
 		const finishingKeys = ['Enter'];
 		const cancelingKeys = ['Escape'];
 		if (finishingKeys.indexOf(e.key) > -1) {
 			e.stopPropagation();
 			e.preventDefault();
 			onFinishedEditing(this.state.textValue);
-			// this.setState({textValue: ''});
+
+			if(clearOnFinish) {
+				this.setState({textValue: ''});
+			}
 		}
 		if (cancelingKeys.indexOf(e.key) > -1) {
 			e.stopPropagation();
 			e.preventDefault();
 			this.setState({textValue: this.props.text});
 			onCancelEditing();
-			// this.setState({textValue: ''});
+
+			if(clearOnFinish) {
+				this.setState({textValue: ''});
+			}
 		}
 	}
 
@@ -73,7 +80,8 @@ export default class EditableTextField extends React.Component {
 		else {
 			return (
 				<div className="editable-text-field">
-					<Input.Text placeholder={placeholderText}
+					<Input.Text
+						placeholder={placeholderText}
 						value={displayText}
 						onChange={this.updateTextValue}
 						onBlur={this.onBlur}
