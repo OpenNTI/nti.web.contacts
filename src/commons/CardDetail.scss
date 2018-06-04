@@ -22,7 +22,7 @@
 		font-size: 14px;
 		text-align: left;
 		padding: 0;
-		margin: 15px;
+		margin: 5px 15px 15px;
 
 		&.promise-button > ul > li:first-child > span {
 			left: 0;
@@ -38,7 +38,6 @@
 	}
 
 	.card-meta {
-		display: flex;
 		padding: 12px 15px 0;
 		flex: 1 1 auto;
 		position: relative;
