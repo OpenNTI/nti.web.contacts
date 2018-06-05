@@ -24,11 +24,9 @@ export default class SharingListStore extends BaseContactsStore {
 	static async contactSuggestionProvider (value, idsToExclude = []) {
 		const service = await getService();
 		const contacts = await service.getContacts();
-		const results = await contacts.search(value, false, true);
-		// Filter out results that aren't users, and any IDs
-		// we explicitly want to exclude.
-		return results.filter(entity => entity.isUser
-			&& !idsToExclude.includes(entity.getID()));
+		const results = await contacts.search(value);
+		// Filter out any IDs we explicitly want to exclude.
+		return results.filter(entity => !idsToExclude.includes(entity.getID()));
 	}
 
 	onCreateSharingList = (name, members) => {

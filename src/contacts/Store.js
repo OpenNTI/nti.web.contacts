@@ -42,7 +42,7 @@ export default class ContactListStore extends BaseContactsStore {
 		this.emitChange('loading');
 
 		try {
-			this.searchItems = (!term) ? [] : await this.ds.search(term, false, true);
+			this.searchItems = (!term) ? [] : await this.ds.search(term);
 
 			this.loading = false;
 		}
