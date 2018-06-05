@@ -48,13 +48,11 @@ export default class ContactListStore extends BaseContactsStore {
 		}
 		catch (e) {
 			if (this.searchToken === token) {
-				// If this call was not aborted and still failed,
-				// return the error.
+				// Only report errors on the current request.
 				throw e;
 			}
 
-			// This call got aborted by another update, so
-			// do nothing.
+			// Ignore all failures for requests that have been discarded.
 			return;
 		}
 		finally {
