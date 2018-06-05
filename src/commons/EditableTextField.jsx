@@ -95,6 +95,7 @@ export default class EditableTextField extends React.Component {
 			return (
 				<div className="editable-text-field">
 					<Input.Text
+						autoFocus
 						onClick={this.onClick}
 						placeholder={placeholderText}
 						value={displayText}
