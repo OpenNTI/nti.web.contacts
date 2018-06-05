@@ -22,3 +22,18 @@
 .members {
 	padding-left: 15px;
 }
+
+.members-flyout-trigger {
+
+	.flyout-inner {
+		padding: 15px;
+		width: 200px;
+	}
+
+	.members-hover {
+		color: $tertiary-grey;
+		font-size: 10px;
+		font-weight: bold;
+		line-height: 14px;
+	}
+}

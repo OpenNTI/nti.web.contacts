@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
+import { Flyout } from '@nti/web-commons';
 
 import Member from './Member';
 import MemberOverflowPlaceholder from './MemberOverflowPlaceholder';
@@ -36,11 +37,23 @@ export default function Members ({members, displayLabel = true}) {
 	}
 
 	return (
-		<div className="members">
-			{displayLabel && (<div className="members-label">{t('membersLabel')}</div>)}
-			<div className="member-list">
-				{listOfMembers.reverse()}
-			</div>
-		</div>
+		<Flyout.Triggered
+			hover dark
+			className="members-flyout-trigger"
+			trigger={(
+				<div className="members">
+					{displayLabel && (<div className="members-label">{t('membersLabel')}</div>)}
+					<div className="member-list">
+						{listOfMembers.reverse()}
+					</div>
+				</div>
+			)}>
+			{members.map((x) => (
+				<div className="members-hover"
+					key={x.Username}>
+					{x.alias}
+				</div>
+			))}
+		</Flyout.Triggered>
 	);
 }
