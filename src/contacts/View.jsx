@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { EmptyList, Loading, Layouts } from '@nti/web-commons';
+import { EmptyList, Loading, Layouts, User } from '@nti/web-commons';
 import {contextual} from '@nti/web-search';
 // import { searchable } from '@nti/web-search';
 
@@ -95,6 +95,8 @@ class ContactListView extends React.Component {
 	renderContactListCards = () => {
 		const {items, searchItems, searchTerm, loading} = this.props;
 
+		const userPresenceStore = User.Presence.Store;
+
 		if(loading) {
 			return <Loading.Mask />;
 		}
@@ -105,17 +107,35 @@ class ContactListView extends React.Component {
 			filteredItems = searchItems;
 		}
 
+		const activeContacts = filteredItems.filter(x => userPresenceStore.getPresenceFor(x));
+		const offlineContacts = filteredItems.filter(x => userPresenceStore.getPresenceFor(x) == null);
+
 		return (
 			<div className="contact-list-cards-frame">
 				{(!filteredItems.length && searchTerm) && <EmptyList type="contactssearch"/>}
 				{(!filteredItems.length && !searchTerm) && <EmptyList type="contacts"/>}
-				{filteredItems.length > 0 && (
-					<ContactCardsContainer items={filteredItems}
+				<div className="status-header">
+					Active
+				</div>
+				{activeContacts.length > 0 && (
+					<ContactCardsContainer items={activeContacts}
 						removeContact={this.removeContact}
 						chatWithContact={this.chatWithContact}
 						addToSharingList={this.openAddToSharingListModal}
 						viewContactProfile={this.viewContactProfile}/>
 				)}
+
+				<div className="status-header">
+					Offline
+				</div>
+				{offlineContacts.length > 0 && (
+					<ContactCardsContainer items={offlineContacts}
+						removeContact={this.removeContact}
+						chatWithContact={this.chatWithContact}
+						addToSharingList={this.openAddToSharingListModal}
+						viewContactProfile={this.viewContactProfile}/>
+				)}
+
 			</div>
 		);
 	}
