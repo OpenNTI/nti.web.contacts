@@ -14,6 +14,7 @@ Members.propTypes = {
 };
 
 const MAX_MEMBERS_TO_DISPLAY = 8;
+const MAX_MEMBERS_IN_FLYOUT = 15;
 
 export default function Members ({members, displayLabel = true}) {
 
@@ -48,12 +49,17 @@ export default function Members ({members, displayLabel = true}) {
 					</div>
 				</div>
 			)}>
-			{members.map((x) => (
+			{members.slice(0, MAX_MEMBERS_IN_FLYOUT).map((x) => (
 				<div className="members-hover"
 					key={x.Username}>
 					{x.alias}
 				</div>
 			))}
+			{members.length > MAX_MEMBERS_IN_FLYOUT && (
+				<div className="members-hover">
+					And {members.length - MAX_MEMBERS_IN_FLYOUT} more...
+				</div>
+			)}
 		</Flyout.Triggered>
 	);
 }
