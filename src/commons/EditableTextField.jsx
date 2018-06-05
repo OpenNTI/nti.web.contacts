@@ -28,6 +28,13 @@ export default class EditableTextField extends React.Component {
 		}
 	}
 
+	// Note: for now we're assuming that we will always want to
+	// ensure our input has non-whitespace characters before saving.
+	// Could add a prop to toggle this behavior later if we need to.
+	isValidText (inputText) {
+		return (inputText && inputText.trim());
+	}
+
 	onKeyDown = (e) => {
 		const {onFinishedEditing, onCancelEditing, clearOnFinish} = this.props;
 		const finishingKeys = ['Enter'];
@@ -35,10 +42,12 @@ export default class EditableTextField extends React.Component {
 		if (finishingKeys.indexOf(e.key) > -1) {
 			e.stopPropagation();
 			e.preventDefault();
-			onFinishedEditing(this.state.textValue);
+			if (this.isValidText(this.state.textValue)) {
+				onFinishedEditing(this.state.textValue);
 
-			if(clearOnFinish) {
-				this.setState({textValue: ''});
+				if(clearOnFinish) {
+					this.setState({textValue: ''});
+				}
 			}
 		}
 		if (cancelingKeys.indexOf(e.key) > -1) {
@@ -54,7 +63,7 @@ export default class EditableTextField extends React.Component {
 	}
 
 	onBlur = () => {
-		if(this.props.saveOnBlur) {
+		if(this.props.saveOnBlur && this.isValidText(this.state.textValue)) {
 			const {onFinishedEditing} = this.props;
 
 			onFinishedEditing(this.state.textValue);
