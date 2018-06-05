@@ -11,7 +11,7 @@ FollowLabel.propTypes = {
 export default function FollowLabel ({following}) {
 
 	const text = following ? 'Following' : 'Add Contact';
-	const iconClass = following ? 'icon-remove-user' : 'icon-add-user';
+	const iconClass = following ? 'icon-friend' : 'icon-addfriend';
 
 	return (
 		<span className={cx('follow-label', {following})}>
