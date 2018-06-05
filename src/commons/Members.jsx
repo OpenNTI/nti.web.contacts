@@ -52,12 +52,12 @@ export default function Members ({members, displayLabel = true}) {
 			{members.slice(0, MAX_MEMBERS_IN_FLYOUT).map((x) => (
 				<div className="members-hover"
 					key={x.Username}>
-					{x.alias}
+					{x.alias.toUpperCase()}
 				</div>
 			))}
 			{members.length > MAX_MEMBERS_IN_FLYOUT && (
-				<div className="members-hover">
-					And {members.length - MAX_MEMBERS_IN_FLYOUT} more...
+				<div className="members-hover overflow">
+					AND {members.length - MAX_MEMBERS_IN_FLYOUT} MORE...
 				</div>
 			)}
 		</Flyout.Triggered>
