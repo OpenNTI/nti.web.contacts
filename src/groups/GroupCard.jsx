@@ -80,10 +80,8 @@ class GroupCard extends React.Component {
 
 
 		return (
-			<div className="group-card">
-				<LinkTo.Object className="group-avatar" object={entity}>
-					<Avatar className="group-avatar" entity={entity}/>
-				</LinkTo.Object>
+			<LinkTo.Object className="group-card" object={entity}>
+				<Avatar className="group-avatar" entity={entity}/>
 				<CardDetail entity={entity}
 					members={entity.friends}
 					saveOnBlur
@@ -119,7 +117,7 @@ class GroupCard extends React.Component {
 						</React.Fragment>
 					)}
 				/>
-			</div>
+			</LinkTo.Object>
 		);
 	}
 }
