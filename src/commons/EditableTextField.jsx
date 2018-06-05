@@ -74,6 +74,11 @@ export default class EditableTextField extends React.Component {
 		}
 	}
 
+	onClick = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+	}
+
 	render () {
 		const {text, isEditable, placeholderText} = this.props;
 		const {textValue: currentInputText} = this.state;
@@ -90,6 +95,7 @@ export default class EditableTextField extends React.Component {
 			return (
 				<div className="editable-text-field">
 					<Input.Text
+						onClick={this.onClick}
 						placeholder={placeholderText}
 						value={displayText}
 						onChange={this.updateTextValue}
