@@ -73,7 +73,9 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 	}
 
 	cleanup () {
-		this.ds.removeListener('change', this.onDataSourceChanged);
+		if (this.ds && this.ds.removeListener) {
+			this.ds.removeListener('change', this.onDataSourceChanged);
+		}
 	}
 
 	async updateSearchTerm (searchTerm) {
