@@ -73,15 +73,15 @@ class AddContactToSharingListModal extends React.Component {
 				<SharingListRow key={i.ID} sharingList={i} onClick={this.onClick}/>
 			)
 		)) || [];
-		rows.push(<CreateSharingListRow
-			onFinish={this.createNewSharingList}
-			onEnterEditMode={this.onEnterEditMode}
-			onExitEditMode={this.onExitEditMode}
-			key={'Add new sharing list'}/>);
 
 		return (
 			<div className="sharing-list-rows">
-				{rows}
+				<div className="sharing-lists">{rows}</div>
+				<CreateSharingListRow
+					onFinish={this.createNewSharingList}
+					onEnterEditMode={this.onEnterEditMode}
+					onExitEditMode={this.onExitEditMode}
+					key={'Add new sharing list'}/>
 			</div>
 		);
 	}

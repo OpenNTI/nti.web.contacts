@@ -44,6 +44,14 @@
 	line-height: 20px;
 	min-height: 360px;
 
+	.sharing-list-rows {
+		.sharing-lists {
+			max-height: calc(100vh - 220px);
+			overflow: scroll;
+			padding-right: 10px;
+		}
+	}
+
 	&.sub-header {
 		color: $primary-grey;
 		padding-left: 0px;
