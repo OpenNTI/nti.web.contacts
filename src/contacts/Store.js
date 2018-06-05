@@ -38,13 +38,13 @@ export default class ContactListStore extends BaseContactsStore {
 		const token = this.searchToken = {term};
 
 		this.searchTerm = term;
-		this.ds.loading = true;
+		this.loading = true;
 		this.emitChange('loading');
 
 		try {
 			this.searchItems = (!term) ? [] : await this.ds.search(term, false, true);
 
-			this.ds.loading = false;
+			this.loading = false;
 		}
 		catch (e) {
 			if (this.searchToken === token) {
