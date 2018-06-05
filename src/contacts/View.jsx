@@ -137,7 +137,7 @@ class ContactListView extends React.Component {
 							<ContactSidebar />
 						</NavContent.Nav>
 					)}
-					<NavContent.Content>{this.renderContactListCards()}</NavContent.Content>
+					<NavContent.Content className="contacts-body-content">{this.renderContactListCards()}</NavContent.Content>
 				</NavContent.Container>
 				{this.renderModals()}
 			</div>
