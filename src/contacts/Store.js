@@ -34,35 +34,31 @@ export default class ContactListStore extends BaseContactsStore {
 		this.ds.createList(name, members);
 	}
 
-	async updateSearchTerm (searchTerm) {
+	async updateSearchTerm (term) {
+		const token = this.searchToken = {term};
 
-		this.searchTerm = searchTerm;
+		this.searchTerm = term;
 		this.ds.loading = true;
 		this.emitChange('loading');
 
-		if (!searchTerm) {
-			this.searchItems = [];
+		try {
+			this.searchItems = (!term) ? [] : await this.ds.search(term, false, true);
+
 			this.ds.loading = false;
 		}
-		else {
-
-			const token = this.searchToken = {};
-			try {
-				this.searchItems = await this.ds.search(searchTerm, false, true);
-				this.ds.loading = false;
+		catch (e) {
+			if (this.searchToken === token) {
+				// If this call was not aborted and still failed,
+				// return the error.
+				throw e;
 			}
-			catch (e) {
-				if (this.searchToken === token) {
-					// If this call was not aborted and still failed,
-					// return the error.
-					throw e;
-				}
 
-				// This call got aborted by another update, so
-				// do nothing.
-
-			}
+			// This call got aborted by another update, so
+			// do nothing.
+			return;
 		}
+
+
 		this.emitChange('searchItems');
 		this.emitChange('loading');
 	}
