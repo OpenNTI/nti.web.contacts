@@ -57,6 +57,11 @@ export default class ContactListStore extends BaseContactsStore {
 			// do nothing.
 			return;
 		}
+		finally {
+			if (this.searchToken === token) {
+				delete this.searchToken;
+			}
+		}
 
 
 		this.emitChange('searchItems');
