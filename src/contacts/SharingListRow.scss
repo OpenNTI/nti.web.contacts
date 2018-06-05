@@ -4,7 +4,6 @@
 	height: 50px;
 	font-family: "Open Sans";
 	font-size: 14px;
-	line-height: 19px;
 	display: flex;
 	margin-top: auto;
 	margin-bottom: auto;
@@ -16,10 +15,11 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
+		line-height: 50px;
 	}
 
 	.members {
-		margin-top: auto;
+		margin-top: 8px;
 		margin-bottom: auto;
 		position: static;
 		margin-left: auto;
