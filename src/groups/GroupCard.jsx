@@ -80,7 +80,7 @@ class GroupCard extends React.Component {
 
 
 		return (
-			<LinkTo.Object className="group-card" object={entity}>
+			<LinkTo.Object className="group-card" object={entity} draggable="false">
 				<Avatar className="group-avatar" entity={entity}/>
 				<CardDetail entity={entity}
 					members={entity.friends}

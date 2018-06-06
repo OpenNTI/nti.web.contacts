@@ -49,11 +49,10 @@ export default class SharingListCard extends React.Component {
 		const {entity, members, deleteSharingList} = this.props;
 		const {renameMode} = this.state;
 
-		// TODO: Wrap this in a LinkTo component that links to
-		// a route that points to the sharing list manager modal
 		return (
 			<LinkTo.Path to={`sharing-lists/${encodeURIComponent(entity.getID())}`}
-				className="sharing-list-card">
+				className="sharing-list-card"
+				draggable="false">
 				<CardDetail entity={entity}
 					members={members}
 					flyoutOptions={(
