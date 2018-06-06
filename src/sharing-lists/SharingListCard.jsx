@@ -20,7 +20,6 @@ export default class SharingListCard extends React.Component {
 		]).isRequired,
 		members: PropTypes.array,
 		renameSharingList: PropTypes.func,
-		managePeople: PropTypes.func,
 		deleteSharingList: PropTypes.func
 	};
 
@@ -53,7 +52,8 @@ export default class SharingListCard extends React.Component {
 		// TODO: Wrap this in a LinkTo component that links to
 		// a route that points to the sharing list manager modal
 		return (
-			<div className="sharing-list-card">
+			<LinkTo.Path to={`sharing-lists/${encodeURIComponent(entity.getID())}`}
+				className="sharing-list-card">
 				<CardDetail entity={entity}
 					members={members}
 					flyoutOptions={(
@@ -77,7 +77,7 @@ export default class SharingListCard extends React.Component {
 					onCancelEditing={this.cancelRenamingGroup}
 					renameMode={renameMode}
 					saveOnBlur/>
-			</div>
+			</LinkTo.Path>
 		);
 	}
 }
