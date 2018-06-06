@@ -23,16 +23,6 @@ export default
 @GroupListStore.connect(propMap)
 class GroupsView extends React.Component {
 
-	state = {
-		showRenameDialog: false,
-		showInviteCodeDialog: false,
-		showDeleteDialog: false,
-		showJoinGroupDialog: false,
-		showCreateDialog: false,
-		activeGroup: null,
-		activeInviteCode: null
-	}
-
 	static propTypes = {
 		store: PropTypes.object,
 		items: PropTypes.array,
