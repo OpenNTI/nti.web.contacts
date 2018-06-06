@@ -15,7 +15,6 @@ ContactListCard.propTypes = {
 	]).isRequired,
 	removeContact: PropTypes.func,
 	addContactToSharingList: PropTypes.func,
-	chatWithContact: PropTypes.func
 };
 
 const t = scoped('nti-web-contacts.contacts.ContactListCard', {
