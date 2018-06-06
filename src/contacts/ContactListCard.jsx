@@ -32,28 +32,37 @@ export default function ContactListCard ({entity, removeContact, addContactToSha
 			<CardDetail entity={entity}
 				flyoutOptions={(
 					<React.Fragment>
+
 						<div className="contact-list-action-flyout-option"
 							key="viewProfile">
 							<LinkTo.Object object={entity}>
 								{t('viewProfile')}
 							</LinkTo.Object>
 						</div>
-						<div className="contact-list-action-flyout-option link"
-							key="chat">
-							<User.Presence user={entity}>
-								<ChatLink entity={entity} />
-							</User.Presence>
-						</div>
+
+						{entity.following && (
+							<div className="contact-list-action-flyout-option link"
+								key="chat">
+								<User.Presence user={entity}>
+									<ChatLink entity={entity} />
+								</User.Presence>
+							</div>
+						)}
+
 						<div className="contact-list-action-flyout-option"
 							onClick={(e) => addContactToSharingList(entity)}
 							key="addToSharingList">
 							{t('addToSharingList')}
 						</div>
-						<div className="contact-list-action-flyout-option-delete"
-							onClick={(e) => removeContact(entity)}
-							key="unfollow">
-							{t('deleteText')}
-						</div>
+
+						{entity.following && (
+							<div className="contact-list-action-flyout-option-delete"
+								onClick={(e) => removeContact(entity)}
+								key="unfollow">
+								{t('deleteText')}
+							</div>
+						)}
+
 					</React.Fragment>
 				)}/>
 		</LinkTo.Object>
