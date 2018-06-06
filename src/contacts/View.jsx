@@ -112,9 +112,7 @@ class ContactListView extends React.Component {
 				{filteredItems.length > 0 && (
 					<ContactCardsContainer items={filteredItems}
 						removeContact={this.removeContact}
-						chatWithContact={this.chatWithContact}
-						addToSharingList={this.openAddToSharingListModal}
-						viewContactProfile={this.viewContactProfile}/>
+						addToSharingList={this.openAddToSharingListModal}/>
 				)}
 			</div>
 		);

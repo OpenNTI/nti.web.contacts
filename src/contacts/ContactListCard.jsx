@@ -14,7 +14,6 @@ ContactListCard.propTypes = {
 		PropTypes.string
 	]).isRequired,
 	removeContact: PropTypes.func,
-	viewContactProfile: PropTypes.func,
 	addContactToSharingList: PropTypes.func,
 	chatWithContact: PropTypes.func
 };
@@ -26,7 +25,7 @@ const t = scoped('nti-web-contacts.contacts.ContactListCard', {
 	deleteText: 'Unfollow'
 });
 
-export default function ContactListCard ({entity, removeContact, viewContactProfile, addContactToSharingList, chatWithContact}) {
+export default function ContactListCard ({entity, removeContact, addContactToSharingList}) {
 
 	return (
 		<LinkTo.Object className="contact-list-card" object={entity}>
@@ -41,7 +40,6 @@ export default function ContactListCard ({entity, removeContact, viewContactProf
 							</LinkTo.Object>
 						</div>
 						<div className="contact-list-action-flyout-option link"
-							onClick={(e) => chatWithContact(entity)}
 							key="chat">
 							<User.Presence user={entity}>
 								<ChatLink entity={entity} />
