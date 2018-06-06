@@ -49,7 +49,7 @@ class GroupsView extends React.Component {
 		const {items, store, loading, searchTerm} = this.props;
 
 		if (!store || loading) {
-			return <Loading.Mask />;
+			return <div className="groups-panel"><Loading.Mask /></div>;
 		}
 
 		const filteredItems = this.getFilteredItemsBySearchTerm(searchTerm, items);
