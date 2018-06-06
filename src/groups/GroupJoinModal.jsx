@@ -65,7 +65,7 @@ class GroupJoinModal extends React.Component {
 
 	render () {
 		const {validCode} = this.state;
-		const invalidCodeClass = validCode ? '' : 'error-message';
+		const invalidCodeClass = validCode ? '' : 'invalid-code-error';
 		return(
 			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				<div className="group-action-modal">
@@ -81,7 +81,7 @@ class GroupJoinModal extends React.Component {
 								onChange={this.updateGroupCode}
 								maxLength="140"/>
 						</div>
-						{!validCode && <div className="error-message">{t('invalidCodeMessage')}</div>}
+						{!validCode && <div className="invalid-code-error">{t('invalidCodeMessage')}</div>}
 					</div>
 
 					{this.renderControls()}

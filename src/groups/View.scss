@@ -52,13 +52,13 @@
 		width: 100%;
 		height: 40px;
 
-		&.error-message {
+		&.invalid-code-error {
 			color: $secondary-grey;
 			border: solid 1px $primary-red;
 		}
 	}
 
-	.error-message {
+	.invalid-code-error {
 		color: $primary-red;
 	}
 }
