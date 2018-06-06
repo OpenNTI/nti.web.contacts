@@ -79,7 +79,7 @@ class GroupJoinModal extends React.Component {
 								className={invalidCodeClass}
 								value={this.state.groupCode}
 								onChange={this.updateGroupCode}
-								maxLength="140"/>
+								maxLength="80"/>
 						</div>
 						{!validCode && <div className="invalid-code-error">{t('invalidCodeMessage')}</div>}
 					</div>

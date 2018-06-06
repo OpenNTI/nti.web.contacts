@@ -101,7 +101,8 @@ export default class EditableTextField extends React.Component {
 						value={displayText}
 						onChange={this.updateTextValue}
 						onBlur={this.onBlur}
-						onKeyDown={this.onKeyDown}/>
+						onKeyDown={this.onKeyDown}
+						maxLength="80"/>
 				</div>
 			);
 		}

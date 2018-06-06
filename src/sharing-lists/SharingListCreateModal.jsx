@@ -97,7 +97,7 @@ class SharingListCreateModal extends React.Component {
 		return (
 			<div className="sharing-list-action-modal-content">
 				<div className="sharing-list-action-modal-content sub-header">{t('listNameLabel')}</div>
-				<Input.Text placeholder="Name" value={this.state.sharingListName} onChange={this.updateSharingListName} maxLength="140"/>
+				<Input.Text placeholder="Name" value={this.state.sharingListName} onChange={this.updateSharingListName} maxLength="80"/>
 				<div className="sharing-list-action-modal-content sub-header">{t('contactSearchLabel')}</div>
 				<span>
 					<i className="icon-hide"/> {t('listDescription')}

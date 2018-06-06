@@ -68,7 +68,7 @@ class GroupInviteCodeModal extends React.Component {
 					<div className="group-action-modal-content">
 						{t('bodyText')}
 						<div className="group-action-modal-content sub-header">Group Code</div>
-						{invitationCode && <Input.Text value={invitationCode}/>}
+						{invitationCode && <Input.Text value={invitationCode} maxLength="80"/>}
 					</div>
 				</div>
 			</Prompt.Dialog>
