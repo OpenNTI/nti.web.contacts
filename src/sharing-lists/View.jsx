@@ -93,6 +93,7 @@ class SharingListsView extends React.Component {
 				<div className="sharing-lists-title-and-button">
 					<div className="sharing-lists-header-title">{t('headerText')}</div>
 					<Button component={LinkTo.Path} to="sharing-lists/add" className="create-sharing-list-button">
+						<i className="icon-createlarge"/>
 						{t('createButton')}
 					</Button>
 				</div>

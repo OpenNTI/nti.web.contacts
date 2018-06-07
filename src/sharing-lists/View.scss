@@ -20,9 +20,17 @@
 	.create-sharing-list-button {
 		margin-left: auto;
 		margin-bottom: auto;
-		height: 40px;
 		border-radius: 3px;
+		line-height: 20px;
+		padding: 10px;
+		text-align: center;
 		font-weight: normal;
+
+		.icon-createlarge {
+			font-size: 18px;
+			vertical-align: text-bottom;
+			margin-right: 5px;
+		}
 	}
 }
 
