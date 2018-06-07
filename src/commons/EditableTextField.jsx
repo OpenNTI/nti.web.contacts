@@ -67,16 +67,22 @@ export default class EditableTextField extends React.Component {
 		}
 	}
 
-	onBlur = () => {
-		if(this.props.saveOnBlur && this.isValidText(this.state.textValue)) {
-			const {onFinishedEditing} = this.props;
+	onFocus = () => {
+		clearTimeout(this.handleBlurTimeout);
+	}
 
-			onFinishedEditing(this.state.textValue);
-		}
-		else {
-			this.setState({textValue: this.props.text});
-			this.props.onCancelEditing();
-		}
+	onBlur = () => {
+		this.handleBlurTimeout = setTimeout(() => {
+			if(this.props.saveOnBlur && this.isValidText(this.state.textValue)) {
+				const {onFinishedEditing} = this.props;
+
+				onFinishedEditing(this.state.textValue);
+			}
+			else {
+				this.setState({textValue: this.props.text});
+				this.props.onCancelEditing();
+			}
+		}, 10);
 	}
 
 	onClick = (e) => {
@@ -105,6 +111,7 @@ export default class EditableTextField extends React.Component {
 						placeholder={placeholderText}
 						value={displayText}
 						onChange={this.updateTextValue}
+						onFocus={this.onFocus}
 						onBlur={this.onBlur}
 						onKeyDown={this.onKeyDown}
 						maxLength="80"/>
