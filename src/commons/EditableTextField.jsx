@@ -18,6 +18,8 @@ export default class EditableTextField extends React.Component {
 		clearOnFinish: PropTypes.bool
 	};
 
+	attachInputRef = x => this.input = x;
+
 	updateTextValue = (newValue) => {
 		this.setState({textValue: newValue});
 	}
@@ -25,6 +27,9 @@ export default class EditableTextField extends React.Component {
 	componentDidUpdate (oldProps) {
 		if(oldProps && oldProps.text !== this.props.text) {
 			this.setState({textValue: this.props.text});
+		}
+		if (oldProps && !oldProps.isEditable && this.props.isEditable) {
+			this.input.focus();
 		}
 	}
 
@@ -95,8 +100,8 @@ export default class EditableTextField extends React.Component {
 			return (
 				<div className="editable-text-field">
 					<Input.Text
-						autoFocus
 						onClick={this.onClick}
+						ref={this.attachInputRef}
 						placeholder={placeholderText}
 						value={displayText}
 						onChange={this.updateTextValue}
