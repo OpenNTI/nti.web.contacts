@@ -1,8 +1,9 @@
 @import "~@nti/style-common";
 
 .sharing-list-card {
+	display: block;
 	height: 160px;
-	flex-grow: 1;
+	flex: 0 1 auto;
 	width: 472px;
 	margin: 10px;
 	text-decoration: none;
