@@ -39,7 +39,7 @@ export default function Members ({members, displayLabel = true}) {
 
 	return (
 		<Flyout.Triggered
-			hover dark
+			hover arrow dark
 			className="members-flyout-trigger"
 			trigger={(
 				<div className="members">
