@@ -36,7 +36,7 @@ const onAfter = () => {
 	delete $AppConfig.nodeService;
 };
 
-describe('Contact Cards', () => {
+describe('Test Card Detail', () => {
 
 	beforeEach(onBefore);
 	afterEach(onAfter);
