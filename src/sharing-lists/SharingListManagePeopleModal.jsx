@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
-import { Prompt, DialogButtons, Panels } from '@nti/web-commons';
+import { DialogButtons } from '@nti/web-commons';
 
 import SharingListContactsContainer from './SharingListContactsContainer';
 import SharingListStore from './Store';
