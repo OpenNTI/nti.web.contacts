@@ -15,7 +15,10 @@ export default
 class SharingListManagePeopleModal extends React.Component {
 
 	static propTypes = {
-		store: PropTypes.object
+		store: PropTypes.object,
+		onHeaderTextChange: PropTypes.func,
+		onDismiss: PropTypes.func,
+		entityId: PropTypes.string
 	};
 
 	static getDerivedStateFromProps ({entityId, store}, state) {
@@ -27,13 +30,13 @@ class SharingListManagePeopleModal extends React.Component {
 		};
 	}
 
+	componentDidMount () {
+		this.updateHeaderText();
+	}
+
 	state = {
 		item: null,
 		contacts: []
-	}
-
-	onContactsChange = (updatedContacts) => {
-		this.setState({contacts: updatedContacts});
 	}
 
 	addContactToList = (newContact) => {
@@ -55,24 +58,18 @@ class SharingListManagePeopleModal extends React.Component {
 	}
 
 	onFinishedEditing = () => {
-		const {store} = this.props;
+		const {store, onDismiss} = this.props;
 		const {contacts:updatedContacts, item} = this.state;
 		store.onFinishedManagingPeople(updatedContacts || [], item);
-		this.onDismiss();
+		onDismiss();
 	}
 
-	onDismiss = () => {
-		global.history.back();
-	}
-
-	renderHeader = () => {
+	updateHeaderText = () => {
+		const {onHeaderTextChange} = this.props;
 		const numberOfContacts = (this.state.contacts && this.state.contacts.length) || 0;
 		const headerTitle = t('modalTitleText') + ' (' + numberOfContacts + ')';
-		return (
-			<Panels.Header className="sharing-list-action-modal-header" onClose={this.onDismiss}>
-				{headerTitle}
-			</Panels.Header>
-		);
+
+		onHeaderTextChange(headerTitle);
 	}
 
 	renderControls = () => {
@@ -92,7 +89,7 @@ class SharingListManagePeopleModal extends React.Component {
 		const {contacts} = this.state || [];
 
 		return (
-			<div className="sharing-list-action-modal-content">
+			<div>
 				<div className="sharing-list-action-modal-content sub-header">Add People</div>
 				<SharingListContactsContainer
 					addContactToList={this.addContactToList}
@@ -104,13 +101,10 @@ class SharingListManagePeopleModal extends React.Component {
 
 	render () {
 		return(
-			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
-				<div className="sharing-list-action-modal">
-					{this.renderHeader()}
-					{this.renderContent()}
-					{this.renderControls()}
-				</div>
-			</Prompt.Dialog>
+			<div className="sharing-list-action-modal-content">
+				{this.renderContent()}
+				{this.renderControls()}
+			</div>
 		);
 	}
 }
