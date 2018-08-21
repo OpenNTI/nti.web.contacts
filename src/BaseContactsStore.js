@@ -9,6 +9,7 @@ import {HOC} from '@nti/lib-commons';
 const SEARCH_BUFFER_TIME = 500;
 
 export default class BaseContactsStore extends Stores.SimpleStore {
+	static Singleton = true;
 
 	static connect (propMap, storeProp = 'store') {
 		const store = this.getStore();
