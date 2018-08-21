@@ -6,10 +6,12 @@ import {HOC} from '@nti/lib-commons';
 
 // const logger = Logger.get('contacts:components:Store');
 
+const SEARCH_BUFFER_TIME = 500;
+
 export default class BaseContactsStore extends Stores.SimpleStore {
 
 	static connect (propMap, storeProp = 'store') {
-		const store = this.getInstance();
+		const store = this.getStore();
 		const extraProps = {
 			[storeProp]: store,
 			searchItems: this.searchItems
@@ -80,8 +82,13 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 
 	async updateSearchTerm (searchTerm) {
 		//Default implementation
-		this.searchTerm = searchTerm;
-		this.emitChange('items');
-		this.emitChange('searchTerm');
+
+		clearTimeout(this.searchBuffer);
+
+		this.searchBuffer = setTimeout(() => {
+			this.searchTerm = searchTerm;
+			this.emitChange('items');
+			this.emitChange('searchTerm');
+		}, SEARCH_BUFFER_TIME);
 	}
 }
