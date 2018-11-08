@@ -6,6 +6,10 @@
 	flex-grow: 1;
 	margin: 10px;
 	text-decoration: none;
+
+	.contact-card-detail .card-action-flyout {
+		width: 50px;
+	}
 }
 
 .group-avatar {
