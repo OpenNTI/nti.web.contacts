@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DisplayName } from '@nti/web-commons';
 
-import Members from '../commons/Members';
+import Members from '../common/Members';
 
 SharingListRow.propTypes = {
 	sharingList: PropTypes.object,

@@ -3,8 +3,8 @@ import React from 'react';
 import {mount} from 'enzyme';
 import { DisplayName } from '@nti/web-commons';
 
-import CardDetail from '../commons/CardDetail';
-import EditableTextField from '../commons/EditableTextField';
+import CardDetail from '../common/CardDetail';
+import EditableTextField from '../common/EditableTextField';
 
 //TODO: Probably don't need all of this function?
 const mockService = () => ({

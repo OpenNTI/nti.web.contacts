@@ -4,7 +4,7 @@ import { scoped } from '@nti/lib-locale';
 import { Avatar, User } from '@nti/web-commons';
 import { LinkTo } from '@nti/web-routing';
 
-import { CardDetail } from '../commons';
+import { CardDetail } from '../common';
 
 import ChatLink from './ChatLink';
 

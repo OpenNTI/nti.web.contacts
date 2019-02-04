@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 
-import EditableTextField from '../commons/EditableTextField';
+import EditableTextField from '../common/EditableTextField';
 
 const t = scoped('nti-web-contacts.contacts.CreateSharingListRow', {
 	newListText: 'Create a New List'

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { LinkTo } from '@nti/web-routing';
 
-import { CardDetail } from '../commons';
+import { CardDetail } from '../common';
 
 const t = scoped('nti-web-contacts.sharing-lists.SharingListCard', {
 	renameText: 'Change Name',

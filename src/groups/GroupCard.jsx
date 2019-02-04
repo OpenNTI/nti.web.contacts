@@ -6,7 +6,7 @@ import { encodeForURI } from '@nti/lib-ntiids';
 import { Avatar, Prompt } from '@nti/web-commons';
 import { LinkTo } from '@nti/web-routing';
 
-import { CardDetail } from '../commons';
+import { CardDetail } from '../common';
 
 import GroupListStore from './Store';
 
