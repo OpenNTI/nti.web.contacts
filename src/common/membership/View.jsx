@@ -35,6 +35,14 @@ class MembershipView extends React.Component {
 	// static deriveBindingFromProps = async ({entity}) => !entity ? 'new-group' : await getService().then(s => s.resolveEntity(entity))
 	static deriveBindingFromProps = ({entity}) => entity || 'new-group'
 	
+	componentDidUpdate ({members: previousMembers}) {
+		const {onChange, members} = this.props;
+
+		if (onChange && members !== previousMembers) {
+			onChange(members);
+		}
+	}
+
 	render () {
 		const {
 			loading,
