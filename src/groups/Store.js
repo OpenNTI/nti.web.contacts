@@ -1,9 +1,22 @@
 import {getService} from '@nti/web-client';
+import {isNTIID} from '@nti/lib-ntiids';
 import Logger from '@nti/util-logger';
 
 import BaseContactsStore from '../BaseContactsStore';
 
 const logger = Logger.get('contacts:components:Groups');
+
+function extractId (x) {
+	try {
+		return x.getID();
+	}
+	catch (e) {
+		logger.error('Unable to extract id.');
+	}
+	return null;
+}
+
+const toId = x => isNTIID(x) ? x : extractId(x);
 
 export default class GroupListStore extends BaseContactsStore {
 
@@ -30,8 +43,8 @@ export default class GroupListStore extends BaseContactsStore {
 		return await service.getCollection('Invitations', 'Invitations');
 	}
 
-	createGroup = (groupName) => {
-		this.ds.createGroup(groupName);
+	createGroup = (groupName, members = []) => {
+		this.ds.createGroup(groupName, members.map(toId).filter(Boolean));
 		this.emitChange('items');
 	}
 
