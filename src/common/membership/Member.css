@@ -1,0 +1,19 @@
+.member {
+	display: flex;
+	align-items: center;
+	margin: 0.5em;
+	padding: 0 0.5em 0 0;
+}
+
+.member > * {
+	flex: 0;
+}
+
+.username {
+	flex: 1 1 auto;
+}
+
+.avatar {
+	width: 2em;
+	margin-right: 0.5em;
+}

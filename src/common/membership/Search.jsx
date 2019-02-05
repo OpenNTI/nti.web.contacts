@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {getService} from '@nti/web-client';
 import classnames from 'classnames/bind';
-import {Search as SearchInput, DisplayName} from '@nti/web-commons';
+import {Search as SearchInput} from '@nti/web-commons';
 import {scoped} from '@nti/lib-locale';
 
 import styles from './Search.css';
@@ -15,8 +15,7 @@ const t = scoped('contacts.membership.search-component', {
 export default class Search extends React.Component {
 
 	static propTypes = {
-		onItemClick: PropTypes.func,
-		exclude: PropTypes.array
+		itemCmp: PropTypes.any.isRequired // component for rendering individual result items
 	}
 
 	state = {}
@@ -44,16 +43,9 @@ export default class Search extends React.Component {
 		});
 	}
 
-	onItemClick = entity => {
-		const {onItemClick} = this.props;
-
-		if (onItemClick) {
-			onItemClick(entity);
-		}
-	}
-
 	render () {
 		const {
+			props: {itemCmp: ItemCmp},
 			state: {results}
 		} = this;
 
@@ -63,33 +55,11 @@ export default class Search extends React.Component {
 				{(results || []).length === 0 ? null : (
 					<ul className={cx('search-results')}>
 						{results.map(entity => (
-							<Item key={entity.getID()} entity={entity} onClick={this.onItemClick} />
+							<li key={entity.getID()}><ItemCmp entity={entity} /></li>
 						))}
 					</ul>
 				)}
 			</div>
-		);
-	}
-}
-
-class Item extends React.PureComponent {
-	static propTypes = {
-		onClick: PropTypes.func.isRequired,
-		entity: PropTypes.object.isRequired
-	}
-	
-	onClick = () => {
-		const {onClick, entity} = this.props;
-		onClick(entity);
-	}
-
-	render () {
-		const {entity} = this.props;
-
-		return (
-			<li onClick={this.onClick}>
-				<DisplayName entity={entity}/>
-			</li>
 		);
 	}
 }

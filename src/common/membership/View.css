@@ -7,3 +7,18 @@
 .member {
 	display: inline-block;
 }
+
+.add-icon {
+	color: var(--primary-green, #3fb34f);
+	margin-left: 0.25em;
+}
+
+.remove-icon {
+	color: var(--primary-red, #f35252);
+	margin-left: 0.25em;
+}
+
+.is-member {
+	background: #f6f6f6;
+	border-radius: 3px;
+}

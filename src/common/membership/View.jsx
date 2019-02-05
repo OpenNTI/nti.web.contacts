@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {DisplayName, Loading} from '@nti/web-commons';
+import {Loading} from '@nti/web-commons';
 import classnames from 'classnames/bind';
 
 import Search from './Search';
 import {default as Store, ADD, REMOVE, MEMBERS, LOADING} from './Store';
 import styles from './View.css';
+import Member from './Member';
 
 const cx = classnames.bind(styles);
 
@@ -51,48 +52,44 @@ class MembershipView extends React.Component {
 			remove
 		} = this.props;
 
+		const MemberListItem = ({entity, ...props}) => {
+			const isMember = members.includes(entity);
+
+			return (
+				<Member
+					onClick={isMember ? remove : add}
+					entity={entity}
+					className={cx({'is-member': isMember})}
+					{...props}
+				>
+					<i className={cx(
+						isMember ? 'icon-remove' : 'icon-add', // defined in style common, not moduled
+						{
+							// component local styles
+							'add-icon': !isMember,
+							'remove-icon': isMember
+						}
+					)} />
+				</Member>
+			);
+		};
+
 		return (
 			<div className={cx('membership', {loading})}>
-				{members.length === 0 ? (
-					<div>such empty</div>
-				) : (
+				{!!members.length && (
 					<ul className={cx('members')}>
 						{members.map(m => (
 							<li key={m.getID()} className={cx('member')}>
-								<Member entity={m} onClick={remove} />
+								<MemberListItem entity={m} />
 							</li>
 						))}
 					</ul>
 				)}
-				<Search onItemClick={add} />
+				<Search itemCmp={MemberListItem} />
 				{loading && (
 					<Loading.Spinner />
 				)}
 			</div>
-		);
-	}
-}
-
-class Member extends React.PureComponent {
-
-	static propTypes = {
-		entity: PropTypes.object.isRequired,
-		onClick: PropTypes.func
-	}
-
-	onClick = () => {
-		const {entity, onClick} = this.props;
-
-		if (onClick) {
-			onClick(entity);
-		}
-	}
-
-	render () {
-		const {entity} = this.props;
-
-		return (
-			<DisplayName entity={entity} onClick={this.onClick} />
 		);
 	}
 }
