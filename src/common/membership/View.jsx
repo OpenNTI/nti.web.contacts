@@ -4,7 +4,7 @@ import {DisplayName, Loading} from '@nti/web-commons';
 import classnames from 'classnames/bind';
 
 import Search from './Search';
-import {default as Store, ADD, REMOVE, MEMBERS, ADDED, REMOVED, LOADING} from './Store';
+import {default as Store, ADD, REMOVE, MEMBERS, LOADING} from './Store';
 import styles from './View.css';
 
 const cx = classnames.bind(styles);
@@ -13,8 +13,6 @@ export default
 @Store.connect({
 	[ADD]: 'add',
 	[REMOVE]: 'remove',
-	[ADDED]: 'added',
-	[REMOVED]: 'removed',
 	[MEMBERS]: 'members',
 	[LOADING]: 'loading'
 })
@@ -25,6 +23,7 @@ class MembershipView extends React.Component {
 			PropTypes.object, // group model instance
 			PropTypes.string // group id
 		]),
+		onChange: PropTypes.func,
 		loading: PropTypes.bool,
 		members: PropTypes.array,
 		add: PropTypes.func,
@@ -35,27 +34,25 @@ class MembershipView extends React.Component {
 
 	// static deriveBindingFromProps = async ({entity}) => !entity ? 'new-group' : await getService().then(s => s.resolveEntity(entity))
 	static deriveBindingFromProps = ({entity}) => entity || 'new-group'
-
+	
 	render () {
 		const {
 			loading,
 			members = [],
 			add,
-			// remove,
-			added = [],
-			removed = []
+			remove
 		} = this.props;
-
-		const show = [...members, ...added].filter(e => !removed.length || !removed.includes(e));
 
 		return (
 			<div className={cx('membership', {loading})}>
-				{show.length === 0 ? (
+				{members.length === 0 ? (
 					<div>such empty</div>
 				) : (
 					<ul className={cx('members')}>
-						{show.map(m => (
-							<li key={m.getID()} className={cx('member')}><DisplayName entity={m} /></li>
+						{members.map(m => (
+							<li key={m.getID()} className={cx('member')}>
+								<Member entity={m} onClick={remove} />
+							</li>
 						))}
 					</ul>
 				)}
@@ -64,6 +61,30 @@ class MembershipView extends React.Component {
 					<Loading.Spinner />
 				)}
 			</div>
+		);
+	}
+}
+
+class Member extends React.PureComponent {
+
+	static propTypes = {
+		entity: PropTypes.object.isRequired,
+		onClick: PropTypes.func
+	}
+
+	onClick = () => {
+		const {entity, onClick} = this.props;
+
+		if (onClick) {
+			onClick(entity);
+		}
+	}
+
+	render () {
+		const {entity} = this.props;
+
+		return (
+			<DisplayName entity={entity} onClick={this.onClick} />
 		);
 	}
 }

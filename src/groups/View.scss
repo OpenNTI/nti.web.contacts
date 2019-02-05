@@ -12,35 +12,6 @@
 	}
 }
 
-.group-action-modal {
-	min-height: 400px;
-	width: 550px;
-	background: white;
-	display: flex;
-	flex-direction: column;
-
-	> * {
-		flex: 1 1 auto;
-	}
-
-	> .group-action-modal-controls {
-		flex: 0;
-	}
-}
-
-.group-action-modal-header {
-	height: 50px;
-	font-size: 24px;
-	line-height: 33px;
-	font-weight: 300;
-	color: $primary-grey;
-
-	&.panel-header-component {
-		padding-left: 25px;
-		padding-top: 7px;
-	}
-}
-
 .group-action-modal-content {
 	padding-left: 25px;
 	padding-right: 25px;
@@ -73,12 +44,34 @@
 	}
 }
 
-// .group-action-modal-controls {
-// 	position: absolute;
-// 	right: 0;
-// 	bottom: 0;
-// 	width: 100%;
-// }
+.group-action-modal {
+	min-height: 400px;
+	width: 550px;
+	background: white;
+	display: flex;
+	flex-direction: column;
+
+	> * {
+		flex: 0;
+	}
+
+	> .group-action-modal-content {
+		flex: 1 1 auto;
+	}
+}
+
+.group-action-modal-header {
+	height: 50px;
+	font-size: 24px;
+	line-height: 33px;
+	font-weight: 300;
+	color: $primary-grey;
+
+	&.panel-header-component {
+		padding-left: 25px;
+		padding-top: 7px;
+	}
+}
 
 .groups-header-title {
 	color: $primary-grey;
