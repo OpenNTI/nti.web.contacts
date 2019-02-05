@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {scoped} from '@nti/lib-locale';
-import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
+import {Prompt, DialogButtons, Panels, Input} from '@nti/web-commons';
+
+import {Membership} from '../common';
 
 import GroupListStore from './Store';
 
@@ -78,6 +80,7 @@ class GroupCreateModal extends React.Component {
 							<Input.Text placeholder="Name" value={this.state.groupName} onChange={this.updateGroupName} maxLength="80"/>
 						</div>
 					</div>
+					<Membership />
 					{this.renderControls()}
 				</div>
 			</Prompt.Dialog>
