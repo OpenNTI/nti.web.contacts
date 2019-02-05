@@ -40,23 +40,27 @@ class GroupCreateModal extends React.Component {
 	}
 
 	onCreateGroup = () => {
-		if (!this.disableCreate) {
-			const {store} = this.props;
-			const {groupName} = this.state;
-			store.createGroup(groupName);
-			this.onDismiss();
-		}
-		// do nothing if create is disabled
+		const {
+			members,
+			props: {store},
+			state: {groupName}
+		} = this;
+
+		store.createGroup(groupName, members);
+		this.onDismiss();
 	}
+
+	// tracking solely for group creation; no need to setState and trigger a re-render
+	onMembershipChange = members => this.members = members
 
 	renderControls = () => {
 
 		const {groupName} = this.state;
-		const disableCreateClass = this.disableCreate = groupName.trim() ? '' : 'disabled';
+		const disabled = !groupName.trim();
 
 		const buttons = [
 			{label: t('cancelButton'), onClick: this.onDismiss},
-			{label: t('createButton'), onClick: this.onCreateGroup, className: disableCreateClass}
+			{label: t('createButton'), onClick: this.onCreateGroup, disabled}
 		];
 
 		return (
@@ -79,8 +83,8 @@ class GroupCreateModal extends React.Component {
 						<div>
 							<Input.Text placeholder="Name" value={this.state.groupName} onChange={this.updateGroupName} maxLength="80"/>
 						</div>
+						<Membership onChange={this.onMembershipChange} />
 					</div>
-					<Membership />
 					{this.renderControls()}
 				</div>
 			</Prompt.Dialog>
