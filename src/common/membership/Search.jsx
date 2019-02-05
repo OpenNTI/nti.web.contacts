@@ -9,7 +9,7 @@ import styles from './Search.css';
 
 const cx = classnames.bind(styles);
 const t = scoped('contacts.membership.search-component', {
-	placeholder: 'Find contacts'
+	placeholder: 'Add members'
 });
 
 export default class Search extends React.Component {
@@ -25,20 +25,27 @@ export default class Search extends React.Component {
 	}
 
 	onSearch = async query => {
-		let results;
+		let results, error;
 
 		this.setState({
 			results,
+			error,
 			loading: true
 		});
 
 		if ((query || '').trim()) {
-			results = await getService()
-				.then(s => s.getContacts().search(query));
+			try {
+				results = await getService()
+					.then(s => s.getContacts().search(query));
+			}
+			catch (e) {
+				error = e;
+			}
 		}
 
 		this.setState({
 			results,
+			error,
 			loading: false
 		});
 	}
