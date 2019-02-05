@@ -33,8 +33,10 @@ export default class Search extends React.Component {
 			loading: true
 		});
 
-		results = await getService()
-			.then(s => s.getContacts().search(query));
+		if ((query || '').trim()) {
+			results = await getService()
+				.then(s => s.getContacts().search(query));
+		}
 
 		this.setState({
 			results,
