@@ -4,7 +4,14 @@ import {Loading} from '@nti/web-commons';
 import classnames from 'classnames/bind';
 
 import Search from './Search';
-import {default as Store, ADD, REMOVE, MEMBERS, LOADING} from './Store';
+import {default as Store,
+	ADD,
+	REMOVE,
+	MEMBERS,
+	NEW_GROUP,
+	CAN_MANAGE_MEMBERS,
+	LOADING
+} from './Store';
 import styles from './View.css';
 import Member from './Member';
 
@@ -15,6 +22,7 @@ export default
 	[ADD]: 'add',
 	[REMOVE]: 'remove',
 	[MEMBERS]: 'members',
+	[CAN_MANAGE_MEMBERS]: 'canManage',
 	[LOADING]: 'loading'
 })
 class MembershipView extends React.Component {
@@ -26,6 +34,7 @@ class MembershipView extends React.Component {
 		]),
 		onChange: PropTypes.func,
 		loading: PropTypes.bool,
+		canManage: PropTypes.bool,
 		members: PropTypes.array,
 		add: PropTypes.func,
 		remove: PropTypes.func,
@@ -34,7 +43,7 @@ class MembershipView extends React.Component {
 	}
 
 	// static deriveBindingFromProps = async ({entity}) => !entity ? 'new-group' : await getService().then(s => s.resolveEntity(entity))
-	static deriveBindingFromProps = ({entity}) => entity || 'new-group'
+	static deriveBindingFromProps = ({entity}) => entity || NEW_GROUP
 	
 	componentDidUpdate ({members: previousMembers}) {
 		const {onChange, members} = this.props;
@@ -47,10 +56,15 @@ class MembershipView extends React.Component {
 	render () {
 		const {
 			loading,
+			canManage,
 			members = [],
 			add,
 			remove
 		} = this.props;
+
+		if (!canManage) {
+			return null;
+		}
 
 		const MemberListItem = ({entity, ...props}) => {
 			const isMember = members.includes(entity);
