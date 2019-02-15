@@ -19,6 +19,6 @@
 }
 
 .is-member {
-	background: var(--quad-grey, #f8f8f8);
+	background: var(--light-blue, #f5fbff);
 	border-radius: 3px;
 }
