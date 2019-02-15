@@ -17,4 +17,6 @@
 .avatar {
 	width: 2em;
 	margin-right: 0.5em;
+	flex: 0 0 2em;
+	border-radius: 50%;
 }
