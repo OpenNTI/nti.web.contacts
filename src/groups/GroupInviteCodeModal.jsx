@@ -17,6 +17,7 @@ class GroupInviteCodeModal extends React.Component {
 
 	static propTypes = {
 		store: PropTypes.object,
+		entityId: PropTypes.string
 	};
 
 	static getDerivedStateFromProps ({entityId, store}, state) {
