@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Loading} from '@nti/web-commons';
 import classnames from 'classnames/bind';
 
+import MemberListItem from './MemberListItem';
 import Search from './Search';
 import {default as Store,
 	ADD,
@@ -13,9 +14,10 @@ import {default as Store,
 	LOADING
 } from './Store';
 import styles from './View.css';
-import Member from './Member';
+
 
 const cx = classnames.bind(styles);
+const noop = () => void 0;
 
 export default
 @Store.connect({
@@ -53,12 +55,21 @@ class MembershipView extends React.Component {
 		}
 	}
 
+	onSearchItemClick = entity => {
+		const {
+			members,
+			add = noop,
+			remove = noop
+		} = this.props;
+
+		((members || []).includes(entity) ? remove : add)(entity);
+	}
+
 	render () {
 		const {
 			loading,
 			canManage,
 			members = [],
-			add,
 			remove
 		} = this.props;
 
@@ -66,40 +77,18 @@ class MembershipView extends React.Component {
 			return null;
 		}
 
-		const MemberListItem = ({entity, ...props}) => {
-			const isMember = members.includes(entity);
-
-			return (
-				<Member
-					onClick={isMember ? remove : add}
-					entity={entity}
-					className={cx({'is-member': isMember})}
-					{...props}
-				>
-					<i className={cx(
-						isMember ? 'icon-remove' : 'icon-add', // defined in style common, not moduled
-						{
-							// component local styles
-							'add-icon': !isMember,
-							'remove-icon': isMember
-						}
-					)} />
-				</Member>
-			);
-		};
-
 		return (
 			<div className={cx('membership', {loading})}>
 				{!!members.length && (
 					<ul className={cx('members')}>
 						{members.map(m => (
 							<li key={m.getID()} className={cx('member')}>
-								<MemberListItem entity={m} />
+								<MemberListItem entity={m} onClick={remove} isMember />
 							</li>
 						))}
 					</ul>
 				)}
-				<Search itemCmp={MemberListItem} />
+				<Search members={members} onItemClick={this.onSearchItemClick} />
 				{loading && (
 					<Loading.Spinner />
 				)}
