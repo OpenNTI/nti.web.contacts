@@ -79,7 +79,7 @@ export default class GroupCreateModal extends React.Component {
 
 		return (
 			<div className="group-action-modal">
-				<Panels.Header className="group-action-modal-header" onClose={this.onDismiss}>
+				<Panels.Header className="group-action-modal-header" onClose={onCancel}>
 					{t('header')}
 				</Panels.Header>
 				<div className="group-action-modal-content">
