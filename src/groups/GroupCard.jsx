@@ -78,9 +78,11 @@ class GroupCard extends React.Component {
 		const {entity} = this.props;
 		const {renameMode} = this.state;
 
+		const editPath = `groups/${encodeForURI(entity.getID())}/edit/`;
+		const invitePath = `groups/${encodeForURI(entity.getID())}/invite`;
 
 		return (
-			<LinkTo.Object className="group-card" object={entity} draggable="false">
+			<LinkTo.Path to={editPath} className="group-card" draggable="false">
 				<Avatar className="group-avatar" entity={entity}/>
 				<CardDetail entity={entity}
 					members={entity.friends}
@@ -91,7 +93,7 @@ class GroupCard extends React.Component {
 					flyoutOptions={(
 						<React.Fragment>
 							{entity.hasLink('default-trivial-invitation-code') && (
-								<LinkTo.Path to={`groups/${encodeForURI(entity.getID())}`} className="group-action-flyout-option">
+								<LinkTo.Path to={invitePath} className="group-action-flyout-option">
 									{t('groupCodeText')}
 								</LinkTo.Path>
 							)}
@@ -117,7 +119,7 @@ class GroupCard extends React.Component {
 						</React.Fragment>
 					)}
 				/>
-			</LinkTo.Object>
+			</LinkTo.Path>
 		);
 	}
 }

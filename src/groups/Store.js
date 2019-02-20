@@ -43,6 +43,14 @@ export default class GroupListStore extends BaseContactsStore {
 		return await service.getCollection('Invitations', 'Invitations');
 	}
 
+	getGroupById = id => {
+		return (this.get('items') || []).find(g => g.getID && g.getID() === id);
+	}
+
+	async saveGroup (group, {displayName, members = []}) {
+		return group.update(...members);
+	}
+
 	createGroup = (groupName, members = []) => {
 		this.ds.createGroup(groupName, members.map(toId).filter(Boolean));
 		this.emitChange('items');
