@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {getService} from '@nti/web-client';
 import classnames from 'classnames/bind';
-import {Search as SearchInput} from '@nti/web-commons';
+import {Search as SearchInput, Loading} from '@nti/web-commons';
 import {scoped} from '@nti/lib-locale';
 
 import styles from './Search.css';
@@ -41,7 +41,9 @@ export default class Search extends React.Component {
 					.then(s => s.getContacts().search(query));
 			}
 			catch (e) {
-				error = e;
+				if (e !== 'aborted') { // killed by subsequent request
+					error = e;
+				}
 			}
 		}
 
@@ -55,21 +57,28 @@ export default class Search extends React.Component {
 	render () {
 		const {
 			props: {members, onItemClick},
-			state: {results}
+			state: {results, loading}
 		} = this;
 
 		return (
 			<div className={cx('search')}>
-				<SearchInput buffered onChange={this.onQueryChange} placeholder={t('placeholder')} />
-				{(results || []).length === 0 ? null : (
-					<ul className={cx('search-results')}>
-						{results.map(entity => (
-							<li key={entity.getID()}>
-								<MemberListItem entity={entity} isMember={(members || []).includes(entity)} onClick={onItemClick} />
-							</li>
-						))}
-					</ul>
-				)}
+				<SearchInput buffered delay={300} onChange={this.onQueryChange} placeholder={t('placeholder')} />
+				<div className={cx('search-results-pane')}>
+					{loading
+						? <Loading.Spinner />
+						: (
+							(results || []).length === 0 ? null : (
+								<ul className={cx('search-results')}>
+									{results.map(entity => (
+										<li key={entity.getID()}>
+											<MemberListItem entity={entity} isMember={(members || []).includes(entity)} onClick={onItemClick} />
+										</li>
+									))}
+								</ul>
+							)
+						)
+					}
+				</div>
 			</div>
 		);
 	}

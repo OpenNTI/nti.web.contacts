@@ -7,7 +7,18 @@
 	border-radius: 2px;
 }
 
+.search-results-pane {
+	min-height: 150px;
+	margin-bottom: 1rem;
+	display: flex; /* center the loading spinner */
+}
+
+.search-results-pane > * { /* the loading spinner */
+	flex: 0 0 auto;
+}
+
 .search-results {
+	flex: 1 1 auto;
 	list-style: none;
 	padding: 0;
 	margin: 0;
