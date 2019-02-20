@@ -47,8 +47,9 @@ export default class GroupListStore extends BaseContactsStore {
 		return (this.get('items') || []).find(g => g.getID && g.getID() === id);
 	}
 
-	async saveGroup (group, {displayName, members = []}) {
-		return group.update(...members);
+	async saveGroup (group, {displayName: alias, members: friends = []}) {
+		return group.updateFields({alias, friends})
+			.then(g => (this.emitChange('items'), g));
 	}
 
 	createGroup = (groupName, members = []) => {
