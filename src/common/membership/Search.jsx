@@ -6,6 +6,7 @@ import {Search as SearchInput} from '@nti/web-commons';
 import {scoped} from '@nti/lib-locale';
 
 import styles from './Search.css';
+import MemberListItem from './MemberListItem';
 
 const cx = classnames.bind(styles);
 const t = scoped('contacts.membership.search-component', {
@@ -15,7 +16,8 @@ const t = scoped('contacts.membership.search-component', {
 export default class Search extends React.Component {
 
 	static propTypes = {
-		itemCmp: PropTypes.any.isRequired // component for rendering individual result items
+		members: PropTypes.array,
+		onItemClick: PropTypes.func
 	}
 
 	state = {}
@@ -52,7 +54,7 @@ export default class Search extends React.Component {
 
 	render () {
 		const {
-			props: {itemCmp: ItemCmp},
+			props: {members, onItemClick},
 			state: {results}
 		} = this;
 
@@ -62,7 +64,9 @@ export default class Search extends React.Component {
 				{(results || []).length === 0 ? null : (
 					<ul className={cx('search-results')}>
 						{results.map(entity => (
-							<li key={entity.getID()}><ItemCmp entity={entity} /></li>
+							<li key={entity.getID()}>
+								<MemberListItem entity={entity} isMember={(members || []).includes(entity)} onClick={onItemClick} />
+							</li>
 						))}
 					</ul>
 				)}
