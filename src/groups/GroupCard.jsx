@@ -19,6 +19,16 @@ const t = scoped('nti-web-contacts.groups.GroupCard', {
 	renameText: 'Rename Group'
 });
 
+const editorPath = entity => `groups/${encodeForURI(entity.getID())}/edit/`;
+
+const EditLinkWrapper = ({entity, ...props}) => <LinkTo.Path to={editorPath(entity)} draggable={false} {...props} />;
+EditLinkWrapper.propTypes = {entity: PropTypes.any};
+
+const DivWrapper = (props) => {
+	return <div {...props} />;
+};
+DivWrapper.propTypes = {entity: PropTypes.any};
+
 export default
 @GroupListStore.connect()
 class GroupCard extends React.Component {
@@ -77,12 +87,13 @@ class GroupCard extends React.Component {
 
 		const {entity} = this.props;
 		const {renameMode} = this.state;
+		const {isModifiable: canEdit} = entity;
 
-		const editPath = `groups/${encodeForURI(entity.getID())}/edit/`;
 		const invitePath = `groups/${encodeForURI(entity.getID())}/invite`;
 
+		const Wrapper = canEdit ? EditLinkWrapper : DivWrapper;
 		return (
-			<LinkTo.Path to={editPath} className="group-card" draggable="false">
+			<Wrapper entity={entity} className="group-card">
 				<Avatar className="group-avatar" entity={entity}/>
 				<CardDetail entity={entity}
 					members={entity.friends}
@@ -119,7 +130,7 @@ class GroupCard extends React.Component {
 						</React.Fragment>
 					)}
 				/>
-			</LinkTo.Path>
+			</Wrapper>
 		);
 	}
 }
