@@ -16,6 +16,7 @@
 
 .avatar {
 	width: 2em;
+	height: 2em; /* ie sucks */
 	margin-right: 0.5em;
 	flex: 0 0 2em;
 	border-radius: 50%;
