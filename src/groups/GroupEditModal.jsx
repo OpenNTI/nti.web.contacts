@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import {Prompt, Loading} from '@nti/web-commons';
 import {decodeFromURI} from '@nti/lib-ntiids';
 import {scoped} from '@nti/lib-locale';
-import classnames from 'classnames/bind';
 
-import styles from './GroupEditModal.css';
 import Store from './Store';
 import Editor from './Editor';
 
-const cx = classnames.bind(styles);
 const t = scoped('nti-web-contacts.groups.EditModal', {
 	notFound: 'Not Found'
 });
@@ -73,13 +70,13 @@ class GroupEditModal extends React.Component {
 		} = this;
 
 		return (
-			<Prompt.Dialog className={cx('group-edit-modal')} onBeforeDismiss={this.onDismiss}>
+			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
 				{
 					loading
 						? <Loading.Spinner />
 						: group
 							? <Editor group={group} onSave={this.onSave} onCancel={this.onDismiss} error={error} />
-							: <div className={cx('not-found')}>{t('notFound')}</div>
+							: <div>{t('notFound')}</div>
 				}
 			</Prompt.Dialog>
 		);
