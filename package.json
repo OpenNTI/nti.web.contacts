@@ -1,6 +1,6 @@
 {
   "name": "@nti/web-contacts",
-  "version": "0.9.0",
+  "version": "0.10.0-alpha",
   "description": "Components for dealing with people",
   "main": "lib/index.js",
   "module": "src/index.js",
