@@ -52,7 +52,7 @@
 	flex-direction: column;
 
 	> * {
-		flex: 0;
+		flex: 0 1 auto;
 	}
 
 	> .group-action-modal-content {
