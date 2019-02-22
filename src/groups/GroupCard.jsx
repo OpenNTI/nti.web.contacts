@@ -13,6 +13,7 @@ import GroupListStore from './Store';
 const logger = Logger.get('contacts:components:Groups');
 
 const t = scoped('nti-web-contacts.groups.GroupCard', {
+	editGroupText: 'Edit Group',
 	leaveGroupText: 'Leave Group',
 	deleteGroupText: 'Delete Group',
 	groupCodeText: 'View Group Code',
@@ -91,9 +92,8 @@ class GroupCard extends React.Component {
 
 		const invitePath = `groups/${encodeForURI(entity.getID())}/invite`;
 
-		const Wrapper = canEdit ? EditLinkWrapper : DivWrapper;
 		return (
-			<Wrapper entity={entity} className="group-card">
+			<LinkTo.Object object={entity} className="group-card">
 				<Avatar className="group-avatar" entity={entity}/>
 				<CardDetail entity={entity}
 					members={entity.friends}
@@ -103,6 +103,12 @@ class GroupCard extends React.Component {
 					renameMode={renameMode}
 					flyoutOptions={(
 						<React.Fragment>
+							{canEdit && (
+								<LinkTo.Path to={editorPath(entity)} className="group-action-flyout-option">
+									{t('editGroupText')}
+								</LinkTo.Path>
+							)}
+
 							{entity.hasLink('default-trivial-invitation-code') && (
 								<LinkTo.Path to={invitePath} className="group-action-flyout-option">
 									{t('groupCodeText')}
@@ -130,7 +136,7 @@ class GroupCard extends React.Component {
 						</React.Fragment>
 					)}
 				/>
-			</Wrapper>
+			</LinkTo.Object>
 		);
 	}
 }
