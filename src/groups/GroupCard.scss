@@ -1,5 +1,23 @@
 @import "~@nti/style-common";
 
+.card-action-flyout {
+	.group-action-flyout-option {
+		text-decoration: none;
+		color: $secondary-grey;
+		font-size: 14px;
+		line-height: 19px;
+		margin: 8px;
+		display: block;
+	}
+
+	.group-action-flyout-option-delete {
+		color: $primary-red;
+		font-size: 14px;
+		line-height: 19px;
+		margin: 8px;
+	}
+}
+
 .group-card {
 	height: 200px;
 	max-width: 472px;
@@ -15,22 +33,6 @@
 .group-avatar {
 	float: left;
 	height: inherit;
-}
-
-.group-action-flyout-option {
-	text-decoration: none;
-	color: $secondary-grey;
-	font-size: 14px;
-	line-height: 19px;
-	margin: 8px;
-	display: block;
-}
-
-.group-action-flyout-option-delete {
-	color: $primary-red;
-	font-size: 14px;
-	line-height: 19px;
-	margin: 8px;
 }
 
 .groups-list-frame {
