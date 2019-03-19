@@ -49,7 +49,7 @@ export default class MembershipStore extends Stores.BoundStore {
 
 		this.set({
 			[LOADING]: false,
-			[MEMBERS]: friends,
+			[MEMBERS]: [...friends],
 			[CAN_MANAGE_MEMBERS]: canManage,
 			error
 		});
