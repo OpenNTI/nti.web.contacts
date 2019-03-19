@@ -40,8 +40,6 @@ class MembershipView extends React.Component {
 		members: PropTypes.array,
 		add: PropTypes.func,
 		remove: PropTypes.func,
-		added: PropTypes.array,
-		removed: PropTypes.array,
 	}
 
 	// static deriveBindingFromProps = async ({entity}) => !entity ? 'new-group' : await getService().then(s => s.resolveEntity(entity))
