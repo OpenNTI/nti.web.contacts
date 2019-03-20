@@ -18,18 +18,6 @@
 	}
 }
 
-.group-card {
-	height: 200px;
-	max-width: 472px;
-	flex-grow: 1;
-	margin: 10px;
-	text-decoration: none;
-
-	.contact-card-detail .card-action-flyout {
-		width: 50px;
-	}
-}
-
 .group-avatar {
 	float: left;
 	height: inherit;
@@ -38,6 +26,20 @@
 .groups-list-frame {
 	display: flex;
 	flex-flow: row wrap;
+
+	.group-card {
+		$margin: 10px;
+
+		height: 200px;
+		max-width: 472px;
+		margin: $margin;
+		flex: 1 1 calc(50% - #{$margin * 2});
+		text-decoration: none;
+
+		.contact-card-detail .card-action-flyout {
+			width: 50px;
+		}
+	}
 }
 
 .groups-panel-header {
