@@ -19,6 +19,7 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 		};
 
 		return function decorator (component) {
+			// eslint-disable-next-line react/display-name
 			const cmp = React.forwardRef((props, ref) =>
 				React.createElement(component, {
 					...extraProps,
