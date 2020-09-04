@@ -48,7 +48,7 @@
     "@nti/web-client": "NextThought/nti.web.client",
     "@nti/web-commons": "NextThought/nti.web.commons",
     "@nti/web-routing": "NextThought/nti.web.routing",
-    "@nti/web-search": "NextThought/nti.web.component.search",
+    "@nti/web-search": "NextThought/nti.web.search",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10"
   }
