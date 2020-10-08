@@ -35,12 +35,12 @@
 
 		&.invalid-code-error {
 			color: var(--secondary-grey);
-			border: solid 1px $primary-red;
+			border: solid 1px var(--primary-red);
 		}
 	}
 
 	.invalid-code-error {
-		color: $primary-red;
+		color: var(--primary-red);
 	}
 }
 

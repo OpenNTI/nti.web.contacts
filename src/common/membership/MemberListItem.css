@@ -4,7 +4,7 @@
 }
 
 .remove-icon {
-	color: var(--primary-red, #f35252);
+	color: var(--primary-red);
 	margin-left: 0.25em;
 }
 
