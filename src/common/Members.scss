@@ -1,7 +1,7 @@
 @import "~@nti/style-common";
 
 .members-label {
-	color: $tertiary-grey;
+	color: var(--tertiary-grey);
 	font-size: 10px;
 	font-weight: bold;
 	line-height: 14px;
@@ -30,7 +30,7 @@
 	}
 
 	.members-hover {
-		color: $tertiary-grey;
+		color: var(--tertiary-grey);
 		font-size: 10px;
 		font-weight: bold;
 		line-height: 14px;
