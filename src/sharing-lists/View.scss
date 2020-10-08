@@ -10,7 +10,7 @@
 	display: flex;
 
 	.sharing-lists-header-title {
-		color: $primary-grey;
+		color: var(--primary-grey);
 		font-size: 32px;
 		font-weight: 300;
 		line-height: 43px;
@@ -77,7 +77,7 @@
 	flex-direction: column;
 
 	&.sub-header {
-		color: $primary-grey;
+		color: var(--primary-grey);
 		padding-left: 0;
 		padding-right: 0;
 		font-size: 16px;

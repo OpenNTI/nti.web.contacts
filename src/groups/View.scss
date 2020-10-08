@@ -21,7 +21,7 @@
 	line-height: 20px;
 
 	&.sub-header {
-		color: $primary-grey;
+		color: var(--primary-grey);
 		padding-left: 0;
 		padding-right: 0;
 		font-size: 16px;
@@ -65,7 +65,7 @@
 	font-size: 24px;
 	line-height: 33px;
 	font-weight: 300;
-	color: $primary-grey;
+	color: var(--primary-grey);
 
 	&.panel-header-component {
 		padding-left: 25px;
@@ -74,7 +74,7 @@
 }
 
 .groups-header-title {
-	color: $primary-grey;
+	color: var(--primary-grey);
 	font-size: 32px;
 	font-weight: 300;
 	line-height: 43px;
