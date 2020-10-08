@@ -16,7 +16,7 @@
 	padding-left: 25px;
 	padding-right: 25px;
 	padding-top: 30px;
-	color: $secondary-grey;
+	color: var(--secondary-grey);
 	font-size: 14px;
 	line-height: 20px;
 
@@ -34,7 +34,7 @@
 		height: 40px;
 
 		&.invalid-code-error {
-			color: $secondary-grey;
+			color: var(--secondary-grey);
 			border: solid 1px $primary-red;
 		}
 	}
@@ -102,7 +102,7 @@
 
 		&.join {
 			background: white;
-			color: $secondary-grey;
+			color: var(--secondary-grey);
 			border: 1px solid $border-grey-light;
 			border-radius: 3px;
 		}

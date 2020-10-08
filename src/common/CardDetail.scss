@@ -50,7 +50,7 @@
 			padding-right: 20px;
 
 			.entity-location {
-				color: $secondary-grey;
+				color: var(--secondary-grey);
 				font-size: 14px;
 				white-space: nowrap;
 				overflow: hidden;
@@ -79,7 +79,7 @@
 		}
 
 		.card-flyout-trigger {
-			color: $secondary-grey;
+			color: var(--secondary-grey);
 			position: absolute;
 			top: 0;
 			right: 0;

@@ -14,7 +14,7 @@
 		font-weight: bold;
 
 		.entity-location {
-			color: $secondary-grey;
+			color: var(--secondary-grey);
 			font-size: 14px;
 			font-family: $body-font-family;
 			font-weight: normal;
@@ -29,7 +29,7 @@
 }
 
 .contact-list-action-flyout-option {
-	color: $secondary-grey;
+	color: var(--secondary-grey);
 	font-size: 14px;
 	line-height: 19px;
 	padding: 8px;
