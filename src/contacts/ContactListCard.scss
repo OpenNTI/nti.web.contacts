@@ -10,13 +10,13 @@
 		color: var(--primary-grey);
 		font-size: 18px;
 		line-height: 24px;
-		font-family: $header-font-family;
+		font-family: var(--header-font-family);
 		font-weight: bold;
 
 		.entity-location {
 			color: var(--secondary-grey);
 			font-size: 14px;
-			font-family: $body-font-family;
+			font-family: var(--body-font-family);
 			font-weight: normal;
 		}
 	}
