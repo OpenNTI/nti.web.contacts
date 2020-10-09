@@ -16,12 +16,12 @@
 	padding-left: 25px;
 	padding-right: 25px;
 	padding-top: 30px;
-	color: $secondary-grey;
+	color: var(--secondary-grey);
 	font-size: 14px;
 	line-height: 20px;
 
 	&.sub-header {
-		color: $primary-grey;
+		color: var(--primary-grey);
 		padding-left: 0;
 		padding-right: 0;
 		font-size: 16px;
@@ -34,13 +34,13 @@
 		height: 40px;
 
 		&.invalid-code-error {
-			color: $secondary-grey;
-			border: solid 1px $primary-red;
+			color: var(--secondary-grey);
+			border: solid 1px var(--primary-red);
 		}
 	}
 
 	.invalid-code-error {
-		color: $primary-red;
+		color: var(--primary-red);
 	}
 }
 
@@ -65,7 +65,7 @@
 	font-size: 24px;
 	line-height: 33px;
 	font-weight: 300;
-	color: $primary-grey;
+	color: var(--primary-grey);
 
 	&.panel-header-component {
 		padding-left: 25px;
@@ -74,7 +74,7 @@
 }
 
 .groups-header-title {
-	color: $primary-grey;
+	color: var(--primary-grey);
 	font-size: 32px;
 	font-weight: 300;
 	line-height: 43px;
@@ -102,8 +102,8 @@
 
 		&.join {
 			background: white;
-			color: $secondary-grey;
-			border: 1px solid $border-grey-light;
+			color: var(--secondary-grey);
+			border: 1px solid var(--border-grey-light);
 			border-radius: 3px;
 		}
 	}

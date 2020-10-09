@@ -7,16 +7,16 @@
 	margin: 0 8px 8px;
 
 	.card-title {
-		color: $primary-grey;
+		color: var(--primary-grey);
 		font-size: 18px;
 		line-height: 24px;
-		font-family: $header-font-family;
+		font-family: var(--header-font-family);
 		font-weight: bold;
 
 		.entity-location {
-			color: $secondary-grey;
+			color: var(--secondary-grey);
 			font-size: 14px;
-			font-family: $body-font-family;
+			font-family: var(--body-font-family);
 			font-weight: normal;
 		}
 	}
@@ -29,7 +29,7 @@
 }
 
 .contact-list-action-flyout-option {
-	color: $secondary-grey;
+	color: var(--secondary-grey);
 	font-size: 14px;
 	line-height: 19px;
 	padding: 8px;
@@ -48,7 +48,7 @@
 }
 
 .contact-list-action-flyout-option-delete {
-	color: $primary-red;
+	color: var(--primary-red);
 	font-size: 14px;
 	line-height: 19px;
 	margin: 8px;

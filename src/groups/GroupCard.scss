@@ -3,7 +3,7 @@
 .card-action-flyout {
 	.group-action-flyout-option {
 		text-decoration: none;
-		color: $secondary-grey;
+		color: var(--secondary-grey);
 		font-size: 14px;
 		line-height: 19px;
 		margin: 8px;
@@ -11,7 +11,7 @@
 	}
 
 	.group-action-flyout-option-delete {
-		color: $primary-red;
+		color: var(--primary-red);
 		font-size: 14px;
 		line-height: 19px;
 		margin: 8px;

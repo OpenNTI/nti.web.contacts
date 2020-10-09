@@ -2,12 +2,12 @@
 
 .sharing-list-row {
 	height: 50px;
-	font-family: "Open Sans";
+	font-family: var(--body-font-family);
 	font-size: 14px;
 	display: flex;
 	margin-top: auto;
 	margin-bottom: auto;
-	border-bottom: 1px solid $border-grey-light;
+	border-bottom: 1px solid var(--border-grey-light);
 
 	.list-title {
 		margin-top: auto;

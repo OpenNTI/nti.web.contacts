@@ -1,10 +1,10 @@
 .add-icon {
-	color: var(--primary-green, #3fb34f);
+	color: var(--primary-green);
 	margin-left: 0.25em;
 }
 
 .remove-icon {
-	color: var(--primary-red, #f35252);
+	color: var(--primary-red);
 	margin-left: 0.25em;
 }
 

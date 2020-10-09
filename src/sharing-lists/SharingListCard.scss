@@ -10,7 +10,7 @@
 }
 
 .sharing-list-action-flyout-option {
-	color: $secondary-grey;
+	color: var(--secondary-grey);
 	font-size: 14px;
 	line-height: 19px;
 	margin: 8px;
@@ -23,7 +23,7 @@
 }
 
 .sharing-list-action-flyout-option-delete {
-	color: $primary-red;
+	color: var(--primary-red);
 	font-size: 14px;
 	line-height: 19px;
 	margin: 8px;

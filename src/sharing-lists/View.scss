@@ -3,14 +3,14 @@
 .sharing-lists-header-description {
 	width: 400px;
 	word-wrap: normal;
-	color: $secondary-grey;
+	color: var(--secondary-grey);
 }
 
 .sharing-lists-title-and-button {
 	display: flex;
 
 	.sharing-lists-header-title {
-		color: $primary-grey;
+		color: var(--primary-grey);
 		font-size: 32px;
 		font-weight: 300;
 		line-height: 43px;
@@ -58,7 +58,7 @@
 	font-size: 24px;
 	line-height: 33px;
 	font-weight: 300;
-	color: $secondary-grey;
+	color: var(--secondary-grey);
 
 	&.panel-header-component {
 		padding-left: 25px;
@@ -70,14 +70,14 @@
 	padding-left: 25px;
 	padding-right: 25px;
 	padding-top: 30px;
-	color: $secondary-grey;
+	color: var(--secondary-grey);
 	font-size: 14px;
 	line-height: 20px;
 	display: flex;
 	flex-direction: column;
 
 	&.sub-header {
-		color: $primary-grey;
+		color: var(--primary-grey);
 		padding-left: 0;
 		padding-right: 0;
 		font-size: 16px;
