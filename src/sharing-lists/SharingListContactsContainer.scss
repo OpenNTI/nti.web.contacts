@@ -1,8 +1,8 @@
 @import "~@nti/style-common";
 
 .sharing-list-contact-container {
-  margin-top: 15px;
-  height: auto;
+	margin-top: 15px;
+	height: auto;
 
 	.sharing-list-contacts {
 		max-height: calc(100vh - 502px);
@@ -10,7 +10,7 @@
 		margin-bottom: 60px;
 		padding-right: 10px;
 
-		.empty-list{
+		.empty-list {
 			margin-left: 0;
 			margin-right: 0;
 		}
