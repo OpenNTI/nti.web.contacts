@@ -35,8 +35,6 @@
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "raf": "^3.4.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0"
   },
   "dependencies": {
@@ -48,8 +46,12 @@
     "@nti/web-client": "NextThought/nti.web.client",
     "@nti/web-commons": "NextThought/nti.web.commons",
     "@nti/web-routing": "NextThought/nti.web.routing",
-    "@nti/web-search": "NextThought/nti.web.search",
-    "classnames": "^2.2.5",
-    "prop-types": "^15.5.10"
+    "@nti/web-search": "NextThought/nti.web.search"
+  },
+  "peerDependencies": {
+    "classnames": "*",
+    "react": "*",
+    "react-dom": "*",
+    "prop-types": "*"
   }
 }
