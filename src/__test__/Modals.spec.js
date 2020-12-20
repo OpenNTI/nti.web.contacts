@@ -63,8 +63,6 @@ describe('Test Modals', () => {
 
 	test('Test sharing list management modal', () => {
 
-		// Note that we can't currently use the enzyme library
-		// for testing here, as it doesn't support forwarded refs.
 		const renderer = TestRenderer.create(
 			<SharingListManagePeopleModal
 				entityId={mockID}

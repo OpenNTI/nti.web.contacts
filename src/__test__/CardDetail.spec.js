@@ -1,10 +1,8 @@
 /* eslint-env jest */
 import React from 'react';
-import {mount} from 'enzyme';
-import { DisplayName } from '@nti/web-commons';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 
 import CardDetail from '../common/CardDetail';
-import EditableTextField from '../common/EditableTextField';
 
 //TODO: Probably don't need all of this function?
 const mockService = () => ({
@@ -30,7 +28,7 @@ const onBefore = () => {
 };
 
 const onAfter = () => {
-	//unmock getService()
+	//un-mock getService()
 	const {$AppConfig} = global;
 	delete $AppConfig.nodeInterface;
 	delete $AppConfig.nodeService;
@@ -48,20 +46,20 @@ describe('Test Card Detail', () => {
 
 		const nonFollowingEntity = {Username: 'test_name', following: []};
 		const members = [member1, member2];
-		const cardDetail = mount(<CardDetail entity={nonFollowingEntity} members={members} />);
-		expect(cardDetail.find('.members').exists()).toBe(true);
-		expect(cardDetail.find('.member-list').exists()).toBe(true);
+		const cardDetail = render(<CardDetail entity={nonFollowingEntity} members={members} />);
+		expect(cardDetail.container.querySelector('.members')).toBeTruthy();
+		expect(cardDetail.container.querySelector('.member-list')).toBeTruthy();
 
 		cardDetail.unmount();
 
 		// Don't show members list unless we are passing in a list of members
-		const cardWithoutMembers = mount(<CardDetail entity={nonFollowingEntity}/>);
-		expect(cardWithoutMembers.find('.members').exists()).toBe(false);
-		expect(cardWithoutMembers.find('.member-list').exists()).toBe(false);
+		const cardWithoutMembers = render(<CardDetail entity={nonFollowingEntity}/>);
+		expect(cardWithoutMembers.container.querySelector('.members')).toBeFalsy();
+		expect(cardWithoutMembers.container.querySelector('.member-list')).toBeFalsy();
 		cardWithoutMembers.unmount();
 	});
 
-	test('Test card detail flyout options', () => {
+	test('Test card detail flyout options', async () => {
 
 		const nonFollowingEntity = {Username: 'test_name', following: []};
 		const mockOptionText = 'Mock flyout option text';
@@ -75,17 +73,17 @@ describe('Test Card Detail', () => {
 			</React.Fragment>
 		);
 
-		const cardDetail = mount(<CardDetail entity={nonFollowingEntity} flyoutOptions={flyoutOption} />);
-		expect(cardDetail.find('.mock-flyout-option').exists()).toBe(false);
+		const cardDetail = render(<CardDetail entity={nonFollowingEntity} flyoutOptions={flyoutOption} />);
+		expect(cardDetail.baseElement.querySelector('.mock-flyout-option')).toBeFalsy();
 
 		// click the dropdown trigger and then we should see our option
-		cardDetail.find('.dropdown').simulate('click');
-		expect(cardDetail.find('.mock-flyout-option').exists()).toBe(true);
-		expect(cardDetail.find('.mock-flyout-option').text()).toBe(mockOptionText);
-		cardDetail.unmount();
+		fireEvent.click(cardDetail.container.querySelector('.dropdown'));
+		await waitFor(() =>
+			expect(cardDetail.baseElement.querySelector('.mock-flyout-option')?.textContent).toBe(mockOptionText)
+		);
 	});
 
-	test('Test card detail name and rename mode', () => {
+	test('Test card detail name and rename mode', async () => {
 
 		const alias = 'test alias';
 		const entity = {
@@ -95,10 +93,10 @@ describe('Test Card Detail', () => {
 		};
 
 		// If not a modifiable entity, we use a regular display name
-		const cardDetail = mount(<CardDetail entity={entity} />);
-		expect(cardDetail.find('.display-name').exists()).toBe(true);
-		expect(cardDetail.contains(<DisplayName entity={entity}/>)).toBe(true);
-		expect(cardDetail.containsMatchingElement(<EditableTextField text={alias}/>)).toBe(false);
+		const cardDetail = render(<CardDetail entity={entity} />);
+		expect(cardDetail.container.querySelector('.display-name')).toBeTruthy();
+		expect(await cardDetail.findByText(alias)).toBeTruthy();
+		expect(cardDetail.container.querySelector('.editable-text-field')).toBeFalsy();
 
 		const modifiableEntity = {
 			Username: 'test_name',
@@ -108,11 +106,13 @@ describe('Test Card Detail', () => {
 		};
 
 		// If we have a modifiable entity, we use an editable text field.
-		const modifiableCard = mount(<CardDetail entity={modifiableEntity} renameMode={false}/>);
-		expect(modifiableCard.containsMatchingElement(<EditableTextField text={alias} isEditable={false}/>)).toBe(true);
+		const modifiableCard = render(<CardDetail entity={modifiableEntity} renameMode={false}/>);
+		expect(modifiableCard.container.querySelector('.editable-text-field')).toBeTruthy();
+		expect(modifiableCard.container.querySelector('.editable-text-field input')).toBeFalsy();
 
-		const modifiableCardWithRename = mount(<CardDetail entity={modifiableEntity} renameMode={true}/>);
-		expect(modifiableCardWithRename.containsMatchingElement(<EditableTextField text={alias} isEditable={true}/>)).toBe(true);
+		const modifiableCardWithRename = render(<CardDetail entity={modifiableEntity} renameMode={true}/>);
+		const input = await modifiableCardWithRename.getByDisplayValue(alias);
+		expect(input.matches('.editable-text-field input')).toBeTruthy();
 	});
 
 
