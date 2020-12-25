@@ -29,10 +29,8 @@
   },
   "homepage": "https://github.com/NextThought/nti.web.contacts#readme",
   "devDependencies": {
-    "@nti/cmp-scripts": "^2.0.0",
-    "@nti/lib-dom": "NextThought/nti.lib.dom",
-    "@nti/style-common": "NextThought/nti.style.common",
-    "@testing-library/react": "^11.2.1"
+    "@nti/cmp-scripts": "^2.31.8",
+    "@nti/lib-dom": "NextThought/nti.lib.dom"
   },
   "dependencies": {
     "@nti/lib-commons": "NextThought/nti.lib.commons",
@@ -44,12 +42,5 @@
     "@nti/web-commons": "NextThought/nti.web.commons",
     "@nti/web-routing": "NextThought/nti.web.routing",
     "@nti/web-search": "NextThought/nti.web.search"
-  },
-  "peerDependencies": {
-    "classnames": "*",
-    "react": "*",
-    "react-dom": "*",
-    "react-test-renderer": "*",
-    "prop-types": "*"
   }
 }
