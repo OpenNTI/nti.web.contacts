@@ -1,2 +1,2 @@
 export { default } from './View';
-export SharingListCard from './SharingListCard';
+export { default as SharingListCard } from './SharingListCard';

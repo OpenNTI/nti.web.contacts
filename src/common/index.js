@@ -1,5 +1,5 @@
-export Member from './Member';
-export Members from './Members';
-export CardDetail from './CardDetail';
-export FollowButton from './FollowButton';
-export Membership from './membership';
+export { default as Member } from './Member';
+export { default as Members } from './Members';
+export { default as CardDetail } from './CardDetail';
+export { default as FollowButton } from './FollowButton';
+export { default as Membership } from './membership';
