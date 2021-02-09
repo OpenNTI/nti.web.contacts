@@ -1,6 +1,7 @@
 import './AddContactToSharingListModal.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { Prompt, Panels, DialogButtons } from '@nti/web-commons';
 
@@ -14,8 +15,6 @@ const t = scoped('nti-web-contacts.contacts.AddContactToSharingListModal', {
 	done: 'Done'
 });
 
-export default
-@ContactListStore.connect()
 class AddContactToSharingListModal extends React.Component {
 
 	static propTypes = {
@@ -109,3 +108,7 @@ class AddContactToSharingListModal extends React.Component {
 		);
 	}
 }
+
+export default decorate(AddContactToSharingListModal, [
+	ContactListStore.connect()
+]);

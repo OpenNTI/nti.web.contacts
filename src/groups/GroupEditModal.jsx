@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import {Prompt, Loading} from '@nti/web-commons';
 import {decodeFromURI} from '@nti/lib-ntiids';
 import {scoped} from '@nti/lib-locale';
@@ -11,13 +12,6 @@ const t = scoped('nti-web-contacts.groups.EditModal', {
 	notFound: 'Not Found'
 });
 
-export default
-@Store.connect({
-	items: 'items',
-	loading: 'loading',
-	getGroupById: 'getGroupById',
-	saveGroup: 'saveGroup'
-})
 class GroupEditModal extends React.Component {
 	static propTypes = {
 		loading: PropTypes.bool,
@@ -44,9 +38,9 @@ class GroupEditModal extends React.Component {
 			props: {saveGroup},
 			group
 		} = this;
-		
+
 		// store.createGroup(displayName, members);
-		
+
 		if (group && saveGroup) {
 			let error;
 			this.setState({error}); // clears existing error
@@ -82,3 +76,12 @@ class GroupEditModal extends React.Component {
 		);
 	}
 }
+
+export default decorate(GroupEditModal, [
+	Store.connect({
+		items: 'items',
+		loading: 'loading',
+		getGroupById: 'getGroupById',
+		saveGroup: 'saveGroup'
+	})
+]);

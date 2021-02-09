@@ -1,6 +1,7 @@
 import './View.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { EmptyList, Loading, Layouts } from '@nti/web-commons';
 import {contextual} from '@nti/web-search';
@@ -27,9 +28,6 @@ const t = scoped('nti-web-contacts.contacts.ContactListView', {
 
 });
 
-export default
-@contextual(t('searchContext'))
-@ContactListStore.connect(propMap)
 class ContactListView extends React.Component {
 
 	static propTypes = {
@@ -144,3 +142,9 @@ class ContactListView extends React.Component {
 	}
 
 }
+
+
+export default decorate(ContactListView, [
+	contextual(t('searchContext')),
+	ContactListStore.connect(propMap)
+]);

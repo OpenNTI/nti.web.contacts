@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import {Loading} from '@nti/web-commons';
 import classnames from 'classnames/bind';
 
@@ -19,14 +20,7 @@ import styles from './View.css';
 const cx = classnames.bind(styles);
 const noop = () => void 0;
 
-export default
-@Store.connect({
-	[ADD]: 'add',
-	[REMOVE]: 'remove',
-	[MEMBERS]: 'members',
-	[CAN_MANAGE_MEMBERS]: 'canManage',
-	[LOADING]: 'loading'
-})
+
 class MembershipView extends React.Component {
 
 	static propTypes = {
@@ -44,7 +38,7 @@ class MembershipView extends React.Component {
 
 	// static deriveBindingFromProps = async ({entity}) => !entity ? 'new-group' : await getService().then(s => s.resolveEntity(entity))
 	static deriveBindingFromProps = ({entity}) => entity || NEW_GROUP
-	
+
 	componentDidUpdate ({members: previousMembers}) {
 		const {onChange, members} = this.props;
 
@@ -94,3 +88,13 @@ class MembershipView extends React.Component {
 		);
 	}
 }
+
+export default decorate(MembershipView, [
+	Store.connect({
+		[ADD]: 'add',
+		[REMOVE]: 'remove',
+		[MEMBERS]: 'members',
+		[CAN_MANAGE_MEMBERS]: 'canManage',
+		[LOADING]: 'loading'
+	})
+]);

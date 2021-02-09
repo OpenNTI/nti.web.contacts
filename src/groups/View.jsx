@@ -1,6 +1,7 @@
 import './View.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { Loading, Button, EmptyList } from '@nti/web-commons';
 import { LinkTo } from '@nti/web-routing';
@@ -8,11 +9,6 @@ import { LinkTo } from '@nti/web-routing';
 import GroupListStore from './Store';
 import GroupCard from './GroupCard';
 
-const propMap = {
-	items: 'items',
-	loading: 'loading',
-	searchTerm: 'searchTerm'
-};
 
 const t = scoped('nti-web-contacts.groups.View', {
 	groupsHeader: 'Groups',
@@ -20,8 +16,6 @@ const t = scoped('nti-web-contacts.groups.View', {
 	joinGroupButton: 'Join Group'
 });
 
-export default
-@GroupListStore.connect(propMap)
 class GroupsView extends React.Component {
 
 	static propTypes = {
@@ -83,3 +77,12 @@ class GroupsView extends React.Component {
 		);
 	}
 }
+
+
+export default decorate(GroupsView, [
+	GroupListStore.connect({
+		items: 'items',
+		loading: 'loading',
+		searchTerm: 'searchTerm'
+	})
+]);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import {scoped} from '@nti/lib-locale';
 import {Prompt, DialogButtons, Panels, Input} from '@nti/web-commons';
 
@@ -14,12 +15,7 @@ const t = scoped('nti-web-contacts.groups.GroupCreateModal', {
 	createGroupDescription: 'Groups are great places to collaborate on projects or to share and discuss common interests. Share photos, videos, files and websites with your peers.'
 });
 
-const propMap = {
-	loading: 'loading'
-};
 
-export default
-@GroupListStore.connect(propMap)
 class GroupCreateModal extends React.Component {
 
 	static propTypes = {
@@ -91,3 +87,9 @@ class GroupCreateModal extends React.Component {
 		);
 	}
 }
+
+export default decorate(GroupCreateModal, [
+	GroupListStore.connect({
+		loading: 'loading'
+	})
+]);

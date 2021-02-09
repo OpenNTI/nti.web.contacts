@@ -1,6 +1,7 @@
 import './View.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { Button, EmptyList, Loading, Prompt } from '@nti/web-commons';
 import { LinkTo } from '@nti/web-routing';
@@ -9,20 +10,12 @@ import SharingListStore from './Store';
 import SharingListCard from './SharingListCard';
 import SharingListManagePeopleModal from './SharingListManagePeopleModal';
 
-const propMap = {
-	items: 'items',
-	loading: 'loading',
-	searchTerm: 'searchTerm'
-};
-
 const t = scoped ('nti-web-contacts.sharing-lists.View', {
 	createButton: 'Create a Sharing List',
 	headerText: 'Sharing Lists',
 	headerDescription: 'Frequently share comments with just a few people? Sharing lists make this even faster. Create a list, add people to it, and start sharing.'
 });
 
-export default
-@SharingListStore.connect(propMap)
 class SharingListsView extends React.Component {
 
 	state = {
@@ -161,3 +154,11 @@ class SharingListsView extends React.Component {
 		);
 	}
 }
+
+export default decorate(SharingListsView, [
+	SharingListStore.connect({
+		items: 'items',
+		loading: 'loading',
+		searchTerm: 'searchTerm'
+	})
+]);

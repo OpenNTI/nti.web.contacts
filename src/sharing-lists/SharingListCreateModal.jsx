@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
 
@@ -13,12 +14,6 @@ const t = scoped('nti-web-contacts.sharing-lists.SharingListCreateModal', {
 	listDescription: 'Lists are private to you. We do not notify people you add to your lists.'
 });
 
-const propMap = {
-	loading: 'loading'
-};
-
-export default
-@SharingListStore.connect(propMap)
 class SharingListCreateModal extends React.Component {
 
 	static propTypes = {
@@ -124,3 +119,11 @@ class SharingListCreateModal extends React.Component {
 		);
 	}
 }
+
+
+
+export default decorate(SharingListCreateModal, [
+	SharingListStore.connect({
+		loading: 'loading'
+	})
+]);

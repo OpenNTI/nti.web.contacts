@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { DialogButtons } from '@nti/web-commons';
 
@@ -10,8 +11,6 @@ const t = scoped ('nti-web-contacts.sharing-lists.SharingListManagePeopleModal',
 	modalTitleText: 'Friends'
 });
 
-export default
-@SharingListStore.connect()
 class SharingListManagePeopleModal extends React.Component {
 
 	static propTypes = {
@@ -108,3 +107,8 @@ class SharingListManagePeopleModal extends React.Component {
 		);
 	}
 }
+
+
+export default decorate(SharingListManagePeopleModal, [
+	SharingListStore.connect()
+]);

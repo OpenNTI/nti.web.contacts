@@ -1,6 +1,7 @@
 import './GroupInviteCodeModal.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { Prompt, Panels, Input } from '@nti/web-commons';
 import { decodeFromURI } from '@nti/lib-ntiids';
@@ -12,8 +13,6 @@ const t = scoped('nti-web-contacts.groups.GroupInviteCodeModal', {
 	bodyText: 'Share this group code to others you want to join your group. Once they click "Join a Group" they will paste in this code to join.'
 });
 
-export default
-@GroupListStore.connect()
 class GroupInviteCodeModal extends React.Component {
 
 	static propTypes = {
@@ -77,3 +76,8 @@ class GroupInviteCodeModal extends React.Component {
 		);
 	}
 }
+
+
+export default decorate(GroupInviteCodeModal, [
+	GroupListStore.connect()
+]);

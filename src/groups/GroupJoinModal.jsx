@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {decorate} from '@nti/lib-commons';
 import {scoped} from '@nti/lib-locale';
 import { Prompt, DialogButtons, Panels, Input } from '@nti/web-commons';
 
@@ -15,8 +16,6 @@ const t = scoped('nti-web-contacts.groups.GroupJoinModal', {
 });
 
 
-export default
-@GroupListStore.connect()
 class GroupJoinModal extends React.Component {
 
 	static propTypes = {
@@ -90,3 +89,8 @@ class GroupJoinModal extends React.Component {
 		);
 	}
 }
+
+
+export default decorate(GroupJoinModal, [
+	GroupListStore.connect()
+]);
