@@ -1,7 +1,7 @@
 import React from 'react';
-import {Stores} from '@nti/lib-store';
-import {Searchable} from '@nti/web-search';
-import {HOC} from '@nti/lib-commons';
+import { Stores } from '@nti/lib-store';
+import { Searchable } from '@nti/web-search';
+import { HOC } from '@nti/lib-commons';
 // import Logger from '@nti/util-logger';
 
 // const logger = Logger.get('contacts:components:Store');
@@ -11,22 +11,27 @@ const SEARCH_BUFFER_TIME = 500;
 export default class BaseContactsStore extends Stores.SimpleStore {
 	static Singleton = true;
 
-	static connect (propMap, storeProp = 'store') {
+	static connect(propMap, storeProp = 'store') {
 		const store = this.getStore();
 		const extraProps = {
 			[storeProp]: store,
-			searchItems: this.searchItems
+			searchItems: this.searchItems,
 		};
 
-		return function decorator (component) {
+		return function decorator(component) {
 			const cmp = React.forwardRef((props, ref) =>
 				React.createElement(component, {
 					...extraProps,
 					...props,
-					ref
-				}));
+					ref,
+				})
+			);
 
-			HOC.hoistStatics(cmp, component, 'SearchableBaseContactsStoreConnector');
+			HOC.hoistStatics(
+				cmp,
+				component,
+				'SearchableBaseContactsStoreConnector'
+			);
 
 			return Searchable.connect(
 				store,
@@ -41,16 +46,16 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 		};
 	}
 
-	constructor () {
+	constructor() {
 		super();
 		this.ds = {
-			loading: true
+			loading: true,
 		};
 		this.searchTerm = '';
 		this.searchItems = [];
 	}
 
-	get (key) {
+	get(key) {
 		if (key === 'loading' || key === 'error') {
 			return this.ds[key] || super.get(key);
 		}
@@ -66,22 +71,22 @@ export default class BaseContactsStore extends Stores.SimpleStore {
 		return super.get(key);
 	}
 
-	async setupDataSource () {
+	async setupDataSource() {
 		// Subclasses must implement this function and create
 		// a datasource and assign it to this.ds
 	}
 
 	onDataSourceChanged = () => {
 		this.emitChange('items');
-	}
+	};
 
-	cleanup () {
+	cleanup() {
 		if (this.ds && this.ds.removeListener) {
 			this.ds.removeListener('change', this.onDataSourceChanged);
 		}
 	}
 
-	async updateSearchTerm (searchTerm) {
+	async updateSearchTerm(searchTerm) {
 		//Default implementation
 
 		clearTimeout(this.searchBuffer);

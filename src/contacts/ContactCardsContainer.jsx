@@ -9,21 +9,28 @@ ContactCardsContainer.propTypes = {
 	removeContact: PropTypes.func,
 	chatWithContact: PropTypes.func,
 	addToSharingList: PropTypes.func,
-	viewContactProfile: PropTypes.func
+	viewContactProfile: PropTypes.func,
 };
 
-export default function ContactCardsContainer ({items, removeContact, chatWithContact, addToSharingList, viewContactProfile}) {
+export default function ContactCardsContainer({
+	items,
+	removeContact,
+	chatWithContact,
+	addToSharingList,
+	viewContactProfile,
+}) {
 	return (
-		items && items.map(
-			(i) => (
-				<ContactListCard entity={i}
-					members={i.friends}
-					key={i.Username}
-					removeContact={removeContact}
-					chatWithContact={chatWithContact}
-					addContactToSharingList={addToSharingList}
-					viewContactProfile={viewContactProfile}/>
-			)
-		)
+		items &&
+		items.map(i => (
+			<ContactListCard
+				entity={i}
+				members={i.friends}
+				key={i.Username}
+				removeContact={removeContact}
+				chatWithContact={chatWithContact}
+				addContactToSharingList={addToSharingList}
+				viewContactProfile={viewContactProfile}
+			/>
+		))
 	);
 }

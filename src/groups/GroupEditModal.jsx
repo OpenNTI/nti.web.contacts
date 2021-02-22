@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {decorate} from '@nti/lib-commons';
-import {Prompt, Loading} from '@nti/web-commons';
-import {decodeFromURI} from '@nti/lib-ntiids';
-import {scoped} from '@nti/lib-locale';
+import { decorate } from '@nti/lib-commons';
+import { Prompt, Loading } from '@nti/web-commons';
+import { decodeFromURI } from '@nti/lib-ntiids';
+import { scoped } from '@nti/lib-locale';
 
 import Store from './Store';
 import Editor from './Editor';
 
 const t = scoped('nti-web-contacts.groups.EditModal', {
-	notFound: 'Not Found'
+	notFound: 'Not Found',
 });
 
 class GroupEditModal extends React.Component {
@@ -18,12 +18,12 @@ class GroupEditModal extends React.Component {
 		entityId: PropTypes.string.isRequired,
 		saveGroup: PropTypes.func.isRequired,
 		getGroupById: PropTypes.func.isRequired,
-	}
+	};
 
-	state = {}
+	state = {};
 
-	get group () {
-		const {getGroupById, entityId} = this.props;
+	get group() {
+		const { getGroupById, entityId } = this.props;
 		const id = decodeFromURI(entityId);
 		return getGroupById(id);
 	}
@@ -31,47 +31,50 @@ class GroupEditModal extends React.Component {
 	onDismiss = () => {
 		//We may want to replace the current route with the previous, or just leave this as is.
 		global.history.back();
-	}
+	};
 
 	onSave = async fields => {
 		const {
-			props: {saveGroup},
-			group
+			props: { saveGroup },
+			group,
 		} = this;
 
 		// store.createGroup(displayName, members);
 
 		if (group && saveGroup) {
 			let error;
-			this.setState({error}); // clears existing error
+			this.setState({ error }); // clears existing error
 
 			try {
 				await saveGroup(group, fields);
 				this.onDismiss();
-			}
-			catch (e) {
+			} catch (e) {
 				error = e;
 			}
-
 		}
-	}
+	};
 
-	render () {
+	render() {
 		const {
-			props: {loading},
-			state: {error},
-			group
+			props: { loading },
+			state: { error },
+			group,
 		} = this;
 
 		return (
 			<Prompt.Dialog onBeforeDismiss={this.onDismiss}>
-				{
-					loading
-						? <Loading.Spinner />
-						: group
-							? <Editor group={group} onSave={this.onSave} onCancel={this.onDismiss} error={error} />
-							: <div>{t('notFound')}</div>
-				}
+				{loading ? (
+					<Loading.Spinner />
+				) : group ? (
+					<Editor
+						group={group}
+						onSave={this.onSave}
+						onCancel={this.onDismiss}
+						error={error}
+					/>
+				) : (
+					<div>{t('notFound')}</div>
+				)}
 			</Prompt.Dialog>
 		);
 	}
@@ -82,6 +85,6 @@ export default decorate(GroupEditModal, [
 		items: 'items',
 		loading: 'loading',
 		getGroupById: 'getGroupById',
-		saveGroup: 'saveGroup'
-	})
+		saveGroup: 'saveGroup',
+	}),
 ]);

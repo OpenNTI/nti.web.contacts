@@ -1,10 +1,10 @@
 import './View.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {decorate} from '@nti/lib-commons';
+import { decorate } from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { EmptyList, Loading, Layouts } from '@nti/web-commons';
-import {contextual} from '@nti/web-search';
+import { contextual } from '@nti/web-search';
 // import { searchable } from '@nti/web-search';
 
 import ContactListStore from './Store';
@@ -12,89 +12,87 @@ import ContactCardsContainer from './ContactCardsContainer';
 import AddContactToSharingListModal from './AddContactToSharingListModal';
 import ContactSidebar from './ContactSidebar';
 
-const {NavContent} = Layouts;
+const { NavContent } = Layouts;
 
 const propMap = {
 	items: 'items',
 	loading: 'loading',
 	searchTerm: 'searchTerm',
-	searchItems: 'searchItems'
+	searchItems: 'searchItems',
 };
 
 const t = scoped('nti-web-contacts.contacts.ContactListView', {
 	contactsHeader: 'Contacts',
 	searchResultsHeader: 'Search Results for "%(term)s"',
-	searchContext: 'followers'
-
+	searchContext: 'followers',
 });
 
 class ContactListView extends React.Component {
-
 	static propTypes = {
 		store: PropTypes.object,
 		items: PropTypes.array,
 		loading: PropTypes.bool,
 		searchTerm: PropTypes.string,
-		searchItems: PropTypes.array
+		searchItems: PropTypes.array,
 	};
 
 	state = {
 		showAddContactToSharingListModal: false,
-		activeContact: null
-	}
+		activeContact: null,
+	};
 
-	onDismissModal = (modal) => {
-		this.setState({[modal]: false});
-		this.setState({activeContact: null});
-	}
+	onDismissModal = modal => {
+		this.setState({ [modal]: false });
+		this.setState({ activeContact: null });
+	};
 
-	removeContact = (entity) => {
-		const {store} = this.props;
+	removeContact = entity => {
+		const { store } = this.props;
 		store.removeContact(entity);
-	}
+	};
 
-	openAddToSharingListModal = (entity) => {
-		this.setState({showAddContactToSharingListModal: true});
-		this.setState({activeContact: entity});
-	}
+	openAddToSharingListModal = entity => {
+		this.setState({ showAddContactToSharingListModal: true });
+		this.setState({ activeContact: entity });
+	};
 
 	onAddContactToList = (contact, list) => {
-		const {store} = this.props;
+		const { store } = this.props;
 		store.addContactToSharingList(contact, list);
-	}
+	};
 
 	getSharingLists = () => {
-		const {store} = this.props;
+		const { store } = this.props;
 		return store.getSharingLists();
-	}
+	};
 
-	renderSearchResultHeader (searchTerm) {
+	renderSearchResultHeader(searchTerm) {
 		return (
 			<div className="contacts-panel-header">
-				{t('searchResultsHeader', {term: searchTerm})}
+				{t('searchResultsHeader', { term: searchTerm })}
 			</div>
 		);
 	}
 
-	renderModals () {
-
-		const {showAddContactToSharingListModal, activeContact} = this.state;
+	renderModals() {
+		const { showAddContactToSharingListModal, activeContact } = this.state;
 
 		return (
 			<div className="contact-view-modal">
 				{showAddContactToSharingListModal && (
 					<AddContactToSharingListModal
 						onDismiss={this.onDismissModal}
-						item={activeContact}/>
+						item={activeContact}
+					/>
 				)}
 			</div>
 		);
 	}
 
 	renderContactListCards = () => {
-		const {items, searchItems, searchTerm, loading} = this.props;
+		const { items, searchItems, searchTerm, loading } = this.props;
 
-		if(loading) {
+		if (loading) {
 			return <Loading.Mask />;
 		}
 
@@ -106,20 +104,25 @@ class ContactListView extends React.Component {
 
 		return (
 			<div className="contact-list-cards-frame">
-				{(!filteredItems.length && searchTerm) && <EmptyList type="contactssearch"/>}
-				{(!filteredItems.length && !searchTerm) && <EmptyList type="contacts"/>}
+				{!filteredItems.length && searchTerm && (
+					<EmptyList type="contactssearch" />
+				)}
+				{!filteredItems.length && !searchTerm && (
+					<EmptyList type="contacts" />
+				)}
 				{filteredItems.length > 0 && (
-					<ContactCardsContainer items={filteredItems}
+					<ContactCardsContainer
+						items={filteredItems}
 						removeContact={this.removeContact}
-						addToSharingList={this.openAddToSharingListModal}/>
+						addToSharingList={this.openAddToSharingListModal}
+					/>
 				)}
 			</div>
 		);
-	}
+	};
 
-	render () {
-
-		const {store, searchTerm} = this.props;
+	render() {
+		const { store, searchTerm } = this.props;
 
 		if (!store) {
 			return null;
@@ -134,17 +137,17 @@ class ContactListView extends React.Component {
 							<ContactSidebar />
 						</NavContent.Nav>
 					)}
-					<NavContent.Content className="contacts-body-content">{this.renderContactListCards()}</NavContent.Content>
+					<NavContent.Content className="contacts-body-content">
+						{this.renderContactListCards()}
+					</NavContent.Content>
 				</NavContent.Container>
 				{this.renderModals()}
 			</div>
 		);
 	}
-
 }
-
 
 export default decorate(ContactListView, [
 	contextual(t('searchContext')),
-	ContactListStore.connect(propMap)
+	ContactListStore.connect(propMap),
 ]);

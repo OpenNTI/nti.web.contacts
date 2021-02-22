@@ -3,20 +3,18 @@ import PropTypes from 'prop-types';
 import { scoped } from '@nti/lib-locale';
 import { Button } from '@nti/web-commons';
 
-const t = scoped ('nti-web-contacts.commons.RemoveButton', {
-	removeButton: 'Remove'
+const t = scoped('nti-web-contacts.commons.RemoveButton', {
+	removeButton: 'Remove',
 });
 
 export default class RemoveButton extends React.Component {
-
 	static propTypes = {
 		onRemove: PropTypes.func,
-		className: PropTypes.string
-	}
+		className: PropTypes.string,
+	};
 
-	render () {
-
-		const {className, onRemove} = this.props;
+	render() {
+		const { className, onRemove } = this.props;
 
 		return (
 			<Button className={className} onClick={onRemove}>

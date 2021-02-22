@@ -6,55 +6,54 @@ import { scoped } from '@nti/lib-locale';
 import EditableTextField from '../common/EditableTextField';
 
 const t = scoped('nti-web-contacts.contacts.CreateSharingListRow', {
-	newListText: 'Create a New List'
+	newListText: 'Create a New List',
 });
 
 export default class CreateSharingListRow extends React.Component {
-
 	static propTypes = {
 		onFinish: PropTypes.func,
 		onEnterEditMode: PropTypes.func,
-		onExitEditMode: PropTypes.func
+		onExitEditMode: PropTypes.func,
 	};
 
 	state = {
-		inEditMode: false
-	}
+		inEditMode: false,
+	};
 
 	onClickRow = () => {
-		const {onEnterEditMode} = this.props;
+		const { onEnterEditMode } = this.props;
 
-		this.setState({inEditMode: true});
+		this.setState({ inEditMode: true });
 
-		if(onEnterEditMode) {
+		if (onEnterEditMode) {
 			onEnterEditMode();
 		}
-	}
+	};
 
-	onFinishedEditing = (name) => {
-		const {onExitEditMode} = this.props;
+	onFinishedEditing = name => {
+		const { onExitEditMode } = this.props;
 
-		const {onFinish} = this.props;
-		this.setState({inEditMode: false});
+		const { onFinish } = this.props;
+		this.setState({ inEditMode: false });
 		onFinish(name);
 
-		if(onExitEditMode) {
+		if (onExitEditMode) {
 			onExitEditMode();
 		}
-	}
+	};
 
 	onCancelEditing = () => {
-		const {onExitEditMode} = this.props;
+		const { onExitEditMode } = this.props;
 
-		this.setState({inEditMode: false});
+		this.setState({ inEditMode: false });
 
-		if(onExitEditMode) {
+		if (onExitEditMode) {
 			onExitEditMode();
 		}
-	}
+	};
 
-	render () {
-		const {inEditMode} = this.state;
+	render() {
+		const { inEditMode } = this.state;
 
 		return (
 			<div className="add-sharing-list-row">
@@ -66,7 +65,8 @@ export default class CreateSharingListRow extends React.Component {
 						onFinishedEditing={this.onFinishedEditing}
 						onCancelEditing={this.onCancelEditing}
 						clearOnFinish
-						saveOnBlur/>
+						saveOnBlur
+					/>
 				</span>
 			</div>
 		);

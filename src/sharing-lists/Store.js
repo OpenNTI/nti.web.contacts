@@ -1,4 +1,4 @@
-import {getService} from '@nti/web-client';
+import { getService } from '@nti/web-client';
 import Logger from '@nti/util-logger';
 
 import BaseContactsStore from '../BaseContactsStore';
@@ -6,22 +6,20 @@ import BaseContactsStore from '../BaseContactsStore';
 const logger = Logger.get('store:Contacts:SharingLists');
 
 export default class SharingListStore extends BaseContactsStore {
-
-	async setupDataSource () {
+	async setupDataSource() {
 		try {
 			const service = await getService();
-			const ds = this.ds = service.getLists();
+			const ds = (this.ds = service.getLists());
 
 			ds.addListener('change', this.onDataSourceChanged);
 			this.emitChange('loading');
-
 		} catch (e) {
 			this.set('error', e);
 			this.emitChange('error', 'loading');
 		}
 	}
 
-	static async contactSuggestionProvider (value, idsToExclude = []) {
+	static async contactSuggestionProvider(value, idsToExclude = []) {
 		const service = await getService();
 		const contacts = await service.getContacts();
 		const results = await contacts.search(value);
@@ -31,24 +29,27 @@ export default class SharingListStore extends BaseContactsStore {
 
 	onCreateSharingList = (name, members) => {
 		this.ds.createList(name, members);
-	}
+	};
 
 	onFinishedManagingPeople = (updatedMembersList, activeSharingList) => {
 		activeSharingList.update(...updatedMembersList);
-	}
+	};
 
-	onDeleteSharingList = (listToDelete) => {
-		return listToDelete.delete()
-			.catch(reason => {
-				logger.error('There was an error while trying to delete a sharing list: error: %o, group: %o', reason, listToDelete);
+	onDeleteSharingList = listToDelete => {
+		return listToDelete.delete().catch(reason => {
+			logger.error(
+				'There was an error while trying to delete a sharing list: error: %o, group: %o',
+				reason,
+				listToDelete
+			);
 
-				//Continue the error.
-				return Promise.reject(reason);
-			});
-	}
+			//Continue the error.
+			return Promise.reject(reason);
+		});
+	};
 
 	renameSharingList = async (sharingList, newName) => {
-		await sharingList.save({'alias': newName});
+		await sharingList.save({ alias: newName });
 		this.emitChange('items');
-	}
+	};
 }

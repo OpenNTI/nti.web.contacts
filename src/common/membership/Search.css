@@ -13,7 +13,8 @@
 	display: flex; /* center the loading spinner */
 }
 
-.search-results-pane > * { /* the loading spinner */
+.search-results-pane > * {
+	/* the loading spinner */
 	flex: 0 0 auto;
 }
 
