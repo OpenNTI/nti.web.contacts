@@ -6,7 +6,7 @@
 
 	.sharing-list-contacts {
 		max-height: calc(100vh - 502px);
-		overflow: scroll;
+		overflow: auto;
 		margin-bottom: 60px;
 		padding-right: 10px;
 

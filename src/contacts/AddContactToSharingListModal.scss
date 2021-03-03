@@ -47,7 +47,7 @@
 	.sharing-list-rows {
 		.sharing-lists {
 			max-height: calc(100vh - 220px);
-			overflow-y: scroll;
+			overflow-y: auto;
 			padding-right: 30px;
 		}
 	}
