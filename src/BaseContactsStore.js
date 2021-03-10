@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Stores } from '@nti/lib-store';
 import { Searchable } from '@nti/web-search';
 import { HOC } from '@nti/lib-commons';

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames/bind';
+
 import { decorate } from '@nti/lib-commons';
 import { Loading } from '@nti/web-commons';
-import classnames from 'classnames/bind';
 
 import MemberListItem from './MemberListItem';
 import Search from './Search';

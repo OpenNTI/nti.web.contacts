@@ -2,6 +2,7 @@ import './CardDetail.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
 import { Flyout, DisplayName, User } from '@nti/web-commons';
 
 import FollowButton from './FollowButton';

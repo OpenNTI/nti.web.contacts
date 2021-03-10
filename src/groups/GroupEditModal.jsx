@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { decorate } from '@nti/lib-commons';
 import { Prompt, Loading } from '@nti/web-commons';
 import { decodeFromURI } from '@nti/lib-ntiids';

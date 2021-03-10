@@ -1,6 +1,7 @@
 import './SharingListContactRow.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Avatar } from '@nti/web-commons';
 
 import RemoveButton from '../common/RemoveButton';

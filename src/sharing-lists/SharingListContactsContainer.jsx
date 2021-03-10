@@ -1,6 +1,7 @@
 import './SharingListContactsContainer.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { getAppUser } from '@nti/web-client';
 import { TokenEditor, EmptyList } from '@nti/web-commons';
 

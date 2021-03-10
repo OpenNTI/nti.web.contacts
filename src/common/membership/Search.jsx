@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getService } from '@nti/web-client';
 import classnames from 'classnames/bind';
+
+import { getService } from '@nti/web-client';
 import { Search as SearchInput, Loading } from '@nti/web-commons';
 import { scoped } from '@nti/lib-locale';
 

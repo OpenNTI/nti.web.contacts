@@ -2,6 +2,7 @@ import './FollowButton.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
 import { User } from '@nti/web-client';
 import { scoped } from '@nti/lib-locale';
 import { HOC, Prompt, PromiseButton } from '@nti/web-commons';
