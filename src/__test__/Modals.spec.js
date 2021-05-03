@@ -2,6 +2,11 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 
+import {
+	setupTestClient,
+	tearDownTestClient,
+} from '@nti/web-client/test-utils';
+
 import SharingListManagePeopleModal from '../sharing-lists/SharingListManagePeopleModal';
 import SharingListContactsContainer from '../sharing-lists/SharingListContactsContainer';
 // import SharingListContactRow from '../sharing-lists/SharingListContactRow';
@@ -39,22 +44,11 @@ const mockService = () => ({
 });
 
 const onBefore = () => {
-	global.$AppConfig = {
-		...(global.$AppConfig || {}),
-		username: 'TestUser',
-		nodeService: mockService(),
-		nodeInterface: {
-			getServiceDocument: () =>
-				Promise.resolve(global.$AppConfig.nodeService),
-		},
-	};
+	setupTestClient(mockService(), 'TestUser');
 };
 
 const onAfter = () => {
-	//unmock getService()
-	const { $AppConfig } = global;
-	delete $AppConfig.nodeInterface;
-	delete $AppConfig.nodeService;
+	tearDownTestClient();
 };
 
 describe('Test Modals', () => {
