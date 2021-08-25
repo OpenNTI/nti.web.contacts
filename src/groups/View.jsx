@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 import { decorate } from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
-import { Loading, Button, EmptyList } from '@nti/web-commons';
+import { Loading, EmptyList } from '@nti/web-commons';
+import { Button } from "@nti/web-core";
 import { LinkTo } from '@nti/web-routing';
 
 import GroupListStore from './Store';
