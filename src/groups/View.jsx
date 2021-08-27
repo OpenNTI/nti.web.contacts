@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { decorate } from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { Loading, EmptyList } from '@nti/web-commons';
-import { Button } from "@nti/web-core";
+import { Button } from '@nti/web-core';
 import { LinkTo } from '@nti/web-routing';
 
 import GroupListStore from './Store';
@@ -60,14 +60,14 @@ class GroupsView extends React.Component {
 					</div>
 					<div className="groups-header-buttons">
 						<Button
-							component={LinkTo.Path}
+							as={LinkTo.Path}
 							to="groups/join"
 							className="header-button join"
 						>
 							{t('joinGroupButton')}
 						</Button>
 						<Button
-							component={LinkTo.Path}
+							as={LinkTo.Path}
 							to="groups/add"
 							className="header-button add"
 						>
