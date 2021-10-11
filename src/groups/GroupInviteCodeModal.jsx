@@ -57,7 +57,10 @@ class GroupInviteCodeModal extends React.Component {
 			return;
 		}
 
-		const link = await item.fetchLink('default-trivial-invitation-code');
+		const link = await item.fetchLink({
+			mode: 'raw',
+			rel: 'default-trivial-invitation-code',
+		});
 		this.setState({ invitationCode: link.invitation_code });
 	};
 
