@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import TestRenderer from 'react-test-renderer';
+import { render, waitFor } from '@testing-library/react';
 
 import {
 	setupTestClient,
@@ -7,7 +7,6 @@ import {
 } from '@nti/web-client/test-utils';
 
 import SharingListManagePeopleModal from '../sharing-lists/SharingListManagePeopleModal';
-import SharingListContactsContainer from '../sharing-lists/SharingListContactsContainer';
 // import SharingListContactRow from '../sharing-lists/SharingListContactRow';
 
 const member1 = { alias: 'member1 Alias', Username: 'member1' };
@@ -54,8 +53,8 @@ describe('Test Modals', () => {
 	beforeEach(onBefore);
 	afterEach(onAfter);
 
-	test('Test sharing list management modal', () => {
-		const renderer = TestRenderer.create(
+	test('Test sharing list management modal', async () => {
+		const cmp = await render(
 			<SharingListManagePeopleModal
 				entityId={mockID}
 				store={mockStore}
@@ -63,13 +62,24 @@ describe('Test Modals', () => {
 			/>
 		);
 
-		const modalContent = renderer.root.findByType(
-			SharingListManagePeopleModal
+		await waitFor(() =>
+			expect(
+				cmp.container.querySelector('.sharing-list-contact-container')
+			).toBeTruthy()
 		);
-		const container = modalContent.findByType(SharingListContactsContainer);
-		expect(container.props.contacts).toBe(mockFriends);
+
+		const modalContent = cmp.container;
+		const container = modalContent.querySelector(
+			'.sharing-list-contact-container'
+		);
+		// cmp.debug(container);
+		expect(
+			Array.from(
+				container.querySelectorAll('.user-info'),
+				x => x.textContent
+			)
+		).toEqual(['member1 Alias', 'member2 Alias']);
 		expect(mockHeaderChanged).toHaveBeenCalledWith('Friends (2)');
-		// const rows = modalContent.findAllByType(SharingListContactRow);
 
 		// TODO: Should check values of rows, remove a row and verify that it is
 		// removed, etc. Also should mock and check save calls to verify that the
