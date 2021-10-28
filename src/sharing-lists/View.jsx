@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { decorate } from '@nti/lib-commons';
 import { scoped } from '@nti/lib-locale';
 import { EmptyList, Loading, Prompt } from '@nti/web-commons';
-import { Button } from "@nti/web-core";
+import { Button } from '@nti/web-core';
 import { LinkTo } from '@nti/web-routing';
 
 import SharingListStore from './Store';
@@ -89,7 +89,7 @@ class SharingListsView extends React.Component {
 						{t('headerText')}
 					</div>
 					<Button
-						component={LinkTo.Path}
+						as={LinkTo.Path}
 						to="sharing-lists/add"
 						className="create-sharing-list-button"
 					>
