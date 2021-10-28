@@ -41,11 +41,8 @@ export default class EditableTextField extends React.Component {
 	}
 
 	onKeyDown = e => {
-		const {
-			onFinishedEditing,
-			onCancelEditing,
-			clearOnFinish,
-		} = this.props;
+		const { onFinishedEditing, onCancelEditing, clearOnFinish } =
+			this.props;
 		const finishingKeys = ['Enter'];
 		const cancelingKeys = ['Escape'];
 		if (finishingKeys.indexOf(e.key) > -1) {
@@ -111,6 +108,7 @@ export default class EditableTextField extends React.Component {
 			return (
 				<div className="editable-text-field">
 					<Input.Text
+						autoFocus
 						onClick={this.onClick}
 						ref={this.attachInputRef}
 						placeholder={placeholderText}
